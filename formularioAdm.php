@@ -1,7 +1,7 @@
 <?php include("cabecalhoAdm.php")?>
 <?php
-//include('verificarLogin.php');
-//verificarLogin();
+include('verificarLogin.php');
+verificarLogin();
 
 
 
@@ -13,17 +13,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Sistema Flowers</title>
+    <title>Loja Liro Matriz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <br>
+<!--
 <a href="sistema.php" >
 <svg xmlns="http://www.w3.org/2000/svg" id="voltar" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
   <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
 </svg>
 </a>
-
+-->
 <fieldset class="boxformularioAdm">
     <form class="row g-3" action="enviarcadastroAdm.php" method="POST">
       <h1>Cadastro ADM</h1>
@@ -59,7 +60,7 @@
 </form>
 </fieldset>
 
-<fieldset class="boxformularioAdm">
+<fieldset class="boxformularioVol">
     <form class="row g-3" action="enviarcadastroVol.php" method="POST">
       <h1>Cadastro Voluntario</h1>
     <div class="col-md-5">

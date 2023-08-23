@@ -54,7 +54,7 @@
         
         }
         .inputSubmit:hover{
-            background-color:  #FF007F;
+            background-color:  white;
             cursor: pointer;
             
         }
@@ -65,11 +65,25 @@
     padding-bottom: 1%;
     padding-right: 3%;
     border: 3px solid  rgb(172, 16, 130);
-    width: 50%; 
+    width: 47%; 
     height: 120%;
-    margin-left: 2%; 
+    margin-left: 1%; 
     background-color: #beb1b8;
 }
+        
+.boxformularioVol{
+    padding-left: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 3%;
+    border: 3px solid  rgb(172, 16, 130);
+    width: 47%; 
+    height: 120%;
+    margin-left: 50%;
+    margin-top: -22.6%; 
+    background-color: #beb1b8;
+}
+
 .form-label{
     font-weight: bold;
 }
@@ -132,4 +146,24 @@
     width: 8%;
     height: 8%;
   }
+  #BemVindo
+{
+    text-align: center;
+    
+    color: rgb(172, 16, 130);
+
+}
+#incluirCadastro{
+    margin-left: 15px;
+    background-image: linear-gradient(to right, rgb(172, 16, 130), rgb(90,20,220));
+    width: 10%;
+    border: none;
+    padding: 10px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 10px;
+    
+    
+}
 
