@@ -15,11 +15,11 @@ include_once('config.php');
     if(!empty($_GET['search']))
     {
         $data = $_GET['search'];
-        $sql = "SELECT * FROM cadastrovol WHERE id LIKE '%$data%' or nome LIKE '%$data%' or email LIKE '%$data%' ORDER BY id DESC";
+        $sql = "SELECT * FROM cadastroadm WHERE id LIKE '%$data%' or nome LIKE '%$data%' or email LIKE '%$data%' ORDER BY id DESC";
     }
     else
     {
-        $sql = "SELECT * FROM cadastrovol ORDER BY id DESC";
+        $sql = "SELECT * FROM cadastroadm ORDER BY id DESC";
     }
     $result = $conexao->query($sql);
 ?>
@@ -37,11 +37,11 @@ include_once('config.php');
 <br><br><br>
    
 <?php
-    echo "<h1 id='BemVindo'>Bem vindo <U>$logado</u><p>Consulta Lista de Voluntários</p></h1>";
+    echo "<h1 id='BemVindo'>Bem vindo <U>$logado</u><p>Consulta Lista de Administradores</p></h1>";
 ?>
 <br>
 <a id="incluirCadastro" value="Novo Volutario" href="formularioAdm.php">Novo Volutario(a)</a>
-<a id="cons_Adm" value="Novo Volutario" href="consulta_Adm.php">Consultar Administradores</a>
+<a id="cons_Adm" value="Novo Volutario" href="consulta_voluntarios.php">Consultar Voluntários</a>
 <br>
 <div>
 <table class="table" id="tabelaLista">

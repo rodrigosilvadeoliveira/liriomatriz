@@ -11,7 +11,7 @@
 </head>
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" sytle="height: 220%;">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" id="cabecalho">
     <img id="logoLiriocabecalho" src ="lirioMatriz_preto.png">
   <div class="container-fluid">
     <!--<a class="navbar-brand" href="#" id="menu">Menu</a>-->
