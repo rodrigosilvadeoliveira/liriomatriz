@@ -20,14 +20,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!--
       <li class="nav-item">
           <a class="nav-link" aria-current="page" href="catalogo.php">Catalogo</a>
         </li>
+-->
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="consulta_voluntarios.php">Voluntários</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="consultaCatalogo.php">Produtos</a>
+          <a class="nav-link" href="consultaProdutosAdm.php">Produtos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="vendas.php">Atendimento</a>

@@ -8,7 +8,7 @@ include_once('config.php');
 if(!empty($_GET['id']))
 {
     $id = $_GET['id'];
-    $sqlSelect = "SELECT * FROM cadastroadm WHERE id=$id";
+    $sqlSelect = "SELECT * FROM cadastrovol WHERE id=$id";
     $result = $conexao->query($sqlSelect);
     if($result->num_rows > 0)
     {
@@ -24,12 +24,12 @@ if(!empty($_GET['id']))
     }
     else
     {
-        header('Location: consulta_adm.php');
+        header('Location: consulta_voluntarios.php');
     }
 }
 else
 {
-    header('Location: consulta_adm.php');
+    header('Location: consulta_voluntarios.php');
 }
 ?>
 
@@ -52,15 +52,15 @@ else
 </a>
 -->
 <fieldset class="boxformularioAdm">
-    <form class="row g-3" action="saveEditAdm.php" method="POST">
+    <form class="row g-3" action="saveEditvol.php" method="POST">
       <h1>Alteração Cadastro</h1>
     <div class="col-md-5">
     <label for="nome" class="form-label">Nome completo</label>
-    <input type="text" name="nome" id="nome" class="form-control" id="inputCity" value="<?php echo $nome ?>">
+    <input type="text" name="nome" id="nome" class="form-control" value="<?php echo $nome ?>">
   </div>
   <div class="col-md-5">
     <label for="usuario" class="form-label">Login</label>
-    <input type="text" name="usuario" id="usuario" class="form-control" id="inputCity" value="<?php echo $usuario ?>">
+    <input type="text" name="usuario" id="usuario" class="form-control" value="<?php echo $usuario ?>">
   </div>
   <div class="col-md-5">
     <label for="senha" class="form-label">Senha</label>
@@ -83,7 +83,7 @@ else
   <div class="col-3">
   <input type="hidden" name="id" value="<?php echo $id ?>">
     <button type="submit" name="update" id="update" class="btn btn-primary">Atualizar</button>
-    <button href="consulta_adm.php" name="cancelar" id="cancelar" class="btn btn-primary">Cancelar</button>
+    <button href="consulta_voluntarios.php" name="update" id="cancelar" class="btn btn-primary">Cancelar</button>
   </div>
 </form>
 </fieldset>
