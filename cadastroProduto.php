@@ -34,6 +34,7 @@ $dataHora = date('Y-m-d H:i:s'); // Data e hora atual
 print_r($dataHora);
 $produto = $_POST['produto'];
 $modelo=$_POST['modelo'];
+$tamanho=$_POST['tamanho'];
 $categoria = $_POST['categoria'];
 $valordevenda = $_POST['valordevenda'];
 $estoque = $_POST['estoque'];
@@ -41,8 +42,8 @@ $valordecompra = $_POST['valordecompra'];
 $fornecedor = $_POST['fornecedor'];
 $barra = $_POST['barra'];
 
-$result = mysqli_query($conexao, "INSERT INTO produtos(produto,modelo,categoria,valordevenda,estoque,valordecompra,fornecedor,barra,data_hora) 
-VALUES ('$produto','$modelo','$categoria','$valordevenda','$estoque','$valordecompra','$fornecedor','$barra','$dataHora')");
+$result = mysqli_query($conexao, "INSERT INTO produtos(produto,modelo,tamanho,categoria,valordevenda,estoque,valordecompra,fornecedor,barra,data_hora) 
+VALUES ('$produto','$modelo','$tamanho','$categoria','$valordevenda','$estoque','$valordecompra','$fornecedor','$barra','$dataHora')");
 
 header('Location: cadastroProduto.php');
 }
@@ -76,6 +77,10 @@ header('Location: cadastroProduto.php');
   <div class="col-md-5">
     <label for="modelo" class="form-label">Modelo</label>
     <input type="text" name="modelo" id="modelo" class="form-control">
+  </div>
+  <div class="col-md-5">
+    <label for="tamanho" class="form-label">Tamanho</label>
+    <input type="varchar" name="tamanho" id="tamanho" class="form-control">
   </div>
   <div class="col-md-5">
     <label for="categoria" class="form-label">Categoria</label>
