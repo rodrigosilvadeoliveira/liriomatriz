@@ -194,7 +194,7 @@ echo "<script>window.location.href = 'vendas.php';</script>";
 
 
         // Query de inserção
-        $query = "INSERT INTO vendas (barra, produto, modelo, tamanho, valordevenda, valordecompra, usuario, datas, hora) VALUES ('$barra', '$nomeProduto', '$modelo', '$tamanho', '$valordevenda', '$valordecompra', '$logado', '$datas', '$hora')";
+        $query = "INSERT INTO vendas (barra, produto, modelo, tamanho, valordevenda, valordecompra, usuario, datas, hora) VALUES ('$barra', '$nomeProduto', '$modelo', '$tamanho', '$valordevenda', '$logado', '$valordecompra', '$datas', '$hora')";
         mysqli_query($conexao, $query);
     
 
