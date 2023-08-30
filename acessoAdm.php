@@ -30,12 +30,12 @@ session_start();
         }else{
         $_SESSION['usuario'] = $usuario;
         $_SESSION['senha'] = $senha;
-        header('Location: formularioAdm.php');
+        header('Location: vendas.php');
         exit(); 
     }
     {
         //não acessa
-        header('location: loginAdmin.php');
+        header('location: loginVoluntario.php');
 
     }
     }

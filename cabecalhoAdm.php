@@ -38,7 +38,7 @@
           <a class="nav-link" href="vendasrealizadas.php">Vendas Realizadas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="relatorios.php">Relatórios</a>
+          <a class="nav-link" href="relatoriosAdm.php">Relatórios</a>
         </li>
         <!--
         <li class="nav-item dropdown">

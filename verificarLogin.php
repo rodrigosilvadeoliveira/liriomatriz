@@ -3,7 +3,7 @@ function verificarLogin() {
   session_start();
 
   if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
-    header('Location: loginAdmin.php');
+    header('Location: index.php');
     exit; // Certifique-se de sair após o redirecionamento
   }
 }

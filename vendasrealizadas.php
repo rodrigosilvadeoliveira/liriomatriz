@@ -63,7 +63,7 @@ include_once('config.php');
       <th scope="col">data</th>
       <th scope="col">hora</th>
       <th scope="col">......</th>
-      <th scope="col">Observação</th>
+      
     </tr>
   </thead>
   <tbody>

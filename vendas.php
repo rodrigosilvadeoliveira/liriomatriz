@@ -59,7 +59,7 @@ include_once('config.php');
    ?>
 <br>
 <form id="meuForm" method="POST" action="vendas.php">
-        <label for="codigo_barras">Código de Barras:</label>
+        <label id="codBarras" for="codigo_barras">Código de Barras:</label>
         <input type="text" name="codigo_barras" id="codigo_barras" />
         <input type="submit" value="Consultar" id="consultar"/>
     </form>
@@ -263,8 +263,8 @@ foreach ($_SESSION['produtos'] as $produto) {
 
 // Exiba o valor total
 echo "<tr>";
-echo "<td colspan='4'>Valor Total:</td>";
-echo "<td>" . $valorTotal . "</td>";
+echo "<td colspan='2' style='font-size: 22px;'><b>Valor Total:</b></td>";
+echo "<td style='font-size: 22px;'>" . $valorTotal . "</td>";
 echo "</tr>";
 
 

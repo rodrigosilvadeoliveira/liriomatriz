@@ -58,7 +58,7 @@
             cursor: pointer;
             
         }
-        
+  
 .boxformularioAdm{
     padding-left: 3%;
     padding-top: 1%;
@@ -82,6 +82,23 @@
     margin-left: 50%;
     margin-top: -22.6%; 
     background-color: #beb1b8;
+}
+.boxformularioRelatorio{
+    padding-left: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 3%;
+    border: 3px solid  rgb(172, 16, 130);
+    width: 47%; 
+    height: 120%;
+    margin-left: 1%; 
+    background-color: #beb1b8;
+    font-size: 18px;
+}
+.boxpaginaRelatorio{
+    border: 3px solid  rgb(172, 16, 130);
+    background-color: #beb1b8;
+    
 }
 
 .form-label{
@@ -113,11 +130,19 @@
     
     margin-left: -15%;
 }
-.valorTotal{
+#codBarras{
+    font-weight: bold;
 }
    
 .nav-link{
     font-size: 24px;
+}
+#relatorio{
+    width: 40%; 
+    height: 220%; 
+    margin-left: 333%; 
+    color: #000000;
+    background-color:#f8bdc6
 }
         
 #lirio{
@@ -206,6 +231,14 @@
     text-align: center;
     margin-top: 1%;
     color: rgb(172, 16, 130);
+
+}
+#BemRelatorio
+{
+    text-align: center;
+    margin-top: 1%;
+    color: rgb(172, 16, 130);
+    font-size: 40px;
 
 }
 #incluirCadastro{
