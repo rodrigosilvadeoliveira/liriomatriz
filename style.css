@@ -1,5 +1,9 @@
 
+header {
+    position: fixed;
 
+    /* outros estilos desejados para o cabeçalho */
+  }
 .boxlogin{
     position: absolute;
     top: 50%;
@@ -67,6 +71,7 @@
     border: 3px solid  rgb(172, 16, 130);
     width: 47%; 
     height: 120%;
+    margin-top: 8%;
     margin-left: 1%; 
     background-color: #beb1b8;
 }
@@ -95,6 +100,7 @@
     background-color: #beb1b8;
     font-size: 18px;
 }
+
 .boxpaginaRelatorio{
     border: 3px solid  rgb(172, 16, 130);
     background-color: #beb1b8;
@@ -130,19 +136,26 @@
     
     margin-left: -15%;
 }
+
 #codBarras{
     font-weight: bold;
+    margin-left: 1%;
+    font-size: 18px;
 }
    
 .nav-link{
     font-size: 24px;
 }
+
 #relatorio{
     width: 40%; 
     height: 220%; 
     margin-left: 333%; 
     color: #000000;
     background-color:#f8bdc6
+}
+#confirmar{
+    margin-left: 1%;
 }
         
 #lirio{
@@ -211,17 +224,18 @@
   #cabecalho{
     width: 100%;
   }
+  
   #sair{
     margin-left: -18%;
   }
   #logoLiriocabecalho{
-    width: 8%;
-    height: 8%;
+    width: 15%;
+    height: 15%;
   }
   #BemVindo
 {
     text-align: center;
-    margin-top: -3%;
+    margin-top: 5%;
     color: rgb(172, 16, 130);
 
 }
@@ -229,14 +243,14 @@
 #BemVindoVendas
 {
     text-align: center;
-    margin-top: 1%;
+    margin-top: 8%;
     color: rgb(172, 16, 130);
 
 }
 #BemRelatorio
 {
     text-align: center;
-    margin-top: 1%;
+    margin-top: 5%;
     color: rgb(172, 16, 130);
     font-size: 40px;
 
@@ -268,11 +282,17 @@
     
     
 }
+
 #tabelaLista{
-margin-top: 1.5%;    
+margin-top: 1.5%;
+margin-left: 1%;
+padding-right: 2%;
 }
 #cancelarLink{
     margin-top: 10%;
+}
+#tabelaAtendimento{
+    margin-left: 1%;
 }
 
 @media (max-width: 1400px) {

@@ -67,10 +67,11 @@ include_once('config.php');
   <thead>
     <tr>
     <th scope="col">Id</th>
-      <th scope="col">Barra</th>
+    <th scope="col">Barra</th>
       <th scope="col">Produto</th>
-      <th scope="col">Marca</th>
-      <th scope="col">Caracteristicas</th>
+      <th scope="col">Modelo</th>
+      <th scope="col">Tamanho</th>
+      <th scope="col">Categoria</th>
       <th scope="col">Preço</th>
 
       <th scope="col">......</th>
@@ -150,6 +151,7 @@ mysqli_query($conexao, $query_pagamento);
         $nomeProduto = $produto['produto'];
         $modelo = $produto['modelo'];
         $tamanho = $produto['tamanho'];
+        $categoria = $produto['categoria'];
         $valordevenda = $produto['valordevenda'];
         $valordecompra = $produto['valordecompra'];
         
@@ -169,7 +171,7 @@ mysqli_query($conexao, $query_pagamento);
                 mysqli_query($conexao, $query_update_compra);
 
                 // Registre a venda na tabela de vendas
-                $query_venda = "INSERT INTO vendas (barra, produto, modelo, tamanho, valordevenda, valordecompra, usuario, datas, hora) VALUES ('$barra', '$nomeProduto', '$modelo', '$tamanho', '$valordevenda', '$valordecompra', '$logado', '$datas', '$hora')";
+                $query_venda = "INSERT INTO vendas (barra, produto, modelo, tamanho, categoria, valordevenda, valordecompra, usuario, datas, hora) VALUES ('$barra', '$nomeProduto', '$modelo', '$tamanho', '$categoria', '$valordevenda', '$valordecompra', '$logado', '$datas', '$hora')";
                 mysqli_query($conexao, $query_venda);
             } else {
               //  echo "Quantidade insuficiente para vender o produto com o código de barras: $barra";
@@ -194,7 +196,7 @@ echo "<script>window.location.href = 'vendasVol.php';</script>";
 
 
         // Query de inserção
-        $query = "INSERT INTO vendas (barra, produto, modelo, tamanho, valordevenda, valordecompra, usuario, datas, hora) VALUES ('$barra', '$nomeProduto', '$modelo', '$tamanho', '$valordevenda', '$logado', '$valordecompra', '$datas', '$hora')";
+        $query = "INSERT INTO vendas (barra, produto, modelo, tamanho, categoria, valordevenda, valordecompra, usuario, datas, hora) VALUES ('$barra', '$nomeProduto', '$modelo', '$tamanho', '$categoria', '$valordevenda', '$logado', '$valordecompra', '$datas', '$hora')";
         mysqli_query($conexao, $query);
     
 
@@ -248,6 +250,7 @@ foreach ($_SESSION['produtos'] as $produto) {
     echo "<td>" . $produto['produto'] . "<br>";
     echo "<td>" . $produto['modelo'] . "<br>";
     echo "<td>" . $produto['tamanho'] . "<br>";
+    echo "<td>" . $produto['categoria'] . "<br>";
     echo "<td>" . $produto['valordevenda'] . "<br>";
     echo "<td>
     <a class='btn btn-sm btn-danger' href='deleteprodutodalistaVol.php?id=" . $produto['id'] . "' title='Deletar'>

@@ -15,7 +15,7 @@ include_once('config.php');
     if(!empty($_GET['search']))
     {
         $data = $_GET['search'];
-        $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or produto LIKE '%$data%' or marca LIKE '%$data%' ORDER BY id DESC";
+        $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or produto LIKE '%$data%' or modelo LIKE '%$data%' or categoria LIKE '%$data%' ORDER BY id DESC";
     }
     else
     {
@@ -41,7 +41,7 @@ include_once('config.php');
 
 <div>
 <a id="incluirCadastro" href="cadastroProduto.php" value="Novo Cadastro">Novo Produto</a>
-<table class="table" id="tabelaLista">
+<table class="table" id="tabelaLista" style="width: 99%;">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -51,10 +51,24 @@ include_once('config.php');
       <th scope="col">Tamanho</th>
       <th scope="col">Categoria</th>
       <th scope="col">Valor de Venda</th>
-      <th scope="col">Estoque</th>
+      <th scope="col">
+      <label for="qtdcomprada">Estoque:</label><br>
+  <select id="qtdcomprada">
+    <option value="">Sele...</option>
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">5</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+  </select></th>
       <th scope="col">Valor de Compra</th>
       <th scope="col">Fornecedor</th>
-      <th scope="col">Data e hora</th>
+      <th scope="col">Data</th>
+      <th scope="col">Hora</th>
       <th scope="col">......</th>
     </tr>
   </thead>
@@ -83,7 +97,9 @@ include_once('config.php');
             
             echo "<td>" .$user_data['fornecedor']. "</td>";
             
-            echo "<td>" .$user_data['data_hora']. "</td>";
+            echo "<td>" .$user_data['datas']. "</td>";
+
+            echo "<td>" .$user_data['hora']. "</td>";
             
             echo "<td> 
             <a class='btn btn-sm btn-primary' href='edit_cadastroProduto.php?id=$user_data[id]' title='Editar'>
@@ -128,32 +144,12 @@ include_once('config.php');
 </script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('categoria').addEventListener('change', function() {
+    document.getElementById('qtdcomprada').addEventListener('change', function() {
       var categoriaSelecionada = this.value;
       var linhas = document.querySelectorAll('tbody tr');
 
       linhas.forEach(function(linha) {
-        var categoriaTd = linha.querySelector('td:nth-child(4)'); // Quarta coluna é a de Categoria
-        var categoriaProduto = categoriaTd.textContent.toLowerCase().trim(); // Pegando o texto da categoria e colocando em minúsculas
-
-        // Verificando se a categoria selecionada é igual à categoria do produto na linha atual
-        if (categoriaSelecionada === '' || categoriaProduto === categoriaSelecionada) {
-          linha.style.display = 'table-row'; // Mostra a linha
-        } else {
-          linha.style.display = 'none'; // Esconde a linha
-        }
-      });
-    });
-  });
-</script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('marca').addEventListener('change', function() {
-      var categoriaSelecionada = this.value;
-      var linhas = document.querySelectorAll('tbody tr');
-
-      linhas.forEach(function(linha) {
-        var categoriaTd = linha.querySelector('td:nth-child(5)'); // Quarta coluna é a de Categoria
+        var categoriaTd = linha.querySelector('td:nth-child(8)'); // Quarta coluna é a de Categoria
         var categoriaProduto = categoriaTd.textContent.toLowerCase().trim(); // Pegando o texto da categoria e colocando em minúsculas
 
         // Verificando se a categoria selecionada é igual à categoria do produto na linha atual

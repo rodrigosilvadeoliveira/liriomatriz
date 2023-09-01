@@ -30,7 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 echo "<script>window.location.href = 'cadastroProduto.php';</script>";
 error_reporting(0);
 // Insira as informações da compra no banco de dados
-$dataHora = date('Y-m-d H:i:s'); // Data e hora atual
+// Data e hora atual
+$datas = date('Y-m-d'); // Data e hora atual
+$hora = date('H:i:s');
 print_r($dataHora);
 $produto = $_POST['produto'];
 $modelo=$_POST['modelo'];
@@ -42,8 +44,8 @@ $valordecompra = $_POST['valordecompra'];
 $fornecedor = $_POST['fornecedor'];
 $barra = $_POST['barra'];
 
-$result = mysqli_query($conexao, "INSERT INTO produtos(produto,modelo,tamanho,categoria,valordevenda,estoque,valordecompra,fornecedor,barra,data_hora) 
-VALUES ('$produto','$modelo','$tamanho','$categoria','$valordevenda','$estoque','$valordecompra','$fornecedor','$barra','$dataHora')");
+$result = mysqli_query($conexao, "INSERT INTO produtos(produto,modelo,tamanho,categoria,valordevenda,estoque,valordecompra,fornecedor,barra,datas,hora) 
+VALUES ('$produto','$modelo','$tamanho','$categoria','$valordevenda','$estoque','$valordecompra','$fornecedor','$barra','$datas','$hora')");
 
 header('Location: cadastroProduto.php');
 }

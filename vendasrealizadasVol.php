@@ -15,13 +15,9 @@ include_once('config.php');
     if(!empty($_GET['search']))
     {
         $data = $_GET['search'];
-        $sql = "SELECT * FROM vendas WHERE barra LIKE '%$data%' or produto LIKE '%$data%' or datas LIKE '%$data%' ORDER BY id DESC";
+        $sql = "SELECT * FROM vendas WHERE barra LIKE '%$data%' or produto LIKE '%$data%' or modelo LIKE '%$data%' or categoria LIKE '%$data%' or datas LIKE '%$data%' ORDER BY id DESC";
     }
-    else
-    {
-        $sql = "SELECT * FROM vendas ORDER BY datas DESC";
-    }
-    $result = $conexao->query($sql);
+    
 ?>
      
 <!DOCTYPE html>
@@ -37,7 +33,7 @@ include_once('config.php');
 <br><br><br>
    
 <?php
-    echo "<h1 id='BemVindoVendas'>Vendas realizadas</h1>";
+    echo "<h1 id='BemVindoVendas'>Consulta de Vendas realizadas</h1>";
 ?>
 
 <div>
@@ -49,6 +45,16 @@ include_once('config.php');
 <br>
 <a id="incluirCadastro" value="Vendas Realizadas" href="vendas.php">Novo Atendimento</a>
 <br>
+<fieldset class="boxformularioRelatorio" style="margin-top: 2%;">
+<form id="dataRelatorio" method="POST" action="vendasrealizadas.php">
+    <label for="data_inicio"><b>RSelecionar periodo para consulta:</b></label><br>
+    <label for="data_inicio"><b>Data Inicio:</b></label>
+    <input type="date" name="data_inicio" id="data_inicio" />
+    <label for="data_fim"><b>Data Fim:</b></label>
+    <input type="date" name="data_fim" id="data_fim" />
+    <input type="submit" value="Consultar" id="Exportar"/>
+</form>
+</fieldset>
 <div>
 <table class="table" id="tabelaLista">
   <thead>
@@ -58,15 +64,32 @@ include_once('config.php');
       <th scope="col">Produto</th>
       <th scope="col">Modelo</th>
       <th scope="col">Tamanho</th>
+      <th scope="col">Categoria</th>
       <th scope="col">Preço</th>
       <th scope="col">Voluntário</th>
       <th scope="col">data</th>
       <th scope="col">hora</th>
+     
       
     </tr>
   </thead>
   <tbody>
   <?php
+  $dbHost = 'localhost';
+  $dbUsername = 'root';
+  $dbPassword = '';
+  $dbName = 'lojalirio';
+  
+  // Estabelecer a conexão com o banco de dados
+  $conexao = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+  
+  if (isset($_POST['data_inicio']) && isset($_POST['data_fim'])) {
+      $inicio = $_POST['data_inicio'];
+      $fim = $_POST['data_fim'];
+  
+  $sql = "SELECT * FROM vendas WHERE datas BETWEEN '$inicio' AND '$fim'";
+  $result = $conexao->query($sql);
+
         while($user_data = mysqli_fetch_assoc($result))
         {
             echo "<tr>";
@@ -80,6 +103,8 @@ include_once('config.php');
             
             echo "<td>" .$user_data['tamanho']. "</td>";
 
+            echo "<td>" .$user_data['categoria']. "</td>";
+
             echo "<td>" .$user_data['valordevenda']. "</td>";
             
             echo "<td>" .$user_data['usuario']. "</td>";
@@ -87,11 +112,11 @@ include_once('config.php');
             echo "<td>" .$user_data['datas']. "</td>";
             echo "<td>" .$user_data['hora']. "</td>";
 
-            echo "</tr>";
+             echo "</tr>";
 
         }
 
-
+    }
 
   ?>
     

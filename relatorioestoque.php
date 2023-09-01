@@ -18,7 +18,7 @@ if (isset($_POST['data_inicio']) && isset($_POST['data_fim'])) {
     $inicio = $_POST['data_inicio'];
     $fim = $_POST['data_fim'];
 
-$sql = "SELECT * FROM vendas WHERE datas BETWEEN '$inicio' AND '$fim'";
+$sql = "SELECT * FROM produtos WHERE datas BETWEEN '$inicio' AND '$fim'";
 $result = $conexao->query($sql);
 
 $spreadsheet = new Spreadsheet();
@@ -26,26 +26,17 @@ $sheet = $spreadsheet->getActiveSheet();
 
 // Defina o cabeçalho da tabela
 $sheet->setCellValue('A1', 'id');
-$sheet->setCellValue('B1', 'barra');
+$sheet->setCellValue('B1', 'Código de barras');
 $sheet->setCellValue('C1', 'produto');
 $sheet->setCellValue('D1', 'modelo');
 $sheet->setCellValue('E1', 'tamanho');
-$sheet->setCellValue('F1', 'valordevenda');
-$sheet->setCellValue('G1', 'valordecompra');
-$sheet->setCellValue('H1', 'usuario');
-$sheet->setCellValue('I1', 'categoria');
-$sheet->setCellValue('J1', 'datas');
-$sheet->setCellValue('K1', 'hora');
-$sheet->setCellValue('M1', 'Total Compras');
-$sheet->setCellValue('N1', 'Total Vendas');
-$sheet->setCellValue('O1', 'Lucro');
-$sheet->setCellValue('P1', 'Caixa');
-$sheet->setCellValue('M2', '=SUM(G2:G376)');
-$sheet->setCellValue('N2', '=SUM(F2:F376)');
-$sheet->setCellValue('O2', '=M2-L2');
-$sheet->setCellValue('Q2', '=P2*35/100');
-
-
+$sheet->setCellValue('F1', 'categoria');
+$sheet->setCellValue('G1', 'valordevenda');
+$sheet->setCellValue('H1', 'estoque');
+$sheet->setCellValue('I1', 'valordecompra');
+$sheet->setCellValue('J1', 'fornecedor');
+$sheet->setCellValue('K1', 'data');
+$sheet->setCellValue('L1', 'hora');
 
 //Estilo da celula
 $styles = [
@@ -90,12 +81,13 @@ if ($result) {
     $sheet->setCellValue('C' . $row, $row_data['produto']);
     $sheet->setCellValue('D' . $row, $row_data['modelo']);
     $sheet->setCellValue('E' . $row, $row_data['tamanho']);
-    $sheet->setCellValue('F' . $row, $row_data['valordevenda']);
-    $sheet->setCellValue('G' . $row, $row_data['valordecompra']);
-    $sheet->setCellValue('H' . $row, $row_data['usuario']);
-    $sheet->setCellValue('I' . $row, $row_data['categoria']);
-    $sheet->setCellValue('J' . $row, $row_data['datas']);
-    $sheet->setCellValue('k' . $row, $row_data['hora']);
+    $sheet->setCellValue('F' . $row, $row_data['categoria']);
+    $sheet->setCellValue('G' . $row, $row_data['valordevenda']);
+    $sheet->setCellValue('H' . $row, $row_data['estoque']);
+    $sheet->setCellValue('I' . $row, $row_data['valordecompra']);
+    $sheet->setCellValue('J' . $row, $row_data['fornecedor']);
+    $sheet->setCellValue('K' . $row, $row_data['datas']);
+    $sheet->setCellValue('K' . $row, $row_data['hora']);
     $row++;
 }
 }else {
@@ -104,7 +96,7 @@ if ($result) {
 
 // Defina o cabeçalho do arquivo para download
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="produtos_vendidosPorDia.xlsx"');
+header('Content-Disposition: attachment; filename="relatorio_estoque.xlsx"');
 header('Cache-Control: max-age=0');
 
 // Crie um objeto Writer para salvar o arquivo Excel

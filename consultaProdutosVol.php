@@ -15,7 +15,7 @@ include_once('config.php');
     if(!empty($_GET['search']))
     {
         $data = $_GET['search'];
-        $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or produto LIKE '%$data%' or marca LIKE '%$data%' ORDER BY id DESC";
+        $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or produto LIKE '%$data%' or modelo LIKE '%$data%' or categoria LIKE '%$data%' ORDER BY id DESC";
     }
     else
     {
@@ -40,7 +40,7 @@ include_once('config.php');
 ?>
 
 <div>
-<a id="incluirCadastro" href="cadastroProdutoVol.php" value="Novo Cadastro">Novo Produto</a>
+
 <table class="table" id="tabelaLista">
   <thead>
     <tr>
@@ -112,7 +112,7 @@ include_once('config.php');
 
     function searchData()
     {
-        window.location = 'consultaProdutosAdm.php?search='+search.value;
+        window.location = 'consultaProdutosVol.php?search='+search.value;
     }
 </script>
 <script>

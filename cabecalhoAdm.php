@@ -12,7 +12,7 @@
 <body>
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" id="cabecalho">
-    <img id="logoLiriocabecalho" src ="lirioMatriz_preto.png">
+    <img id="logoLiriocabecalho" src ="LÍRIO MATRIZ (PRETO)_menor.png">
   <div class="container-fluid">
     <!--<a class="navbar-brand" href="#" id="menu">Menu</a>-->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,8 +55,8 @@
         -->
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" id="cpesquisa">
+        <button class="btn btn-outline-success" type="submit" id="bpesquisa">Search</button>
       </form>
     </div>
   </div>
