@@ -87,7 +87,7 @@ if ($result) {
     $sheet->setCellValue('I' . $row, $row_data['valordecompra']);
     $sheet->setCellValue('J' . $row, $row_data['fornecedor']);
     $sheet->setCellValue('K' . $row, $row_data['datas']);
-    $sheet->setCellValue('K' . $row, $row_data['hora']);
+    $sheet->setCellValue('L' . $row, $row_data['hora']);
     $row++;
 }
 }else {
