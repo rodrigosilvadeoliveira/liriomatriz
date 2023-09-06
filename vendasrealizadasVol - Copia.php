@@ -1,4 +1,4 @@
-<?php include("cabecalhoAdm.php")?>
+<?php include("cabecalhoVol.php")?>
 <?php
 include('verificarLogin.php');
 verificarLogin();
@@ -69,7 +69,7 @@ include_once('config.php');
       <th scope="col">Voluntário</th>
       <th scope="col">data</th>
       <th scope="col">hora</th>
-      <th scope="col">......</th>
+     
       
     </tr>
   </thead>
@@ -90,7 +90,7 @@ include_once('config.php');
   $sql = "SELECT * FROM vendas WHERE datas BETWEEN '$inicio' AND '$fim'";
   $result = $conexao->query($sql);
 
-  // Exiba a lista de produtos e calcule o valor total
+    // Exiba a lista de produtos e calcule o valor total
 $valorTotal = 0; // Variável para armazenar o valor total
 
         while($user_data = mysqli_fetch_assoc($result))
@@ -114,7 +114,6 @@ $valorTotal = 0; // Variável para armazenar o valor total
 
             echo "<td>" .$user_data['datas']. "</td>";
             echo "<td>" .$user_data['hora']. "</td>";
-
             echo "<td> 
             <a class='btn btn-sm btn-primary' href='editVendas.php?id=$user_data[id]' title='Editar'>
             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
@@ -131,13 +130,13 @@ $valorTotal = 0; // Variável para armazenar o valor total
             $valorTotal += $user_data['valordevenda']; // Adicione o valor de venda ao valor total
 
         }
-        echo "<tr>";
-        echo "<td colspan='4'><b>Valor Total:</b></td>";
-        echo "<td>" . $valorTotal . "</td>";
-        echo "</tr>";
+
 
     }
-
+    echo "<tr>";
+echo "<td colspan='4'>Valor Total:</td>";
+echo "<td>" . $valorTotal . "</td>";
+echo "</tr>";
   ?>
     
     </tr>
@@ -161,4 +160,4 @@ $valorTotal = 0; // Variável para armazenar o valor total
         window.location = 'sistema.php?search='+search.value;
     }
 </script>
-</html> 
+</html>
