@@ -85,7 +85,7 @@ header {
     width: 47%; 
     height: 120%;
     margin-left: 50%;
-    margin-top: -22.6%; 
+    margin-top: -19%; 
     background-color: #beb1b8;
 }
 .boxformularioRelatorio{
@@ -106,7 +106,18 @@ header {
     background-color: #beb1b8;
     
 }
-
+.boxformularioeditVendas{
+    padding-left: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 3%;
+    border: 3px solid  rgb(172, 16, 130);
+    width: 47%; 
+    height: 120%;
+    margin-top: 8%;
+    margin-left: 1%; 
+    background-color: #beb1b8;
+}
 .form-label{
     font-weight: bold;
 }
@@ -206,17 +217,17 @@ header {
     fill: #beb1b8;
   }
   #submitAdm{
-    margin-top: 21%;
+    margin-top: 18%;
 
   }
   #update{
-    margin-top: 22%;
+    margin-top: 18%;
     font-size: 18px;
 
   }
   #cancelar{
-    margin-top: -47%;
-    margin-left: 70%;
+    margin-top: -40%;
+    margin-left: 50%;
     background-color: #000000;
     font-size: 18px;
 

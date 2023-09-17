@@ -77,6 +77,15 @@ include_once('config.php');
     <input type="submit" value="Exportar" id="Exportar"/>
 </form>
 </fieldset>
+
+<br>
+<fieldset class="boxformularioRelatorio">
+<form id="dataRelatorio" method="POST" action="relatorio_estoque_completo.php">
+    <label for="data_inicio"><b>Exportar em planilha todo o Estoque:</b></label>
+    <input type="submit" value="Exportar" id="Exportar"/>
+</form>
+</fieldset>
+
 </div>
 <script>
     var search = document.getElementById('pesquisar');

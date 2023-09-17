@@ -158,7 +158,7 @@ $valorTotal = 0; // Variável para armazenar o valor total
 
     function searchData()
     {
-        window.location = 'sistema.php?search='+search.value;
+        window.location = 'vendasrealizadas.php?search='+search.value;
     }
 </script>
 </html> 

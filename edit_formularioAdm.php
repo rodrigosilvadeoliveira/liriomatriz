@@ -56,11 +56,11 @@ else
       <h1>Alteração Cadastro</h1>
     <div class="col-md-5">
     <label for="nome" class="form-label">Nome completo</label>
-    <input type="text" name="nome" id="nome" class="form-control" id="inputCity" value="<?php echo $nome ?>">
+    <input type="text" name="nome" id="nome" class="form-control" id="nome" value="<?php echo $nome ?>">
   </div>
   <div class="col-md-5">
     <label for="usuario" class="form-label">Login</label>
-    <input type="text" name="usuario" id="usuario" class="form-control" id="inputCity" value="<?php echo $usuario ?>">
+    <input type="text" name="usuario" id="usuario" class="form-control" id="usuario" value="<?php echo $usuario ?>">
   </div>
   <div class="col-md-5">
     <label for="senha" class="form-label">Senha</label>
