@@ -43,7 +43,7 @@ $sheet->setCellValue('P1', 'Caixa');
 $sheet->setCellValue('M2', '=SUM(G2:G376)');
 $sheet->setCellValue('N2', '=SUM(F2:F376)');
 $sheet->setCellValue('O2', '=N2-M2');
-$sheet->setCellValue('Q2', '=P2*35/100');
+
 
 
 
