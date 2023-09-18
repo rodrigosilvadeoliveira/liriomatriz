@@ -47,7 +47,7 @@ include_once('config.php');
 <br>
 <fieldset class="boxformularioRelatorio" style="margin-top: 2%;">
 <form id="dataRelatorio" method="POST" action="vendasrealizadasVol.php">
-    <label for="data_inicio"><b>RSelecionar periodo para consulta:</b></label><br>
+    <label for="data_inicio"><b>Selecionar periodo para consulta:</b></label><br>
     <label for="data_inicio"><b>Data Inicio:</b></label>
     <input type="date" name="data_inicio" id="data_inicio" />
     <label for="data_fim"><b>Data Fim:</b></label>

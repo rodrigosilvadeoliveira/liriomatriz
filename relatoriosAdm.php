@@ -41,13 +41,13 @@ include_once('config.php');
 ?>
 
 <h3 id="instrucao" style="font-size:17px; margin-left:1%;">
-<b>*Intruções para gerar relatório:</b><br>
-1. Selecione data inicio e a data fim, de acordo com o periodo a ser consultado.
+<b>*Instruções para gerar relatório:</b><br>
+    1. Selecione data inicio e a data fim de acordo com o periodo a ser consultado.
     <p>2. Click no botão Exportar.
     <br>3. Verificar na Pasta download arquivo excel do relatório</p> </h3>
 <fieldset class="boxformularioRelatorio">
 <form id="dataRelatorio" method="POST" action="relatorioVendasporProduto.php">
-    <label for="data_inicio"><b>Relatorio de Vendas por produto:</b></label><br>
+    <label for="data_inicio"><b>Relatório de Vendas por produto:</b></label><br>
     <label for="data_inicio"><b>Data Inicio:</b></label>
     <input type="date" name="data_inicio" id="data_inicio" />
     <label for="data_fim"><b>Data Fim:</b></label>
@@ -58,7 +58,7 @@ include_once('config.php');
 <br>
 <fieldset class="boxformularioRelatorio">
 <form id="dataRelatorio" method="POST" action="relatorio_vendasAdm.php">
-    <label for="data_inicio"><b>Relatorio de Vendas por tipo de Pgto:</b></label><br>
+    <label for="data_inicio"><b>Relatório de Vendas por tipo de Pgto:</b></label><br>
     <label for="data_inicio"><b>Data Inicio:</b></label>
     <input type="date" name="data_inicio" id="data_inicio" />
     <label for="data_fim"><b>Data Fim:</b></label>
@@ -69,7 +69,7 @@ include_once('config.php');
 <br>
 <fieldset class="boxformularioRelatorio">
 <form id="dataRelatorio" method="POST" action="relatorioestoque.php">
-    <label for="data_inicio"><b>Relatorio de Estoque:</b></label><br>
+    <label for="data_inicio"><b>Relatório de Estoque:</b></label><br>
     <label for="data_inicio"><b>Data Inicio:</b></label>
     <input type="date" name="data_inicio" id="data_inicio" />
     <label for="data_fim"><b>Data Fim:</b></label>
