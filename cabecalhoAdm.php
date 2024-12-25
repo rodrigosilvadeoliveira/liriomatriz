@@ -35,7 +35,7 @@
           <a class="nav-link" href="vendas.php">Atendimento</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="vendasrealizadas.php">Vendas Realizadas</a>
+          <a class="nav-link" href="vendasrealizadas.php">Vendas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="relatoriosAdm.php">Relatórios</a>
@@ -43,7 +43,7 @@
         </li>
         <li class="nav-item">
          
-          <a class="nav-link" href="cadastroEvento.php">Site</a>
+          <a class="nav-link" href="cadastroEvento.php">Igreja</a>
         </li>
         <!--
         <li class="nav-item dropdown">

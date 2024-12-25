@@ -3,7 +3,7 @@
 <?php
 include_once('config.php');
 
-$sql = "SELECT * FROM produtos WHERE carroussel = 'carrousel' ORDER BY id DESC";
+$sql = "SELECT * FROM evento WHERE cartaz = 'carrousel' ORDER BY id DESC";
 $result = $conexao->query($sql);
 
 //session_start();

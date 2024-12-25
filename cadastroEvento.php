@@ -75,19 +75,30 @@ header('Location: cadastroEvento.php');
 <body>
     <br><br>
 <?php
-    echo "<h1 id='BemVindo'>Consulta e cadastro Eventos</h1>";
+    echo "<h1 id='BemVindo'>Cadastrar Eventos no Site</h1>";
 ?>
-
+<a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
+<a id="incluirCadastro" href="cadastroMembrosAdm.php" value="Novo Cadastro">Membros</a>
 <div>
 <fieldset class="boxformularioAdm">
     <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroEvento.php" method="POST" enctype="multipart/form-data">
     
       <h1>Cadastro de Evento</h1>
     
-  <div class="col-md-5">
+  
       <!-- <label class="nomedoCampo">Imagem: *</label> -->
       
-      <input type="hidden" name="cartaz" id="cartaz" class="form-control" value="divulgar">
+      <div class="col-md-5">
+    <label for="inputState" class="form-label">*Evento ou Cartaz na Home?</label>
+    <br>
+    <select id="cartaz" class="form-select" name="cartaz" required>
+        <option value="">Selecione</option>
+        <option value="divulgar">Evento</option>
+        <option value="carrousel">Cartaz na Home</option>
+    </select>
+</div>
+<div class="col-md-5">
+<label for="inputState" class="form-label">*Selecione arquivo:</label>
        <input type="file" name="imagem" class="form-control" accept="image/*">
      </div><br>
   
