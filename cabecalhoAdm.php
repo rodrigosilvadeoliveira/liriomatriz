@@ -39,6 +39,11 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="relatoriosAdm.php">Relatórios</a>
+          
+        </li>
+        <li class="nav-item">
+         
+          <a class="nav-link" href="cadastroEvento.php">Site</a>
         </li>
         <!--
         <li class="nav-item dropdown">

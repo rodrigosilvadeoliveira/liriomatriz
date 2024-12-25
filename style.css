@@ -1,6 +1,11 @@
 
 header {
     position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #f0f0f0;
+        z-index: 100;
+        /* outros estilos desejados para o cabeçalho */
 
     /* outros estilos desejados para o cabeçalho */
   }
@@ -304,6 +309,118 @@ padding-right: 2%;
 }
 #tabelaAtendimento{
     margin-left: 1%;
+}
+.imagenscarroussel{
+    width: 50%;
+    height: 50%;
+    margin: 10px;
+    padding: 2%;
+    margin-left: 23%;
+
+}
+.carroussel-container {
+    display: contents;
+    position: fixed;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    z-index: 50;
+}
+.carroussel{
+    margin-top: 5%;
+ 
+}
+#titulohome{
+    margin-top: 1%;
+    text-align: center;
+    font-family:  'Times New Roman', Times, serif;
+    color: black;
+}
+#subtitulohome{
+    margin-top: 2%;
+    text-align: center;
+    font-family: cursive;
+    color: darkblue;
+}
+#textos{
+    margin-top: 1%;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    color: ;
+}
+.footer{
+    position: relative;
+    bottom: 0;
+    width: 101%;
+    background-color: #e9ecef;
+  }
+  .tabelafooter{
+    margin-left: 5%;
+}
+.textofooter{
+    font-size: 24px;
+    font-family: bold;
+    font-style: normal;
+    font-weight: bold;
+}
+.bandeiras{
+    width: 30px;
+    height: 30px;
+    margin-left: ;
+} 
+.bandeirass{
+    width: 50px;
+    height: 30px;
+    margin-left: ;
+}
+.imgPro{
+    max-width: 300px; /* Imagens se ajustarão à largura máxima do contêiner */
+    height: 300px;
+    margin: 10px;
+} 
+.rodape{
+    margin-left: 5%;
+  }
+  .containerhome {
+    display: flex;
+        justify-content: center; /* Centraliza os elementos na horizontal */
+    overflow: auto;
+}
+
+.boxhome {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1600px; /* Ajuste o valor conforme necessário */
+}
+#tabelaSite {
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+    margin-top: 2%;
+    margin-left: 1%;
+}
+
+#tabelaSite table {
+    width: 100%;
+}
+
+#tabelaSite tr {
+    display: inline-block;
+    width:350px;
+    box-sizing: border-box;
+}
+.produtos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    
+}
+
+.imagens{
+    width: 300px;
+    height: 300px;
+    margin: 10px;
+
 }
 
 @media (max-width: 1400px) {
