@@ -8,15 +8,21 @@
 </head>
 <body>
 <img id="logo" src ="lirioMatriz_preto.png">
-    <h1 id="lirio">Sistema de Loja <br><u>Lirio Matriz</u></h1>
-
-    
+    <h1 id="lirio">Sistema Lirio Matriz</h1>
     <div class="boxlogin">
+    <a href="loginAdmin.php"><button class="buttonlogin">Adm</button></a>
+    <a href="loginVoluntario.php"><button class="buttonlogin">Voluntário</button></a>
+    <a href="loginIgreja.php"><button class="buttonlogin">Igreja</button></a>
+    </div>
+    <!-- <div class="boxlogin">
         <a href="loginAdmin.php" id="botaoadm">Administrador</a>
 </div>
         <div class="boxloginVol">
         <a href="loginVoluntario.php" id="botaovol">Voluntário</a>
 </div>
+<div class="boxloginIgr">
+        <a href="loginAdmin.php" id="botaoigr">Igreja</a>
+</div> -->
         <!--
 <a href="formulario.php" id="cadastre">Cadastre-se</a>"
 //-->

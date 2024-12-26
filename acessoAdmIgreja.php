@@ -30,12 +30,12 @@ session_start();
         }else{
         $_SESSION['usuario'] = $usuario;
         $_SESSION['senha'] = $senha;
-        header('Location: vendas.php');
+        header('Location: cadastroMembros.php');
         exit(); 
     }
     {
         //não acessa
-        header('location: loginAdmin.php');
+        header('location: loginAdminIgreja.php');
 
     }
     }

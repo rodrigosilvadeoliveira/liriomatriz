@@ -26,10 +26,10 @@
         </li>
 -->
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="index.php">Ao Vivo</a>
+          <a class="nav-link" aria-current="page" href="videosSite.php">Ao Vivo</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="index.php">Novo Começo</a>
+          <a class="nav-link" href="novoComecoSite.php">Novo Começo</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="index.php">Igreja</a>

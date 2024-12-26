@@ -31,11 +31,9 @@ include_once('config.php');
     </head>
 <body>
 <br >
-<br >
-<br >
-<br >
 
-<h1 id="titulohome">Lirio Matriz</h1>
+
+<h1 id="titulonapagina">Lirio Matriz</h1>
 <h3 id="subtitulohome">Somos uma igreja em Voluntariado</h2>
 <h3 id="textos">Servimos a Deus com excelencia e por amor....</h3>
 

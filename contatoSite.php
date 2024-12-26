@@ -61,8 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <form action="contato.php" method="post">
 
-<br><br><br><br>
-<h1 id="titulocategoria">Contato com a Lirio Matriz</h1>
+<h1 id="titulonapagina">Contato com a Lirio Matriz</h1>
 
 <h3 class="fraseentrega">Tem dúvidas gostaria de saber mais sobre a igreja, envie uma mensagem através do nosso firmulario.</h3>
 

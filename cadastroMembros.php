@@ -45,9 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <header>
-    <div class="cabecalho" id="cabecalho">
+    <!-- <div class="cabecalho" id="cabecalho">
     <?php include('cabecalhoSite.php');?>
-    </div>    
+    </div>     -->
 
 </header>
 

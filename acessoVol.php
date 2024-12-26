@@ -26,7 +26,7 @@ session_start();
             unset($_SESSION['usuario']);
             unset($_SESSION['senha']);
             print_r('Não existe registro');
-            print_r('<a href="index.php" id="voltar">Voltar Pgina Home</a>');
+            print_r('<a href="homeLirio.php" id="voltar">Voltar Pgina Home</a>');
         }else{
         $_SESSION['usuario'] = $usuario;
         $_SESSION['senha'] = $senha;
