@@ -1,4 +1,4 @@
-<?php include("cabecalhoAdm.php")?>
+<?php include("cabecalhoIgreja.php")?>
 <?php
 include('verificarLogin.php');
 verificarLogin();
@@ -73,13 +73,13 @@ header('Location: cadastroEvento.php');
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <br><br>
+    <br><br><br>
 <?php
     echo "<h1 id='BemVindo'>Cadastrar Eventos no Site</h1>";
 ?>
-<a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
-<a id="incluirCadastro" href="cadastroMembrosAdm.php" value="Novo Cadastro">Membros</a>
-<div>
+<a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
+<a id="cons_Adm" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
+<a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a><div>
 <fieldset class="boxformularioAdm">
     <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroEvento.php" method="POST" enctype="multipart/form-data">
     

@@ -45,48 +45,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <header>
-    <!-- <div class="cabecalho" id="cabecalho">
-    <?php include('cabecalhoSite.php');?>
-    </div>     -->
+    <div class="cabecalho" id="cabecalho">
+    <?php include('cabecalhoIgreja.php');?>
+    </div>    
 
 </header>
 
-<form action="cadastroMembros.php" method="post">
 
-<br><br><br><br><br><br><br><br>
-<h1 id="titulocategoria">Cadastro de Membros</h1>
-<div class="dadoscliente">    
-<div class="col-md-5">
+<br><br><br>
+<?php
+    echo "<h1 id='BemVindo'>Cadastro de Membros</h1>";
+?>
+
+<fieldset class="boxformularioMembrosAdm">
+<form class="row g-3" action="cadastroMembros.php" method="post">
+    
+<h1>Incluir Cadastro</h1>
+<div class="col-md-3">
     <label for="nome" class="form-label">*Nome:</label>
     <input type="text" name="nome" id="nome" class="form-control" required>
-  </div><br>
+  </div>
   
-  <div class="col-md-5">
+  <div class="col-md-3">
     <label for="nome" class="form-label">*Sobrenome:</label>
     <input type="text" name="sobrenome" id="sobrenome" class="form-control" required>
-  </div><br>
+  </div>
 
-  <div class="col-md-5">
+  <div class="col-md-3">
     <label for="nome" class="form-label">*Data Nascimento:</label>
     <input type="date" name="nascimento" id="nascimento" class="form-control" required>
-  </div><br>
+  </div>
 
-  <div class="col-md-5">
+  <div class="col-md-3">
     <label for="nome" class="form-label">*Membro Desde:</label>
     <input type="date" name="data" id="data" class="form-control" >
-  </div><br>
-
-  <div class="col-2">
+  </div>
+<br>
+  <div class="col-md-3">
     <label for="telefone" class="form-label">*Telefone:</label>
     <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="dd numero" required>
-  </div><br>
+  </div>
   
-  <div class="col-md-5">
+  <div class="col-md-3">
     <label for="email" class="form-label">Email:</label>
     <input type="email"  name="email" id="email" class="form-control" >
-  </div><br>
+  </div>
 
-  <div class="col-md-5">
+  <div class="col-md-3">
     <label for="inputState" class="form-label">*Voluntário:</label>
     <select id="voluntario" class="form-select" name="voluntario" required>
         <option value="">Selecione</option>
@@ -94,9 +99,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <option value="não">não</option>
     </select>
 </div>
-<br>
 
-<div class="col-md-5">
+
+<div class="col-md-3">
     <label for="inputState" class="form-label">*Lider:</label>
     <select id="lider" class="form-select" name="lider">
     <option value="">Selecione</option>
@@ -115,9 +120,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
     </select>
 </div>
-<br>
+
   
-<div class="col-md-5">
+<div class="col-md-3">
     <label for="inputState" class="form-label">Departamento1:</label>
     <select id="departamentoum" class="form-select" name="departamentoum">
     <option value="">Selecione</option>
@@ -132,8 +137,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <option value="transito">Transito</option>
     </select>
 </div>
-<br>
-<div class="col-md-5">
+
+<div class="col-md-3">
     <label for="inputState" class="form-label">Departamento2:</label>
     <select id="departamentodois" class="form-select" name="departamentodois">
     <option value="">Selecione</option>
@@ -148,8 +153,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <option value="transito">Transito</option>
     </select>
 </div>
-<br>
-<div class="col-md-5">
+
+<div class="col-md-3">
     <label for="inputState" class="form-label">Departamento3:</label>
     <select id="departamentotres" class="form-select" name="departamentotres">
     <option value="">Selecione</option>
@@ -165,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </select>
 </div>
 <br>
-<div class="col-md-5">
+<div class="col-md-3">
     <label for="inputState" class="form-label">*Membro(a) Ativo:</label>
     <select id="status" class="form-select" name="status">
         <option value="">Selecione</option>
@@ -173,37 +178,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <option value="nãoAtivo">Não Ativo</option>
     </select>
 </div>
-<br>
-   </label>
+
+</label>
    <button type="submit" name="submitAdm" id="submitAdm" class="submitAdm">Enviar</button>
    
    </button>
 
-</div>
-</div>
-</div>
-</form>
-<br>
-<!-- Modal de confirmação -->
-<div class="modal fade" id="confirmacaoModal" tabindex="-1" aria-labelledby="confirmacaoModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmacaoModalLabel">Confirmação de Envio</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Seu formulário foi enviado com sucesso! Entraremos em contato em breve.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  action="cadastroMenbros.php">Fechar</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="footer" id="footer">
-      <?php include('footerSite.php');?>
-      </div>
+</form>
+</fieldset>
+
+
 </body>
 </html>

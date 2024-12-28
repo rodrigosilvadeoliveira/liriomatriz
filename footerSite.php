@@ -15,7 +15,7 @@
 <footer class="footer">
     <br>
 <table class="tabelafooter" id="tabelafooter">
-    <tr><th>
+    <!-- <tr><th>
     <h3 class="textofooter"> PROGRAMAÇÃO:</h3></th>
     <th>
 
@@ -23,15 +23,15 @@ Quinta Be Power -
 20 horas
 
 - Domingo na Lírio -
-10 horas | 18 horas
+10 horas
 
 - Domingo de ceia -
-Sempre no 2° domingo do mês -  08h | 11h30
+Sempre no 1° domingo do mês -  09h
 
 </th>
-    </tr>
+    </tr> -->
     <tr>
-    <th><h3 class="textofooter"> Links Utéis:</h3></th>
+    <th><h4 class="textofooter"> Links Utéis:</h4></th>
     <th>
     <a href="sobre.php"><strong><img class="bandeirass" src="LÍRIO MATRIZ (PRETO)_menor.png">Sobre a Lirio</strong></a>
     <a href="contato.php"><strong><img class="bandeiras" src="img/iconsTelefone.png">Fale Conosco</strong></a>
@@ -44,7 +44,7 @@ Sempre no 2° domingo do mês -  08h | 11h30
     <div class="rodape">
     <p>&copy; 2023 Rua Amanari, 629 - JVila Santa Teresinha, São Paulo - SP, 08247-060 - Brasil
 
-+55 (11) 2071-3218 - admliriooffice@gmail.com WhatssApp: 11 - 9999999 | <a href="contato.php">Contato</a></p>
++55 (11) 2071-3218 - admliriooffice@gmail.com WhatssApp: 11 - 9999999
     </div>
 </footer>
 

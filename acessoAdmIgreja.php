@@ -30,7 +30,7 @@ session_start();
         }else{
         $_SESSION['usuario'] = $usuario;
         $_SESSION['senha'] = $senha;
-        header('Location: cadastroMembros.php');
+        header('Location: cadastroMembrosAdm.php');
         exit(); 
     }
     {
