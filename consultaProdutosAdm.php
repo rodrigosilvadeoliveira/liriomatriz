@@ -32,15 +32,21 @@ include_once('config.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>Consulta Produtos Lirio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <script src="bootstrap.min.js"></script>
 </head>
 <body>
-    <br><br>
+<div class="linkTitulo">
 <?php
     echo "<h1 id='BemVindo'>Catalogo de Produtos e Estoque</h1>";
 ?>
+</div>
 
-<div>
+<div class="linkPro">
 <a id="incluirCadastro" href="cadastroProduto.php" value="Novo Cadastro">Novo Produto</a>
+</div>
+
+<div></div>
 <table class="table" id="tabelaLista" style="width: 99%;">
   <thead>
     <tr>

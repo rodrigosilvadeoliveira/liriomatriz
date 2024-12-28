@@ -10,8 +10,8 @@
 <img id="logo" src ="lirioMatriz_preto.png">
     <h1 id="lirio">Sistema Lirio Matriz</h1>
     <div class="boxlogin">
-    <a href="loginAdmin.php"><button class="buttonlogin">Adm</button></a>
-    <a href="loginVoluntario.php"><button class="buttonlogin">Voluntário</button></a>
+    <a href="loginAdmin.php"><button class="buttonlogin">Acesso Admin - Loja</button></a>
+    <a href="loginVoluntario.php"><button class="buttonlogin">Acesso Voluntário - Loja</button></a>
     <a href="loginIgreja.php"><button class="buttonlogin">Igreja</button></a>
     </div>
     <!-- <div class="boxlogin">

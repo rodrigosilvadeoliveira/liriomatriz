@@ -35,12 +35,13 @@ include_once('config.php');
 </head>
 <body>
     <br><br>
+    <div class="linkTitulo">
 <?php
     echo "<h1 id='BemVindo'>Catalogo de Produtos e Estoque</h1>";
 ?>
-
+</div>
 <div>
-
+<a id="incluirCadastro" href="cadastroProdutoVol.php" value="Novo Cadastro">Novo Produto</a>
 <table class="table" id="tabelaLista">
   <thead>
     <tr>
@@ -83,7 +84,9 @@ include_once('config.php');
             
             echo "<td>" .$user_data['fornecedor']. "</td>";
             
-            echo "<td>" .$user_data['data_hora']. "</td>";
+            echo "<td>" .$user_data['datas']. "</td>";
+
+            echo "<td>" .$user_data['hora']. "</td>";
             
        
             echo "</tr>";

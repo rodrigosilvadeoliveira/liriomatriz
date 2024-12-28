@@ -6,7 +6,7 @@ ini_set('display_errors', 1); // Exibir erros no navegador (para fins de desenvo
 error_reporting(E_ALL); // Relatar todos os tipos de erro (para fins de desenvolvimento)
 date_default_timezone_set('America/Sao_Paulo'); // Definir fuso horário para Brasil/Brasília
 
-if(isset($_POST['submitAdm']))
+if(isset($_POST['submitPro']))
 {
 include_once("config.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -109,7 +109,7 @@ header('Location: cadastroProduto.php');
   </div>
 
   <div class="col-3">
-    <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary">Enviar</button>
+    <button type="submit" name="submitPro" id="submitPro" class="btn btn-primary">Enviar</button>
   </div>
   
 </form>

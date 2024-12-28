@@ -144,7 +144,7 @@ header {
     padding-bottom: 1%;
     padding-right: 3%;
     border: 3px solid  rgb(172, 16, 130);
-    width: 47%; 
+    width: 40%; 
     height: 120%;
     margin-left: 1%; 
     background-color: #beb1b8;
@@ -287,6 +287,23 @@ header {
 #submitAdm:hover{
     background-image: linear-gradient(to right, rgb(0, 80, 172), rgb(80,19,195));
 }
+#submitPro{
+    
+    background-image: linear-gradient(to right, rgb(172, 16, 130), rgb(90,20,220));
+    
+    width: 60%;
+    height: 60%;
+    border: none;
+    padding: 8px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+#submitPro:hover{
+    background-image: linear-gradient(to right, rgb(0, 80, 172), rgb(80,19,195));
+}
   #update{
     margin-top: 18%;
     font-size: 18px;
@@ -312,6 +329,8 @@ header {
   }
   #BemVindo
 {
+    height: top;
+    line-height: 80px;
     text-align: center;
     margin-top: 5%;
     color: rgb(172, 16, 130);
@@ -320,12 +339,14 @@ header {
 
 #BemVindoVendas
 {
+    height: top;
+    line-height: 80px;
     text-align: center;
     margin-top: 8%;
     color: rgb(172, 16, 130);
 
 }
-#BemRelatorio
+#bemRelatorio
 {
     text-align: center;
     margin-top: 5%;
@@ -524,6 +545,7 @@ padding-right: 2%;
     color: ;
 }
 
+
 @media (max-width: 1400px) {
 
     .boxformularioVol{
@@ -546,6 +568,12 @@ padding-right: 2%;
         margin-left: 2%;
         font-size: 24px;
     }
+    .linkTitulo{
+        margin-top: 10%;
+    }
+    .linkPro{
+        margin-top: 1%;
+    }
 }
 @media (max-width: 999px){
     .boxlogin{
@@ -563,9 +591,18 @@ padding-right: 2%;
         font-size: 24px;
     }
     #sair{
-        margin-top: 3%;
-        margin-left: 20%;
+        margin-top: 5%;
+        margin-left: 22%;
       }
+      .linkTitulo{
+        margin-top: 18%;
+    }
+    .linkPro{
+        margin-top: 1%;
+    }
+    #bemRelatorio{
+     margin-top: 10%;   
+    }
 }
 
 @media (max-width: 800px){
@@ -583,6 +620,12 @@ padding-right: 2%;
         width: 43%;
         margin-left: 2%;
         font-size: 24px;
+    }
+    .linkTitulo{
+        margin-top: 30%;
+    }
+    .linkPro{
+        margin-top: 3%;
     }
 }
 
@@ -602,6 +645,16 @@ padding-right: 2%;
         margin-left: 2%;
         font-size: 24px;
     }
+    .linkTitulo{
+        margin-top: 40%;
+    }
+    .linkPro{
+        margin-top: 3%;
+    }
+    #BemVindoVendas{
+        margin-top: 20%;
+    }
+
 }
 
 @media (max-width: 413px){
@@ -619,5 +672,15 @@ padding-right: 2%;
         margin-left: 2%;
         font-size: 24px;
     }
+    .linkTitulo{
+        margin-top: 50%;
+    }
+    #BemVindoVendas{
+        margin-top: 20%;
+    }
+    .boxformularioRelatorio{
+        width: 60%;
+    }
+    
 
 }

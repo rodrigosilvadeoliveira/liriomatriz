@@ -9,7 +9,7 @@ unset($_SESSION['usuario_logado']);
 session_destroy();
 
 // Redireciona o usuário para a página de login (ou qualquer outra página de sua escolha)
-header("Location: index.php");
+header("Location: homeLirio.php");
 exit();
 ?>
    // session_start();

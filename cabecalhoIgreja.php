@@ -49,9 +49,9 @@
         <button class="btn btn-outline-success" type="submit" id="bpesquisa">Search</button>
       </form>
     </div>
-  </div>
+  </div>-->
   <div class="d-flex">
-    <a href="sair.php" class="btn btn-danger me5" id="sair">Sair</a> -->
+    <a href="sair.php" class="btn btn-danger me5" id="sair">Sair</a> 
 </div>
 </nav>
 </header>

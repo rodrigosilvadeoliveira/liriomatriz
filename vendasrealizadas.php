@@ -28,6 +28,8 @@ include_once('config.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>Loja Lirio Matriz</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <script src="bootstrap.min.js"></script>
 </head>
 <body>
 <br><br><br>
@@ -45,13 +47,15 @@ include_once('config.php');
 <br>
 <a id="incluirCadastro" value="Vendas Realizadas" href="vendas.php">Novo Atendimento</a>
 <br>
-<fieldset class="boxformularioRelatorio" style="margin-top: 2%;">
+<fieldset class="boxformularioRelatorio" style="margin-top: 4%;">
 <form id="dataRelatorio" method="POST" action="vendasrealizadas.php">
     <label for="data_inicio"><b>Selecionar periodo para consulta:</b></label><br>
     <label for="data_inicio"><b>Data Inicio:</b></label>
     <input type="date" name="data_inicio" id="data_inicio" />
+    <div>
     <label for="data_fim"><b>Data Fim:</b></label>
     <input type="date" name="data_fim" id="data_fim" />
+    </div>
     <input type="submit" value="Consultar" id="Exportar"/>
 </form>
 </fieldset>
