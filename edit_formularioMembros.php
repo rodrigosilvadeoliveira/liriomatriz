@@ -51,7 +51,7 @@ else
 <body>
 <br>
 
-<fieldset class="boxformularioAdm">
+<fieldset class="boxformularioMembrosAdm">
     <form class="row g-3" action="saveEditMembros.php" method="POST">
       <h1>Alteração Cadastro</h1>
     <div class="col-md-5">
@@ -174,8 +174,8 @@ else
   
   <div class="col-3">
   <input type="hidden" name="id" value="<?php echo $id?>">
-    <button type="submit" name="update" id="update" class="btn btn-primary">Atualizar</button>
-    <button href="consulta_membros.php" name="update" id="cancelar" class="btn btn-primary">Cancelar</button>
+    <button type="submit" name="updateMembros" id="updateMembros" class="btn btn-primary">Atualizar</button>
+    <button href="consulta_membros.php" name="updateMembros" id="cancelarMembros" class="btn btn-primary">Cancelar</button>
   </div>
 </form>
 </fieldset>

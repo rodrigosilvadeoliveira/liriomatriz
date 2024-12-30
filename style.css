@@ -309,9 +309,21 @@ header {
     font-size: 18px;
 
   }
+  #updateMembros{
+    margin-top: 10%;
+    font-size: 18px;
+
+  }
   #cancelar{
     margin-top: -40%;
     margin-left: 50%;
+    background-color: #000000;
+    font-size: 18px;
+
+  }
+  #cancelarMembros{
+    margin-top: -22%;
+    margin-left: 40%;
     background-color: #000000;
     font-size: 18px;
 
@@ -544,6 +556,14 @@ padding-right: 2%;
     font-family: cursive;
     color: ;
 }
+.diaHoje {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 
 
 @media (max-width: 1400px) {
@@ -627,6 +647,16 @@ padding-right: 2%;
     .linkPro{
         margin-top: 3%;
     }
+    #cancelarMembros{
+
+        margin-top: 8%;
+        margin-left: -5%;
+    }
+    #cancelarMembros{
+
+        margin-top: 8%;
+        margin-left: -1%;
+    }
 }
 
 @media (max-width: 541px){
@@ -654,6 +684,11 @@ padding-right: 2%;
     #BemVindoVendas{
         margin-top: 20%;
     }
+    #cancelarMembros{
+
+        margin-top: 8%;
+        margin-left: -1%;
+    }
 
 }
 
@@ -680,6 +715,11 @@ padding-right: 2%;
     }
     .boxformularioRelatorio{
         width: 60%;
+    }
+    #cancelarMembros{
+
+        margin-top: 8%;
+        margin-left: -5%;
     }
     
 

@@ -40,6 +40,17 @@ include_once('config.php');
     echo "<h1 id='BemVindo'>Bem vindo <U>$logado</u><p>Consulta Lista de Membros</p></h1>";
 ?>
 <br>
+<div  class="diaHoje">
+        <p type="hidden" class="date">
+            <?php
+                // Configura o fuso horário
+                date_default_timezone_set('America/Sao_Paulo');
+                
+                // Obtém a data atual no formato desejado
+                echo date('d/m/Y');
+            ?>
+        </p>
+    </div>
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
 <a id="cons_Adm" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
 <a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
@@ -58,7 +69,7 @@ include_once('config.php');
       <th scope="col">Nome</th>
       <th scope="col">Sobrenome</th>
       <th scope="col">Nascimento</th>
-      <th scope="col">Data Inicio</th>
+      <th scope="col">Membro desde</th>
       <th scope="col">Telefone</th>
       <th scope="col">Email</th>
       <th scope="col">Voluntaio</th>
@@ -68,6 +79,7 @@ include_once('config.php');
       <th scope="col">Departamento 3</th>
       <th scope="col">Status</th>
       <th scope="col">......</th>
+      <th scope="col">Tempo membro</th>
     </tr>
   </thead>
   <tbody>
@@ -109,6 +121,16 @@ include_once('config.php');
             </a> 
             
 </td>";
+date_default_timezone_set('America/Sao_Paulo');
+        $dataAtual = new DateTime();
+
+        // Obtém a data cadastrada (exemplo vindo de $user_data['data'])
+        $dataCadastrada = new DateTime($user_data['data']);
+
+        // Calcula a diferença entre as datas
+        $diferenca = $dataAtual->diff($dataCadastrada);
+        
+             $dataAtual->format('d/m/Y') . " - " . $dataCadastrada->format('d/m/Y'); echo "<td>" ." (" . $diferenca->y . " anos, " . $diferenca->m . "  meses  e ". $diferenca->d . "  dias)"."</td>";
             echo "</tr>";
 
         }
