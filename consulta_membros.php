@@ -40,7 +40,7 @@ include_once('config.php');
     echo "<h1 id='BemVindo'>Bem vindo <U>$logado</u><p>Consulta Lista de Membros</p></h1>";
 ?>
 <br>
-<div  class="diaHoje">
+<!-- <div  class="diaHoje">
         <p type="hidden" class="date">
             <?php
                 // Configura o fuso horário
@@ -50,10 +50,12 @@ include_once('config.php');
                 echo date('d/m/Y');
             ?>
         </p>
-    </div>
+    </div> -->
+    <div>
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="cons_Adm" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
+<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
 <a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
+</div>
 <br>
 <fieldset class="boxexportarMembros">
 <form id="dataRelatorio" method="POST" action="relatorio_membros.php">
@@ -122,16 +124,31 @@ include_once('config.php');
             
 </td>";
 date_default_timezone_set('America/Sao_Paulo');
-        $dataAtual = new DateTime();
+$dataAtual = new DateTime();
 
-        // Obtém a data cadastrada (exemplo vindo de $user_data['data'])
-        $dataCadastrada = new DateTime($user_data['data']);
+// Obtém o status (exemplo vindo de $user_data['status'])
+$status = $user_data['status'];
 
-        // Calcula a diferença entre as datas
-        $diferenca = $dataAtual->diff($dataCadastrada);
-        
-             $dataAtual->format('d/m/Y') . " - " . $dataCadastrada->format('d/m/Y'); echo "<td>" ." (" . $diferenca->y . " anos, " . $diferenca->m . "  meses  e ". $diferenca->d . "  dias)"."</td>";
-            echo "</tr>";
+// Obtém a data cadastrada (exemplo vindo de $user_data['data'])
+$dataCadastrada = new DateTime($user_data['data']);
+
+// Verifica o status
+if ($status === 'ativo') {
+    // Calcula a diferença entre as datas
+    $diferenca = $dataAtual->diff($dataCadastrada);
+    
+    // Mostra a data e a diferença
+    
+     $dataAtual->format('d/m/Y') . " - " . $dataCadastrada->format('d/m/Y');
+     echo "<td>" .
+     " (" . $diferenca->y . " anos, " . $diferenca->m . " meses e " . $diferenca->d . " dias)"
+        . "</td>";
+} else {
+    // Mostra uma mensagem se não estiver ativo
+    echo "<td>Status inativo.</td>";
+}
+
+echo "</tr>";
 
         }
 
@@ -145,19 +162,5 @@ date_default_timezone_set('America/Sao_Paulo');
 </div>
 
 </body>
-<script>
-    var search = document.getElementById('pesquisar');
 
-    search.addEventListener("keydown", function(event) {
-        if (event.key === "Enter") 
-        {
-            searchData();
-        }
-    });
-
-    function searchData()
-    {
-        window.location = 'sistema.php?search='+search.value;
-    }
-</script>
 </html>

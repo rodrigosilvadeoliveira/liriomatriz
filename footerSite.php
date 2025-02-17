@@ -34,7 +34,7 @@ Sempre no 1° domingo do mês -  09h
     <th><h4 class="textofooter"> Links Utéis:</h4></th>
     <th>
     <a href="sobre.php"><strong><img class="bandeirass" src="LÍRIO MATRIZ (PRETO)_menor.png">Sobre a Lirio</strong></a>
-    <a href="contato.php"><strong><img class="bandeiras" src="img/iconsTelefone.png">Fale Conosco</strong></a>
+    <a href="contatoSite.php"><strong><img class="bandeiras" src="img/iconsTelefone.png">Fale Conosco</strong></a>
     <a href="https://www.instagram.com/lirio.matriz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><strong><img class="bandeiras" src="img/instagram.png">@lirio.matriz</strong></a>
     <a href="https://www.youtube.com/@lirio.igreja"><strong><img class="bandeiras" src="img/youtube.png">@lirio.matriz</strong></a>
   </th></tr>

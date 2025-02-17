@@ -12,7 +12,7 @@
 <body>
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" id="cabecalho">
-    <img id="logoLiriocabecalho" src ="LÍRIO MATRIZ (PRETO)_menor.png">
+   <a href="homeSite.php"><img id="logoLiriocabecalhoSite" src ="LÍRIO MATRIZ (PRETO)_menor.png"></a>
   <div class="container-fluid">
     <!--<a class="navbar-brand" href="#" id="menu">Menu</a>-->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,14 +31,16 @@
         <li class="nav-item">
           <a class="nav-link" href="novoComecoSite.php">Novo Começo</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="index.php">Igreja</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="voluntariadoSite.php">Voluntariado</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="programacaoSite.php">Programação</a>
+        </li>
+        <a class="nav-link" href="programacaoSite.php">Loja Lirio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="contatoSite.php">Contato</a>

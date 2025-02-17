@@ -66,27 +66,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <h3 class="fraseentrega">Tem dúvidas gostaria de saber mais sobre a igreja, envie uma mensagem através do nosso firmulario.</h3>
 
 <div class="dadoscliente">    
-<div class="col-md-5">
+<div class="col-md-9">
     <label for="nome" class="form-label">*Nome:</label>
     <input type="text" name="nome" id="nome" class="form-control" required>
   </div><br>
   
-  <div class="col-md-5">
+  <div class="col-md-9">
     <label for="nome" class="form-label">*Sobrenome:</label>
     <input type="text" name="sobrenome" id="sobrenome" class="form-control" required>
   </div><br>
 
-  <div class="col-2">
+  <div class="col-6">
     <label for="telefone" class="form-label">*Telefone:</label>
     <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="dd numero" required>
   </div><br>
   
-  <div class="col-md-5">
+  <div class="col-md-9">
     <label for="email" class="form-label">Email:</label>
     <input type="email"  name="email" id="email" class="form-control">
   </div><br>
 
-  <div class="col-md-5">
+  <div class="col-md-9">
     <label for="inputState" class="form-label">*Forma de contato:</label>
     <select id="tpcontato" class="form-select" name="tpcontato">
         <option value="">Selecione</option>
@@ -97,12 +97,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <br>
 
   
-  <div class="col-md-5">
+  <div class="col-md-9">
     <label for="nome" class="form-label">*Titulo para Assunto:</label>
     <input type="text" name="assunto" id="assunto" class="form-control" required>
   </div><br>
   
-  <div class="col-md-5">
+  <div class="col-md-9">
     <label for="mensagem" class="form-label">*Deixe aqui sua mensagem:</label>
     <textarea name="mensagem" id="mensagem" class="form-control" rows="8" required></textarea>
 </div><br>

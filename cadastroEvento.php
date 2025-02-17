@@ -50,14 +50,15 @@ include_once("config.php");
 // Data e hora atual
 // $cartaz = isset($_POST['cartaz']) ? $_POST['cartaz'] : null;
 $cartaz = $_POST['cartaz'];
+$links = $_POST['links'];
 if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
   $imagem = "./img/".$_FILES["imagem"]["name"];
   move_uploaded_file($_FILES["imagem"]["tmp_name"] ,$imagem);
 }else{
   $imagem = "";
 }
-$result = mysqli_query($conexao, "INSERT INTO evento(imagem,cartaz) 
-VALUES ('$imagem','$cartaz')");
+$result = mysqli_query($conexao, "INSERT INTO evento(imagem,cartaz,links) 
+VALUES ('$imagem','$cartaz','$links')");
 
 header('Location: cadastroEvento.php');
 }
@@ -75,7 +76,7 @@ header('Location: cadastroEvento.php');
 <body>
     <br><br><br>
 <?php
-    echo "<h1 id='BemVindo'>Cadastrar Eventos no Site</h1>";
+    echo "<h1 id='BemVindo'>Cadastrar Imagens no Site</h1>";
 ?>
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
 <a id="cons_Adm" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
@@ -83,7 +84,7 @@ header('Location: cadastroEvento.php');
 <fieldset class="boxformularioAdm">
     <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroEvento.php" method="POST" enctype="multipart/form-data">
     
-      <h1>Cadastro de Evento</h1>
+      <h1>Cadastro de Imagens</h1>
     
   
       <!-- <label class="nomedoCampo">Imagem: *</label> -->
@@ -95,6 +96,7 @@ header('Location: cadastroEvento.php');
         <option value="">Selecione</option>
         <option value="divulgar">Evento</option>
         <option value="carrousel">Cartaz na Home</option>
+        <option value="home">Imagem Home</option>
     </select>
 </div>
 <div class="col-md-5">
@@ -102,7 +104,12 @@ header('Location: cadastroEvento.php');
        <input type="file" name="imagem" class="form-control" accept="image/*">
      </div><br>
   
-  <div class="col-3">
+     <div class="col-md-5">
+<label class="form-label">Informe Link se tiver:</label>
+       <input type="text" class="form-control" name="links" placeholder="" id="links" maxlength="50">
+     </div> <br>
+
+  <div class="col-md-5">
     <button type="submit" name="submitEvento" id="submitEvento" class="btn btn-primary">Enviar</button>
   </div>
   
@@ -112,7 +119,9 @@ header('Location: cadastroEvento.php');
   <thead>
     <tr>
     <th scope="col">#</th>
-      <th scope="col">Evento</th>
+      <th scope="col">Banner</th>
+      <th scope="col">Tp.Divulgação</th>
+      <th scope="col">Links</th>
       
       <th scope="col">......</th>
     </tr>
@@ -125,7 +134,8 @@ header('Location: cadastroEvento.php');
             echo "<td>" .$user_data['id']. "</td>";
             
             echo "<td><img src=".$user_data['imagem']." width='150' height='100'></td>";
-            
+            echo "<td>".$user_data['cartaz']."</td>";
+            echo "<td>".$user_data['links']."</td>";
             
             echo "<td> 
             

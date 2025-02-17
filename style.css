@@ -335,6 +335,10 @@ header {
   #sair{
     margin-left: -18%;
   }
+  #logoLiriocabecalhoSite{
+    width: 45%;
+    height: 45%;
+  }
   #logoLiriocabecalho{
     width: 15%;
     height: 15%;
@@ -375,9 +379,8 @@ header {
     color: white;
     font-size: 15px;
     cursor: pointer;
-    border-radius: 10px;
-    
-    
+    border-radius: 10px;  
+    align-items: flex-start;
 }
 #cons_Adm{
     margin-left: 15px;
@@ -518,7 +521,16 @@ padding-right: 2%;
 
 }
 .dadoscliente{
-    margin-left: ;
+    padding-left: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 3%;
+    border: 3px solid  rgb(172, 16, 130);
+    width: 50%; 
+    
+    margin-top: 2%;
+    margin-left: 20%; 
+    background-color: #beb1b8;
 }
 
 .form-container {
@@ -564,6 +576,12 @@ padding-right: 2%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+#titulocategoria{
+    margin-top: 120px;
+    text-align: center;
+    font-family: cursive;
+    color: ;
+}
 
 
 @media (max-width: 1400px) {
@@ -688,6 +706,15 @@ padding-right: 2%;
 
         margin-top: 8%;
         margin-left: -1%;
+    }
+    .imagenscarroussel{
+        margin-top: 30%;
+        width: 70%;
+        height: 70%;
+        margin: 10px;
+        padding: 2%;
+        margin-left: 23%;
+    
     }
 
 }
