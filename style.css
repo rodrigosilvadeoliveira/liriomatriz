@@ -9,6 +9,11 @@ header {
 
     /* outros estilos desejados para o cabeçalho */
   }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 /* .boxlogin{
     position: absolute;
     top: 50%;
@@ -446,20 +451,20 @@ padding-right: 2%;
     font-size: 24px;
     color: ;
 }
-.footer{
-    position: relative;
-    bottom: 0;
-    width: 101%;
-    background-color: #e9ecef;
-  }
-  .tabelafooter{
-    margin-left: 5%;
+
+  .footer a {
+    color: #000000;
+    text-decoration: none;
+    /* display: block; */
+    margin: 5px 0;
 }
+
 .textofooter{
     font-size: 24px;
     font-family: bold;
     font-style: normal;
     font-weight: bold;
+    
 }
 .bandeiras{
     width: 30px;
@@ -477,7 +482,13 @@ padding-right: 2%;
     margin: 10px;
 } 
 .rodape{
-    margin-left: 5%;
+    font-size: 14px;
+    margin-top: auto;
+    margin-left: 0%;
+    display: flexbox;
+    background-color: #e9ecef;
+    width: 100%;
+    align-items: center;
   }
   .containerhome {
     display: flex;
@@ -496,13 +507,24 @@ padding-right: 2%;
     overflow: auto;
     margin-top: 2%;
     margin-left: 1%;
+    overflow-x: auto; /* Adiciona rolagem lateral */
+    white-space: nowrap;
 }
 
 #tabelaSite table {
     width: 100%;
+    min-width: 800px; /* Defina um tamanho mínimo para forçar a rolagem */
+    border-collapse: collapse;
+}
+#tabelaSite::-webkit-scrollbar {
+    display: none; /* Oculta a barra no Chrome, Edge e Safari */
 }
 
 #tabelaSite tr {
+    display: inline-block;
+    width:350px;
+    box-sizing: border-box;
+}#tabelaSite tr {
     display: inline-block;
     width:350px;
     box-sizing: border-box;
@@ -511,14 +533,39 @@ padding-right: 2%;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    display: flex;
+    flex-wrap: nowrap;
     
 }
+.produtos {
+    display: inline-block;
+    /* width: auto; */
+    vertical-align: top;
+    padding-left: 0%;
+    height: auto; /* Ajusta a altura automaticamente com base no conteúdo */
+    min-height: 5px;
+}
+.produtos td {
+    
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo */
+    justify-content: center; /* Mantém os elementos centralizados */
+    padding: 1px;
+}
+
 
 .imagens{
     width: 300px;
-    height: 300px;
-    margin: 10px;
-
+    height: 350px;
+    max-height: 200px
+    
+}
+.linkredirect {
+    width: 90%;
+    max-width: 200px;
+    padding: 1px;
+    font-size: 16px;
+    text-align: center;
 }
 .dadoscliente{
     padding-left: 3%;
@@ -716,6 +763,17 @@ padding-right: 2%;
         margin-left: 23%;
     
     }
+    .imagens{
+        width: 200px;
+        height: 200px;
+        margin: 1px;
+        /* max-width: 150px; Ajuste o tamanho das imagens conforme necessário*/
+        
+    }
+    #tabelaSite tr {
+        width:250px;
+    
+    }
 
 }
 
@@ -748,6 +806,6 @@ padding-right: 2%;
         margin-top: 8%;
         margin-left: -5%;
     }
-    
+   
 
 }

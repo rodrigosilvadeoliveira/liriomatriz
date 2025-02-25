@@ -11,26 +11,8 @@
 </head>
 
 <body>
-    
-<footer class="footer">
-    <br>
-<table class="tabelafooter" id="tabelafooter">
-    <!-- <tr><th>
-    <h3 class="textofooter"> PROGRAMAÇÃO:</h3></th>
-    <th>
-
-Quinta Be Power -
-20 horas
-
-- Domingo na Lírio -
-10 horas
-
-- Domingo de ceia -
-Sempre no 1° domingo do mês -  09h
-
-</th>
-    </tr> -->
-    <tr>
+   
+    <div class="rodape">
     <th><h4 class="textofooter"> Links Utéis:</h4></th>
     <th>
     <a href="sobre.php"><strong><img class="bandeirass" src="LÍRIO MATRIZ (PRETO)_menor.png">Sobre a Lirio</strong></a>
@@ -38,10 +20,7 @@ Sempre no 1° domingo do mês -  09h
     <a href="https://www.instagram.com/lirio.matriz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><strong><img class="bandeiras" src="img/instagram.png">@lirio.matriz</strong></a>
     <a href="https://www.youtube.com/@lirio.igreja"><strong><img class="bandeiras" src="img/youtube.png">@lirio.matriz</strong></a>
   </th></tr>
-</table>
-<div>
 
-    <div class="rodape">
     <p>&copy; 2023 Rua Amanari, 629 - JVila Santa Teresinha, São Paulo - SP, 08247-060 - Brasil
 
 +55 (11) 2071-3218 - admliriooffice@gmail.com WhatssApp: 11 - 9999999
