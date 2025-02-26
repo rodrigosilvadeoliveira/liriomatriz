@@ -100,7 +100,7 @@ header {
     padding-right: 3%;
     border: 3px solid  rgb(172, 16, 130);
     width: 47%; 
-    height: 120%;
+    
     margin-top: 8%;
     margin-left: 1%; 
     background-color: #beb1b8;
@@ -504,6 +504,15 @@ padding-right: 2%;
     display: flex;
     flex-wrap: wrap;
     max-width: 1600px; /* Ajuste o valor conforme necessário */
+}
+#tabelaForm {
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+    margin-top: 2%;
+    margin-left: 30%;
+    overflow-x: auto; /* Adiciona rolagem lateral */
+    white-space: nowrap;
 }
 #tabelaSite {
     width: 100%;

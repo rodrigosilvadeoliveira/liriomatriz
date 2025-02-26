@@ -39,7 +39,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
 $result = mysqli_query($conexao, "INSERT INTO evento(imagem) 
 VALUES ('$imagem')");
 
-header('Location: cadastroEvento.php');
+header('Location: cadastroForm.php');
 }
 
 if(isset($_POST['submitEvento']))
@@ -60,7 +60,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
 $result = mysqli_query($conexao, "INSERT INTO evento(imagem,cartaz,links) 
 VALUES ('$imagem','$cartaz','$links')");
 
-header('Location: cadastroEvento.php');
+header('Location: cadastroForm.php');
 }
 ?>
      
@@ -70,7 +70,7 @@ header('Location: cadastroEvento.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Consulta Eventos Lirio</title>
+    <title>Inscrição</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -80,7 +80,8 @@ header('Location: cadastroEvento.php');
 ?>
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
 <a id="cons_Adm" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
-<a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a><div>
+<a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
+<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
 <fieldset class="boxformularioAdm">
     <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroEvento.php" method="POST" enctype="multipart/form-data">
     
@@ -130,7 +131,7 @@ header('Location: cadastroEvento.php');
             
             echo "<td> 
             
-            <a class='btn btn-sm btn-danger' href='deleteEvento.php?id=$user_data[id]' title='Deletar'>
+            <a class='btn btn-sm btn-danger' href='deleteForm.php?id=$user_data[id]' title='Deletar'>
                 <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>
                     <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
                 </svg>

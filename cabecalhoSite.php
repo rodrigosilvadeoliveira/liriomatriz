@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Loja Lirio Matriz</title>
+    <title>Lirio Matriz</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     <script src="loja.js" async></script>
@@ -26,7 +26,7 @@
         </li>
 -->
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="videosSite.php">Ao Vivo</a>
+          <a class="nav-link" aria-current="page" href="homeSite.php">Inicio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="novoComecoSite.php">Novo Começo</a>

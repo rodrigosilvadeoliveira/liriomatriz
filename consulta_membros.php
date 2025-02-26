@@ -30,7 +30,7 @@ include_once('config.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Lirio Matriz</title>
+    <title>Consultar Membros</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -55,6 +55,7 @@ include_once('config.php');
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
 <a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
 <a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
+<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
 </div>
 <br>
 <fieldset class="boxexportarMembros">
