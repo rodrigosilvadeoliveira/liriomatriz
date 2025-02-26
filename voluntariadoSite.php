@@ -38,10 +38,11 @@ include_once('config.php');
 <h3 id="textos">Servimos a Deus com excelencia e por amor.</h3>
 
 <h1 id="titulohome">O que precisa para ser voluntário?</h1>                                                                                                                                                                                                                                                                        
-<h3 id="textos">Ser batizado, curso Lirio play, para algumas áreas necessário curso Arena</h3>
+<h3 id="textos">Ser batizado, ser dizimista, curso Lirio play, para algumas áreas necessário curso Arena</h3>
 
 <h1 id="titulohome">Quais são as áreas do voluntáriado?</h1>                                                                                                                                                                                                                                                                        
-<h3 id="textos">Louvor, Sonoplastia, Oficial, Kids, Staff, Dança, Midias, Criativo, Recepção, Loja e sala voluntários.</h3>
+<h3 id="textos">Louvor, Mesa de Som, Oficial, Kids, Staff, Dança, Midias, Criativo, Recepção, GC Casados,Gc Jovens, Consagração, 
+    Intercessão, Visitas,Teatro,Coral, Loja e sala voluntários.</h3>
 
 <h1 id="titulohome">O que aprendemos no Lirio Play?</h1>                                                                                                                                                                                                                                                                        
 <h3 id="textos">Aprendemos a história da Lirio, visão Lirio, nossa identidade, podemos tirar dúvidas e aprender mais da Biblia e a fé cristã, como funciona o voluntáriado na Liro.</h3>
