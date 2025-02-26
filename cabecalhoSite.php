@@ -12,7 +12,7 @@
 <body>
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" id="cabecalho">
-   <a href="homeSite.php"><img id="logoLiriocabecalhoSite" src ="LÍRIO MATRIZ (PRETO)_menor.png"></a>
+   <!-- <a href="homeSite.php"></a> --><img id="logoLiriocabecalhoSite" src ="LÍRIO MATRIZ (PRETO)_menor.png">
   <div class="container-fluid">
     <!--<a class="navbar-brand" href="#" id="menu">Menu</a>-->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

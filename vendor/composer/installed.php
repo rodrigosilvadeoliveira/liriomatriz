@@ -1,6 +1,6 @@
 <?php return array(
     'root' => array(
-        'name' => 'flowersmakes/spreadsheet',
+        'name' => 'Liriomakes/spreadsheet',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
         'reference' => 'd59b67d996796e2261cd74b92d4e9b0bab14ba85',
@@ -19,7 +19,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'flowersmakes/spreadsheet' => array(
+        'Liriomakes/spreadsheet' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
             'reference' => 'd59b67d996796e2261cd74b92d4e9b0bab14ba85',

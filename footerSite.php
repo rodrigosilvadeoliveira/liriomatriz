@@ -11,9 +11,10 @@
 </head>
 
 <body>
-   
+   <footer>
     <div class="rodape">
     <th><h4 class="textofooter"> Links Utéis:</h4></th>
+    <div class="infoFooter">
     <th>
     <a href="sobre.php"><strong><img class="bandeirass" src="LÍRIO MATRIZ (PRETO)_menor.png">Sobre a Lirio</strong></a>
     <a href="contatoSite.php"><strong><img class="bandeiras" src="img/iconsTelefone.png">Fale Conosco</strong></a>
@@ -25,6 +26,7 @@
 
 +55 (11) 2071-3218 - admliriooffice@gmail.com WhatssApp: 11 - 9999999
     </div>
+</div>
 </footer>
 
 </body>

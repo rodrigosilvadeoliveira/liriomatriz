@@ -1,5 +1,5 @@
 {
-    "name":"flowersmakes/spreadsheet",
+    "name":"Liriomakes/spreadsheet",
     "autoload":{
         "psr-4": {
             "App\\":"app/"

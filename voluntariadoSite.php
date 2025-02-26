@@ -35,19 +35,19 @@ include_once('config.php');
 
 <h1 id="titulonapagina">Lirio Matriz</h1>
 <h3 id="subtitulohome">Somos uma igreja em Voluntariado</h2>
-<h3 id="textos">Servimos a Deus com excelencia e por amor....</h3>
+<h3 id="textos">Servimos a Deus com excelencia e por amor.</h3>
 
 <h1 id="titulohome">O que precisa para ser voluntário?</h1>                                                                                                                                                                                                                                                                        
-<h3 id="textos">Ser batizado, curso Lirio play, para ministério de Louvor curso Arena...</h3>
+<h3 id="textos">Ser batizado, curso Lirio play, para algumas áreas necessário curso Arena</h3>
 
 <h1 id="titulohome">Quais são as áreas do voluntáriado?</h1>                                                                                                                                                                                                                                                                        
-<h3 id="textos">Ser batizado, curso Lirio play, para ministério de Louvor curso Arena...</h3>
+<h3 id="textos">Louvor, Sonoplastia, Oficial, Kids, Staff, Dança, Midias, Criativo, Recepção, Loja e sala voluntários.</h3>
 
 <h1 id="titulohome">O que aprendemos no Lirio Play?</h1>                                                                                                                                                                                                                                                                        
-<h3 id="textos">Ser batizado, curso Lirio play, para ministério de Louvor curso Arena...</h3>
+<h3 id="textos">Aprendemos a história da Lirio, visão Lirio, nossa identidade, podemos tirar dúvidas e aprender mais da Biblia e a fé cristã, como funciona o voluntáriado na Liro.</h3>
 
 <h1 id="titulohome">O que aprendemos no Arena?</h1>
-<h3 id="textos">Ser batizado, curso Lirio play, para ministério de Louvor curso Arena...</h3>
+<h3 id="textos">No curso arena, apronfundamos nosso conhecimento no louvor, como servir no voluntário, com base na biblia o que Deus espera de nós? </h3>
 
 <div class="footer" id="footer">
       <?php include('footerSite.php');?>

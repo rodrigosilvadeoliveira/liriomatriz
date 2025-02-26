@@ -264,9 +264,9 @@ header {
     font-size: 80px;
 }
 #logo{
-    margin-top: -5%;
+    margin-top:-2%;
     width: 20%;
-    height: 20%;
+    height: 30%;
 }
 #voltarLogin{
     margin-top: -22%;
@@ -341,16 +341,16 @@ header {
     margin-left: -18%;
   }
   #logoLiriocabecalhoSite{
-    width: 45%;
-    height: 45%;
+    width: 10%;
+    height: 10%;
   }
   #logoLiriocabecalho{
-    width: 15%;
-    height: 15%;
+    width: 10%;
+    height: 10%;
   }
   #BemVindo
 {
-    height: top;
+    height: 10%;
     line-height: 80px;
     text-align: center;
     margin-top: 5%;
@@ -414,11 +414,11 @@ padding-right: 2%;
     margin-left: 1%;
 }
 .imagenscarroussel{
-    width: 50%;
-    height: 50%;
-    margin: 10px;
+    width: 70%;
+    height: 30%;
+    margin: 5px;
     padding: 2%;
-    margin-left: 23%;
+    margin-left: 15%;
 
 }
 .carroussel-container {
@@ -433,7 +433,7 @@ padding-right: 2%;
  
 }
 #titulohome{
-    margin-top: 1%;
+    margin-top: 5%;
     text-align: center;
     font-family:  'Times New Roman', Times, serif;
     color: black;
@@ -464,7 +464,11 @@ padding-right: 2%;
     font-family: bold;
     font-style: normal;
     font-weight: bold;
+    margin-left: 2%;
     
+}
+.infoFooter{
+    margin-left: 2%;
 }
 .bandeiras{
     width: 30px;
@@ -486,7 +490,7 @@ padding-right: 2%;
     margin-top: auto;
     margin-left: 0%;
     display: flexbox;
-    background-color: #e9ecef;
+    background-color: #f8f9fa;
     width: 100%;
     align-items: center;
   }
@@ -688,6 +692,9 @@ padding-right: 2%;
     #bemRelatorio{
      margin-top: 10%;   
     }
+    #tabelacarrousel{
+        margin-top: 10%;
+    }
 }
 
 @media (max-width: 800px){
@@ -760,7 +767,7 @@ padding-right: 2%;
         height: 70%;
         margin: 10px;
         padding: 2%;
-        margin-left: 23%;
+        margin-left: 15%;
     
     }
     .imagens{
