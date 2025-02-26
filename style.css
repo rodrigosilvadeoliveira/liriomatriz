@@ -704,6 +704,17 @@ padding-right: 2%;
     #tabelacarrousel{
         margin-top: 10%;
     }
+    .imagenscarroussel{
+        margin-top: 3%;
+        width: 100%;
+        height: 90%;
+        padding: 2%;
+        margin-left: -1%;
+    
+    }
+    #titulocategoria{
+        margin-top: 4%;
+    }
 }
 
 @media (max-width: 800px){
@@ -738,6 +749,18 @@ padding-right: 2%;
         margin-top: 8%;
         margin-left: -1%;
     }
+    .imagenscarroussel{
+        margin-top: 10%;
+        width: 100%;
+        height: 90%;
+        padding: 2%;
+        margin-left: -1%;
+    
+    }
+    #titulocategoria{
+        margin-top: 4%;
+    }
+    
 }
 
 @media (max-width: 541px){
@@ -790,6 +813,18 @@ padding-right: 2%;
         width:250px;
     
     }
+    .imagenscarroussel{
+        margin-top: 10%;
+        width: 100%;
+        height: 90%;
+        padding: 2%;
+        margin-left: -1%;
+    
+    }
+    #titulocategoria{
+        margin-top: 4%;
+    }
+
 
 }
 
@@ -832,7 +867,7 @@ padding-right: 2%;
     
     }
     #titulocategoria{
-        margin-top: 2%;
+        margin-top: 4%;
     }
    
 

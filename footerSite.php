@@ -22,9 +22,9 @@
     <a href="https://www.youtube.com/@lirio.igreja"><strong><img class="bandeiras" src="img/youtube.png">@lirio.matriz</strong></a>
   </th></tr>
 
-    <p>&copy; 2023 Rua Amanari, 629 - JVila Santa Teresinha, São Paulo - SP, 08247-060 - Brasil
+    <p>&copy; 2025 Rua Amanari, 629 - Vila Santa Teresinha, São Paulo - SP, 08247-060 - Brasil
 
-+55 (11) 2071-3218 - admliriooffice@gmail.com WhatssApp: 11 - 9999999
++55 (11) 2071-3218 - admliriooffice@gmail.com WhatssApp: 11 - 94860-4083
     </div>
 </div>
 </footer>
