@@ -510,7 +510,7 @@ padding-right: 2%;
     max-width: 100%;
     overflow: auto;
     margin-top: 2%;
-    margin-left: 30%;
+    margin-left: 0%;
     overflow-x: auto; /* Adiciona rolagem lateral */
     white-space: nowrap;
 }
@@ -534,10 +534,6 @@ padding-right: 2%;
 }
 
 #tabelaSite tr {
-    display: inline-block;
-    width:350px;
-    box-sizing: border-box;
-}#tabelaSite tr {
     display: inline-block;
     width:350px;
     box-sizing: border-box;

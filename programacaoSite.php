@@ -33,18 +33,8 @@ $result = $conexao->query($sql);
 <br >
 
 <h1 id="titulohome">Programação</h1>
-<!-- <div class="containerhome">
-    <div class="boxhome">
-<a href=""><img class="imgPro" id="nossaloja" src="img/quinta.jpeg"></a>
-<a href=""><img class="imgPro" id="nossaloja" src="img/gcmulheres.jpeg"></a>
-<a href=""><img class="imgPro" id="nossaloja" src="img/gchomens.jpeg"></a>
-<a href=""><img class="imgPro" id="nossaloja" src="img/gcjovens.jpeg"></a>
-<a href=""><img class="imgPro" id="nossaloja" src="img/musical.jpeg"></a>
 
-</div>
-</div> -->
-
-<div id="tabelaSite">
+<div id="programacaoSite">
 <div class="produtos-container">
         <table>
             <tbody>   
