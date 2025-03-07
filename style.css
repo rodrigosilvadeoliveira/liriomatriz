@@ -583,7 +583,7 @@ padding-right: 2%;
 .form-container {
     width: 100%;
     max-width: 800px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     overflow: hidden;
     background: white;
@@ -632,7 +632,9 @@ padding-right: 2%;
 
 
 @media (max-width: 1400px) {
-    
+#titulonapagina{
+    margin-top: 10%;
+}
     .boxformularioVol{
         margin-top: -25.2%;
     }   
@@ -659,8 +661,18 @@ padding-right: 2%;
     .linkPro{
         margin-top: 1%;
     }
+    
+    .form-container {
+        margin-left: 15%;
+    }
 }
 @media (max-width: 999px){
+    #logoLiriocabecalhoSite{
+       margin-left: 85%;
+    }
+    .navbar-toggler{
+        margin-top: -5%;
+    }
     .boxlogin{
         position: absolute;
         top: 45%;
@@ -706,10 +718,19 @@ padding-right: 2%;
         width: 35%;
         margin-top: -5%;
     }
+    .form-container {
+    margin-left: 8%;
+    }
 }
 
 @media (max-width: 800px){
-    
+    #titulonapagina{
+        margin-top: 20%;
+    }
+    #logoLiriocabecalhoSite{
+    height: 40px ;
+    width: 75px;
+    }
     .boxlogin{
         position: absolute;
         top: 35%;
@@ -763,7 +784,13 @@ padding-right: 2%;
 }
 
 @media (max-width: 541px){
-
+    #logoLiriocabecalhoSite{
+        margin-left: 80%;
+        margin-top: 2%;
+         }
+         .navbar-toggler{
+            margin-top: -8%;
+         }
     .boxlogin{
         position: absolute;
         top: 40%;
@@ -835,7 +862,16 @@ padding-right: 2%;
     
 }
 
+}
+
 @media (max-width: 414px){
+    #titulonapagina{
+        margin-top: 30%;
+    }
+    #logoLiriocabecalhoSite{
+        height: 40px ;
+        width: 75px;
+        }
     .boxlogin{
         position: absolute;
         top: 43%;
