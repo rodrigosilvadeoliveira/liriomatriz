@@ -35,7 +35,7 @@ session_start();
     }
     {
         //não acessa
-        header('location: loginAdmin.php');
+        header('location: acesso_negado.php');
 
     }
     }

@@ -35,7 +35,7 @@ session_start();
     }
     {
         //não acessa
-        header('location: loginVoluntario.php');
+        header('location: acesso_negado.php');
 
     }
     }

@@ -247,12 +247,12 @@ header {
 }
 #lirioLogin{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin-top: -13%;
+    margin-top: -10%;
     height: top;
     line-height: 80px;
     text-align: center;
     color: #000000;
-    font-size: 80px;
+    font-size: 70px;
 }
 #logo{
     margin-top:-2%;
@@ -784,6 +784,10 @@ padding-right: 2%;
 }
 
 @media (max-width: 541px){
+    #lirioLogin{
+
+        font-size: 45px;
+    }
     #logoLiriocabecalhoSite{
         margin-left: 80%;
         margin-top: 2%;
