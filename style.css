@@ -233,15 +233,6 @@ header {
     color: #000000;
     font-size: 80px;
 }
-#lirio{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin-top: -3%;
-    height: top;
-    line-height: 80px;
-    text-align: center;
-    color: #000000;
-    font-size: 80px;
-}
 #botaoadm{
     font-size: 30px;
     text-decoration: none;
@@ -641,6 +632,12 @@ padding-right: 2%;
 
 
 @media (max-width: 1400px) {
+    .boxlogin{
+        position: absolute;
+        top: 45%;
+        left: 8%;
+        
+    }
 
     .boxformularioVol{
         margin-top: -25.2%;
@@ -673,7 +670,7 @@ padding-right: 2%;
     .boxlogin{
         position: absolute;
         top: 45%;
-        left: 35%;
+        left: 10%;
         
     }
     .buttonlogin{
@@ -711,14 +708,18 @@ padding-right: 2%;
     #titulocategoria{
         margin-top: 4%;
     }
+    #logo{
+        width: 35%;
+        margin-top: -5%;
+    }
 }
 
 @media (max-width: 800px){
     
     .boxlogin{
         position: absolute;
-        top: 45%;
-        left: 30%;
+        top: 35%;
+        left: 10%;
         
     }
     .buttonlogin{
@@ -756,6 +757,14 @@ padding-right: 2%;
     #titulocategoria{
         margin-top: 4%;
     }
+    #logo{
+        margin-top:-5%;
+        width: 35%;
+        height: 20%;
+    }
+    #lirio{
+        font-size: 65px;
+    }
     
 }
 
@@ -764,7 +773,7 @@ padding-right: 2%;
     .boxlogin{
         position: absolute;
         top: 40%;
-        left: 18%;
+        
         
     }
     .buttonlogin{
@@ -821,15 +830,28 @@ padding-right: 2%;
         margin-top: 4%;
     }
 
-
+    #lirio{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        margin-top: -3%;
+        height: top;
+        line-height: 80px;
+        text-align: center;
+        color: #000000;
+        font-size: 50px;
+    
 }
 
-@media (max-width: 413px){
+@media (max-width: 414px){
     .boxlogin{
         position: absolute;
-        top: 50%;
-        left: 10%;
+        top: 43%;
+        left: 8%;
         
+    }
+    #logo{
+        width: 40%;
+        height: 25%;
+        margin-top: -8%;
     }
     .buttonlogin{
         padding: 10px;

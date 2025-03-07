@@ -24,7 +24,7 @@
 
     <p>&copy; 2025 Rua Amanari, 629 - Vila Santa Teresinha, São Paulo - SP, 08247-060 - Brasil
 
-+55 (11) 2071-3218 - admliriooffice@gmail.com WhatssApp: 11 - 94860-4083
++55 (11) 2071-3218 - liriomatrizorganizacao@gmail.com WhatssApp: 11 - 94860-4083
     </div>
 </div>
 </footer>
