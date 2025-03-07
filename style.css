@@ -632,13 +632,7 @@ padding-right: 2%;
 
 
 @media (max-width: 1400px) {
-    .boxlogin{
-        position: absolute;
-        top: 45%;
-        left: 8%;
-        
-    }
-
+    
     .boxformularioVol{
         margin-top: -25.2%;
     }   
@@ -648,7 +642,7 @@ padding-right: 2%;
     .boxlogin{
         position: absolute;
         top: 38%;
-        left: 35%;
+        left: 20%;
         
     }
     .buttonlogin{
