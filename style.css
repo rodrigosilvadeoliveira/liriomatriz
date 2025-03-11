@@ -581,7 +581,7 @@ padding-right: 2%;
     font-size: 16px;
     text-align: center;
 }
-.dadoscliente{
+.dadoscontato{
     padding-left: 3%;
     padding-top: 1%;
     padding-bottom: 1%;
@@ -736,6 +736,10 @@ padding-right: 2%;
     }
     .form-container {
     margin-left: 8%;
+    }
+    .dadoscontato{
+        width: 70%;
+        margin-left: 15%;
     }
 }
 
@@ -946,6 +950,11 @@ padding-right: 2%;
         width: auto;
         height: auto;
         border: none;
+        margin-left: 10%;
+    }
+    .dadoscontato{
+
+        width: 80% ;
         margin-left: 10%;
     }
 }

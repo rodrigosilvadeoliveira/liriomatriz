@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <h3 class="fraseentrega">Tem dúvidas gostaria de saber mais sobre a igreja, envie uma mensagem através do nosso firmulario.</h3>
 
-<div class="dadoscliente">    
+<div class="dadoscontato">    
 <div class="col-md-9">
     <label for="nome" class="form-label">*Nome:</label>
     <input type="text" name="nome" id="nome" class="form-control" required>
