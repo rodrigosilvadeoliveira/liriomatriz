@@ -32,6 +32,7 @@ $result = $conexao->query($sql);
 </header>
 
 <h1 id="titulonapagina">Conheça mais sobre Cursos e Áreas do Voluntariádo e faça sua inscrição</h1>
+<h3 id="textos">*Antes de  inscrição verifique se tem requisitos necessário, alguns cursos e o voluntariado é necessario ser membro e batizado.</h3>
 
 <!-- <div class="form-container">
          Cole o iframe aqui -->
