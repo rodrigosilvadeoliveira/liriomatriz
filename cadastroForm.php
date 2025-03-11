@@ -100,7 +100,7 @@ header('Location: cadastroForm.php');
         <option value="curso_arena">Arena</option>
         <option value="curso_lirioplay">Lirio Play</option>
         <option value="curso_mergulhar">Mergulhar</option>
-        
+
         <option value="voluntariado_consagracao">Consagração</option>
         <option value="voluntariado_coral">Coral</option>
         <option value="voluntariado_criativo">Criativo</option>

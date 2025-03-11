@@ -684,7 +684,7 @@ padding-right: 2%;
 }
 @media (max-width: 999px){
     #logoLiriocabecalhoSite{
-       margin-left: 85%;
+       margin-left: auto;
     }
     .navbar-toggler{
         margin-top: -5%;
@@ -746,6 +746,7 @@ padding-right: 2%;
     #logoLiriocabecalhoSite{
     height: 40px ;
     width: 75px;
+    
     }
     .boxlogin{
         position: absolute;
