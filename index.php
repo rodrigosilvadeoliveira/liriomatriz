@@ -3,10 +3,10 @@
 <?php
 include_once('config.php');
 
-$sql = "SELECT * FROM evento WHERE cartaz = 'carrousel' ORDER BY id DESC";
+$sql = "SELECT * FROM evento WHERE cartaz= 'carrousel' ORDER BY id DESC";
 $result = $conexao->query($sql);
 
-$sql = "SELECT * FROM evento WHERE cartaz = 'home' ORDER BY id DESC";
+$sql = "SELECT * FROM evento WHERE cartaz= 'home' ORDER BY id DESC";
 $resultHome = $conexao->query($sql);
 
 //session_start();

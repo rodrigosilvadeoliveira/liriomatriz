@@ -5,7 +5,7 @@ session_start();
 // Conecte-se ao banco de dados (substitua com suas configurações)
 include('config.php');
 
-$sql = "SELECT * FROM evento WHERE cartaz= 'formulario' ORDER BY id DESC";
+$sql = "SELECT * FROM evento WHERE inscricao= 'voluntariado_midias' ORDER BY id DESC";
 $result = $conexao->query($sql);
    // print_r($_SESSION);
    
@@ -31,35 +31,32 @@ $result = $conexao->query($sql);
 
 </header>
 
-<h1 id="titulonapagina">Conheça mais sobre Cursos e Áreas do Voluntariádo e faça sua inscrição</h1>
+<h1 id="titulonapagina">Quando disponivel para incrições o formulário será disponibilizado aqui.</h1>
 
 <!-- <div class="form-container">
          Cole o iframe aqui -->
        <!-- <iframe id="novocomeco" src="https://docs.google.com/forms/d/e/1FAIpQLSfIQWHrh-sMw6rVoDg-PSh2syVPn36i91ZUI67nbi2Yn9-yOA/viewform?embedded=true" width="640" height="950" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-    </div>
+    </div> -->
     <div id="tabelaForm">
 <div class="produtos-container">
         <table>
             <tbody>   
-            
-        </tbody>
-    </table>
-</div>
-</div> -->
-<tr>
-<?php
+            <?php
             // Listar produtos no carrinho aqui
             
             while ($imagemHome = mysqli_fetch_assoc($result)) {
-                
-                echo '<form action="'. $imagemHome['inscricao'] . '.php">';
-                echo '<h3 id="inscrever">' . $imagemHome['inscricao'] . ' <input type="submit" class="linkredirect" value="Inscrição">';
-                echo '</h3>';
-                echo '</form>';
+                echo '<iframe id="novocomeco" src="' . $imagemHome['links'] . '">';
+
+                echo '<img class="imagens" src="' . $produtoNoCarrinho['imagem'] . '">';
+                echo '<a href="' . $imagemHome['links'] . '">' . '</a>';
+                echo '</iframe>';
                 
             }
             ?>
-
+        </tbody>
+    </table>
+</div>
+</div>
 
 <div class="footer" id="footer">
       <?php include('footerSite.php');?>

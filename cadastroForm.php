@@ -19,7 +19,7 @@ include_once('config.php');
     }
     else
     {
-      $sql = "SELECT * FROM evento WHERE cartaz = 'formulario' ORDER BY id DESC";
+      $sql = "SELECT * FROM evento WHERE cartaz= 'formulario' ORDER BY id DESC";
     }
     $result = $conexao->query($sql);
 
@@ -50,6 +50,7 @@ include_once("config.php");
 // Data e hora atual
 // $cartaz = isset($_POST['cartaz']) ? $_POST['cartaz'] : null;
 $cartaz = $_POST['cartaz'];
+$inscricao = $_POST['inscricao'];
 $links = $_POST['links'];
 if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
   $imagem = "./img/".$_FILES["imagem"]["name"];
@@ -57,8 +58,8 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
 }else{
   $imagem = "";
 }
-$result = mysqli_query($conexao, "INSERT INTO evento(imagem,cartaz,links) 
-VALUES ('$imagem','$cartaz','$links')");
+$result = mysqli_query($conexao, "INSERT INTO evento(imagem,cartaz,inscricao,links) 
+VALUES ('$imagem','$cartaz','$inscricao','$links')");
 
 header('Location: cadastroForm.php');
 }
@@ -76,14 +77,16 @@ header('Location: cadastroForm.php');
 <body>
     <br><br><br>
 <?php
-    echo "<h1 id='BemVindo'>Cadastrar Fornulário no Site</h1>";
+    echo "<h1 id='BemVindo'>Cadastrar Formulário no Site</h1>";
 ?>
+<div class="produtos-container">
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="cons_Adm" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
+<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
 <a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
 <a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
-<fieldset class="boxformularioAdm">
-    <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroEvento.php" method="POST" enctype="multipart/form-data">
+</div>
+<fieldset class="boxformulariodoSite">
+    <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroForm.php" method="POST" enctype="multipart/form-data">
     
       <h1>Cadastro de Imagens</h1>
     
@@ -93,8 +96,28 @@ header('Location: cadastroForm.php');
       <div class="col-md-5">
     <label for="inputState" class="form-label">*Tipo Cadastro</label>
     <br>
-    <select id="cartaz" class="form-select" name="cartaz" required>
-        <option value="formulario">Formulario</option>
+    <select id="inscricao" class="form-select" name="inscricao" required>
+        <option value="curso_arena">Arena</option>
+        <option value="curso_lirioplay">Lirio Play</option>
+        <option value="curso_mergulhar">Mergulhar</option>
+        
+        <option value="voluntariado_consagracao">Consagração</option>
+        <option value="voluntariado_coral">Coral</option>
+        <option value="voluntariado_criativo">Criativo</option>
+        <option value="voluntariado_danca">Dança</option>
+        <option value="voluntariado_gccasados">GC Casados</option>
+        <option value="voluntariado_gcjovens">GC Jovens</option>
+        <option value="voluntariado_intercessao">Intercessão</option>
+        <option value="voluntariado_Kids">Kids</option>
+        <option value="voluntariado_loja">Loja</option>
+        <option value="voluntariado_louvor">Louvor</option>
+        <option value="voluntariado_midias">Midias</option>
+        <option value="voluntariado_oficiais">Oficias</option>
+        <option value="voluntariado_recepcao">Recepção</option>
+        <option value="voluntariado_sala_dos_voluntarios">Sala Voluntarios</option>
+        <option value="voluntariado_som">Mesa de Som</option>
+        <option value="voluntariado_teatro">Teatro</option>
+        <option value="voluntariado_visitas">Visitas</option>
       
     </select>
 </div>
@@ -103,6 +126,10 @@ header('Location: cadastroForm.php');
 <label class="form-label">Informe Link do google Form:</label>
        <input type="text" class="form-control" name="links" placeholder="" id="links" maxlength="300">
      </div> <br>
+     <div class="col-md-5">
+
+       <input type="hidden" class="form-control" name="cartaz" placeholder="" id="cartaz" value="formulario">
+     </div>
 
   <div class="col-md-5">
     <button type="submit" name="submitEvento" id="submitEvento" class="btn btn-primary">Enviar</button>
@@ -126,7 +153,7 @@ header('Location: cadastroForm.php');
         {
             echo "<tr>";
             echo "<td>" .$user_data['id']. "</td>";
-            echo "<td>".$user_data['cartaz']."</td>";
+            echo "<td>".$user_data['inscricao']."</td>";
             echo "<td>".$user_data['links']."</td>";
             
             echo "<td> 

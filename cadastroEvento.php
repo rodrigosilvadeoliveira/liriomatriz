@@ -84,7 +84,7 @@ header('Location: cadastroEvento.php');
 <a id="cons_Adm" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
 <a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
 <a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
-<fieldset class="boxformularioAdm">
+<fieldset class="boxformulariodoSite">
     <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroEvento.php" method="POST" enctype="multipart/form-data">
     
       <h1>Cadastro de Imagens</h1>
