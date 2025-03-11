@@ -942,5 +942,10 @@ padding-right: 2%;
         margin-top: 4%;
     }
    
-
+    #youtube {
+        width: auto;
+        height: auto;
+        border: none;
+        margin-left: 10%;
+    }
 }
