@@ -88,8 +88,6 @@ include_once('config.php');
 </form>
 </fieldset>
 
-
-
 </div>
 <script>
     var search = document.getElementById('pesquisar');
