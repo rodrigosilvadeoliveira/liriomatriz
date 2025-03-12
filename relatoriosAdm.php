@@ -51,7 +51,7 @@ include_once('config.php');
 <form id="dataRelatorio" method="POST" action="relatorioVendasporProduto.php">
     <label for="data_inicio"><b>Relatório de Vendas por produto:</b></label><br>
     <label for="data_inicio"><b>Data Inicio:</b></label>
-    <input type="date" name="data_inicio" id="data_inicio" />
+    <input type="date" name="data_inicio" id="data_inicio" /><br>
     <label for="data_fim"><b>Data Fim:</b></label>
     <input type="date" name="data_fim" id="data_fim" />
     <input type="submit" value="Exportar" id="Exportar"/>
@@ -62,7 +62,7 @@ include_once('config.php');
 <form id="dataRelatorio" method="POST" action="relatorio_vendasAdm.php">
     <label for="data_inicio"><b>Relatório de Vendas por tipo de Pgto:</b></label><br>
     <label for="data_inicio"><b>Data Inicio:</b></label>
-    <input type="date" name="data_inicio" id="data_inicio" />
+    <input type="date" name="data_inicio" id="data_inicio" /><br>
     <label for="data_fim"><b>Data Fim:</b></label>
     <input type="date" name="data_fim" id="data_fim" />
     <input type="submit" value="Exportar" id="Exportar"/>
@@ -73,7 +73,7 @@ include_once('config.php');
 <form id="dataRelatorio" method="POST" action="relatorioestoque.php">
     <label for="data_inicio"><b>Relatório de Estoque:</b></label><br>
     <label for="data_inicio"><b>Data Inicio:</b></label>
-    <input type="date" name="data_inicio" id="data_inicio" />
+    <input type="date" name="data_inicio" id="data_inicio" /><br>
     <label for="data_fim"><b>Data Fim:</b></label>
     <input type="date" name="data_fim" id="data_fim" />
     <input type="submit" value="Exportar" id="Exportar"/>

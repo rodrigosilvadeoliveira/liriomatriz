@@ -804,6 +804,10 @@ padding-right: 2%;
     #lirio{
         font-size: 65px;
     }
+    .boxformularioRelatorio{
+        width: 90%;
+        margin-left: 2%;
+    }
     
 }
 
@@ -892,6 +896,10 @@ padding-right: 2%;
 .boxformulariodoSite{
     width: 110%;
 }
+.boxformularioRelatorio{
+        width: 90%;
+        margin-left: 2%;
+    }
 
 }
 
@@ -928,9 +936,7 @@ padding-right: 2%;
     #BemVindoVendas{
         margin-top: 20%;
     }
-    .boxformularioRelatorio{
-        width: 60%;
-    }
+    
     #cancelarMembros{
 
         margin-top: 8%;
