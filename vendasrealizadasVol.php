@@ -83,11 +83,9 @@ include_once('config.php');
   // Estabelecer a conexão com o banco de dados
   $conexao = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
   
-  if (isset($_POST['data_inicio']) && isset($_POST['data_fim'])) {
-      $inicio = $_POST['data_inicio'];
-      $fim = $_POST['data_fim'];
+
   
-  $sql = "SELECT * FROM vendas WHERE datas BETWEEN '$inicio' AND '$fim'";
+  $sql = "SELECT * FROM vendas ORDER BY id DESC";
   $result = $conexao->query($sql);
 
         while($user_data = mysqli_fetch_assoc($result))
@@ -116,7 +114,7 @@ include_once('config.php');
 
         }
 
-    }
+    
 
   ?>
     

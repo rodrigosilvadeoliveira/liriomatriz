@@ -52,14 +52,11 @@ include_once("config.php");
 $cartaz = $_POST['cartaz'];
 $inscricao = $_POST['inscricao'];
 $links = $_POST['links'];
-if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
-  $imagem = "./img/".$_FILES["imagem"]["name"];
-  move_uploaded_file($_FILES["imagem"]["tmp_name"] ,$imagem);
-}else{
-  $imagem = "";
-}
-$result = mysqli_query($conexao, "INSERT INTO evento(imagem,cartaz,inscricao,links) 
-VALUES ('$imagem','$cartaz','$inscricao','$links')");
+$inicio = $_POST['inicio'];
+$fim = $_POST['fim'];
+
+$result = mysqli_query($conexao, "INSERT INTO evento(imagem,cartaz,inscricao,links,inicio,fim) 
+VALUES ('$imagem','$cartaz','$inscricao','$links','$inicio','$fim')");
 
 header('Location: cadastroForm.php');
 }
@@ -88,7 +85,7 @@ header('Location: cadastroForm.php');
 <fieldset class="boxformulariodoSite">
     <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroForm.php" method="POST" enctype="multipart/form-data">
     
-      <h1>Cadastro de Imagens</h1>
+      <h1>Cadastro de Inscrições</h1>
     
   
       <!-- <label class="nomedoCampo">Imagem: *</label> -->
@@ -127,6 +124,14 @@ header('Location: cadastroForm.php');
        <input type="text" class="form-control" name="links" placeholder="" id="links" maxlength="300">
      </div> <br>
      <div class="col-md-5">
+<label class="form-label">Inicio da inscricao:</label>
+       <input type="date" class="form-control" name="inicio" placeholder="" id="inicio">
+     </div> <br>
+     <div class="col-md-5">
+     <label class="form-label">Fim da inscricao:</label>
+       <input type="date" class="form-control" name="fim" placeholder="" id="fim">
+     </div> <br>
+     <div class="col-md-5">
 
        <input type="hidden" class="form-control" name="cartaz" placeholder="" id="cartaz" value="formulario">
      </div>
@@ -143,6 +148,8 @@ header('Location: cadastroForm.php');
     <th scope="col">#</th>
       <th scope="col">Tp.Divulgação</th>
       <th scope="col">Links</th>
+      <th scope="col">Inicio</th>
+      <th scope="col">Fim</th>
       
       <th scope="col">......</th>
     </tr>
@@ -155,6 +162,8 @@ header('Location: cadastroForm.php');
             echo "<td>" .$user_data['id']. "</td>";
             echo "<td>".$user_data['inscricao']."</td>";
             echo "<td>".$user_data['links']."</td>";
+            echo "<td>".$user_data['inicio']."</td>";
+            echo "<td>".$user_data['fim']."</td>";
             
             echo "<td> 
             
