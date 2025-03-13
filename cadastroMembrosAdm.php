@@ -71,10 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "<h1 id='BemVindo'>Cadastro de Membros</h1>";
 ?>
 <br>
+<div class="produtos-container">
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="cons_Adm" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
+<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
 <a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
 <a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
+</div>
 <br>
 <fieldset class="boxformularioMembrosAdm">
 <form class="row g-3" action="cadastroMembros.php" method="post">  

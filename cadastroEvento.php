@@ -80,10 +80,22 @@ header('Location: cadastroEvento.php');
 <?php
     echo "<h1 id='BemVindo'>Cadastrar Imagens no Site</h1>";
 ?>
+<div  class="diaHoje">
+        <p type="hidden" class="date">
+            <?php
+                // Configura o fuso horário
+                date_default_timezone_set('America/Sao_Paulo');
+                
+                // Obtém a data atual no formato desejado
+                echo date('d/m/Y');
+            ?>
+       
+<div class="produtos-container">
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="cons_Adm" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
+<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
 <a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
 <a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
+</div>
 <fieldset class="boxformulariodoSite">
     <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroEvento.php" method="POST" enctype="multipart/form-data">
     
@@ -136,7 +148,7 @@ header('Location: cadastroEvento.php');
             echo "<tr>";
             echo "<td>" .$user_data['id']. "</td>";
             
-            echo "<td><img src=".$user_data['imagem']." width='150' height='100'></td>";
+            echo "<td><img src=".$user_data['imagem']." width='200' height='150'></td>";
             echo "<td>".$user_data['cartaz']."</td>";
             echo "<td>".$user_data['links']."</td>";
             

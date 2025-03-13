@@ -47,21 +47,45 @@ $result = $conexao->query($sql);
     </table>
 </div>
 </div> -->
-<tr>
-<?php
+
+<table class="table" id="tabelaLista" style="width: 99%;">
+  <thead>
+    <tr>
+    <th scope="col">Inscrição</th>
+      <th scope="col">Data inicio</th>
+      <th scope="col">Fim inscrição</th>
+           
+      <th scope="col">......</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php
             // Listar produtos no carrinho aqui
             
             while ($imagemHome = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
                 
                 echo '<form action="'. $imagemHome['inscricao'] . '.php">';
-                echo '<h3 id="inscrever">' . $imagemHome['inscricao'] . ' <input type="submit" class="linkredirect" value="Inscrição">';
-                echo '</h3>';
+                echo "<td>".'<h2 id="inscrever">' . $imagemHome['inscricao'] . "</td>";
+                echo '</h2>';
+                echo "<td>".$imagemHome['inicio']."</td>";
+                echo "<td>".$imagemHome['fim']."</td>";
+                echo "<td>" . ' <input type="submit" class="linkredirect" value="Cadastrar">'."</td>";
+                echo '</tr>';
                 echo '</form>';
                 
+                echo "</tr>";
+
             }
-            ?>
-
-
+    
+    
+    
+      ?>
+        
+        </tr>
+      </tbody>
+    </table>
+    </div>
 <div class="footer" id="footer">
       <?php include('footerSite.php');?>
       </div>
