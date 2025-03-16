@@ -22,6 +22,22 @@ include_once('config.php');
         $sql = "SELECT * FROM membros ORDER BY id DESC";
     }
     $result = $conexao->query($sql);
+
+    while ($user_data = mysqli_fetch_assoc($result)) {
+        $dataAtual = new DateTime();
+        $idade = new DateTime($user_data['nascimento']);
+        $idadeAtual = $dataAtual->diff($idade)->y;
+        $status = $user_data['status'];
+    
+        if ($user_data['idade'] != $idadeAtual && $status === 'ativo') { // Só atualiza se necessário
+            $id = $user_data['id'];
+            $sqlUpdate = "UPDATE membros SET idade = '$idadeAtual' WHERE id = '$id'";
+            $conexao->query($sqlUpdate);
+        }
+    }
+    
+    // **Reexecuta a consulta para garantir que os dados atualizados sejam refletidos**
+    $result = $conexao->query($sql);
 ?>
      
 <!DOCTYPE html>
@@ -74,6 +90,7 @@ include_once('config.php');
       <th scope="col">Nome</th>
       <th scope="col">Sobrenome</th>
       <th scope="col">Nascimento</th>
+      <th scope="col">Batizado</th>
       <th scope="col">Membro desde</th>
       <th scope="col">Telefone</th>
       <th scope="col">Email</th>
@@ -84,6 +101,7 @@ include_once('config.php');
       <th scope="col">Departamento 3</th>
       <th scope="col">Status</th>
       <th scope="col">......</th>
+      <th scope="col">Idade</th>
       <th scope="col">Tempo membro</th>
     </tr>
   </thead>
@@ -99,6 +117,8 @@ include_once('config.php');
             echo "<td>" .$user_data['sobrenome']. "</td>";
                         
             echo "<td>" .$user_data['nascimento']. "</td>";
+
+            echo "<td>" .$user_data['batizado']. "</td>";
             
             echo "<td>" .$user_data['datas']. "</td>";
 
@@ -126,8 +146,23 @@ include_once('config.php');
             </a> 
             
 </td>";
-date_default_timezone_set('America/Sao_Paulo');
 $dataAtual = new DateTime();
+
+$idade = new DateTime($user_data['nascimento']);
+
+// Calcula a diferença entre as datas
+    $idadeAtual = $dataAtual->diff($idade);
+    
+    // Mostra a data e a diferença
+    
+     $dataAtual->format('d/m/Y') . " - " . $idade->format('d/m/Y');
+     echo "<td>" .
+     " $idadeAtual->y"
+        . "</td>";
+
+
+date_default_timezone_set('America/Sao_Paulo');
+
 
 // Obtém o status (exemplo vindo de $user_data['status'])
 $status = $user_data['status'];
@@ -150,6 +185,7 @@ if ($status === 'ativo') {
     // Mostra uma mensagem se não estiver ativo
     echo "<td>Status inativo.</td>";
 }
+ 
 
 echo "</tr>";
 

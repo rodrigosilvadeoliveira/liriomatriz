@@ -145,6 +145,19 @@ header {
     margin-left: 1%; 
     background-color: #beb1b8;
 }
+.boxformularioEditMembrosAdm{
+    margin-top: 5%;
+    padding-left: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 3%;
+    border: 3px solid  rgb(172, 16, 130);
+    width: 90%; 
+    
+    margin-top: 2%;
+    margin-left: 1%; 
+    background-color: #beb1b8;
+}
 .boxformularioVol{
     padding-left: 3%;
     padding-top: 1%;
@@ -743,6 +756,11 @@ padding-right: 2%;
     .dadoscontato{
         width: 70%;
         margin-left: 15%;
+    }
+    #cancelarMembros{
+
+        margin-top: -33%;
+        margin-left: 50%;
     }
 }
 

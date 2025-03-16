@@ -97,6 +97,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 
   <div class="col-md-3">
+    <label for="inputState" class="form-label">*Batizado:</label>
+    <select id="batizado" class="form-select" name="lider">
+    <option value="">Selecione</option>
+    <option value="não">Não</option>
+    <option value="sim">Sim</option>
+    </select>
+</div>
+
+  <div class="col-md-3">
     <label for="nome" class="form-label">*Membro Desde:</label>
     <input type="date" name="data" id="data" class="form-control" >
   </div>

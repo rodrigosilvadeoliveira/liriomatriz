@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $sobrenome = $_POST['sobrenome'];
     $nascimento = $_POST['nascimento'];
+    $batizado = $_POST['batizado'];
     $datas = $_POST['datas'];
     $telefone = $_POST['telefone'];
     $email = $_POST['email'];
@@ -46,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <header>
     <div class="cabecalho" id="cabecalho">
-    <?php include('cabecalhoIgreja.php');?>
+    <?php include('cabecalhoMembros.php');?>
     </div>    
 
 </header>
@@ -75,6 +76,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label for="nome" class="form-label">*Data Nascimento:</label>
     <input type="date" name="nascimento" id="nascimento" class="form-control" required>
   </div>
+
+  <div class="col-md-3">
+    <label for="inputState" class="form-label">*Batizado:</label>
+    <select id="batizado" class="form-select" name="lider">
+    <option value="">Selecione</option>
+    <option value="não">Não</option>
+    <option value="sim">Sim</option>
+    </select>
+</div>
 
   <div class="col-md-3">
     <label for="nome" class="form-label">*Membro Desde:</label>

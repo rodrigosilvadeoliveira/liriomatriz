@@ -17,6 +17,7 @@ if(!empty($_GET['id']))
             $nome = $user_data['nome'];
             $sobrenome = $user_data['sobrenome'];
             $nascimento = $user_data['nascimento'];
+            $batizado = $user_data['batizado'];
             $datas = $user_data['datas'];
             $telefone = $user_data['telefone'];
             $email = $user_data['email'];
@@ -45,13 +46,22 @@ else
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Loja Liro Matriz</title>
+    <title>Liro Matriz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <br>
-
-<fieldset class="boxformularioMembrosAdm">
+<br><br><br>
+<?php
+    echo "<h1 id='BemVindo'>Alterar Cadastro</h1>";
+?>
+<div class="produtos-container">
+<a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
+<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
+<a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
+<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
+</div>
+<fieldset class="boxformularioEditMembrosAdm">
     <form class="row g-3" action="saveEditMembros.php" method="POST">
       <h1>Alteração Cadastro</h1>
     <div class="col-md-5">
@@ -67,6 +77,15 @@ else
     <input type="date"  name="nascimento" id="nascimento" class="form-control" value="<?php echo $nascimento?>">
   </div>
   
+  <div class="col-md-3">
+    <label for="inputState" class="form-label">*Batizado:</label>
+    <select id="batizado" class="form-select" name="batizado">
+    <option value="">Selecione</option>
+    <option value="não">Não</option>
+    <option value="sim">Sim</option>
+    </select>
+</div>
+
   <div class="col-3">
     <label for="data" class="form-label">Data Inicio</label>
     <input type="date" class="form-control" name="datas" id="data" placeholder="" value="<?php echo $datas?>">
