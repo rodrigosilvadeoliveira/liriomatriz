@@ -7,7 +7,7 @@
     $nome = $_POST['nome'];
     $sobrenome = $_POST['sobrenome'];
     $nascimento = $_POST['nascimento'];
-    $data = $_POST['data'];
+    $datas = $_POST['datas'];
     $telefone = $_POST['telefone'];
     $email = $_POST['email'];
     $voluntario = $_POST['voluntario'];
@@ -19,7 +19,7 @@
 
         
         $sqlInsert = "UPDATE membros 
-        SET nome='$nome',sobrenome='$sobrenome',nascimento='$nascimento',data='$data',telefone='$telefone',email='$email',voluntario='$voluntario',lider='$lider',departamentoum='$departamentoum',departamentodois='$departamentodois',departamentotres='$departamentotres',status='$status'
+        SET nome='$nome',sobrenome='$sobrenome',nascimento='$nascimento',datas='$datas',telefone='$telefone',email='$email',voluntario='$voluntario',lider='$lider',departamentoum='$departamentoum',departamentodois='$departamentodois',departamentotres='$departamentotres',status='$status'
         WHERE id=$id";
         $result = $conexao->query($sqlInsert);
         print_r($result);

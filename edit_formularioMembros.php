@@ -17,7 +17,7 @@ if(!empty($_GET['id']))
             $nome = $user_data['nome'];
             $sobrenome = $user_data['sobrenome'];
             $nascimento = $user_data['nascimento'];
-            $data = $user_data['data'];
+            $datas = $user_data['datas'];
             $telefone = $user_data['telefone'];
             $email = $user_data['email'];
             $voluntario = $user_data['voluntario'];
@@ -69,7 +69,7 @@ else
   
   <div class="col-3">
     <label for="data" class="form-label">Data Inicio</label>
-    <input type="date" class="form-control" name="data" id="data" placeholder="" value="<?php echo $data?>">
+    <input type="date" class="form-control" name="datas" id="data" placeholder="" value="<?php echo $datas?>">
   </div>
   
   <div class="col-3">
@@ -174,7 +174,7 @@ else
   
   <div class="col-3">
   <input type="hidden" name="id" value="<?php echo $id?>">
-    <button type="submit" name="updateMembros" id="updateMembros" class="btn btn-primary">Atualizar</button>
+    <button type="submit" name="update" id="updateMenbros" class="btn btn-primary">Atualizar</button>
     <button href="consulta_membros.php" name="updateMembros" id="cancelarMembros" class="btn btn-primary">Cancelar</button>
   </div>
 </form>

@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $sobrenome = $_POST['sobrenome'];
     $nascimento = $_POST['nascimento'];
-    $data = $_POST['data'];
+    $datas = $_POST['datas'];
     $telefone = $_POST['telefone'];
     $email = $_POST['email'];
     $voluntario = $_POST['voluntario'];
@@ -32,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'];
 
 
-    $result = mysqli_query($conexao, "INSERT INTO membros(nome, sobrenome, nascimento, data, telefone, email, voluntario, lider, departamentoum, departamentodois,departamentotres, status) 
-    VALUES ('$nome', '$sobrenome','$nascimento','$data', '$telefone', '$email', '$voluntario', '$lider', '$departamentoum', '$departamentodois', '$departamentotres', '$status')");
+    $result = mysqli_query($conexao, "INSERT INTO membros(nome, sobrenome, nascimento, datas, telefone, email, voluntario, lider, departamentoum, departamentodois,departamentotres, status) 
+    VALUES ('$nome', '$sobrenome','$nascimento','$datas', '$telefone', '$email', '$voluntario', '$lider', '$departamentoum', '$departamentodois', '$departamentotres', '$status')");
 
     header('Location: cadastroMembrosAdm.php');
 }

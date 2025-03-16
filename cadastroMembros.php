@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $sobrenome = $_POST['sobrenome'];
     $nascimento = $_POST['nascimento'];
-    $data = $_POST['data'];
+    $datas = $_POST['datas'];
     $telefone = $_POST['telefone'];
     $email = $_POST['email'];
     $voluntario = $_POST['voluntario'];
@@ -18,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'];
 
 
-    $result = mysqli_query($conexao, "INSERT INTO membros(nome, sobrenome, nascimento, data, telefone, email, voluntario, lider, departamentoum, departamentodois,departamentotres, status) 
-    VALUES ('$nome', '$sobrenome','$nascimento','$data', '$telefone', '$email', '$voluntario', '$lider', '$departamentoum', '$departamentodois', '$departamentotres', '$status')");
+    $result = mysqli_query($conexao, "INSERT INTO membros(nome, sobrenome, nascimento, datas, telefone, email, voluntario, lider, departamentoum, departamentodois,departamentotres, status) 
+    VALUES ('$nome', '$sobrenome','$nascimento','$datas', '$telefone', '$email', '$voluntario', '$lider', '$departamentoum', '$departamentodois', '$departamentotres', '$status')");
 
     header('Location: cadastroMembros.php');
 }
@@ -56,12 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php
     echo "<h1 id='BemVindo'>Cadastro de Membros</h1>";
 ?>
-<div class="produtos-container">
-<a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
-<a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
-<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
-</div>
+
 <fieldset class="boxformularioMembrosAdm">
 <form class="row g-3" action="cadastroMembros.php" method="post">
     

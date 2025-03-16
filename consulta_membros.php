@@ -100,7 +100,7 @@ include_once('config.php');
                         
             echo "<td>" .$user_data['nascimento']. "</td>";
             
-            echo "<td>" .$user_data['data']. "</td>";
+            echo "<td>" .$user_data['datas']. "</td>";
 
             echo "<td>" .$user_data['telefone']. "</td>";
 
@@ -133,7 +133,7 @@ $dataAtual = new DateTime();
 $status = $user_data['status'];
 
 // Obtém a data cadastrada (exemplo vindo de $user_data['data'])
-$dataCadastrada = new DateTime($user_data['data']);
+$dataCadastrada = new DateTime($user_data['datas']);
 
 // Verifica o status
 if ($status === 'ativo') {
