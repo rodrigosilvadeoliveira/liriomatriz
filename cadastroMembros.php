@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'];
 
 
-    $result = mysqli_query($conexao, "INSERT INTO membros(nome, sobrenome, nascimento, datas, telefone, email, voluntario, lider, departamentoum, departamentodois,departamentotres, status) 
-    VALUES ('$nome', '$sobrenome','$nascimento','$datas', '$telefone', '$email', '$voluntario', '$lider', '$departamentoum', '$departamentodois', '$departamentotres', '$status')");
+    $result = mysqli_query($conexao, "INSERT INTO membros(nome, sobrenome, nascimento, batizado, datas, telefone, email, voluntario, lider, departamentoum, departamentodois,departamentotres, status) 
+    VALUES ('$nome', '$sobrenome','$nascimento','$batizado','$datas', '$telefone', '$email', '$voluntario', '$lider', '$departamentoum', '$departamentodois', '$departamentotres', '$status')");
 
     header('Location: cadastroMembros.php');
 }
@@ -81,8 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label for="inputState" class="form-label">*Batizado:</label>
     <select id="batizado" class="form-select" name="batizado">
     <option value="">Selecione</option>
-    <option value="não">Não</option>
-    <option value="sim">Sim</option>
+    <option value="não">não</option>
+    <option value="sim">sim</option>
     </select>
 </div>
 
