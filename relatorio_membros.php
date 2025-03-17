@@ -35,7 +35,9 @@ $sheet->setCellValue('J1', 'departamento1');
 $sheet->setCellValue('K1', 'departamentodo2');
 $sheet->setCellValue('L1', 'departamento3');
 $sheet->setCellValue('M1', 'Status');
-
+$sheet->setCellValue('N1', 'Idade');
+$sheet->setCellValue('O1', 'Responsavel');
+$sheet->setCellValue('P1', 'Batizada');
 //Estilo da celula
 $styles = [
     'font' => [
@@ -78,7 +80,7 @@ if ($result) {
     $sheet->setCellValue('B' . $row, $row_data['nome']);
     $sheet->setCellValue('C' . $row, $row_data['sobrenome']);
     $sheet->setCellValue('D' . $row, $row_data['nascimento']);
-    $sheet->setCellValue('E' . $row, $row_data['data']);
+    $sheet->setCellValue('E' . $row, $row_data['datas']);
     $sheet->setCellValue('F' . $row, $row_data['telefone']);
     $sheet->setCellValue('G' . $row, $row_data['email']);
     $sheet->setCellValue('H' . $row, $row_data['voluntario']);
@@ -87,6 +89,9 @@ if ($result) {
     $sheet->setCellValue('K' . $row, $row_data['departamentodois']);
     $sheet->setCellValue('L' . $row, $row_data['departamentotres']);
     $sheet->setCellValue('M' . $row, $row_data['status']);
+    $sheet->setCellValue('N' . $row, $row_data['idade']);
+    $sheet->setCellValue('O' . $row, $row_data['responsavel']);
+    $sheet->setCellValue('P' . $row, $row_data['batizado']);
     $row++;
 }
 }else {
@@ -95,7 +100,7 @@ if ($result) {
 
 // Defina o cabeçalho do arquivo para download
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="estoque_completo.xlsx"');
+header('Content-Disposition: attachment; filename="lista_membros.xlsx"');
 header('Cache-Control: max-age=0');
 
 // Crie um objeto Writer para salvar o arquivo Excel

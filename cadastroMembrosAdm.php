@@ -31,10 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $departamentodois = $_POST['departamentodois'];
     $departamentotres = $_POST['departamentotres'];
     $status = $_POST['status'];
+    $responsavel = $_POST['responsavel'];
 
 
-    $result = mysqli_query($conexao, "INSERT INTO membros(nome, sobrenome, nascimento, batizado, datas, telefone, email, voluntario, lider, departamentoum, departamentodois,departamentotres, status) 
-    VALUES ('$nome', '$sobrenome','$nascimento','$batizado','$datas', '$telefone', '$email', '$voluntario', '$lider', '$departamentoum', '$departamentodois', '$departamentotres', '$status')");
+    $result = mysqli_query($conexao, "INSERT INTO membros(nome, sobrenome, nascimento, batizado, datas, telefone, email, voluntario, lider, departamentoum, departamentodois,departamentotres, status,responsavel) 
+    VALUES ('$nome', '$sobrenome','$nascimento','$batizado','$datas', '$telefone', '$email', '$voluntario', '$lider', '$departamentoum', '$departamentodois', '$departamentotres', '$status','$responsavel')");
 
     header('Location: cadastroMembrosAdm.php');
 }
@@ -230,7 +231,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </select>
 </div>
 
-   </label>
+<div class="col-md-3">
+    <label for="nome" class="form-label">Responsavel:</label>
+    <input type="text" name="responsavel" id="responsavel" class="form-control" placeholder="Nome completo do responsavél">
+  </div>
+
+</label>
    <button type="submit" name="submitAdm" id="submitAdm" class="submitAdm">Enviar</button>
    
    </button>

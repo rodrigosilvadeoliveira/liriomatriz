@@ -103,6 +103,7 @@ include_once('config.php');
       <th scope="col">......</th>
       <th scope="col">Idade</th>
       <th scope="col">Tempo membro</th>
+      <th scope="col">Responsavel</th>
     </tr>
   </thead>
   <tbody>
@@ -176,7 +177,7 @@ if ($status === 'ativo') {
     echo "<td>Status inativo.</td>";
 }
  
-
+echo "<td>" .$user_data['responsavel']. "</td>";
 echo "</tr>";
 
         }
