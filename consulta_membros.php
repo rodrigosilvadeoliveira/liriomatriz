@@ -146,23 +146,13 @@ include_once('config.php');
             </a> 
             
 </td>";
-$dataAtual = new DateTime();
 
-$idade = new DateTime($user_data['nascimento']);
 
-// Calcula a diferença entre as datas
-    $idadeAtual = $dataAtual->diff($idade);
-    
-    // Mostra a data e a diferença
-    
-     $dataAtual->format('d/m/Y') . " - " . $idade->format('d/m/Y');
-     echo "<td>" .
-     " $idadeAtual->y"
-        . "</td>";
+echo "<td>" .$user_data['idade']. "</td>";
 
 
 date_default_timezone_set('America/Sao_Paulo');
-
+$dataAtual = new DateTime();
 
 // Obtém o status (exemplo vindo de $user_data['status'])
 $status = $user_data['status'];

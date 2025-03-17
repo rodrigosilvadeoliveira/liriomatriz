@@ -80,7 +80,7 @@ else
   <div class="col-md-3">
     <label for="inputState" class="form-label">*Batizado:</label>
     <select id="batizado" class="form-select" name="batizado">
-    <option value="">Selecione</option>
+    <option value="<?php echo $batizado?>"><?php echo $batizado?></option>
     <option value="não">Não</option>
     <option value="sim">Sim</option>
     </select>
@@ -118,17 +118,23 @@ else
     <select id="lider" class="form-select" name="lider">
     <option value="<?php echo $lider?>"><?php echo $lider?></option>
     <option value="não">Não</option>
-    <option value="criativo">Criativo</option>
-    <option value="homens">GC Homens</option>
-    <option value="jovens">GC Jovens</option>
-    <option value="mulheres">GCMulheres</option>
-    <option value="kids">Kids</option>
-    <option value="loja">Loja</option>
-    <option value="louvor">Louvor</option>
-    <option value="midias">Midias</option>
-    <option value="recepcao">Recepção</option>
-    <option value="staff">Staff</option>
-    <option value="transito">Transito</option>
+    <option value="consagracao">Consagração</option>
+        <option value="coral">Coral</option>
+        <option value="criativo">Criativo</option>
+        <option value="danca">Dança</option>
+        <option value="gccasados">GC Casados</option>
+        <option value="gcjovens">GC Jovens</option>
+        <option value="intercessao">Intercessão</option>
+        <option value="Kids">Kids</option>
+        <option value="loja">Loja</option>
+        <option value="louvor">Louvor</option>
+        <option value="midias">Midias</option>
+        <option value="oficiais">Oficias</option>
+        <option value="recepcao">Recepção</option>
+        <option value="salavoluntarios">Sala Voluntarios</option>
+        <option value="som">Mesa de Som</option>
+        <option value="teatro">Teatro</option>
+        <option value="visitas">Visitas</option>
         
     </select>
 </div>
@@ -138,15 +144,23 @@ else
     <select id="departamentoum" class="form-select" name="departamentoum">
     <option value="<?php echo $departamentoum?>"><?php echo $departamentoum?></option>
     <option value="">Selecione</option>
-    <option value="criativo">Criativo</option>
-    <option value="kids">Kids</option>
-    <option value="loja">Loja</option>
-    <option value="louvor">Louvor</option>
-    <option value="midias">Midias</option>
-    <option value="recepcao">Recepção</option>
-    <option value="staff">Staff</option>
-    <option value="sonoplastia">Sonoplastia</option>
-    <option value="transito">Transito</option>
+    <option value="consagracao">Consagração</option>
+        <option value="coral">Coral</option>
+        <option value="criativo">Criativo</option>
+        <option value="danca">Dança</option>
+        <option value="gccasados">GC Casados</option>
+        <option value="gcjovens">GC Jovens</option>
+        <option value="intercessao">Intercessão</option>
+        <option value="Kids">Kids</option>
+        <option value="loja">Loja</option>
+        <option value="louvor">Louvor</option>
+        <option value="midias">Midias</option>
+        <option value="oficiais">Oficias</option>
+        <option value="recepcao">Recepção</option>
+        <option value="salavoluntarios">Sala Voluntarios</option>
+        <option value="som">Mesa de Som</option>
+        <option value="teatro">Teatro</option>
+        <option value="visitas">Visitas</option>
     </select>
 </div>
 <div class="col-md-5">
@@ -154,15 +168,23 @@ else
     <select id="departamentodois" class="form-select" name="departamentodois">
     <option value="<?php echo $departamentodois?>"><?php echo $departamentodois?></option>
     <option value="">Selecione</option>
-    <option value="criativo">Criativo</option>
-    <option value="kids">Kids</option>
-    <option value="loja">Loja</option>
-    <option value="louvor">Louvor</option>
-    <option value="midias">Midias</option>
-    <option value="recepcao">Recepção</option>
-    <option value="staff">Staff</option>
-    <option value="sonoplastia">Sonoplastia</option>
-    <option value="transito">Transito</option>
+    <option value="consagracao">Consagração</option>
+        <option value="coral">Coral</option>
+        <option value="criativo">Criativo</option>
+        <option value="danca">Dança</option>
+        <option value="gccasados">GC Casados</option>
+        <option value="gcjovens">GC Jovens</option>
+        <option value="intercessao">Intercessão</option>
+        <option value="Kids">Kids</option>
+        <option value="loja">Loja</option>
+        <option value="louvor">Louvor</option>
+        <option value="midias">Midias</option>
+        <option value="oficiais">Oficias</option>
+        <option value="recepcao">Recepção</option>
+        <option value="salavoluntarios">Sala Voluntarios</option>
+        <option value="som">Mesa de Som</option>
+        <option value="teatro">Teatro</option>
+        <option value="visitas">Visitas</option>
     </select>
 </div>
 <div class="col-md-5">
@@ -170,15 +192,23 @@ else
     <select id="departamentotres" class="form-select" name="departamentotres">
     <option value="<?php echo $departamentotres?>"><?php echo $departamentotres?></option>
     <option value="">Selecione</option>
-    <option value="criativo">Criativo</option>
-    <option value="kids">Kids</option>
-    <option value="loja">Loja</option>
-    <option value="louvor">Louvor</option>
-    <option value="midias">Midias</option>
-    <option value="recepcao">Recepção</option>
-    <option value="staff">Staff</option>
-    <option value="sonoplastia">Sonoplastia</option>
-    <option value="transito">Transito</option>
+    <option value="consagracao">Consagração</option>
+        <option value="coral">Coral</option>
+        <option value="criativo">Criativo</option>
+        <option value="danca">Dança</option>
+        <option value="gccasados">GC Casados</option>
+        <option value="gcjovens">GC Jovens</option>
+        <option value="intercessao">Intercessão</option>
+        <option value="Kids">Kids</option>
+        <option value="loja">Loja</option>
+        <option value="louvor">Louvor</option>
+        <option value="midias">Midias</option>
+        <option value="oficiais">Oficias</option>
+        <option value="recepcao">Recepção</option>
+        <option value="salavoluntarios">Sala Voluntarios</option>
+        <option value="som">Mesa de Som</option>
+        <option value="teatro">Teatro</option>
+        <option value="visitas">Visitas</option>
     </select>
 </div>
 
