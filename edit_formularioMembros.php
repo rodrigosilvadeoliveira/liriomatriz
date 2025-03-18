@@ -88,7 +88,7 @@ else
 
   <div class="col-3">
     <label for="data" class="form-label">Data Inicio</label>
-    <input type="date" class="form-control" name="datas" id="data" placeholder="" value="<?php echo $datas?>">
+    <input type="date" class="form-control" name="datas" id="datas" placeholder="" value="<?php echo $datas?>">
   </div>
   
   <div class="col-3">

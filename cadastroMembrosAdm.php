@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="col-md-3">
     <label for="nome" class="form-label">*Membro Desde:</label>
-    <input type="date" name="data" id="data" class="form-control" >
+    <input type="date" name="datas" id="datas" class="form-control" >
   </div>
 
   <div class="col-md-3">
