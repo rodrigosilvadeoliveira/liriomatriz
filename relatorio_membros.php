@@ -18,6 +18,9 @@ $sql = "SELECT * FROM membros";
 
 $result = $conexao->query($sql);
 
+$sqlmembros = "SELECT * FROM totalmembros";
+$resultmembros = $conexao->query($sqlmembros);
+
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
@@ -37,7 +40,9 @@ $sheet->setCellValue('L1', 'departamento3');
 $sheet->setCellValue('M1', 'Status');
 $sheet->setCellValue('N1', 'Idade');
 $sheet->setCellValue('O1', 'Responsavel');
-$sheet->setCellValue('P1', 'Batizada');
+$sheet->setCellValue('P1', 'Batizado');
+$sheet->setCellValue('Q1', 'Total até 12 anos');
+$sheet->setCellValue('R1', 'Total a partir de 13 anos');
 //Estilo da celula
 $styles = [
     'font' => [
@@ -92,6 +97,17 @@ if ($result) {
     $sheet->setCellValue('N' . $row, $row_data['idade']);
     $sheet->setCellValue('O' . $row, $row_data['responsavel']);
     $sheet->setCellValue('P' . $row, $row_data['batizado']);
+    $row++;
+}
+}else {
+    echo "Por favor, selecione as datas.";
+}
+if ($resultmembros) {
+    $row = 2;
+    while ($row_data = $resultmembros->fetch_assoc()) {
+    $sheet->setCellValue('Q' . $row, $row_data['idademenor']);
+    $sheet->setCellValue('R' . $row, $row_data['idademaior']);
+    
     $row++;
 }
 }else {

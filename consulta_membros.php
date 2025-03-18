@@ -98,12 +98,12 @@ include_once('config.php');
   </thead>
   <tbody>
   <?php
-        while($user_data = mysqli_fetch_assoc($resultmembros))
+        while($user_membros = mysqli_fetch_assoc($resultmembros))
         {
             echo "<tr>";
-            echo "<td>" .$user_data['idademenor']. "</td>";
+            echo "<td>" .$user_membros['idademenor']. "</td>";
             
-            echo "<td>" .$user_data['idademaior']. "</td>";
+            echo "<td>" .$user_membros['idademaior']. "</td>";
             echo "</tr>";
 
         }
