@@ -37,7 +37,12 @@ include_once('config.php');
     }
     
     // **Reexecuta a consulta para garantir que os dados atualizados sejam refletidos**
-    $result = $conexao->query($sql);
+    $resultlist = $conexao->query($sql);
+    include('calculoMembros.php');
+
+    $sqlmembros = "SELECT * FROM totalmembros ORDER BY id DESC";
+    $resultmembros = $conexao->query($sqlmembros);
+    
 ?>
      
 <!DOCTYPE html>
@@ -83,6 +88,33 @@ include_once('config.php');
 </form>
 </fieldset>
 <div>
+<table class="table" id="tabelaTotal">
+  <thead>
+    <tr>
+      <th scope="col">Membros até 12 anos</th>
+      <th scope="col">Membros apartir 13 anos</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  <?php
+        while($user_data = mysqli_fetch_assoc($resultmembros))
+        {
+            echo "<tr>";
+            echo "<td>" .$user_data['idademenor']. "</td>";
+            
+            echo "<td>" .$user_data['idademaior']. "</td>";
+            echo "</tr>";
+
+        }
+  ?>
+    
+    
+  </tbody>
+</table>
+</div>
+
+<div>
 <table class="table" id="tabelaLista">
   <thead>
     <tr>
@@ -108,7 +140,7 @@ include_once('config.php');
   </thead>
   <tbody>
   <?php
-        while($user_data = mysqli_fetch_assoc($result))
+        while($user_data = mysqli_fetch_assoc($resultlist))
         {
             echo "<tr>";
             echo "<td>" .$user_data['id']. "</td>";

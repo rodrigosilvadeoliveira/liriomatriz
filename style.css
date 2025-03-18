@@ -425,6 +425,14 @@ margin-top: 1.5%;
 margin-left: 1%;
 padding-right: 2%;
 }
+#tabelaTotal{
+    margin-top: 1.5%;
+    margin-left: 1%;
+    padding-right: 2%;
+    width: 20%;
+    border: #000000;
+    background-color: #beb1b8;
+    }
 #cancelarLink{
     margin-top: 10%;
 }

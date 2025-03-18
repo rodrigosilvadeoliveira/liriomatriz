@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = mysqli_query($conexao, "INSERT INTO membros(nome, sobrenome, nascimento, batizado, datas, telefone, email, voluntario, lider, departamentoum, departamentodois,departamentotres, status,responsavel) 
     VALUES ('$nome', '$sobrenome','$nascimento','$batizado','$datas', '$telefone', '$email', '$voluntario', '$lider', '$departamentoum', '$departamentodois', '$departamentotres', '$status','$responsavel')");
 
+
     header('Location: cadastroMembrosAdm.php');
 }
 }
