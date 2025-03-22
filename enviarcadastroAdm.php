@@ -13,9 +13,10 @@ if(isset($_POST['submitAdm']))
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $celular = $_POST['celular'];
+    $nivel_acesso = $_POST['nivel_acesso'];
 
-    $result = mysqli_query($conexao, "INSERT INTO cadastroAdm(nome,usuario,senha,email,telefone,celular) 
-    VALUES ('$nome','$usuario','$senha','$email','$telefone','$celular')");
+    $result = mysqli_query($conexao, "INSERT INTO cadastroAdm(nome,usuario,senha,email,telefone,celular,nivel_acesso) 
+    VALUES ('$nome','$usuario','$senha','$email','$telefone','$celular','$nivel_acesso')");
 
 header('Location: loginAdmin.php');
 }

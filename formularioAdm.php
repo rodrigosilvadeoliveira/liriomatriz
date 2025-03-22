@@ -29,16 +29,16 @@ verificarLogin();
     <form class="row g-3" action="enviarcadastroAdm.php" method="POST">
       <h1>Cadastro ADM</h1>
     <div class="col-md-5">
-    <label for="nome" class="form-label">Nome completo</label>
-    <input type="text" name="nome" id="nome" class="form-control">
+    <label for="nome" class="form-label">*Nome completo</label>
+    <input type="text" name="nome" id="nome" class="form-control" required>
   </div>
   <div class="col-md-5">
-    <label for="usuario" class="form-label">Login</label>
-    <input type="text" name="usuario" id="usuario" class="form-control">
+    <label for="usuario" class="form-label">*Login</label>
+    <input type="text" name="usuario" id="usuario" class="form-control" required>
   </div>
   <div class="col-md-5">
-    <label for="senha" class="form-label">Senha</label>
-    <input type="password"  name="senha" id="senha" class="form-control">
+    <label for="senha" class="form-label">*Senha</label>
+    <input type="password"  name="senha" id="senha" class="form-control" required>
   </div>
   <div class="col-md-5">
     <label for="email" class="form-label">Email</label>
@@ -46,20 +46,28 @@ verificarLogin();
   </div>
   
   <div class="col-3">
-    <label for="telefone" class="form-label">Telefone</label>
+    <label for="telefone" class="form-label">*Telefone</label>
     <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="dd numero">
   </div>
   <div class="col-3">
     <label for="celular" class="form-label">Celular</label>
-    <input type="tel" class="form-control" name="celular" id="celular" placeholder="dd numero">
+    <input type="tel" class="form-control" name="celular" id="celular" placeholder="dd numero" required>
   </div>
+  <div class="col-md-3">
+    <label for="inputState" class="form-label">*Perfil:</label>
+    <select id="nivel_acesso" class="form-select" name="nivel_acesso">
+    <option value="">Selecione</option>
+    <option value="admin">Administrador</option>
+        <option value="voluntario">Voluntário</option>
+        </select>
+</div>
 
   <div class="col-3">
     <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary">Enviar</button>
   </div>
 </form>
 </fieldset>
-
+<!-- 
 <fieldset class="boxformularioVol">
     <form class="row g-3" action="enviarcadastroVol.php" method="POST">
       <h1>Cadastro Voluntario</h1>
@@ -93,7 +101,7 @@ verificarLogin();
     <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary">Enviar</button>
   </div>
 </form>
-</fieldset>
+</fieldset> -->
 
 </body>
 </html>
