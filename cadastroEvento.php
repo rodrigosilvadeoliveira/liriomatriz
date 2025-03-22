@@ -91,10 +91,9 @@ header('Location: cadastroEvento.php');
             ?>
        
 <div class="produtos-container">
-<a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
+
 <a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
-<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
+
 </div>
 <fieldset class="boxformulariodoSite">
     <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroEvento.php" method="POST" enctype="multipart/form-data">

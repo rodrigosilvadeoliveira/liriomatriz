@@ -79,7 +79,7 @@ header('Location: cadastroForm.php');
 <div class="produtos-container">
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
 <a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
-<a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
+
 <a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
 </div>
 <fieldset class="boxformulariodoSite">

@@ -17,7 +17,7 @@ if (isset($_POST['submit']) && !empty($_POST['usuario']) && !empty($_POST['senha
         unset($_SESSION['usuario']);
         unset($_SESSION['senha']);
         echo 'Usuário ou senha inválidos';
-        echo '<a href="homeLirio.php" id="voltar">Voltar para a Página Home</a>';
+        header('Location: acesso_negado.php');
     } else {
         $row = $result->fetch_assoc();
         $_SESSION['usuario'] = $usuario;
@@ -34,6 +34,9 @@ if (isset($_POST['submit']) && !empty($_POST['usuario']) && !empty($_POST['senha
                 break;
             case 'organizador':
                 header('Location: cadastroMembrosAdm.php');
+                break;
+            case 'midia':
+                header('Location: cadastroEvento.php');
                 break;
             default:
                 header('Location: acesso_negado.php');
