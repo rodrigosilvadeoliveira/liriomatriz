@@ -33,15 +33,6 @@
 <div class="footer" id="footer">
       <?php include('footerSite.php');?>
       </div>
-    <script>
-    // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
-    const tempoLimite = 3600000;
-
-    // Redireciona para logout após o tempo limite
-    setTimeout(() => {
-        window.location.href = "sistema.php?timeout=1"; 
-    }, tempoLimite);
-</script>
 
 </body>
 </html>
