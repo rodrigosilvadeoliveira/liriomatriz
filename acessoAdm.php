@@ -38,6 +38,10 @@ if (isset($_POST['submit']) && !empty($_POST['usuario']) && !empty($_POST['senha
             case 'midia':
                 header('Location: cadastroEvento.php');
                 break;
+            case 'master':
+                header('Location: formularioMaster.php');
+                break;
+                    
             default:
                 header('Location: acesso_negado.php');
                 break;

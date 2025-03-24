@@ -18,6 +18,6 @@ if(isset($_POST['submitAdm']))
     $result = mysqli_query($conexao, "INSERT INTO cadastroAdm(nome,usuario,senha,email,telefone,celular,nivel_acesso) 
     VALUES ('$nome','$usuario','$senha','$email','$telefone','$celular','$nivel_acesso')");
 
-header('Location: loginAdmin.php');
+header('Location: sistema.php');
 }
 ?>
