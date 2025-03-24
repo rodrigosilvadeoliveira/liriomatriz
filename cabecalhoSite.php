@@ -45,9 +45,9 @@
         </li>
         <a class="nav-link" href="lojaLirio.php">Loja Lirio</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="contatoSite.php">Contato</a>
-        </li>
+        </li> -->
               </ul>
       <!-- <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" id="cpesquisa">
@@ -60,5 +60,15 @@
 </div> -->
 </nav>
 </header>
+<script>
+    // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
+    const tempoLimite = 3600000;
+
+    // Redireciona para logout após o tempo limite
+    setTimeout(() => {
+        window.location.href = "sistema.php?timeout=1"; 
+    }, tempoLimite);
+</script>
+
 </body>
 </html>

@@ -19,7 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
-<!-- Adicione este script antes do fechamento da tag </body> -->
+<!-- Adicione este script antes do fechamento da tag <script>
+    // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
+    const tempoLimite = 3600000;
+
+    // Redireciona para logout após o tempo limite
+    setTimeout(() => {
+        window.location.href = "sistema.php?timeout=1"; 
+    }, tempoLimite);
+</script>
+
+</body> -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     // Seu formulário
@@ -143,5 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="footer" id="footer">
       <?php include('footerSite.php');?>
       </div>
+
+
 </body>
 </html>

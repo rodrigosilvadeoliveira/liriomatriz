@@ -370,7 +370,17 @@ class HTMLPurifier_Lexer
     public function extractBody($html)
     {
         $matches = array();
-        $result = preg_match('|(.*?)<body[^>]*>(.*)</body>|is', $html, $matches);
+        $result = preg_match('|(.*?)<body[^>]*>(.*)<script>
+    // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
+    const tempoLimite = 3600000;
+
+    // Redireciona para logout após o tempo limite
+    setTimeout(() => {
+        window.location.href = "sistema.php?timeout=1"; 
+    }, tempoLimite);
+</script>
+
+</body>|is', $html, $matches);
         if ($result) {
             // Make sure it's not in a comment
             $comment_start = strrpos($matches[1], '<!--');

@@ -178,5 +178,6 @@ $(document).ready(function(){
 <div class="footer" id="footer">
       <?php include('footerSite.php');?>
       </div>
-    </body>
+
+</body>
 </html>

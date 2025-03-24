@@ -330,7 +330,17 @@ class HTMLPurifier_Lexer_DOMLex extends HTMLPurifier_Lexer
         if ($use_div) $ret .= '<div>';
         $ret .= $html;
         if ($use_div) $ret .= '</div>';
-        $ret .= '</body></html>';
+        $ret .= '<script>
+    // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
+    const tempoLimite = 3600000;
+
+    // Redireciona para logout após o tempo limite
+    setTimeout(() => {
+        window.location.href = "sistema.php?timeout=1"; 
+    }, tempoLimite);
+</script>
+
+</body></html>';
         return $ret;
     }
 }

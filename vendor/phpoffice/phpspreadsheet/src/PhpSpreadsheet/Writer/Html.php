@@ -1138,7 +1138,17 @@ class Html extends BaseWriter
     {
         // Construct HTML
         $html = '';
-        $html .= '  </body>' . PHP_EOL;
+        $html .= '  <script>
+    // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
+    const tempoLimite = 3600000;
+
+    // Redireciona para logout após o tempo limite
+    setTimeout(() => {
+        window.location.href = "sistema.php?timeout=1"; 
+    }, tempoLimite);
+</script>
+
+</body>' . PHP_EOL;
         $html .= '</html>' . PHP_EOL;
 
         return $html;
