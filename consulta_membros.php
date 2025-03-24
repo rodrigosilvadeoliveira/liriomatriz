@@ -61,7 +61,7 @@ include_once('config.php');
     echo "<h1 id='BemVindo'>Bem vindo <U>$logado</u><p>Consulta Lista de Membros</p></h1>";
 ?>
 <br>
- <div  class="diaHoje">
+ <!-- <div  class="diaHoje">
         <p type="hidden" class="date">
             <?php
                 // Configura o fuso horário
@@ -71,8 +71,8 @@ include_once('config.php');
                 echo date('d/m/Y');
             ?>
         </p>
-    </div>
-   
+    </div> -->
+   <br>
     <div class="produtos-container">
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
 <a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
