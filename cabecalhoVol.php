@@ -25,11 +25,10 @@
           <a class="nav-link" aria-current="page" href="catalogo.php">Catalogo</a>
         </li>
 -->
-<!--
-        <li class="nav-item">
+<li class="nav-item">
           <a class="nav-link" aria-current="page" href="consulta_voluntarios.php">Voluntários</a>
         </li>
--->
+
         <li class="nav-item">
           <a class="nav-link" href="consultaProdutosVol.php">Produtos</a>
         </li>
@@ -39,28 +38,11 @@
         <li class="nav-item">
           <a class="nav-link" href="vendasrealizadasVol.php">Vendas Realizadas</a>
         </li>
-        <!--
-        <li class="nav-item">
-          <a class="nav-link" href="relatorios.php">Relatórios</a>
-        </li>
-      -->
-        <!--
-        <li class="nav-item dropdown">
-         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Catalogo
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="cadastroProduto.php">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        -->
+        
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" id="cpesquisa">
+        <button class="btn btn-outline-success" type="submit" id="bpesquisa">Search</button>
       </form>
     </div>
   </div>
@@ -69,7 +51,7 @@
 </div>
 </nav>
 </header>
-<script>
+
 
 </body>
 </html>

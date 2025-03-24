@@ -28,6 +28,8 @@ include_once('config.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>Loja Lirio Matriz</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <script src="bootstrap.min.js"></script>
 </head>
 <body>
 <br><br><br>
@@ -43,15 +45,17 @@ include_once('config.php');
     </a>
 </div>
 <br>
-<a id="incluirCadastro" value="Vendas Realizadas" href="vendas.php">Novo Atendimento</a>
+<a id="incluirCadastro" value="Vendas Realizadas" href="vendasVol.php">Novo Atendimento</a>
 <br>
-<fieldset class="boxformularioRelatorio" style="margin-top: 2%;">
-<form id="dataRelatorio" method="POST" action="vendasrealizadasVol.php">
+<fieldset class="boxformularioRelatorio" style="margin-top: 4%;">
+<form id="dataRelatorio" method="POST" action="vendasrealizadas.php">
     <label for="data_inicio"><b>Selecionar periodo para consulta:</b></label><br>
     <label for="data_inicio"><b>Data Inicio:</b></label>
     <input type="date" name="data_inicio" id="data_inicio" />
+    <div>
     <label for="data_fim"><b>Data Fim:</b></label>
     <input type="date" name="data_fim" id="data_fim" />
+    </div>
     <input type="submit" value="Consultar" id="Exportar"/>
 </form>
 </fieldset>
@@ -69,24 +73,20 @@ include_once('config.php');
       <th scope="col">Voluntário</th>
       <th scope="col">data</th>
       <th scope="col">hora</th>
-     
+      
       
     </tr>
   </thead>
   <tbody>
   <?php
-  $dbHost = 'localhost';
-  $dbUsername = 'root';
-  $dbPassword = '';
-  $dbName = 'lojalirio';
+include('config.php');
   
-  // Estabelecer a conexão com o banco de dados
-  $conexao = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
-  
-
-  
+   
   $sql = "SELECT * FROM vendas ORDER BY id DESC";
   $result = $conexao->query($sql);
+
+  // Exiba a lista de produtos e calcule o valor total
+$valorTotal = 0; // Variável para armazenar o valor total
 
         while($user_data = mysqli_fetch_assoc($result))
         {
@@ -110,9 +110,15 @@ include_once('config.php');
             echo "<td>" .$user_data['datas']. "</td>";
             echo "<td>" .$user_data['hora']. "</td>";
 
-             echo "</tr>";
+       
+            echo "</tr>";
+            $valorTotal += $user_data['valordevenda']; // Adicione o valor de venda ao valor total
 
         }
+        echo "<tr>";
+        echo "<td colspan='4'><b>Valor Total:</b></td>";
+        echo "<td>" . $valorTotal . "</td>";
+        echo "</tr>";
 
     
 
@@ -146,7 +152,7 @@ include_once('config.php');
 
     function searchData()
     {
-        window.location = 'sistema.php?search='+search.value;
+        window.location = 'vendasrealizadas.php?search='+search.value;
     }
 </script>
-</html>
+</html> 
