@@ -24,9 +24,9 @@
 <form action="contato.php" method="post">
 
 
-<h1 id="titulonapagina">Seja bem Vindo a Lirio Matriz</h1>
+<!--<h1 id="titulonapagina">Conheça o curso Mergulhar</h1>-->
 
-<div class="form-container">
+<div class="form-mergulhar">
         <!-- Cole o iframe aqui 
         <iframe src="mergulhar.pdf" width="100%" height="600px"></iframe>
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSfxEFCitoAF8MHY7jJVKSQI8MbdwwoF3CKyOGpMb19dh6jzHy4c0h265L6J_bToA/pub?start=true&loop=false&delayms=5000" width="100%" height="600px"></iframe>
@@ -35,7 +35,7 @@
     <?php
 $slides = glob("img/slides/*.jpg"); // Pega todas as imagens da pasta slides/
 foreach ($slides as $slide) {
-    echo '<img src="'.$slide.'" width="100%" />';
+    echo '<img class="mergulhar" src="'.$slide.'" />';
 }
 ?>
 <div class="footer" id="footer">

@@ -595,6 +595,11 @@ padding-right: 2%;
     
     
 }
+.mergulhar{
+    width: 100%;
+    
+    
+}
 .linkredirect {
     width: 90%;
     max-width: 200px;
@@ -623,6 +628,15 @@ padding-right: 2%;
     overflow: hidden;
     background: white;
     margin-left: 25%;
+}
+.form-mergulhar {
+    width: 100%;
+    max-width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    margin-left: 0%;
 }
 #novocomeco {
     width: 100%;
