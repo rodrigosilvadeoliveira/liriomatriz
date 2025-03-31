@@ -19,7 +19,7 @@ include_once('config.php');
     }
     else
     {
-      $sql = "SELECT * FROM evento WHERE cartaz IN ('divulgar', 'carrousel') ORDER BY id DESC";
+      $sql = "SELECT * FROM evento WHERE cartaz IN ('programacao', 'carrousel') ORDER BY id DESC";
 
 
     }
@@ -108,7 +108,7 @@ header('Location: cadastroEvento.php');
     <br>
     <select id="cartaz" class="form-select" name="cartaz" required>
         <option value="">Selecione</option>
-        <option value="divulgar">Evento</option>
+        <option value="programacao">Programação</option>
         <option value="carrousel">Cartaz na Home</option>
         <option value="home">Imagem Home</option>
     </select>
