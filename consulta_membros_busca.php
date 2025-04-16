@@ -15,34 +15,9 @@ include_once('config.php');
     if(!empty($_GET['search']))
     {
         $data = $_GET['search'];
-        $sql = "SELECT * FROM membros WHERE id LIKE '%$data%' or nome LIKE '%$data%' or email LIKE '%$data%' ORDER BY id DESC";
+        $sql = "SELECT * FROM membros WHERE id LIKE '%$data%' or nome LIKE '%$data%' or sobrenome LIKE '%$data%' ORDER BY id DESC";
     }
-    else
-    {
-        $sql = "SELECT * FROM membros ORDER BY id DESC";
-    }
-    $result = $conexao->query($sql);
 
-    while ($user_data = mysqli_fetch_assoc($result)) {
-        $dataAtual = new DateTime();
-        $idade = new DateTime($user_data['nascimento']);
-        $idadeAtual = $dataAtual->diff($idade)->y;
-        $status = $user_data['status'];
-    
-        if ($user_data['idade'] != $idadeAtual && $status === 'ativo') { // Só atualiza se necessário
-            $id = $user_data['id'];
-            $sqlUpdate = "UPDATE membros SET idade = '$idadeAtual' WHERE id = '$id'";
-            $conexao->query($sqlUpdate);
-        }
-    }
-    
-    // **Reexecuta a consulta para garantir que os dados atualizados sejam refletidos**
-    $resultlist = $conexao->query($sql);
-    include('calculoMembros.php');
-
-    $sqlmembros = "SELECT * FROM totalmembros ORDER BY id DESC";
-    $resultmembros = $conexao->query($sqlmembros);
-    
 ?>
      
 <!DOCTYPE html>
@@ -77,43 +52,20 @@ include_once('config.php');
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
 <a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
 <a id="incluirCadastro" value="Novo Volutario" href="consulta_membros_busca.php">Pesquisa Membro(a)</a>
+
 <a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
 </div>
 
 <br>
-<fieldset class="boxexportarMembros">
-<form id="dataRelatorio" method="POST" action="relatorio_membros.php">
-    <label for="data_inicio"><b>Exportar em planilha Membros da Lirio Matriz:</b></label>
-    <input type="submit" value="Exportar" id="Exportar"/>
+<fieldset>
+<br>
+<form id="dataRelatorio" method="POST" action="consulta_membros_busca.php">
+    
+    <label for="nomep"><b>Nome do membro(a):</b></label>
+    <input type="varchar" name="nome" id="nome" />
+        <input type="submit" value="Consultar" id="Exportar"/>
 </form>
 </fieldset>
-<div>
-<table class="table" id="tabelaTotal">
-  <thead>
-    <tr>
-      <th scope="col">Membros até 12 anos</th>
-      <th scope="col">Membros apartir 13 anos</th>
-      
-    </tr>
-  </thead>
-  <tbody>
-  <?php
-        while($user_membros = mysqli_fetch_assoc($resultmembros))
-        {
-            echo "<tr>";
-            echo "<td>" .$user_membros['idademenor']. "</td>";
-            
-            echo "<td>" .$user_membros['idademaior']. "</td>";
-            echo "</tr>";
-
-        }
-  ?>
-    
-    
-  </tbody>
-</table>
-</div>
-
 <div>
 <table class="table" id="tabelaLista">
   <thead>
@@ -141,8 +93,22 @@ include_once('config.php');
   </thead>
   <tbody>
   <?php
-        while($user_data = mysqli_fetch_assoc($resultlist))
-        {
+  
+include_once('config.php');
+
+// Estabelecer a conexão com o banco de dados
+$conexao = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+
+if (isset($_POST['nome'])){
+  $nome = $_POST['nome'];
+
+$sql = "SELECT * FROM membros WHERE nome = '$nome' or id = '$nome' ORDER BY id DESC";
+
+
+$result = $conexao->query($sql);
+
+      while($user_data = mysqli_fetch_assoc($result))
+   {
             echo "<tr>";
             echo "<td>" .$user_data['id']. "</td>";
             
@@ -218,7 +184,7 @@ echo "</tr>";
 
         }
 
-
+    }
 
   ?>
     

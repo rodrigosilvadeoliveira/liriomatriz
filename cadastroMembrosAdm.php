@@ -28,7 +28,7 @@
 <?php
 include('verificarLogin.php');
 verificarLogin();
-session_start();
+//session_start();
 include_once('config.php');
 
 // Verifica imagem cortada da sessão
@@ -90,7 +90,7 @@ $logado = $_SESSION['usuario'];
 <div class="produtos-container">
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
 <a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
-
+<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros_busca.php">Pesquisa Membro(a)</a>
 <a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
 </div>
 <br>
@@ -276,6 +276,7 @@ $logado = $_SESSION['usuario'];
   <div class="col-12">
     <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary">Enviar</button>
   </div>
+  
 </form>
 
 <!-- Modal de Cropper -->

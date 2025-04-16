@@ -78,10 +78,10 @@ else
 <form class="row g-3" action="saveEditMembros.php" method="POST" enctype="multipart/form-data">
 
       <h1>Alteração Cadastro</h1>
-      <label for="nova_foto">Alterar Foto de Perfil:</label>
+<!--       <label for="nova_foto">Alterar Foto de Perfil:</label>
 <input type="file" id="nova_foto" name="nova_foto" accept="image/*" class="form-control">
 
-<!-- Imagem recortada prévia -->
+Imagem recortada prévia -->
 <img id="preview_foto" src="uploads/<?php echo $foto ?>" class="imagensevento mt-2 mb-2" />
 
 

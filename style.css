@@ -1031,4 +1031,7 @@ img {
         width: 80% ;
         margin-left: 10%;
     }
+    .produtos-container {
+        margin-top: 1%;   
+    }
 }
