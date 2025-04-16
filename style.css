@@ -440,13 +440,21 @@ padding-right: 2%;
     margin-left: 1%;
 }
 .imagenscarroussel{
-    width: 70%;
-    height: 30%;
+    width: 50%;
+    height: 5%;
     margin: 5px;
     padding: 2%;
-    margin-left: 15%;
+    margin-left: 23%;
 
 }
+.imagensevento {
+    width: 75px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
 .carroussel-container {
     display: contents;
     position: fixed;
@@ -681,6 +689,17 @@ padding-right: 2%;
 #inscrever{
     margin-left: %;
 }
+
+img {
+    max-width: 100%;
+  }
+  .preview {
+    width: 120px;
+    height: 160px; /* proporção 3x4 */
+    overflow: hidden;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+  }
 
 @media (max-width: 1400px) {
 #titulonapagina{

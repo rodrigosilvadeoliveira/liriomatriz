@@ -53,14 +53,16 @@ include_once("config.php");
 // $cartaz = isset($_POST['cartaz']) ? $_POST['cartaz'] : null;
 $cartaz = $_POST['cartaz'];
 $links = $_POST['links'];
+$nomeevento = $_POST['nomeevento'];
 if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
   $imagem = "./img/".$_FILES["imagem"]["name"];
   move_uploaded_file($_FILES["imagem"]["tmp_name"] ,$imagem);
+  
 }else{
   $imagem = "";
 }
-$result = mysqli_query($conexao, "INSERT INTO evento(imagem,cartaz,links) 
-VALUES ('$imagem','$cartaz','$links')");
+$result = mysqli_query($conexao, "INSERT INTO evento(imagem,cartaz,links,nomeevento) 
+VALUES ('$imagem','$cartaz','$links','$nomeevento')");
 
 header('Location: cadastroEvento.php');
 }
@@ -109,7 +111,7 @@ header('Location: cadastroEvento.php');
     <select id="cartaz" class="form-select" name="cartaz" required>
         <option value="">Selecione</option>
         <option value="programacao">Programação</option>
-        <option value="carrousel">Cartaz na Home</option>
+        <option value="carrousel">Banner Carrousel</option>
         <option value="home">Imagem Home</option>
     </select>
 </div>
@@ -118,6 +120,11 @@ header('Location: cadastroEvento.php');
        <input type="file" name="imagem" class="form-control" accept="image/*">
      </div><br>
   
+     <div class="col-md-5">
+<label class="form-label">Nome do Evento:</label>
+       <input type="text" class="form-control" name="nomeevento" placeholder="" id="nomeevento" maxlength="30">
+     </div> <br>
+
      <div class="col-md-5">
 <label class="form-label">Informe Link se tiver:</label>
        <input type="text" class="form-control" name="links" placeholder="" id="links" maxlength="50">
@@ -134,6 +141,7 @@ header('Location: cadastroEvento.php');
     <tr>
     <th scope="col">#</th>
       <th scope="col">Banner</th>
+      <th scope="col">Nome do Evento</th>
       <th scope="col">Tp.Divulgação</th>
       <th scope="col">Links</th>
       
@@ -147,7 +155,8 @@ header('Location: cadastroEvento.php');
             echo "<tr>";
             echo "<td>" .$user_data['id']. "</td>";
             
-            echo "<td><img src=".$user_data['imagem']." width='200' height='150'></td>";
+            echo "<td><img class='imagensevento' src=".$user_data['imagem']." ></td>";
+            echo "<td>".$user_data['nomeevento']."</td>";
             echo "<td>".$user_data['cartaz']."</td>";
             echo "<td>".$user_data['links']."</td>";
             

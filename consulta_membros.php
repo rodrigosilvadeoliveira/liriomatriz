@@ -119,6 +119,7 @@ include_once('config.php');
   <thead>
     <tr>
       <th scope="col">#</th>
+      <th scope="col">Foto</th>
       <th scope="col">Nome</th>
       <th scope="col">Sobrenome</th>
       <th scope="col">Nascimento</th>
@@ -145,6 +146,9 @@ include_once('config.php');
             echo "<tr>";
             echo "<td>" .$user_data['id']. "</td>";
             
+            echo "<td><img class='imagensevento' src='uploads/" . $user_data['foto'] . "'></td>";
+
+
             echo "<td>" .$user_data['nome']. "</td>";
 
             echo "<td>" .$user_data['sobrenome']. "</td>";

@@ -1,47 +1,49 @@
+<?php if (!empty($imagem)): ?>
+    <div style="
+        width: 250px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 15px;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        text-align: center;
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    ">
+        <h3 style="margin: 0 0 10px; font-size: 16px;">Prévia do Perfil</h3>
+        <img src="<?php echo htmlspecialchars($imagem); ?>" alt="Imagem do usuário" style="
+            width: 100px;
+            height: 133px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid #aaa;
+            margin-bottom: 10px;
+        ">
+        <div style="font-weight: bold;">Nome</div>
+        <div style="color: #555;">Sobrenome</div>
+        <div style="color: #0066cc;">email@exemplo.com</div>
+        <div style="color: #333;">(00) 0000-0000</div>
+    </div>
+<?php endif; ?>
 <?php
 include('verificarLogin.php');
 verificarLogin();
-//session_start();
-include_once('config.php');
-   // print_r($_SESSION);
-    if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
-    {
-      unset($_SESSION['usuario']);
-      unset($_SESSION['senha']);
-      header('Location: login.php');
-      
-    }$logado = $_SESSION['usuario'];
-    
-
-if(isset($_POST['submitAdm']))
-{
+session_start();
 include_once('config.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = $_POST['nome'];
-    $sobrenome = $_POST['sobrenome'];
-    $nascimento = $_POST['nascimento'];
-    $batizado = $_POST['batizado'];
-    $datas = $_POST['datas'];
-    $telefone = $_POST['telefone'];
-    $email = $_POST['email'];
-    $voluntario = $_POST['voluntario'];
-    $lider = $_POST['lider'];
-    $departamentoum = $_POST['departamentoum'];
-    $departamentodois = $_POST['departamentodois'];
-    $departamentotres = $_POST['departamentotres'];
-    $status = $_POST['status'];
-    $responsavel = $_POST['responsavel'];
+// Verifica imagem cortada da sessão
+$imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
 
-
-    $result = mysqli_query($conexao, "INSERT INTO membros(nome, sobrenome, nascimento, batizado, datas, telefone, email, voluntario, lider, departamentoum, departamentodois,departamentotres, status,responsavel) 
-    VALUES ('$nome', '$sobrenome','$nascimento','$batizado','$datas', '$telefone', '$email', '$voluntario', '$lider', '$departamentoum', '$departamentodois', '$departamentotres', '$status','$responsavel')");
-
-
-    header('Location: cadastroMembrosAdm.php');
+// Verifica login
+if ((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
+    unset($_SESSION['usuario']);
+    unset($_SESSION['senha']);
+    header('Location: login.php');
 }
-}
+$logado = $_SESSION['usuario'];
+
 ?>
+
 <!-- Adicione este script antes do fechamento da tag <script>
     // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
     const tempoLimite = 3600000;
@@ -66,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
@@ -92,166 +95,245 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 <br>
 <fieldset class="boxformularioMembrosAdm">
-<form class="row g-3" action="cadastroMembrosAdm.php" method="post">  
-<h1>Incluir Cadastro</h1>
-<div class="col-md-3">
+<form method="POST" action="salvar_membro.php" enctype="multipart/form-data" class="row g-3">
+  <div class="col-md-3">
     <label for="nome" class="form-label">*Nome:</label>
     <input type="text" name="nome" id="nome" class="form-control" required>
   </div>
-  
+
   <div class="col-md-3">
-    <label for="nome" class="form-label">*Sobrenome:</label>
+    <label for="sobrenome" class="form-label">*Sobrenome:</label>
     <input type="text" name="sobrenome" id="sobrenome" class="form-control" required>
   </div>
 
   <div class="col-md-3">
-    <label for="nome" class="form-label">*Data Nascimento:</label>
+    <label for="nascimento" class="form-label">*Data Nascimento:</label>
     <input type="date" name="nascimento" id="nascimento" class="form-control" required>
   </div>
 
   <div class="col-md-3">
-    <label for="inputState" class="form-label">*Batizado:</label>
+    <label for="batizado" class="form-label">*Batizado:</label>
     <select id="batizado" class="form-select" name="batizado">
-    <option value="">Selecione</option>
-    <option value="não">Não</option>
-    <option value="sim">Sim</option>
+      <option value="">Selecione</option>
+      <option value="não">Não</option>
+      <option value="sim">Sim</option>
     </select>
-</div>
+  </div>
 
   <div class="col-md-3">
-    <label for="nome" class="form-label">*Membro Desde:</label>
-    <input type="date" name="datas" id="datas" class="form-control" >
+    <label for="datas" class="form-label">*Membro Desde:</label>
+    <input type="date" name="datas" id="datas" class="form-control">
   </div>
 
   <div class="col-md-3">
     <label for="telefone" class="form-label">*Telefone:</label>
     <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="dd numero" required>
   </div>
-  
+
   <div class="col-md-3">
     <label for="email" class="form-label">Email:</label>
-    <input type="email"  name="email" id="email" class="form-control" >
+    <input type="email" name="email" id="email" class="form-control">
   </div>
 
   <div class="col-md-3">
-    <label for="inputState" class="form-label">*Voluntário:</label>
+    <label for="voluntario" class="form-label">*Voluntário:</label>
     <select id="voluntario" class="form-select" name="voluntario" required>
-        <option value="">Selecione</option>
-        <option value="sim">sim</option>
-        <option value="não">não</option>
+      <option value="">Selecione</option>
+      <option value="sim">Sim</option>
+      <option value="não">Não</option>
     </select>
-</div>
-
-<div class="col-md-3">
-    <label for="inputState" class="form-label">*Lider:</label>
-    <select id="lider" class="form-select" name="lider">
-    <option value="">Selecione</option>
-    <option value="não">Não</option>
-        <option value="consagracao">Consagração</option>
-        <option value="coral">Coral</option>
-        <option value="criativo">Criativo</option>
-        <option value="danca">Dança</option>
-        <option value="gccasados">GC Casados</option>
-        <option value="gcjovens">GC Jovens</option>
-        <option value="intercessao">Intercessão</option>
-        <option value="Kids">Kids</option>
-        <option value="loja">Loja</option>
-        <option value="louvor">Louvor</option>
-        <option value="midias">Midias</option>
-        <option value="oficiais">Oficias</option>
-        <option value="recepcao">Recepção</option>
-        <option value="salavoluntarios">Sala Voluntarios</option>
-        <option value="som">Mesa de Som</option>
-        <option value="teatro">Teatro</option>
-        <option value="visitas">Visitas</option>
-        
-    </select>
-</div>
-
-  
-<div class="col-md-3">
-    <label for="inputState" class="form-label">Departamento1:</label>
-    <select id="departamentoum" class="form-select" name="departamentoum">
-    <option value="">Selecione</option>
-    <option value="consagracao">Consagração</option>
-        <option value="coral">Coral</option>
-        <option value="criativo">Criativo</option>
-        <option value="danca">Dança</option>
-        <option value="gccasados">GC Casados</option>
-        <option value="gcjovens">GC Jovens</option>
-        <option value="intercessao">Intercessão</option>
-        <option value="Kids">Kids</option>
-        <option value="loja">Loja</option>
-        <option value="louvor">Louvor</option>
-        <option value="midias">Midias</option>
-        <option value="oficiais">Oficias</option>
-        <option value="recepcao">Recepção</option>
-        <option value="salavoluntarios">Sala Voluntarios</option>
-        <option value="som">Mesa de Som</option>
-        <option value="teatro">Teatro</option>
-        <option value="visitas">Visitas</option>
-    </select>
-</div>
-
-<div class="col-md-3">
-    <label for="inputState" class="form-label">Departamento2:</label>
-    <select id="departamentodois" class="form-select" name="departamentodois">
-    <option value="">Selecione</option>
-    <option value="consagracao">Consagração</option>
-        <option value="coral">Coral</option>
-        <option value="criativo">Criativo</option>
-        <option value="danca">Dança</option>
-        <option value="gccasados">GC Casados</option>
-        <option value="gcjovens">GC Jovens</option>
-        <option value="intercessao">Intercessão</option>
-        <option value="Kids">Kids</option>
-        <option value="loja">Loja</option>
-        <option value="louvor">Louvor</option>
-        <option value="midias">Midias</option>
-        <option value="oficiais">Oficias</option>
-        <option value="recepcao">Recepção</option>
-        <option value="salavoluntarios">Sala Voluntarios</option>
-        <option value="som">Mesa de Som</option>
-        <option value="teatro">Teatro</option>
-        <option value="visitas">Visitas</option>
-    </select>
-</div>
-
-<div class="col-md-3">
-    <label for="inputState" class="form-label">Departamento3:</label>
-    <select id="departamentotres" class="form-select" name="departamentotres">
-    <option value="">Selecione</option>
-    <option value="criativo">Criativo</option>
-    <option value="kids">Kids</option>
-    <option value="loja">Loja</option>
-    <option value="louvor">Louvor</option>
-    <option value="midias">Midias</option>
-    <option value="recepcao">Recepção</option>
-    <option value="staff">Staff</option>
-    <option value="sonoplastia">Sonoplastia</option>
-    <option value="transito">Transito</option>
-    </select>
-</div>
-
-<div class="col-md-3">
-    <label for="inputState" class="form-label">*Membro(a) Ativo:</label>
-    <select id="status" class="form-select" name="status">
-        <option value="">Selecione</option>
-        <option value="ativo">Ativo</option>
-        <option value="nãoAtivo">Não Ativo</option>
-    </select>
-</div>
-
-<div class="col-md-3">
-    <label for="nome" class="form-label">Responsavel:</label>
-    <input type="text" name="responsavel" id="responsavel" class="form-control" placeholder="Nome completo do responsavél">
   </div>
 
-</label>
-   <button type="submit" name="submitAdm" id="submitAdm" class="submitAdm">Enviar</button>
-   
-   </button>
+  <div class="col-md-3">
+    <label for="lider" class="form-label">*Líder:</label>
+    <select id="lider" class="form-select" name="lider">
+      <option value="">Selecione</option>
+      <option value="não">Não</option>
+      <option value="consagracao">Consagração</option>
+      <option value="coral">Coral</option>
+      <option value="criativo">Criativo</option>
+      <option value="danca">Dança</option>
+      <option value="gccasados">GC Casados</option>
+      <option value="gcjovens">GC Jovens</option>
+      <option value="intercessao">Intercessão</option>
+      <option value="Kids">Kids</option>
+      <option value="loja">Loja</option>
+      <option value="louvor">Louvor</option>
+      <option value="midias">Mídias</option>
+      <option value="oficiais">Oficiais</option>
+      <option value="recepcao">Recepção</option>
+      <option value="salavoluntarios">Sala Voluntários</option>
+      <option value="som">Mesa de Som</option>
+      <option value="teatro">Teatro</option>
+      <option value="transito">Trânsito</option>
+      <option value="visitas">Visitas</option>
+    </select>
+  </div>
+
+  <div class="col-md-3">
+    <label for="departamentoum" class="form-label">Departamento 1:</label>
+    <select id="departamentoum" class="form-select" name="departamentoum">
+      <option value="">Selecione</option>
+      <option value="Criativo">Criativo</option>
+      <option value="Consagracao">Consagração</option>
+        <option value="Coral">Coral</option>
+        <option value="Criativo">Criativo</option>
+        <option value="Danca">Dança</option>
+        <option value="GC_Casados">GC Casados</option>
+        <option value="GC_Homens">GC GC_Homens</option>
+        <option value="GC_Jovens">GC Jovens</option>
+        <option value="Intercessao">Intercessão</option>
+        <option value="Kids">Kids</option>
+        <option value="Loja">Loja</option>
+        <option value="Louvor">Louvor</option>
+        <option value="Midias">Midias</option>
+        <option value="Oficiais">Oficias</option>
+        <option value="Recepcao">Recepção</option>
+        <option value="Staff">Staff</option>
+        <option value="Sala_voluntarios">Sala Voluntarios</option>
+        <option value="Som">Mesa de Som</option>
+        <option value="Teatro">Teatro</option>
+        <option value="Visitas">Visitas</option>
+    </select>
+  </div>
+
+  <div class="col-md-3">
+    <label for="departamentodois" class="form-label">Departamento 2:</label>
+    <select id="departamentodois" class="form-select" name="departamentodois">
+      <option value="">Selecione</option>
+      <option value="Criativo">Criativo</option>
+      <option value="Consagracao">Consagração</option>
+        <option value="Coral">Coral</option>
+        <option value="Criativo">Criativo</option>
+        <option value="Danca">Dança</option>
+        <option value="GC_Casados">GC Casados</option>
+        <option value="GC_Homens">GC GC_Homens</option>
+        <option value="GC_Jovens">GC Jovens</option>
+        <option value="Intercessao">Intercessão</option>
+        <option value="Kids">Kids</option>
+        <option value="Loja">Loja</option>
+        <option value="Louvor">Louvor</option>
+        <option value="Midias">Midias</option>
+        <option value="Oficiais">Oficias</option>
+        <option value="Recepcao">Recepção</option>
+        <option value="Staff">Staff</option>
+        <option value="Sala_voluntarios">Sala Voluntarios</option>
+        <option value="Som">Mesa de Som</option>
+        <option value="Teatro">Teatro</option>
+        <option value="Visitas">Visitas</option>
+    </select>
+  </div>
+
+  <div class="col-md-3">
+    <label for="departamentotres" class="form-label">Departamento 3:</label>
+    <select id="departamentotres" class="form-select" name="departamentotres">
+      <option value="">Selecione</option>
+      <option value="Criativo">Criativo</option>
+      <option value="Consagracao">Consagração</option>
+        <option value="Coral">Coral</option>
+        <option value="Criativo">Criativo</option>
+        <option value="Danca">Dança</option>
+        <option value="GC_Casados">GC Casados</option>
+        <option value="GC_Homens">GC GC_Homens</option>
+        <option value="GC_Jovens">GC Jovens</option>
+        <option value="Intercessao">Intercessão</option>
+        <option value="Kids">Kids</option>
+        <option value="Loja">Loja</option>
+        <option value="Louvor">Louvor</option>
+        <option value="Midias">Midias</option>
+        <option value="Oficiais">Oficias</option>
+        <option value="Recepcao">Recepção</option>
+        <option value="Staff">Staff</option>
+        <option value="Sala_voluntarios">Sala Voluntarios</option>
+        <option value="Som">Mesa de Som</option>
+        <option value="Teatro">Teatro</option>
+        <option value="Visitas">Visitas</option>
+    </select>
+  </div>
+
+  <div class="col-md-3">
+    <label for="status" class="form-label">*Membro(a) Ativo:</label>
+    <select id="status" class="form-select" name="status">
+      <option value="">Selecione</option>
+      <option value="ativo">Ativo</option>
+      <option value="naoAtivo">Não Ativo</option>
+    </select>
+  </div>
+
+  <div class="col-md-3">
+    <label for="responsavel" class="form-label">Responsável:</label>
+    <input type="text" name="responsavel" id="responsavel" class="form-control" placeholder="Nome completo do responsável">
+  </div>
+
+  <!-- Upload e crop da foto de perfil -->
+  <div class="col-md-3">
+    <label for="upload_image" class="form-label">Foto de Perfil:</label>
+    <input type="file" name="upload_image" id="upload_image" accept="image/*" class="form-control">
+    <input type="hidden" name="foto_crop" id="foto_crop">
+    <img id="preview_cropped" src="" alt="Prévia da imagem" class="img-thumbnail mt-2" style="max-width: 200px;">
+  </div>
+
+  <div class="col-12">
+    <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary">Enviar</button>
+  </div>
 </form>
+
+<!-- Modal de Cropper -->
+<div class="modal fade" id="modal_crop" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Recortar Foto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img id="image_crop" src="" style="max-width: 100%;">
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="crop_button" class="btn btn-success">OK</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts do Cropper -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<script>
+  let cropper;
+  const modal = new bootstrap.Modal(document.getElementById('modal_crop'));
+
+  document.getElementById('upload_image').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const image = document.getElementById('image_crop');
+        image.src = event.target.result;
+
+        image.onload = () => {
+          if (cropper) cropper.destroy();
+          cropper = new Cropper(image, {
+            aspectRatio: 3 / 4,
+            viewMode: 1
+          });
+          modal.show();
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  document.getElementById('crop_button').addEventListener('click', function () {
+    const canvas = cropper.getCroppedCanvas({ width: 300, height: 400 });
+    const croppedImage = canvas.toDataURL('image/jpeg');
+    document.getElementById('preview_cropped').src = croppedImage;
+    document.getElementById('foto_crop').value = croppedImage;
+    modal.hide();
+  });
+</script>
+
 </fieldset>
 <script>
     // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
