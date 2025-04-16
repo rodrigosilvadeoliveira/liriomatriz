@@ -701,6 +701,35 @@ img {
     border: 1px solid #ccc;
   }
 
+  .modal-content{
+    width: 70%;
+    margin-left: 10%;
+}
+.modal-body.text-center{
+    width: 200px;
+    height: 200px;
+    margin-left: 30%;
+}
+.modal-footer{
+    height: 30%;
+
+}
+#imagemCropper {
+    max-width: 100%;
+    max-height: 500px;
+    display: block;
+    margin: 0 auto;
+  }
+  .cropper-container,
+  .cropper-wrap-box,
+  .cropper-canvas,
+  .cropper-drag-box {
+    max-height: 500px !important;
+    height: 100% !important;
+  }
+  .modal-body {
+    text-align: center;
+  }
 @media (max-width: 1400px) {
 #titulonapagina{
     margin-top: 10%;
@@ -873,7 +902,10 @@ img {
         width: 90%;
         margin-left: 2%;
     }
-    
+    .modal-content{
+    width: 70%;
+    margin-left: 10%;
+}
 }
 
 @media (max-width: 541px){
@@ -965,7 +997,13 @@ img {
         width: 90%;
         margin-left: 2%;
     }
-
+    .modal-body.text-center{
+        margin-left: 15%;
+    }
+    .modal-content{
+        width: 100%;
+        margin-left: 2%;
+    }
 }
 
 @media (max-width: 414px){
@@ -1033,5 +1071,8 @@ img {
     }
     .produtos-container {
         margin-top: 1%;   
+    }
+    .modal-body.text-center{
+        margin-left: 3%;
     }
 }

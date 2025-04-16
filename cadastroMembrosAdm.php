@@ -288,7 +288,7 @@ $logado = $_SESSION['usuario'];
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body text-center">
-        <img id="image_crop" src="" style="max-width: 100%;">
+        <img id="image_crop" src="">
       </div>
       <div class="modal-footer">
         <button type="button" id="crop_button" class="btn btn-success">OK</button>
@@ -317,7 +317,8 @@ $logado = $_SESSION['usuario'];
           if (cropper) cropper.destroy();
           cropper = new Cropper(image, {
             aspectRatio: 3 / 4,
-            viewMode: 1
+            viewMode: 3,
+            responsive: true,
           });
           modal.show();
         };
