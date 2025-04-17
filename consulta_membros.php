@@ -72,7 +72,7 @@ include_once('config.php');
             ?>
         </p>
     </div> -->
-   <br>
+   <br><br>
     <div class="produtos-container">
 <a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
 <a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>

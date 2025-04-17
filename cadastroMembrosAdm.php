@@ -94,8 +94,9 @@ $logado = $_SESSION['usuario'];
 <a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
 </div>
 <br>
+
 <fieldset class="boxformularioMembrosAdm">
-<form method="POST" action="salvar_membro.php" enctype="multipart/form-data" class="row g-3">
+<form method="POST" action="salvar_membro_adm.php" enctype="multipart/form-data" class="row g-3">
   <div class="col-md-3">
     <label for="nome" class="form-label">*Nome:</label>
     <input type="text" name="nome" id="nome" class="form-control" required>
@@ -180,7 +181,7 @@ $logado = $_SESSION['usuario'];
         <option value="Criativo">Criativo</option>
         <option value="Danca">Dança</option>
         <option value="GC_Casados">GC Casados</option>
-        <option value="GC_Homens">GC GC_Homens</option>
+        <option value="GC_Homens">GC Homens</option>
         <option value="GC_Jovens">GC Jovens</option>
         <option value="Intercessao">Intercessão</option>
         <option value="Kids">Kids</option>
@@ -207,7 +208,7 @@ $logado = $_SESSION['usuario'];
         <option value="Criativo">Criativo</option>
         <option value="Danca">Dança</option>
         <option value="GC_Casados">GC Casados</option>
-        <option value="GC_Homens">GC GC_Homens</option>
+        <option value="GC_Homens">GC Homens</option>
         <option value="GC_Jovens">GC Jovens</option>
         <option value="Intercessao">Intercessão</option>
         <option value="Kids">Kids</option>
@@ -234,7 +235,7 @@ $logado = $_SESSION['usuario'];
         <option value="Criativo">Criativo</option>
         <option value="Danca">Dança</option>
         <option value="GC_Casados">GC Casados</option>
-        <option value="GC_Homens">GC GC_Homens</option>
+        <option value="GC_Homens">GC Homens</option>
         <option value="GC_Jovens">GC Jovens</option>
         <option value="Intercessao">Intercessão</option>
         <option value="Kids">Kids</option>
@@ -270,13 +271,22 @@ $logado = $_SESSION['usuario'];
     <label for="upload_image" class="form-label">Foto de Perfil:</label>
     <input type="file" name="upload_image" id="upload_image" accept="image/*" class="form-control">
     <input type="hidden" name="foto_crop" id="foto_crop">
-    <img id="preview_cropped" src="" alt="Prévia da imagem" class="img-thumbnail mt-2" style="max-width: 200px;">
+    
   </div>
 
   <div class="col-12">
     <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary">Enviar</button>
   </div>
-  
+  <div class="col-md-3">
+  <label class="form-label">Prévia da Foto:</label>
+  <div class="image-preview-container">
+    <img id="preview_cropped" src="" alt="Prévia da imagem" 
+         style="max-width: 100%; height: auto; display: none; border-radius: 4px; border: 1px solid #ddd;">
+    <div id="no-image-placeholder" style="text-align: center; padding: 20px; border: 1px dashed #ccc; border-radius: 4px;">
+      Nenhuma imagem selecionada
+    </div>
+  </div>
+</div>
 </form>
 
 <!-- Modal de Cropper -->
@@ -285,19 +295,28 @@ $logado = $_SESSION['usuario'];
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Recortar Foto</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body text-center">
-        <img id="image_crop" src="">
+      <div class="modal-body">
+        <div class="img-container">
+          <img id="image_crop" src="" alt="Imagem para recorte">
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="crop_button" class="btn btn-success">OK</button>
+        <div class="btn-group me-2" role="group">
+          <button type="button" class="btn btn-outline-primary" onclick="cropper.rotate(-90)">
+            <i class="bi bi-arrow-counterclockwise"></i> Girar Esq
+          </button>
+          <button type="button" class="btn btn-outline-primary" onclick="cropper.rotate(90)">
+            <i class="bi bi-arrow-clockwise"></i> Girar Dir
+          </button>
+        </div>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" id="crop_button" class="btn btn-primary">Confirmar Corte</button>
       </div>
     </div>
   </div>
 </div>
-
 <!-- Scripts do Cropper -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
@@ -315,11 +334,25 @@ $logado = $_SESSION['usuario'];
 
         image.onload = () => {
           if (cropper) cropper.destroy();
+          
+          // Configurações melhoradas do Cropper
           cropper = new Cropper(image, {
             aspectRatio: 3 / 4,
-            viewMode: 3,
+            viewMode: 1,
+            autoCropArea: 0.8,
             responsive: true,
+            movable: true,
+            zoomable: true,
+            rotatable: true,
+            scalable: true,
+            minContainerWidth: 300,
+            minContainerHeight: 400,
+            ready: function() {
+              // Ajusta o zoom para mostrar a imagem inteira inicialmente
+              cropper.crop();
+            }
           });
+          
           modal.show();
         };
       };
@@ -328,11 +361,32 @@ $logado = $_SESSION['usuario'];
   });
 
   document.getElementById('crop_button').addEventListener('click', function () {
-    const canvas = cropper.getCroppedCanvas({ width: 300, height: 400 });
-    const croppedImage = canvas.toDataURL('image/jpeg');
-    document.getElementById('preview_cropped').src = croppedImage;
-    document.getElementById('foto_crop').value = croppedImage;
-    modal.hide();
+    // Tamanho maior para melhor qualidade
+    // No evento de clique do crop_button, adicione:
+document.getElementById('no-image-placeholder').style.display = 'none';
+document.getElementById('preview_cropped').style.display = 'block';
+    const canvas = cropper.getCroppedCanvas({
+      width: 600,  // Dobrando o tamanho para melhor qualidade
+      height: 800,
+      minWidth: 300,
+      minHeight: 400,
+      maxWidth: 1200,
+      maxHeight: 1600,
+      fillColor: '#fff',
+      imageSmoothingEnabled: true,
+      imageSmoothingQuality: 'high'
+    });
+    
+    if (canvas) {
+      const croppedImage = canvas.toDataURL('image/jpeg', 0.9); // 90% de qualidade
+      const preview = document.getElementById('preview_cropped');
+      preview.src = croppedImage;
+      preview.style.display = 'block';
+      document.getElementById('foto_crop').value = croppedImage;
+      modal.hide();
+    } else {
+      alert('Erro ao recortar a imagem. Tente novamente.');
+    }
   });
 </script>
 

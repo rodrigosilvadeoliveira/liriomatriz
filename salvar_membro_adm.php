@@ -63,7 +63,7 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
-  echo "<script>alert('Membro cadastrado com sucesso!'); window.location.href='cadastroMembros.php';</script>";
+  echo "<script>alert('Membro cadastrado com sucesso!'); window.location.href='cadastroMembrosAdm.php';</script>";
 } else {
   echo "Erro ao cadastrar: " . $stmt->error;
 }

@@ -714,22 +714,39 @@ img {
     height: 30%;
 
 }
-#imagemCropper {
+ /* Estilos para o modal do cropper */
+ #modal_crop .modal-dialog {
+    max-width: 90%;
+    max-height: 90vh;
+}
+
+#modal_crop .modal-content {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#modal_crop .modal-body {
+    flex: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#image_crop {
     max-width: 100%;
-    max-height: 500px;
-    display: block;
-    margin: 0 auto;
-  }
-  .cropper-container,
-  .cropper-wrap-box,
-  .cropper-canvas,
-  .cropper-drag-box {
-    max-height: 500px !important;
-    height: 100% !important;
-  }
-  .modal-body {
-    text-align: center;
-  }
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+/* Prévia da imagem cortada */
+#preview_cropped {
+    max-width: 100%;
+    height: auto;
+    display: none; /* Esconder até ter imagem */
+}
 @media (max-width: 1400px) {
 #titulonapagina{
     margin-top: 10%;
