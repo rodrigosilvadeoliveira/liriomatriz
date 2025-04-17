@@ -97,7 +97,7 @@ $logado = $_SESSION['usuario'];
 
 <fieldset class="boxformularioMembrosAdm">
 <form method="POST" action="salvar_membro_adm.php" enctype="multipart/form-data" class="row g-3">
-  <div class="col-md-3">
+<div class="col-md-3">
     <label for="nome" class="form-label">*Nome:</label>
     <input type="text" name="nome" id="nome" class="form-control" required>
   </div>
@@ -302,7 +302,7 @@ $logado = $_SESSION['usuario'];
           <img id="image_crop" src="" alt="Imagem para recorte">
         </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer-cropper">
         <div class="btn-group me-2" role="group">
           <button type="button" class="btn btn-outline-primary" onclick="cropper.rotate(-90)">
             <i class="bi bi-arrow-counterclockwise"></i> Girar Esq
@@ -311,8 +311,10 @@ $logado = $_SESSION['usuario'];
             <i class="bi bi-arrow-clockwise"></i> Girar Dir
           </button>
         </div>
+        <div class="botaodomodal">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button type="button" id="crop_button" class="btn btn-primary">Confirmar Corte</button>
+        </div>
       </div>
     </div>
   </div>
@@ -391,15 +393,7 @@ document.getElementById('preview_cropped').style.display = 'block';
 </script>
 
 </fieldset>
-<script>
-    // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
-    const tempoLimite = 3600000;
 
-    // Redireciona para logout após o tempo limite
-    setTimeout(() => {
-        window.location.href = "sistema.php?timeout=1"; 
-    }, tempoLimite);
-</script>
 
 </body>
 </html>

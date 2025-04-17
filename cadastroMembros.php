@@ -297,9 +297,11 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
             <i class="bi bi-arrow-clockwise"></i> Girar Dir
           </button>
         </div>
+        <div class="botaodomodal">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button type="button" id="crop_button" class="btn btn-primary">Confirmar Corte</button>
-      </div>
+        </div>
+       </div>
     </div>
   </div>
 </div>
