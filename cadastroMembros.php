@@ -288,7 +288,7 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
           <img id="image_crop" src="" alt="Imagem para recorte">
         </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer-cropper">
         <div class="btn-group me-2" role="group">
           <button type="button" class="btn btn-outline-primary" onclick="cropper.rotate(-90)">
             <i class="bi bi-arrow-counterclockwise"></i> Girar Esq
@@ -377,15 +377,7 @@ document.getElementById('preview_cropped').style.display = 'block';
 </script>
 
 </fieldset>
-<script>
-    // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
-    const tempoLimite = 3600000;
 
-    // Redireciona para logout após o tempo limite
-    setTimeout(() => {
-        window.location.href = "sistema.php?timeout=1"; 
-    }, tempoLimite);
-</script>
 
 </body>
 </html>
