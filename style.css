@@ -1117,5 +1117,10 @@ img {
     .botaodomodal{
         margin-top: -10%;
         margin-left: 60%;
+        
+    }
+    .modal-footer-cropper{
+       
+        height: 20%;
     }
 }
