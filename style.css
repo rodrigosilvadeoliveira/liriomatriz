@@ -941,6 +941,10 @@ img {
     display: flex;
     flex-direction: column;
 }
+.boxformularioMembrosAdm{
+    margin-left: 5%;
+  
+}
 }
 
 @media (max-width: 541px){
@@ -1040,8 +1044,15 @@ img {
         margin-left: 2%;
     }
     .botaodomodal{
-        margin-top: -8%;
-        margin-left: 40%;
+        margin-top: -8.8%;
+        margin-left: 45%;
+    }
+    .modal-footer-cropper{
+        background-color: #ccc;
+        width: 100%;
+        height: 10%;
+        font-size: 20px;
+       
     }
 }
 
@@ -1119,8 +1130,5 @@ img {
         margin-left: 60%;
         
     }
-    .modal-footer-cropper{
-       
-        height: 20%;
-    }
+    
 }
