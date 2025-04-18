@@ -313,7 +313,7 @@ $logado = $_SESSION['usuario'];
         </div>
         <div class="botaodomodal">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" id="crop_button" class="btn btn-primary">Confirmar Corte</button>
+        <button type="button" id="crop_button" class="btn btn-primary">Confirmar</button>
         </div>
       </div>
     </div>

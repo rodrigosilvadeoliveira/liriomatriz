@@ -19,7 +19,7 @@ include_once('config.php');
     }
     else
     {
-      $sql = "SELECT * FROM evento WHERE cartaz IN ('programacao', 'carrousel') ORDER BY id DESC";
+      $sql = "SELECT * FROM evento WHERE cartaz IN ('programacao', 'carrousel', 'home') ORDER BY id DESC";
 
 
     }
