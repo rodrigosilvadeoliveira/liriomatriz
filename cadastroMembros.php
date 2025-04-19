@@ -260,15 +260,14 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
     
   </div>
 
-  <div class="col-12">
+  <div class="col-md-3">
     <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary">Enviar</button>
   </div>
   <div class="col-md-3">
   <label class="form-label">Prévia da Foto:</label>
   <div class="image-preview-container">
-    <img id="preview_cropped" src="" alt="Prévia da imagem" 
-         style="max-width: 100%; height: auto; display: none; border-radius: 4px; border: 1px solid #ddd;">
-    <div id="no-image-placeholder" style="text-align: center; padding: 20px; border: 1px dashed #ccc; border-radius: 4px;">
+    <img id="preview_cropped" src="" alt="Prévia da imagem" >
+    <div id="no-image-placeholder">
       Nenhuma imagem selecionada
     </div>
   </div>
