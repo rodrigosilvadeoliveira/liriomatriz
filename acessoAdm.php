@@ -22,7 +22,16 @@ if (isset($_POST['submit']) && !empty($_POST['usuario']) && !empty($_POST['senha
         $row = $result->fetch_assoc();
         $_SESSION['usuario'] = $usuario;
         $_SESSION['senha'] = $senha;
-        $_SESSION['nivel_acesso'] = $row['nivel_acesso']; // Armazena o perfil do usuário na sessão
+        $_SESSION['nivel_acesso'] = $row['nivel_acesso'];
+// REGISTRA O LOGIN NO LOG
+$data_login = date('Y-m-d'); // formato: 2025-04-21
+$hora_login = date('H:i:s'); // formato: 14:30:05
+
+$logSql = "INSERT INTO log_login (usuario, nivel_acesso, data_login, hora_login) VALUES (?, ?, ?, ?)";
+$logStmt = $conexao->prepare($logSql);
+$logStmt->bind_param("ssss", $usuario, $row['nivel_acesso'], $data_login, $hora_login);
+$logStmt->execute();
+
 
         // Redireciona com base no perfil
         switch ($row['nivel_acesso']) {
@@ -41,7 +50,6 @@ if (isset($_POST['submit']) && !empty($_POST['usuario']) && !empty($_POST['senha
             case 'master':
                 header('Location: formularioMaster.php');
                 break;
-                    
             default:
                 header('Location: acesso_negado.php');
                 break;

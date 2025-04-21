@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18-Abr-2025 às 19:05
+-- Tempo de geração: 22-Abr-2025 às 01:36
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -80,15 +80,35 @@ INSERT INTO `evento` (`id`, `imagem`, `cartaz`, `inscricao`, `links`, `nomeevent
 (28, './img/lirio_igreja.jpg', 'home', '', 'videosSite.php', '', NULL, NULL),
 (29, './img/porvoce.jpeg', 'home', '', 'novoComecoSite.php', '', NULL, NULL),
 (31, './img/Volutariado.jpeg', 'home', '', 'voluntariadoSite.php', '', NULL, NULL),
-(37, './img/Progamacao.jpeg', 'home', '', 'programacaoSite.php', '', NULL, NULL),
 (50, '', 'formulario', 'curso_arena', 'https://docs.google.com/forms/d/e/1FAIpQLSfIQWHrh-sMw6rVoDg-PSh2syVPn36i91ZUI67nbi2Yn9-yOA/viewform?embedded=true', '', '2025-03-12', '2025-03-28'),
 (55, '', 'formulario', 'voluntariado_midias', 'https://docs.google.com/forms/d/e/1FAIpQLSfIQWHrh-sMw6rVoDg-PSh2syVPn36i91ZUI67nbi2Yn9-yOA/viewform?embedded=true', '', '2025-03-14', '2025-03-26'),
 (59, './img/dizimos.jpeg', 'carrousel', '', '', 'Contribuir com Amor', NULL, NULL),
 (62, './img/AmoraCasa.jpeg', 'carrousel', '', '', 'Amor a Casa', NULL, NULL),
 (64, './img/fervor2025.jpeg', 'carrousel', '', '', 'Fervor 2025', NULL, NULL),
-(68, './img/Programação.jpeg', 'home', '', 'http://localhost/lirioMatriz/programacaoSite.php', 'programaçao', NULL, NULL),
-(69, './img/Programaçãoomagem.jpeg', 'home', '', 'http://localhost/lirioMatriz/programacaoSite.php', 'promogramaçao2', NULL, NULL),
 (70, './img/Programaçãoteste.jpeg', 'home', '', 'http://localhost/lirioMatriz/programacaoSite.php', 'promogramaçao3', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `log_login`
+--
+
+CREATE TABLE `log_login` (
+  `id` int(11) NOT NULL,
+  `usuario` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nivel_acesso` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `data_login` date NOT NULL,
+  `hora_login` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `log_login`
+--
+
+INSERT INTO `log_login` (`id`, `usuario`, `nivel_acesso`, `data_login`, `hora_login`) VALUES
+(1, 'org', 'organizador', '2025-04-21', '00:00:00'),
+(2, 'midias', 'midia', '2025-04-22', '00:25:53'),
+(3, 'master', 'master', '2025-04-22', '00:28:05');
 
 -- --------------------------------------------------------
 
@@ -132,7 +152,9 @@ INSERT INTO `membros` (`id`, `nome`, `sobrenome`, `nascimento`, `batizado`, `dat
 (32, 'Suellen', 'Martins de Oliveira', '1990-02-10', 'sim', '2020-04-11', '11983377337', 'teste@teste.com', 'sim', 'criativo', 'Consagracao', 'Consagracao', 'Sala_voluntario', 'ativo', '35', 'Elizete', 'foto_67ffb1b36f6bd.jpg'),
 (33, 'João', 'Marino', '2010-10-10', 'não', '2021-01-21', '1192883777', '', 'sim', 'consagracao', 'Coral', 'Coral', 'GC_Homens', 'ativo', '14', '', 'foto_6800170fcb454.jpg'),
 (34, 'Magda', 'Ramos Luoreiro', '1900-11-01', 'sim', '2010-03-02', '1198227733', 'testelirio@gmail.com', 'sim', 'não', 'GC_Homens', 'Coral', 'Staff', 'ativo', '124', '', 'foto_68010951d56a4.jpg'),
-(35, 'Lucas', 'oliveira', '2001-10-01', 'não', '2022-11-27', '11982780186', 'tstrodrigoso@gmail.com', 'sim', 'não', 'Criativo', 'Criativo', 'Criativo', 'ativo', '23', 'Maria de Lourdes da silva de Oliveira', 'foto_680137dfe1b2d.jpg');
+(35, 'Lucas', 'oliveira', '2001-10-01', 'não', '2022-11-27', '11982780186', 'tstrodrigoso@gmail.com', 'sim', 'não', 'Criativo', 'Criativo', 'Criativo', 'ativo', '23', 'Maria de Lourdes da silva de Oliveira', 'foto_680137dfe1b2d.jpg'),
+(36, 'Mauro', 'Pereira prado', '1999-01-21', 'não', '2002-10-01', '9817722277', 'testedoemail@email.com', 'sim', 'loja', 'Criativo', '', 'Criativo', 'ativo', '26', '', 'foto_6804164c46b22.jpg'),
+(37, 'Paulo', 'Henrique', '1980-02-11', 'sim', '2000-06-11', '1988277733', 'teste@gmail.com', 'sim', 'louvor', 'Kids', 'Oficiais', '', 'ativo', '45', '', 'foto_6804ffac3a919.jpg');
 
 -- --------------------------------------------------------
 
@@ -170,7 +192,8 @@ INSERT INTO `pagamento` (`id`, `valorTotal`, `tipodePagamento`, `datas`, `hora`)
 (15, '75.92', 'pix', '2025-03-24', '14:32:32'),
 (16, '75.92', 'credito', '2025-03-24', '14:39:23'),
 (17, '122.10', 'dinheiro', '2025-03-24', '15:24:25'),
-(18, '40.70', 'credito', '2025-03-24', '15:26:27');
+(18, '40.70', 'credito', '2025-03-24', '15:26:27'),
+(19, '70.62', 'pix', '2025-04-20', '10:15:55');
 
 -- --------------------------------------------------------
 
@@ -201,7 +224,7 @@ CREATE TABLE `produtos` (
 
 INSERT INTO `produtos` (`id`, `barra`, `produto`, `modelo`, `tamanho`, `categoria`, `valordevenda`, `estoque`, `valordecompra`, `fornecedor`, `carroussel`, `imagem`, `datas`, `hora`) VALUES
 (1, '123456789', 'Camisa Honra', 'Manga curta', 'M 16', 'Vestuário', '40.70', 28, '20.45', 'camisas gospel', '', '', '2023-08-31', '15:37:28'),
-(4, '3232559654', 'Biblia', 'Capa dura amarela', 'GG', 'Biblias', '35.22', 21, '10.00', 'Biblias Lirio', '', './img/porvoce.jpeg', '2023-08-31', '08:53:23'),
+(4, '3232559654', 'Biblia', 'Capa dura amarela', 'GG', 'Biblias', '35.22', 20, '10.00', 'Biblias Lirio', '', './img/porvoce.jpeg', '2023-08-31', '08:53:23'),
 (5, '556688994', 'Livro a vida de Jesus', 'Capa dura', 'Médi', 'Livros', '35.40', 0, '10.20', 'Livraria', 'carrousel', './img/louvor.jpeg', '2023-08-30', '22:36:12'),
 (6, '565231458', 'Pulseira', 'dourado estrela', 'P', 'Acessorios', '5.00', 2, '0.50', 'teste', 'carrousel', './img/fervor.jpeg', '2023-08-31', '09:19:35'),
 (8, '65236987744', 'Bone', 'azul', 'Unico', 'Vestuario', '11.99', 22, '5.50', 'Bones', 'carrousel', './img/teatro.jpeg', '2023-09-05', '20:19:05'),
@@ -226,7 +249,7 @@ CREATE TABLE `totalmembros` (
 --
 
 INSERT INTO `totalmembros` (`id`, `idademenor`, `idademaior`) VALUES
-(1, 5, 6);
+(1, 5, 8);
 
 -- --------------------------------------------------------
 
@@ -264,7 +287,8 @@ INSERT INTO `vendas` (`id`, `barra`, `produto`, `modelo`, `tamanho`, `categoria`
 (28, 123456789, 'Camisa Honra', 'Manga curta', 'M 16', 'Vestuário', '40.70', '20.45', 'rodrigo', '2025-03-24', '15:24:25'),
 (29, 123456789, 'Camisa Honra', 'Manga curta', 'M 16', 'Vestuário', '40.70', '20.45', 'rodrigo', '2025-03-24', '15:24:25'),
 (30, 123456789, 'Camisa Honra', 'Manga curta', 'M 16', 'Vestuário', '40.70', '20.45', 'rodrigo', '2025-03-24', '15:24:25'),
-(31, 123456789, 'Camisa Honra', 'Manga curta', 'M 16', 'Vestuário', '40.70', '20.45', 'rodrigo', '2025-03-24', '15:26:27');
+(31, 123456789, 'Camisa Honra', 'Manga curta', 'M 16', 'Vestuário', '40.70', '20.45', 'rodrigo', '2025-03-24', '15:26:27'),
+(32, 2147483647, 'Biblia', 'Capa dura amarela', 'GG', 'Biblias', '35.22', '10.00', 'teste', '2025-04-20', '10:15:55');
 
 --
 -- Índices para tabelas despejadas
@@ -280,6 +304,12 @@ ALTER TABLE `cadastroadm`
 -- Índices para tabela `evento`
 --
 ALTER TABLE `evento`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `log_login`
+--
+ALTER TABLE `log_login`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -326,19 +356,25 @@ ALTER TABLE `cadastroadm`
 -- AUTO_INCREMENT de tabela `evento`
 --
 ALTER TABLE `evento`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
+-- AUTO_INCREMENT de tabela `log_login`
+--
+ALTER TABLE `log_login`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `membros`
 --
 ALTER TABLE `membros`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de tabela `pagamento`
 --
 ALTER TABLE `pagamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
@@ -356,7 +392,7 @@ ALTER TABLE `totalmembros`
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
