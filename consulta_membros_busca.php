@@ -112,7 +112,7 @@ $result = $conexao->query($sql);
             echo "<tr>";
             echo "<td>" .$user_data['id']. "</td>";
             
-            echo "<td><img class='imagensevento' src='uploads/" . $user_data['foto'] . "'></td>";
+            echo "<td><img class='imagensMembros' src='uploads/" . $user_data['foto'] . "'></td>";
 
 
             echo "<td>" .$user_data['nome']. "</td>";
