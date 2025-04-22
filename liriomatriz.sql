@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22-Abr-2025 às 01:36
+-- Tempo de geração: 22-Abr-2025 às 17:14
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `lojalirio`
+-- Banco de dados: `liriomatriz`
 --
 
 -- --------------------------------------------------------
@@ -44,11 +44,11 @@ CREATE TABLE `cadastroadm` (
 
 INSERT INTO `cadastroadm` (`id`, `nome`, `usuario`, `senha`, `email`, `telefone`, `celular`, `nivel_acesso`) VALUES
 (3, 'Rodrigo Silva', 'rodrigo', '12355', 'qarodrigo', '1122233225', '11982780186', 'voluntario'),
-(4, 'Rodrigo Oliveira', 'teste', '1212', 'qarodrigo', '1122233225', '11982780186', 'admin'),
+(4, 'Rodrigo Oliveira', 'teste', '1212', 'qarodrigo@gmail.com', '1122233225', '11982780186', 'admin'),
 (5, 'teste', 'teste1', 'teste', 'teste@gmail.com', '22222222', '1112233', 'admin'),
-(6, 'secretaria Silva de Oliveira', 'midias', '1221', 'org@gmail.com', '1123245566', '11982780011', 'midia'),
+(6, 'Organizador Silva de Oliveira', 'midias', '1221', 'org@gmail.com', '1123245566', '11982780011', 'midia'),
 (7, 'RODRIGO SILVA DE OLIVEIRA', 'org', '123123', 'tstrodrigoso@gmail.com', '11982780186', '55555556', 'secretaria'),
-(8, 'RODRIGO SILVA DE OLIVEIRA', 'master', 'Digodw19', 'tstrodrigoso@gmail.com', '11982780186', '11982780186', 'master');
+(8, 'RODRIGO SILVA DE OLIVEIRA', 'master', 'Digodw19', 'tstrodrigoso@gmail.com', '11982780189', '11982780186', 'master');
 
 -- --------------------------------------------------------
 
@@ -85,7 +85,7 @@ INSERT INTO `evento` (`id`, `imagem`, `cartaz`, `inscricao`, `links`, `nomeevent
 (59, './img/dizimos.jpeg', 'carrousel', '', '', 'Contribuir com Amor', NULL, NULL),
 (62, './img/AmoraCasa.jpeg', 'carrousel', '', '', 'Amor a Casa', NULL, NULL),
 (64, './img/fervor2025.jpeg', 'carrousel', '', '', 'Fervor 2025', NULL, NULL),
-(70, './img/Programaçãoteste.jpeg', 'home', '', 'http://localhost/lirioMatriz/programacaoSite.php', 'promogramaçao3', NULL, NULL);
+(73, './img/Progamacao.jpeg', 'home', '', 'programacaoSite.php', 'promogramaçaoHome', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -106,9 +106,17 @@ CREATE TABLE `log_login` (
 --
 
 INSERT INTO `log_login` (`id`, `usuario`, `nivel_acesso`, `data_login`, `hora_login`) VALUES
-(1, 'org', 'secretaria', '2025-04-21', '00:00:00'),
+(1, 'org', 'organizador', '2025-04-21', '00:00:00'),
 (2, 'midias', 'midia', '2025-04-22', '00:25:53'),
-(3, 'master', 'master', '2025-04-22', '00:28:05');
+(3, 'master', 'master', '2025-04-22', '00:28:05'),
+(4, 'teste', 'admin', '2025-04-22', '15:31:35'),
+(5, 'teste', 'admin', '2025-04-22', '15:35:33'),
+(6, 'org', 'secretaria', '2025-04-22', '15:51:02'),
+(7, 'teste', 'admin', '2025-04-22', '16:06:01'),
+(8, 'midias', 'midia', '2025-04-22', '16:41:40'),
+(9, 'teste', 'admin', '2025-04-22', '17:13:08'),
+(10, 'org', 'secretaria', '2025-04-22', '17:13:18'),
+(11, 'midias', 'midia', '2025-04-22', '17:13:32');
 
 -- --------------------------------------------------------
 
@@ -356,13 +364,13 @@ ALTER TABLE `cadastroadm`
 -- AUTO_INCREMENT de tabela `evento`
 --
 ALTER TABLE `evento`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT de tabela `log_login`
 --
 ALTER TABLE `log_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `membros`

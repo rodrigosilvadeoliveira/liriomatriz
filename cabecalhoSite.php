@@ -46,7 +46,7 @@
         <li class="nav-item">
           <a class="nav-link" href="inscricoes.php">Inscrições</a>
         </li>
-        <a class="nav-link" href="lojaLirio.php">Loja Lirio</a>
+        <a class="nav-link" href="liriomatriz.php">Loja Lirio</a>
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="contatoSite.php">Contato</a>

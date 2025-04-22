@@ -95,7 +95,7 @@ if (isset($_POST['codigo_barras'])) {
     $host = "Localhost";
     $usuario = "root";
     $senha = "";
-    $banco = "lojalirio";
+    $banco = "liriomatriz";
 
     $conexao = mysqli_connect($host, $usuario, $senha, $banco);
 
@@ -125,7 +125,7 @@ if (isset($_POST['confirmar_compra'])) {
     $host = "Localhost";
     $usuario = "root";
     $senha = "";
-    $banco = "lojalirio";
+    $banco = "liriomatriz";
     
     $conexao = mysqli_connect($host, $usuario, $senha, $banco);
     $valorTotal = $_POST['valorTotal'];

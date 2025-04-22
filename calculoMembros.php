@@ -1,6 +1,6 @@
 <?php
 // Conectar ao banco de dados
-$pdo = new PDO("mysql:host=localhost;dbname=lojalirio", "root", "");
+$pdo = new PDO("mysql:host=localhost;dbname=liriomatriz", "root", "");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Consulta para obter as somas das idades
