@@ -17,12 +17,21 @@ verificarLogin();
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<br>
-
-
+<br><br><br>
+<?php
+    echo "<h1 id='BemVindo'>Acesso Master</h1>";
+?>
+<div class="produtos-container">
+<a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
+<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
+<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros_busca.php">Pesquisa Membro(a)</a>
+<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
+<a id="incluirCadastro" href="consulta_logs.php" value="Novo Cadastro">Log</a>
+<a id="incluirCadastro" href="formularioMaster.php" value="Novo Cadastro">Cadastro Acesso</a>
+</div>
 <fieldset class="boxformularioAdm">
     <form class="row g-3" action="enviarcadastroAdm.php" method="POST">
-      <h1>Cadastro ADM</h1>
+      <h1>Cadastro Usuarios</h1>
     <div class="col-md-5">
     <label for="nome" class="form-label">*Nome completo</label>
     <input type="text" name="nome" id="nome" class="form-control" required>
@@ -65,15 +74,8 @@ verificarLogin();
   </div>
 </form>
 </fieldset>
-<br>
-<div class="produtos-container">
-<a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros_busca.php">Pesquisa Membro(a)</a>
-<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
-<a id="incluirCadastro" href="consulta_logs.php" value="Novo Cadastro">Log</a>
-<a id="incluirCadastro" href="formularioMaster.php" value="Novo Cadastro">Cadastro Acesso</a>
-</div>
+
+
 <script>
     // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
     const tempoLimite = 3600000;

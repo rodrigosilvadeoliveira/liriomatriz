@@ -5,7 +5,7 @@ session_start();
 // Conecte-se ao banco de dados (substitua com suas configurações)
 include('config.php');
 
-$sql = "SELECT * FROM evento WHERE inscricao= 'voluntariado_recepcao' ORDER BY id DESC";
+$sql = "SELECT * FROM evento WHERE inscricao= 'primeiros_passos' ORDER BY id DESC";
 $result = $conexao->query($sql);
    // print_r($_SESSION);
    

@@ -97,25 +97,8 @@ header('Location: cadastroForm.php');
         <option value="curso_arena">Arena</option>
         <option value="curso_lirioplay">Lirio Play</option>
         <option value="curso_mergulhar">Mergulhar</option>
-
-        <option value="voluntariado_consagracao">Consagração</option>
-        <option value="voluntariado_coral">Coral</option>
-        <option value="voluntariado_criativo">Criativo</option>
-        <option value="voluntariado_danca">Dança</option>
-        <option value="voluntariado_gccasados">GC Casados</option>
-        <option value="voluntariado_gcjovens">GC Jovens</option>
-        <option value="voluntariado_intercessao">Intercessão</option>
-        <option value="voluntariado_Kids">Kids</option>
-        <option value="voluntariado_loja">Loja</option>
-        <option value="voluntariado_louvor">Louvor</option>
-        <option value="voluntariado_midias">Midias</option>
-        <option value="voluntariado_oficiais">Oficias</option>
-        <option value="voluntariado_recepcao">Recepção</option>
-        <option value="voluntariado_sala_dos_voluntarios">Sala Voluntarios</option>
-        <option value="voluntariado_som">Mesa de Som</option>
-        <option value="voluntariado_teatro">Teatro</option>
-        <option value="voluntariado_visitas">Visitas</option>
-      
+        <option value="primeiros_passos">Primeiros Passos</option>
+        <option value="voluntariado_inscricao">Voluntariado</option>
     </select>
 </div>
   
