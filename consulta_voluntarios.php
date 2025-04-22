@@ -19,7 +19,7 @@ include_once('config.php');
     }
     else
     {
-        $sql = "SELECT * FROM cadastroadm ORDER BY id DESC";
+        $sql = "SELECT * FROM cadastroadm WHERE nivel_acesso IN ('admin', 'voluntario')  ORDER BY id DESC";
     }
     $result = $conexao->query($sql);
 ?>
@@ -50,6 +50,7 @@ include_once('config.php');
       <th scope="col">#</th>
       <th scope="col">Voluntário(a)</th>
       <th scope="col">Usuario</th>
+      <th scope="col">Perfil</th>
       <th scope="col">Email</th>
       <th scope="col">Telefone</th>
       <th scope="col">Celular</th>
@@ -66,6 +67,7 @@ include_once('config.php');
             echo "<td>" .$user_data['nome']. "</td>";
 
             echo "<td>" .$user_data['usuario']. "</td>";
+            echo "<td>" .$user_data['nivel_acesso']. "</td>";
                         
             echo "<td>" .$user_data['email']. "</td>";
             

@@ -12,7 +12,7 @@
         $celular = $_POST['celular'];
 
         
-        $sqlInsert = "UPDATE cadastrovol 
+        $sqlInsert = "UPDATE cadastroadm 
         SET nome='$nome',usuario='$usuario',senha='$senha',email='$email',telefone='$telefone',celular='$celular'
         WHERE id=$id";
         $result = $conexao->query($sqlInsert);
