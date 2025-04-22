@@ -8,7 +8,7 @@ include_once('config.php');
 if(!empty($_GET['id']))
 {
     $id = $_GET['id'];
-    $sqlSelect = "SELECT * FROM cadastrovol WHERE id=$id";
+    $sqlSelect = "SELECT * FROM cadastroadm WHERE id=$id";
     $result = $conexao->query($sqlSelect);
     if($result->num_rows > 0)
     {
@@ -16,6 +16,7 @@ if(!empty($_GET['id']))
         {
             $nome = $user_data['nome'];
             $usuario = $user_data['usuario'];
+            $nivel_acesso = $user_data['nivel_acesso'];
             $senha = $user_data['senha'];
             $email = $user_data['email'];
             $telefone = $user_data['telefone'];
@@ -66,6 +67,15 @@ else
     <label for="senha" class="form-label">Senha</label>
     <input type="password"  name="senha" id="senha" class="form-control" value="<?php echo $senha ?>">
   </div>
+  <div class="col-md-3">
+    <label for="inputState" class="form-label">*Perfil:</label>
+    <select id="nivel_acesso" class="form-select" name="nivel_acesso">
+    <option ><?php echo $nivel_acesso ?></option>
+    <option value="admin">Administrador</option>
+        <option value="voluntario">Voluntário</option>
+        <option value="inativo">Inativo</option>
+        </select>
+</div>
   <div class="col-md-5">
     <label for="email" class="form-label">Email</label>
     <input type="email"  name="email" id="email" class="form-control" value="<?php echo $email ?>">

@@ -41,7 +41,7 @@ $logStmt->execute();
             case 'voluntario':
                 header('Location: vendasVol.php');
                 break;
-            case 'organizador':
+            case 'secretaria':
                 header('Location: cadastroMembrosAdm.php');
                 break;
             case 'midia':

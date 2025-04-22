@@ -64,7 +64,7 @@ verificarLogin();
     <option value="admin">Administrador</option>
     <option value="voluntario">Voluntário</option>
     <option value="midia">Midias</option>
-    <option value="organizador">Organizador</option>
+    <option value="secretaria">Secretaria</option>
     <option value="master">Master</option>
         </select>
 </div>

@@ -46,8 +46,8 @@ INSERT INTO `cadastroadm` (`id`, `nome`, `usuario`, `senha`, `email`, `telefone`
 (3, 'Rodrigo Silva', 'rodrigo', '12355', 'qarodrigo', '1122233225', '11982780186', 'voluntario'),
 (4, 'Rodrigo Oliveira', 'teste', '1212', 'qarodrigo', '1122233225', '11982780186', 'admin'),
 (5, 'teste', 'teste1', 'teste', 'teste@gmail.com', '22222222', '1112233', 'admin'),
-(6, 'Organizador Silva de Oliveira', 'midias', '1221', 'org@gmail.com', '1123245566', '11982780011', 'midia'),
-(7, 'RODRIGO SILVA DE OLIVEIRA', 'org', '123123', 'tstrodrigoso@gmail.com', '11982780186', '55555556', 'organizador'),
+(6, 'secretaria Silva de Oliveira', 'midias', '1221', 'org@gmail.com', '1123245566', '11982780011', 'midia'),
+(7, 'RODRIGO SILVA DE OLIVEIRA', 'org', '123123', 'tstrodrigoso@gmail.com', '11982780186', '55555556', 'secretaria'),
 (8, 'RODRIGO SILVA DE OLIVEIRA', 'master', 'Digodw19', 'tstrodrigoso@gmail.com', '11982780186', '11982780186', 'master');
 
 -- --------------------------------------------------------
@@ -106,7 +106,7 @@ CREATE TABLE `log_login` (
 --
 
 INSERT INTO `log_login` (`id`, `usuario`, `nivel_acesso`, `data_login`, `hora_login`) VALUES
-(1, 'org', 'organizador', '2025-04-21', '00:00:00'),
+(1, 'org', 'secretaria', '2025-04-21', '00:00:00'),
 (2, 'midias', 'midia', '2025-04-22', '00:25:53'),
 (3, 'master', 'master', '2025-04-22', '00:28:05');
 
