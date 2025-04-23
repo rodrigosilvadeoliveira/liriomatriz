@@ -127,7 +127,7 @@ include_once('config.php');
       <th scope="col">Membro desde</th>
       <th scope="col">Telefone</th>
       <th scope="col">Email</th>
-      <th scope="col">Voluntaio</th>
+      <th scope="col">Voluntario</th>
       <th scope="col">Lider</th>
       <th scope="col">Departamento 1</th>
       <th scope="col">Departamento 2</th>
