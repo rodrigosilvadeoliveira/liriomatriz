@@ -757,11 +757,11 @@ img {
 .btn-group{
     margin-top: 3%;
     padding-left: 3%;
-    width: 95%;
-    height: 45%;
+    width: 35%;
+    height: 60%;
 }
 .botaodomodal{
-    margin-top: -5.5%;
+    margin-top: -12%;
     margin-left: 40%;
 }
 #crop_button_cancelar{
@@ -795,8 +795,10 @@ img {
     .btn-group{
         margin-top: 3%;
         padding-left: 3%;
-        width: 95%;
-        height: 55%;
+        
+    }
+    .botaodomodal{
+        margin-top: -10%;
     }
 #titulonapagina{
     margin-top: 10%;
@@ -1005,8 +1007,8 @@ img {
 @media (max-width: 541px){
     .btn-group{
         
-        width: 95%;
-        height: 55%;
+        width: 45%;
+        height: 75%;
     }
     .inputSubmit{
         width:95%;
@@ -1116,7 +1118,7 @@ img {
     }
     .botaodomodal{
         margin-top: -10.5%;
-        margin-left: 45%;
+        margin-left: 50%;
     }
     .modal-footer-cropper{
         background-color: #ccc;

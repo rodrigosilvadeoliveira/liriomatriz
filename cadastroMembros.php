@@ -131,7 +131,7 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
     </select>
   </div>
 
-  <div class="col-md-3">
+  <!-- <div class="col-md-3">
     <label for="lider" class="form-label">*Líder:</label>
     <select id="lider" class="form-select" name="lider">
       <option value="">Selecione</option>
@@ -155,7 +155,7 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
       <option value="transito">Trânsito</option>
       <option value="visitas">Visitas</option>
     </select>
-  </div>
+  </div> -->
 
   <div class="col-md-3">
     <label for="departamentoum" class="form-label">Departamento 1:</label>
@@ -166,9 +166,6 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
         <option value="Coral">Coral</option>
         <option value="Criativo">Criativo</option>
         <option value="Danca">Dança</option>
-        <option value="GC_Casados">GC Casados</option>
-        <option value="GC_Homens">GC Homens</option>
-        <option value="GC_Jovens">GC Jovens</option>
         <option value="Intercessao">Intercessão</option>
         <option value="Kids">Kids</option>
         <option value="Loja">Loja</option>
@@ -193,9 +190,6 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
         <option value="Coral">Coral</option>
         <option value="Criativo">Criativo</option>
         <option value="Danca">Dança</option>
-        <option value="GC_Casados">GC Casados</option>
-        <option value="GC_Homens">GC Homens</option>
-        <option value="GC_Jovens">GC Jovens</option>
         <option value="Intercessao">Intercessão</option>
         <option value="Kids">Kids</option>
         <option value="Loja">Loja</option>
@@ -220,9 +214,6 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
         <option value="Coral">Coral</option>
         <option value="Criativo">Criativo</option>
         <option value="Danca">Dança</option>
-        <option value="GC_Casados">GC Casados</option>
-        <option value="GC_Homens">GC Homens</option>
-        <option value="GC_Jovens">GC Jovens</option>
         <option value="Intercessao">Intercessão</option>
         <option value="Kids">Kids</option>
         <option value="Loja">Loja</option>
@@ -238,14 +229,8 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
     </select>
   </div>
 
-  <div class="col-md-3">
-    <label for="status" class="form-label">*Membro(a) Ativo:</label>
-    <select id="status" class="form-select" name="status">
-      <option value="">Selecione</option>
-      <option value="ativo">Ativo</option>
-      <option value="naoAtivo">Não Ativo</option>
-    </select>
-  </div>
+
+    <input type="hidden" id="status" name="status" value="ativo">
 
   <div class="col-md-3">
     <label for="responsavel" class="form-label">Responsável:</label>
