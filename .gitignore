@@ -1,0 +1,6 @@
+# Ignorar arquivos de configuração sensíveis
+config.php
+configUser.php
+
+# Ignorar pasta de uploads de arquivos
+/uploads/

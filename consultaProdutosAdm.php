@@ -2,7 +2,7 @@
 <?php
 include('verificarLogin.php');
 verificarLogin();
-//session_start();
+include('verifica_permissao.php');
 include_once('config.php');
    // print_r($_SESSION);
     if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
@@ -15,11 +15,11 @@ include_once('config.php');
     if(!empty($_GET['search']))
     {
         $data = $_GET['search'];
-        $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or produto LIKE '%$data%' or modelo LIKE '%$data%' or categoria LIKE '%$data%' ORDER BY id DESC";
+        $sql = "SELECT * FROM produtos WHERE barra LIKE '%$data%' or produto LIKE '%$data%' or datas LIKE '%$data%' ORDER BY id DESC";
     }
     else
     {
-        $sql = "SELECT * FROM produtos ORDER BY id DESC";
+        $sql = "SELECT * FROM produtos ORDER BY datas DESC";
     }
     $result = $conexao->query($sql);
 ?>
@@ -30,12 +30,15 @@ include_once('config.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Consulta Produtos Lirio</title>
+    <title>Sistema Flowers</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     <script src="bootstrap.min.js"></script>
-</head>
+    <script src="quagga.min.js"></script>
+    </head>
 <body>
+<body>
+
 <div class="linkTitulo">
 <?php
     echo "<h1 id='BemVindo'>Catalogo de Produtos e Estoque</h1>";

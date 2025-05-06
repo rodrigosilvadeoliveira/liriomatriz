@@ -7,9 +7,9 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 $dbHost = 'localhost';
-$dbUsername = 'root';
-$dbPassword = '';
-$dbName = 'liriomatriz';
+$dbUsername = 'u188478530_liriomatriz';
+$dbPassword = 'Lirio2025@';
+$dbName = 'u188478530_liriomatriz';
 
 // Estabelecer a conexão com o banco de dados
 $conexao = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);

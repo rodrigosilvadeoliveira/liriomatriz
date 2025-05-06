@@ -1,5 +1,4 @@
 
-<?php include("cabecalhoSite.php")?>
 <?php
 include_once('config.php');
 
@@ -16,23 +15,27 @@ date_default_timezone_set('America/Sao_Paulo'); // Definir fuso horário para Br
 include_once('config.php');
    // print_r($_SESSION);
     ?>
-    
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>Lirio Matriz</title>
-    <<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?t=<?=time()?>">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     <script src="bootstrap.min.js"></script>
     </head>
-    </head>
+
 <body>
+    <div class="cabecalho" id="cabecalhodoSite">
+    <?php include('cabecalhoSite.php');?>
+    </div>
 <br >
 <div id="tabelacarrousel" class="carroussel">
     <div class="carroussel-container">
@@ -50,7 +53,7 @@ include_once('config.php');
         ?>
     </div>
 </div>
-<h1 id="titulocategoria">Você encontra na Liro Matriz</h1>
+<h1 id="titulocategoria">Você encontra na Lirio Matriz</h1>
 <div id="tabelaSite">
 <div class="produtos-container">
         <table>
