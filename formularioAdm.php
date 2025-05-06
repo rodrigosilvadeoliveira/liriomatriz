@@ -2,7 +2,7 @@
 <?php
 include('verificarLogin.php');
 verificarLogin();
-
+include('verifica_permissao.php');
 
 
 ?>
@@ -26,7 +26,7 @@ verificarLogin();
 </a>
 -->
 <fieldset class="boxformularioAdm">
-    <form class="row g-3" action="enviarcadastroAdm.php" method="POST">
+    <form class="row g-3" action="enviarcadastroadm.php" method="POST">
       <h1>Cadastro ADM</h1>
     <div class="col-md-5">
     <label for="nome" class="form-label">*Nome completo</label>

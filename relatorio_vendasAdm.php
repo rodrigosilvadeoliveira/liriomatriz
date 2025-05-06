@@ -6,13 +6,7 @@ require __DIR__.'/vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-$dbHost = 'localhost';
-$dbUsername = 'root';
-$dbPassword = '';
-$dbName = 'liriomatriz';
-
-// Estabelecer a conexão com o banco de dados
-$conexao = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+include_once('config.php');
 
 if (isset($_POST['data_inicio']) && isset($_POST['data_fim'])) {
     $inicio = $_POST['data_inicio'];

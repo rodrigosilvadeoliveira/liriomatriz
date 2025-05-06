@@ -3,6 +3,7 @@
 include('verificarLogin.php');
 verificarLogin();
 //session_start();
+include('verifica_permissao.php');
 include_once('config.php');
    // print_r($_SESSION);
     if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
@@ -48,14 +49,9 @@ include_once('config.php');
         </p>
     </div> -->
    <br><br>
-    <div class="produtos-container">
-<a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros_busca.php">Pesquisa Membro(a)</a>
-
-<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
-</div>
-
+  <div class="navegacao">
+   <?php include("navegacao.php")?>
+   </div>
 <br>
 <fieldset>
 <br>
@@ -81,9 +77,7 @@ include_once('config.php');
       <th scope="col">Email</th>
       <th scope="col">Voluntario</th>
       <th scope="col">Lider</th>
-      <th scope="col">Departamento 1</th>
-      <th scope="col">Departamento 2</th>
-      <th scope="col">Departamento 3</th>
+      <th scope="col">Departamentos</th>
       <th scope="col">Status</th>
       <th scope="col">......</th>
       <th scope="col">Idade</th>
@@ -133,11 +127,7 @@ $result = $conexao->query($sql);
 
             echo "<td>" .$user_data['lider']. "</td>";
 
-            echo "<td>" .$user_data['departamentoum']. "</td>";
-
-            echo "<td>" .$user_data['departamentodois']. "</td>";
-
-            echo "<td>" .$user_data['departamentotres']. "</td>";
+            echo "<td>" .$user_data['departamentos']. "</td>";
 
             echo "<td>" .$user_data['status']. "</td>";
             

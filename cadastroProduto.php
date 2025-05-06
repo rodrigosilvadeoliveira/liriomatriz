@@ -2,6 +2,7 @@
 <?php
 include('verificarLogin.php');
 verificarLogin();
+include('verifica_permissao.php');
 ini_set('display_errors', 1); // Exibir erros no navegador (para fins de desenvolvimento)
 error_reporting(E_ALL); // Relatar todos os tipos de erro (para fins de desenvolvimento)
 date_default_timezone_set('America/Sao_Paulo'); // Definir fuso horário para Brasil/Brasília

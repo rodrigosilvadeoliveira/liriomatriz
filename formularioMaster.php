@@ -1,8 +1,8 @@
-<?php include("cabecalhoAdm.php")?>
+<?php include("cabecalhoIgreja.php")?>
 <?php
 include('verificarLogin.php');
 verificarLogin();
-
+include('verifica_permissao.php');
 
 
 ?>
@@ -29,8 +29,8 @@ verificarLogin();
 <a id="incluirCadastro" href="consulta_logs.php" value="Novo Cadastro">Log</a>
 <a id="incluirCadastro" href="formularioMaster.php" value="Novo Cadastro">Cadastro Acesso</a>
 </div>
-<fieldset class="boxformularioAdm">
-    <form class="row g-3" action="enviarcadastroAdm.php" method="POST">
+<fieldset class="boxformularioMembrosAdm">
+    <form class="row g-3" action="enviarcadastroadm.php" method="POST">
       <h1>Cadastro Usuarios</h1>
     <div class="col-md-5">
     <label for="nome" class="form-label">*Nome completo</label>

@@ -3,6 +3,7 @@
 include('verificarLogin.php');
 verificarLogin();
 //session_start();
+include('verifica_permissao.php');
 include_once('config.php');
    // print_r($_SESSION);
     if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
@@ -59,14 +60,9 @@ include_once('config.php');
         </p>
     </div> -->
    <br><br>
-    <div class="produtos-container">
-<a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros_busca.php">Pesquisa Membro(a)</a>
-<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
-<a id="incluirCadastro" href="consulta_logs.php" value="Novo Cadastro">Log</a>
-<a id="incluirCadastro" href="formularioMaster.php" value="Novo Cadastro">Cadastro Acesso</a>
-</div>
+  <div class="navegacao">
+   <?php include("navegacao.php")?>
+   </div>
 
 <br>
 <fieldset class="boxexportarMembros">
@@ -81,8 +77,9 @@ include_once('config.php');
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Usuari0</th>
-      <th scope="col">Nivel Acessp</th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Nivel Acesso</th>
       <th scope="col">Data</th>
       <th scope="col">Hora</th>
       
@@ -96,6 +93,8 @@ include_once('config.php');
             echo "<td>" .$user_data['id']. "</td>";
 
             echo "<td>" .$user_data['usuario']. "</td>";
+            
+            echo "<td>" .$user_data['nome']. "</td>";
 
             echo "<td>" .$user_data['nivel_acesso']. "</td>";
                         

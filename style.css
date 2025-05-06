@@ -358,7 +358,14 @@ header {
   #sair{
     margin-left: -18%;
   }
+  #sairmenu{
+display: none;
+  }
   #logoLiriocabecalhoSite{
+    width: 10%;
+    height: 10%;
+  }
+    #logoLiriocabecalhoMobile{
     width: 10%;
     height: 10%;
   }
@@ -405,6 +412,18 @@ header {
     border-radius: 10px;  
     align-items: flex-start;
 }
+#menuHeader{
+    margin-left: 15px;
+    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
+    width: auto;
+    border: none;
+    padding: 10px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 10px;  
+    align-items: flex-start;
+}
 #cons_Adm{
     margin-left: 15px;
     background-image: linear-gradient(to right, rgb(172, 16, 130), rgb(90,20,220));
@@ -439,6 +458,9 @@ padding-right: 2%;
 #tabelaAtendimento{
     margin-left: 1%;
 }
+#tabelaatendimentomobile{
+    display: none;
+    }
 .imagenscarroussel{
     width: 50%;
     height: 5%;
@@ -475,7 +497,7 @@ padding-right: 2%;
 #subtitulohome{
     margin-top: 2%;
     text-align: center;
-    font-family: cursive;
+    font-family:  'Times New Roman', Times, serif;
     color: darkblue;
 }
 #textos{
@@ -572,6 +594,33 @@ padding-right: 2%;
     width:350px;
     box-sizing: border-box;
 }
+#tabelaMobile {
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+    margin-top: 2%;
+    margin-left: 1%;
+    overflow-x: auto; /* Adiciona rolagem lateral */
+    white-space: nowrap;
+    display: none;
+    
+}
+
+#tabelaMobile table {
+    width: 100%;
+    min-width: 800px; /* Defina um tamanho mínimo para forçar a rolagem */
+    border-collapse: collapse;
+}
+#tabelaMobile::-webkit-scrollbar {
+    display: none; /* Oculta a barra no Chrome, Edge e Safari */
+}
+
+#tabelaMobile tr {
+    display: inline-block;
+    width:350px;
+    box-sizing: border-box;
+}
+
 .produtos-container {
     display: flex;
     flex-wrap: wrap;
@@ -667,7 +716,7 @@ padding-right: 2%;
 #titulonapagina{
     margin-top: 160px;
     text-align: center;
-    font-family: cursive;
+    font-family:  'Times New Roman', Times, serif;
     color: ;
 }
 .diaHoje {
@@ -768,6 +817,9 @@ img {
     margin-left: 3%;
   
 }
+.atalhos{
+    margin-top: 2%;
+}
 
 
 @media (max-width: 1400px) {
@@ -776,6 +828,11 @@ img {
         height: 200px;
     }
     #tabelaSite tr {
+        display: inline-block;
+        width:250px;
+        box-sizing: border-box;
+    }
+      #tabelaMobile tr {
         display: inline-block;
         width:250px;
         box-sizing: border-box;
@@ -843,6 +900,13 @@ img {
     
 }
 @media (max-width: 999px){
+    #cabecalho{
+        display: none;
+    }
+   
+    #tabelaMobile {
+        display: inline-flex;
+    }
     #modal_crop .modal-content {
         width: 50%;
         height: 70vh;
@@ -851,6 +915,9 @@ img {
     #logoLiriocabecalhoSite{
        margin-left: auto;
     }
+     #logoLiriocabecalhoMobile{
+        margin-left: 5%;
+      }
     
     .navbar-toggler{
         margin-top: -5%;
@@ -870,8 +937,11 @@ img {
         font-size: 24px;
     }
     #sair{
-        margin-top: 5%;
+        display: none;
         
+      }
+      #sairmenu{
+        display: flex;
         
       }
       .linkTitulo{
@@ -918,9 +988,66 @@ img {
         font-size: 1rem; /* Tamanho padrão de fonte */
         transition: all 0.3s ease; /* Transição suave para mudanças de tamanho */
       }
+      #tabelaAtendimento{
+        display: none;
+    }
+#tabelaatendimentomobile{
+display: inline-table;
+margin-left: 4%;
+margin-top: 2%;
+width: 50%;
+border: none;
+padding: 15px;
+color: white;
+font-size: 15px;
+cursor: pointer;
+border-radius: 10px;
+    
+}
+#confirmar{
+    margin-top: 4%;
+    margin-left: 4%;
+    background-image: linear-gradient(to right, rgb(172, 16, 130), rgb(90,20,220));
+    width: 50%;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-contentcamera {
+    background-color: white;
+    width: 95%;
+    height: 90%;
+    max-width: 600px;
+    margin-top: 5%;
+    margin-left: 2%;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Estilos para o vídeo da câmera */
+video {
+    margin-top: -3%;
+    margin-left: 3%;
+    width: 90%;
+    height: 75%;
+}
+#closeModal{
+    margin-top: 2%;
+}
 }
 
 @media (max-width: 800px){
+    #cabecalho{
+        display: none;
+    }
+
     #titulonapagina{
         margin-top: 20%;
     }
@@ -929,6 +1056,10 @@ img {
     width: 75px;
     
     }
+     .navbar-toggler:hover {
+        margin-top: 30%;
+        margin-left: 30%;
+     }
     .boxlogin{
         position: absolute;
         top: 35%;
@@ -1002,6 +1133,10 @@ img {
     height: 10%;
    
 }
+.atalhos{
+    margin-top: 4%;
+}
+
 }
 
 @media (max-width: 541px){
@@ -1029,9 +1164,15 @@ img {
         margin-left: 80%;
         margin-top: 2%;
          }
+         
+          #logoLiriocabecalhoMobile{
+        width: 20%;
+        height: 20%;
+         }
          .navbar-toggler{
             margin-top: -8%;
          }
+         
     .boxlogin{
         position: absolute;
         top: 40%;
@@ -1076,7 +1217,14 @@ img {
         /* max-width: 150px; Ajuste o tamanho das imagens conforme necessário*/
         
     }
+    #programacaoSite{
+        margin-left: 15%;
+      }
     #tabelaSite tr {
+        width:250px;
+    
+    }
+     #tabelaMobile tr {
         width:250px;
     
     }
@@ -1127,11 +1275,27 @@ img {
         font-size: 20px;
        
     }
-    
+    video {
+        margin-top: 10%;
+        margin-left: 3%;
+        width: 90%;
+        height: 75%;
+    }
 
+    #closeModal{
+        margin-top: 2%;
+        margin-left: 12%;
+        width: 72%;
+    }
+    .atalhos{
+        margin-top: 6%;
+    }
 }
 
 @media (max-width: 414px){
+    #cabecalho{
+        display: none;
+    }
 
  .tela-login{
         margin-top: 3%;
@@ -1211,6 +1375,7 @@ img {
     }
     .produtos-container {
         margin-top: 1%;   
+        margin-left: 2%;
     }
     .modal-body.text-center{
         margin-left: 3%;
@@ -1233,9 +1398,34 @@ img {
         display: none;
       }
       
+      
       .btn.btn-outline-primary i.bi {
         margin-right: 0;
         font-size: 1rem;
       }
     
+    #programacaoSite{
+        margin-left: 15%;
+      }
+      
+      .imagens{
+        width: 300px;
+        height: 300px;
+        margin: 1px;
+        /* max-width: 150px; Ajuste o tamanho das imagens conforme necessário*/
+        
+    }
+    
+    #cncmodal{
+        margin-left: -14%;
+      }
+      video {
+        margin-top: -5%;
+        margin-left: -3%;
+        width: 100%;
+        height: 40%;
+    }
+    .atalhos{
+        margin-top: 8%;
+    }
 }
