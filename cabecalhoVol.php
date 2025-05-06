@@ -7,7 +7,7 @@
     <title>Loja Lirio Matriz</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
-    <script src="loja.js" async></script>
+    
 </head>
 <body>
   <header>
@@ -22,23 +22,23 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!--
       <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="catalogo.php">Catalogo</a>
+          <a class="nav-link" aria-current="page" href="catalogo">Catalogo</a>
         </li>
 -->
-<li class="nav-item">
-          <a class="nav-link" aria-current="page" href="consulta_voluntarios.php">Voluntários</a>
-        </li>
-
         <li class="nav-item">
-          <a class="nav-link" href="consultaProdutosVol.php">Produtos</a>
+          <a class="nav-link" href="consultaProdutosVol">Produtos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="vendasVol.php">Atendimento</a>
+          <a class="nav-link" href="vendasVol">Atendimento</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="vendasrealizadasVol.php">Vendas Realizadas</a>
+          <a class="nav-link" href="vendasrealizadasVol">Vendas Realizadas</a>
         </li>
-        
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="sairmenu" href="sair">Sair</a>
+          
+        </li>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" id="cpesquisa">
@@ -50,6 +50,17 @@
     <a href="sair.php" class="btn btn-danger me5" id="sair">Sair</a>
 </div>
 </nav>
+<div id="tabelaMobile">
+<img id="logoLiriocabecalhoMobile" src ="LÍRIO MATRIZ (PRETO)_menor.png">
+<div class="produtos-container">
+    
+
+<a id="menuHeader" href="consultaProdutosVol">Produtos</a>
+<a id="menuHeader" href="vendasVol">Atendimento</a>
+<a id="menuHeader" href="vendasrealizadasVol">Vendas Realizadas</a>
+<a id="menuHeader" id="sairmenu" href="sair">Sair</a>
+</div>
+</div>
 </header>
 
 

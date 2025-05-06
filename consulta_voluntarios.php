@@ -3,6 +3,7 @@
 include('verificarLogin.php');
 verificarLogin();
 //session_start();
+include('verifica_permissao.php');
 include_once('config.php');
    // print_r($_SESSION);
     if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
@@ -40,8 +41,10 @@ include_once('config.php');
     echo "<h1 id='BemVindo'>Bem vindo <U>$logado</u><p>Consulta Lista de Voluntários</p></h1>";
 ?>
 <br>
+<div class="atalhos">
 <a id="incluirCadastro" value="Novo Volutario" href="formularioAdm.php">Novo Volutario(a)</a>
 <a id="cons_Adm" value="Novo Volutario" href="consulta_Adm.php">Consultar Administradores</a>
+</div>
 <br>
 <div>
 <table class="table" id="tabelaLista">

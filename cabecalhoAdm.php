@@ -7,38 +7,39 @@
     <title>Loja Lirio Matriz</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
-    <script src="loja.js" async></script>
+   
 </head>
 <body>
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" id="cabecalho">
     <img id="logoLiriocabecalho" src ="LÍRIO MATRIZ (PRETO)_menor.png">
   <div class="container-fluid">
-    <!--<a class="navbar-brand" href="#" id="menu">Menu</a>-->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!--
       <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="catalogo.php">Catalogo</a>
+          <a class="nav-link" aria-current="page" href="catalogo">Catalogo</a>
         </li>
 -->
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="consulta_voluntarios.php">Voluntários</a>
+          <a class="nav-link" aria-current="page" href="consulta_voluntarios">Voluntários</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="consultaProdutosAdm.php">Produtos</a>
+          <a class="nav-link" href="consultaProdutosAdm">Produtos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="vendas.php">Atendimento</a>
+          <a class="nav-link" href="vendas">Atendimento</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="vendasrealizadas.php">Vendas</a>
+          <a class="nav-link" href="vendasrealizadas">Vendas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="relatoriosAdm.php">Relatórios</a>
+          <a class="nav-link" href="relatoriosAdm">Relatórios</a>
+          
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="sairmenu" href="sair">Sair</a>
           
         </li>
         <!--
@@ -47,7 +48,7 @@
             Catalogo
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="cadastroProduto.php">Action</a></li>
+            <li><a class="dropdown-item" href="cadastroProduto">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -62,9 +63,20 @@
     </div>
   </div>
   <div class="d-flex">
-    <a href="sair.php" class="btn btn-danger me5" id="sair">Sair</a>
+    <a href="sair" class="btn btn-danger me5" id="sair">Sair</a>
 </div>
 </nav>
+<div id="tabelaMobile">
+<img id="logoLiriocabecalhoMobile" src ="LÍRIO MATRIZ (PRETO)_menor.png">
+<div class="produtos-container">
+    <a id="menuHeader" href="consulta_voluntarios">Voluntários</a>
+<a id="menuHeader" href="consultaProdutosAdm">Produtos</a>
+<a id="menuHeader" href="vendas">Atendimento</a>
+<a id="menuHeader" href="vendasrealizadas">Vendas</a>
+<a id="menuHeader" href="relatoriosAdm">Relatórios</a>
+<a id="menuHeader" id="sairmenu" href="sair">Sair</a>
+</div>
+</div>
 </header>
 
 

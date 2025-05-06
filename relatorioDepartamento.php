@@ -74,16 +74,11 @@ header('Location: cadastroForm.php');
 <body>
     <br><br><br>
 <?php
-    echo "<h1 id='BemVindo'>Cadastrar Formulário no Site</h1>";
+    echo "<h1 id='BemVindo'>Relatório de Atividades</h1>";
 ?>
-<div class="produtos-container">
-<a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros_busca.php">Pesquisa Membro(a)</a>
-<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
-</div>
 
-    <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroForm.php" method="POST" enctype="multipart/form-data">
+
+    <form id="insert_form" class="row g-3" name="realoriodep" action="salvar_realoriodep.php" method="POST" enctype="multipart/form-data">
     <div class="dadoscontato">
       <h1>Relatorio Departamento</h1>
     
@@ -93,62 +88,135 @@ header('Location: cadastroForm.php');
       <div class="col-md-2">
     <label for="inputState" class="form-label">*Departamento</label>
     <br>
-    <select id="inscricao" class="form-select" name="inscricao" required>
-        <option value="curso_arena">Arena</option>
-        <option value="curso_lirioplay">Lirio Play</option>
-        <option value="curso_mergulhar">Mergulhar</option>
+    <select id="departamento" class="form-select" name="departamento" required>
+    <option value="">Selecione</option>
+    <option value="Arena">Arena</option>
+        <option value="Lirioplay">Lirio Play</option>
+        <option value="Mergulhar">Mergulhar</option>
 
-        <option value="voluntariado_consagracao">Consagração</option>
-        <option value="voluntariado_coral">Coral</option>
-        <option value="voluntariado_criativo">Criativo</option>
-        <option value="voluntariado_danca">Dança</option>
-        <option value="voluntariado_gccasados">GC Casados</option>
-        <option value="voluntariado_gcjovens">GC Jovens</option>
-        <option value="voluntariado_intercessao">Intercessão</option>
-        <option value="voluntariado_Kids">Kids</option>
-        <option value="voluntariado_loja">Loja</option>
-        <option value="voluntariado_louvor">Louvor</option>
-        <option value="voluntariado_midias">Midias</option>
-        <option value="voluntariado_oficiais">Oficias</option>
-        <option value="voluntariado_recepcao">Recepção</option>
-        <option value="voluntariado_sala_dos_voluntarios">Sala Voluntarios</option>
-        <option value="voluntariado_som">Mesa de Som</option>
-        <option value="voluntariado_teatro">Teatro</option>
-        <option value="voluntariado_visitas">Visitas</option>
-      
+      <option value="Consagracao">Consagração</option>
+      <option value="Coral">Coral</option>
+      <option value="Criativo">Criativo</option>
+      <option value="Danca">Dança</option>
+      <option value="GCcasados">GC Casados</option>
+      <option value="GCjovens">GC Jovens</option>
+      <option value="Intercessao">Intercessão</option>
+      <option value="Kids">Kids</option>
+      <option value="Loja">Loja</option>
+      <option value="Louvor">Louvor</option>
+      <option value="Midias">Mídias</option>
+      <option value="Oficiais">Oficiais</option>
+      <option value="Recepcao">Recepção</option>
+      <option value="Salavoluntarios">Sala Voluntários</option>
+      <option value="Som">Mesa de Som</option>
+      <option value="Teatro">Teatro</option>
+      <option value="Transito">Trânsito</option>
+      <option value="Visitas">Visitas</option>      
     </select>
 </div>
   
      <div class="col-md-5">
 <label class="form-label">Qual foi evento ou programação</label>
-       <input type="text" class="form-control" name="links" placeholder="" id="links" maxlength="300">
+       <input type="text" class="form-control" name="evento" placeholder="" id="evento" maxlength="300" required>
      </div> <br>
      <div class="col-md-5">
 <label class="form-label">Data:</label>
-       <input type="date" class="form-control" name="inicio" placeholder="" id="inicio">
+       <input type="date" class="form-control" name="data" placeholder="" id="data" required>
      </div> <br>
      <div class="col-md-5">
 <label class="form-label">Tema Apresentado</label>
-       <input type="text" class="form-control" name="links" placeholder="" id="links" maxlength="300">
+       <input type="text" class="form-control" name="tema" placeholder="" id="tema" maxlength="300">
      </div> <br>
 
      <div class="col-md-2">
 <label class="form-label">Qtd. pessoas presentes ?</label>
-       <input type="number" class="form-control" name="links" placeholder="" id="links" maxlength="300">
+       <input type="number" class="form-control" name="qtdpresentes" placeholder="" id="qtdpresentes" maxlength="300">
      </div> <br>
-     <div class="col-md-5">
-       <input type="hidden" class="form-control" name="cartaz" placeholder="" id="cartaz" value="formulario">
-     </div>
+    
      <div class="col-md-9">
-    <label for="mensagem" class="form-label">Deixe aqui informações Adiconais:</label>
-    <textarea name="mensagem" id="mensagem" class="form-control" rows="8" required></textarea>
+    <label for="mensagem" class="form-label">Descrição das atividades: (Relato das atividades ou eventos realizados durante 
+    o encontro)</label>
+    <textarea name="atividades" id="atividades" class="form-control" rows="8" ></textarea>
+</div><br>
+<div class="col-md-9">
+    <label for="mensagem" class="form-label">Metas alcançadas: (Quais objetivos ou metas foram atingidos.)</label>
+    <textarea name="metas" id="metas" class="form-control" rows="8" ></textarea>
+</div><br>
+<div class="col-md-9">
+    <label for="mensagem" class="form-label">Dificuldades enfrentadas: (Quais desafios ou obstáculos surgiram durante a 
+    execução das atividades.) </label>
+    <textarea name="dificuldades" id="dificuldades" class="form-control" rows="8" ></textarea>
+</div><br>
+<div class="col-md-9">
+    <label for="mensagem" class="form-label">Soluções implementadas: (Estratégias adotadas para superar os problemas 
+    encontrados/ Junto com a Pastora) </label>
+    <textarea name="solucoes" id="solucoes" class="form-control" rows="8" ></textarea>
+</div><br>
+<div class="col-md-12">
+  <label class="form-label">Recursos financeiros: (Quanto foi gasto nas atividades e quais recursos financeiros foram utilizados.)</label>
+  
+  <div id="financeiro-lista">
+    <div class="row mb-2 align-items-center">
+      <div class="col-md-6">
+        <input type="text" name="produto[]" class="form-control" placeholder="Nome do produto" >
+      </div>
+      <div class="col-md-4">
+        <input type="number" name="valor[]" class="form-control" placeholder="Valor (R$)" step="0.01" >
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-success" onclick="adicionarCampo()">
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-9">
+    <label for="mensagem" class="form-label">Recursos humanos: (Número de voluntários ou membros envolvidos no ministério.) </label>
+    <textarea name="recursos" id="recursos" class="form-control" rows="8" ></textarea>
+</div><br>
+<div class="col-md-9">
+    <label for="mensagem" class="form-label">Próximas atividades: (O que está planejado para o próximo período.) </label>
+    <textarea name="proxatividade" id="proxatividade" class="form-control" rows="8" ></textarea>
+</div><br>
+<div class="col-md-9">
+    <label for="mensagem" class="form-label">Impacto no ministério e na igreja: (Como as atividades influenciaram a vida espiritual 
+    dos membros, a comunidade ou o crescimento do ministério.) </label>
+    <textarea name="impacto" id="impacto" class="form-control" rows="8" ></textarea>
 </div><br>
   <div class="col-md-10">
     <button type="submit" name="submitEvento" id="submitEvento" class="btn btn-primary">Enviar</button>
   </div>
   </div>
 </form>
+<script>
+  function adicionarCampo() {
+    const lista = document.getElementById('financeiro-lista');
+    
+    const linha = document.createElement('div');
+    linha.className = 'row mb-2 align-items-center';
+    
+    linha.innerHTML = `
+      <div class="col-md-6">
+        <input type="text" name="produto[]" class="form-control" placeholder="Nome do produto" >
+      </div>
+      <div class="col-md-4">
+        <input type="number" name="valor[]" class="form-control" placeholder="Valor (R$)" step="0.01" >
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-danger" onclick="removerCampo(this)">
+          &minus;
+        </button>
+      </div>
+    `;
+    
+    lista.appendChild(linha);
+  }
 
+  function removerCampo(botao) {
+    botao.closest('.row').remove();
+  }
+</script>
 <script>
     // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
     const tempoLimite = 3600000;

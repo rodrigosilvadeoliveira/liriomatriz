@@ -1,6 +1,4 @@
 
-<?php include("cabecalhoSite.php")?>
-    
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,6 +15,9 @@
     </head>
     </head>
 <body>
+    <div class="cabecalho" id="cabecalhodoSite">
+    <?php include('cabecalhoSite.php');?>
+    </div>
 <br >
 <h1 id="titulonapagina">Ao Vivo na Liro Matriz</h1>
 <div class="video-container">

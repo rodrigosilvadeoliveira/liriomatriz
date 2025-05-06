@@ -1,14 +1,14 @@
 <?php
 // Conexão com o banco de dados (ajuste conforme seu ambiente)
-$host = 'localhost';
-$usuario = 'root';
-$senha = '';
-$banco = 'liriomatriz';
-$conn = new mysqli($host, $usuario, $senha, $banco);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include_once('config.php');
 
 // Verifica a conexão
-if ($conn->connect_error) {
-  die("Erro de conexão: " . $conn->connect_error);
+if ($conexao->connect_error) {
+  die("Erro de conexão: " . $conexao->connect_error);
 }
 
 // Recebendo dados do formulário
@@ -21,7 +21,9 @@ $telefone         = $_POST['telefone'] ?? '';
 $email            = $_POST['email'] ?? '';
 $voluntario       = $_POST['voluntario'] ?? '';
 $lider            = $_POST['lider'] ?? '';
-$departamentoum   = $_POST['departamentoum'] ?? '';
+
+$departamentos = is_array($_POST['departamentoum'] ?? []) ? $_POST['departamentoum'] : [];
+$departamentosString = !empty($departamentos) ? implode(",", $departamentos) : '';
 $departamentodois = $_POST['departamentodois'] ?? '';
 $departamentotres = $_POST['departamentotres'] ?? '';
 $status           = $_POST['status'] ?? '';
@@ -50,15 +52,15 @@ if (!empty($foto_crop)) {
 // Inserindo no banco
 $sql = "INSERT INTO membros (
     nome, sobrenome, nascimento, batizado, datas, telefone, email, 
-    voluntario, lider, departamentoum, departamentodois, departamentotres, 
+    voluntario, lider, departamentos, departamentodois, departamentotres, 
     status, responsavel, foto
 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-$stmt = $conn->prepare($sql);
+$stmt = $conexao->prepare($sql);
 $stmt->bind_param(
   "sssssssssssssss",
   $nome, $sobrenome, $nascimento, $batizado, $datas, $telefone, $email,
-  $voluntario, $lider, $departamentoum, $departamentodois, $departamentotres,
+  $voluntario, $lider, $departamentosString, $departamentodois, $departamentotres,
   $status, $responsavel, $foto_nome
 );
 
@@ -69,5 +71,5 @@ if ($stmt->execute()) {
 }
 
 $stmt->close();
-$conn->close();
+$conexao->close();
 ?>
