@@ -2,7 +2,7 @@
 <?php
 include('verificarLogin.php');
 verificarLogin();
-
+include('verifica_permissao.php');
 include_once('config.php');
    // print_r($_SESSION);
     if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)

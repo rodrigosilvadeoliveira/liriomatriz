@@ -3,6 +3,7 @@
 include('verificarLogin.php');
 verificarLogin();
 //session_start();
+include('verifica_permissao.php');
 include_once('config.php');
    // print_r($_SESSION);
     if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
@@ -76,12 +77,9 @@ header('Location: cadastroForm.php');
 <?php
     echo "<h1 id='BemVindo'>Cadastrar Formulário no Site</h1>";
 ?>
-<div class="produtos-container">
-<a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros_busca.php">Pesquisa Membro(a)</a>
-<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
-</div>
+  <div class="navegacao">
+   <?php include("navegacao.php")?>
+   </div>
 <fieldset class="boxformulariodoSite">
     <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroForm.php" method="POST" enctype="multipart/form-data">
     

@@ -2,7 +2,7 @@
 <?php
 include('verificarLogin.php');
 verificarLogin();
-
+include('verifica_permissao.php');
 include_once('config.php');
 
 if(!empty($_GET['id']))

@@ -1,11 +1,13 @@
 {
-    "name":"Liriomakes/spreadsheet",
+    "name":"liriomatriz/spreadsheet",
     "autoload":{
         "psr-4": {
             "App\\":"app/"
         }
     },
     "require": {
-        "phpoffice/phpspreadsheet": "^1.29"
+        "phpoffice/phpspreadsheet": "^1.29",
+        "dompdf/dompdf": "^3.1",
+        "masterminds/html5": "^2.9"
     }
 }

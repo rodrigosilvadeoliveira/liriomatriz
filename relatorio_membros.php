@@ -6,13 +6,7 @@ require __DIR__.'/vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-$dbHost = 'localhost';
-$dbUsername = 'root';
-$dbPassword = '';
-$dbName = 'liriomatriz';
-
-// Estabelecer a conexão com o banco de dados
-$conexao = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+include_once('config.php');
 
 $sql = "SELECT * FROM membros";
 
@@ -34,9 +28,7 @@ $sheet->setCellValue('F1', 'Telefone');
 $sheet->setCellValue('G1', 'Email');
 $sheet->setCellValue('H1', 'Voluntário');
 $sheet->setCellValue('I1', 'Lider');
-$sheet->setCellValue('J1', 'departamento1');
-$sheet->setCellValue('K1', 'departamentodo2');
-$sheet->setCellValue('L1', 'departamento3');
+$sheet->setCellValue('J1', 'departamentos');
 $sheet->setCellValue('M1', 'Status');
 $sheet->setCellValue('N1', 'Idade');
 $sheet->setCellValue('O1', 'Responsavel');
@@ -90,9 +82,7 @@ if ($result) {
     $sheet->setCellValue('G' . $row, $row_data['email']);
     $sheet->setCellValue('H' . $row, $row_data['voluntario']);
     $sheet->setCellValue('I' . $row, $row_data['lider']);
-    $sheet->setCellValue('J' . $row, $row_data['departamentoum']);
-    $sheet->setCellValue('K' . $row, $row_data['departamentodois']);
-    $sheet->setCellValue('L' . $row, $row_data['departamentotres']);
+    $sheet->setCellValue('J' . $row, $row_data['departamentos']);
     $sheet->setCellValue('M' . $row, $row_data['status']);
     $sheet->setCellValue('N' . $row, $row_data['idade']);
     $sheet->setCellValue('O' . $row, $row_data['responsavel']);

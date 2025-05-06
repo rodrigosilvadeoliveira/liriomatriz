@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+date_default_timezone_set('America/Sao_Paulo');
 if (isset($_POST['submit']) && !empty($_POST['usuario']) && !empty($_POST['senha'])) {
     include_once('config.php');
     $usuario = $_POST['usuario'];
@@ -23,35 +23,36 @@ if (isset($_POST['submit']) && !empty($_POST['usuario']) && !empty($_POST['senha
         $_SESSION['usuario'] = $usuario;
         $_SESSION['senha'] = $senha;
         $_SESSION['nivel_acesso'] = $row['nivel_acesso'];
+        $_SESSION['nome'] = $row['nome'];
 // REGISTRA O LOGIN NO LOG
 $data_login = date('Y-m-d'); // formato: 2025-04-21
 $hora_login = date('H:i:s'); // formato: 14:30:05
 
-$logSql = "INSERT INTO log_login (usuario, nivel_acesso, data_login, hora_login) VALUES (?, ?, ?, ?)";
+$logSql = "INSERT INTO log_login (usuario, nome, nivel_acesso, data_login, hora_login) VALUES (?, ?, ?, ?, ?)";
 $logStmt = $conexao->prepare($logSql);
-$logStmt->bind_param("ssss", $usuario, $row['nivel_acesso'], $data_login, $hora_login);
+$logStmt->bind_param("sssss", $usuario, $row['nome'], $row['nivel_acesso'], $data_login, $hora_login);
 $logStmt->execute();
 
 
         // Redireciona com base no perfil
         switch ($row['nivel_acesso']) {
             case 'admin':
-                header('Location: vendas.php');
+                header('Location: vendas');
                 break;
             case 'voluntario':
-                header('Location: vendasVol.php');
+                header('Location: vendasVol');
                 break;
             case 'secretaria':
-                header('Location: cadastroMembrosAdm.php');
+                header('Location: cadastroMembrosAdm');
                 break;
             case 'midia':
-                header('Location: cadastroEvento.php');
+                header('Location: cadastroEvento');
                 break;
             case 'master':
-                header('Location: formularioMaster.php');
+                header('Location: formularioMaster');
                 break;
             default:
-                header('Location: acesso_negado.php');
+                header('Location: acesso_negado');
                 break;
         }
         exit();
