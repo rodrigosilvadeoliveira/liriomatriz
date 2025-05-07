@@ -1,8 +1,11 @@
 <?php
-// verifica_permissao.php
+session_start();
 include_once('config.php');
-// Verifica se o perfil do usuário está definido na sessão
+
 $perfil = $_SESSION['nivel_acesso'] ?? '';
+
+// Pega a página atual em letras minúsculas
+$paginaAtual = strtolower(basename($_SERVER['PHP_SELF']));
 
 // Define as permissões de acesso por página
 $permissoes = [
@@ -49,13 +52,9 @@ $permissoes = [
 ];
 
 // Obtém o nome da página atual
-$paginaAtual = basename($_SERVER['PHP_SELF']);
-echo "Página atual: " . basename($_SERVER['PHP_SELF']);
-// Verifica se a página tem restrições e se o usuário tem permissão
 if (isset($permissoes[$paginaAtual])) {
     if (!in_array($perfil, $permissoes[$paginaAtual])) {
-        // Redireciona para uma página de acesso negado
-        header("Location: acesso_negado.php");
+        header("Location: acesso_negadoperfil.php");
         exit;
     }
 }
