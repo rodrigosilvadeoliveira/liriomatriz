@@ -49,7 +49,7 @@ execução das atividades.):</strong> {$rel['dificuldades']}</p>
 <p><strong>Soluções implementadas: (Estratégias adotadas para superar os problemas 
 encontrados/ Junto com a Pastora):</strong> {$rel['solucoes']}</p>
 <p><strong>Recursos materiais: Materiais necessários (como equipamentos, espaço, materiais gráficos, 
-alimentos, etc.):</strong> {$rel['materias']}</p>
+alimentos, etc.):</strong> {$rel['materiais']}</p>
 <p><strong>Recursos humanos: (Número de voluntários ou membros envolvidos no ministério.):</strong> {$rel['recursos']}</p>
 <p><strong>Próximas atividades: (O que está planejado para o próximo período.):</strong> {$rel['proxatividade']}</p>
 <p><strong>mpacto no ministério e na igreja: (Como as atividades influenciaram a vida espiritual 

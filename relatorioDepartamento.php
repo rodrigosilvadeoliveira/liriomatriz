@@ -165,7 +165,7 @@
 <div class="col-md-9">
     <label for="mensagem" class="form-label">Recursos materiais: Materiais necessários (como equipamentos, espaço, materiais gráficos, 
     alimentos, etc.) </label>
-    <textarea name="materias" id="materias" class="form-control" rows="8" ></textarea>
+    <textarea name="materiais" id="materiais" class="form-control" rows="8" ></textarea>
 </div><br>
 
 <div class="col-md-12">
