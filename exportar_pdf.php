@@ -33,8 +33,8 @@ if (file_exists($imgPath)) {
 
 $html = "
 <img src='$logoSrc' style='width: 150px;'><br>
-<h2>Relatório ID #{$rel['id']}</h2>
-<p><strong>Departamento:</strong> {$rel['departamento']}</p>
+<h2><strong>Relatório do Departamento:</strong> {$rel['departamento']}</h2>
+
 <p><strong>Liderança:</strong> {$rel['lideranca']}</p>
 <p><strong>Evento:</strong> {$rel['evento']}</p>
 <p><strong>Data:</strong> {$rel['data']}</p>

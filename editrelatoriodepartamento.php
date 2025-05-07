@@ -1,65 +1,41 @@
-<?php include("cabecalhoIgreja.php")?>
+<?php include("cabecalhoIgreja.php") ?>
 <?php
+// session_start();
 // include('verificarLogin.php');
+ include_once('config.php');
 // verificarLogin();
-//session_start();
-// include_once('config.php');
-   // print_r($_SESSION);
-//     if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
-//     {
-//       unset($_SESSION['usuario']);
-//       unset($_SESSION['senha']);
-//       header('Location: login.php');
-      
-//     }$logado = $_SESSION['usuario'];
-//     if(!empty($_GET['search']))
-//     {
-//         $data = $_GET['search'];
-//         $sql = "SELECT * FROM evento WHERE imagem LIKE '%$data%' or produto LIKE '%$data%' or modelo LIKE '%$data%' or categoria LIKE '%$data%' ORDER BY id DESC";
-//     }
-//     else
-//     {
-//       $sql = "SELECT * FROM evento WHERE cartaz= 'formulario' ORDER BY id DESC";
-//     }
-//     $result = $conexao->query($sql);
 
-//     if(isset($_POST['submitAdm']))
-// {
-// include_once("config.php");
-
-// // Insira as informações da compra no banco de dados
-// // Data e hora atual
-
-// if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
-//   $imagem = "./img/".$_FILES["imagem"]["name"];
-//   move_uploaded_file($_FILES["imagem"]["tmp_name"] ,$imagem);
-// }else{
-//   $imagem = "";
+// if ((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
+//     unset($_SESSION['usuario']);
+//     unset($_SESSION['senha']);
+//     header('Location: login.php');
 // }
-// $result = mysqli_query($conexao, "INSERT INTO evento(imagem) 
-// VALUES ('$imagem')");
+// $logado = $_SESSION['usuario'];
 
-// header('Location: cadastroForm.php');
-// }
+// Buscar dados existentes
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if ($id <= 0) {
+    header('Location: listaEventos.php');
+    exit;
+}
 
-// if(isset($_POST['submitEvento']))
-// {
-// include_once("config.php");
+$sql = "SELECT * FROM relatorios WHERE id = $id";
+$result = mysqli_query($conexao, $sql);
+$evento = mysqli_fetch_assoc($result);
 
-// // Insira as informações da compra no banco de dados
-// // Data e hora atual
-// // $cartaz = isset($_POST['cartaz']) ? $_POST['cartaz'] : null;
-// $cartaz = $_POST['cartaz'];
-// $inscricao = $_POST['inscricao'];
-// $links = $_POST['links'];
-// $inicio = $_POST['inicio'];
-// $fim = $_POST['fim'];
+if (!$evento) {
+    echo "Evento não encontrado.";
+    exit;
+}
+////////////////////////////////////////////
+$id = $_GET['id']; // ou $_POST, dependendo de como chega
 
-// $result = mysqli_query($conexao, "INSERT INTO evento(imagem,cartaz,inscricao,links,inicio,fim) 
-// VALUES ('$imagem','$cartaz','$inscricao','$links','$inicio','$fim')");
-
-// header('Location: cadastroForm.php');
-// }
+// Consulta os itens relacionados
+$sqlItens = "SELECT * FROM relatorio_itens WHERE relatorio_id = $id";
+$resultItens = mysqli_query($conexao, $sqlItens);
+$itens = mysqli_fetch_all($resultItens, MYSQLI_ASSOC);
+///////////////////////////////////////////////
+// Atualização do evento
 ?>
      
 <!DOCTYPE html>
@@ -78,18 +54,18 @@
 ?>
 
 
-    <form id="insert_form" class="row g-3" name="realoriodep" action="salvar_realoriodep.php" method="POST" enctype="multipart/form-data">
+    <form id="insert_form" class="row g-3" name="realoriodep" action="salvar_editrealoriodep.php" method="POST" enctype="multipart/form-data">
     <div class="dadoscontato">
-      <h1>Relatorio Departamento</h1>
+      <h1>Alterar Relatorio</h1>
     
-  
+      <input type="hidden" name="id" value="<?= $evento['id'] ?>">
       <!-- <label class="nomedoCampo">Imagem: *</label> -->
       
       <div class="col-md-2">
     <label for="inputState" class="form-label">*Departamento</label>
     <br>
-    <select id="departamento" class="form-select" name="departamento" required>
-    <option value="">Selecione</option>
+    <select id="departamento" class="form-select" name="departamento"required>
+    <option value="<?= htmlspecialchars($evento['departamento']) ?>"><?= htmlspecialchars($evento['departamento']) ?></option>
     <option value="Arena">Arena</option>
         <option value="Lirioplay">Lirio Play</option>
         <option value="Mergulhar">Mergulhar</option>
@@ -116,68 +92,69 @@
 </div>
 <div class="col-md-5">
 <label class="form-label">Liderança</label>
-       <input type="text" class="form-control" name="lideranca" placeholder="" id="lideranca" maxlength="300" required>
+       <input type="text" class="form-control" name="lideranca" placeholder="" id="lideranca" maxlength="300" value="<?= htmlspecialchars($evento['lideranca']) ?>" required>
      </div> <br>
 
      <div class="col-md-5">
 <label class="form-label">Qual foi evento ou programação</label>
-       <input type="text" class="form-control" name="evento" placeholder="" id="evento" maxlength="300" required>
+       <input type="text" class="form-control" name="evento" placeholder="" id="evento" maxlength="300" value="<?= htmlspecialchars($evento['evento']) ?>" required>
      </div> <br>
      <div class="col-md-5">
 <label class="form-label">Data:</label>
-       <input type="date" class="form-control" name="data" placeholder="" id="data" required>
+       <input type="date" class="form-control" name="data" placeholder="" id="data" value="<?= htmlspecialchars($evento['data']) ?>" required>
      </div> <br>
      <div class="col-md-5">
 <label class="form-label">Tema Apresentado</label>
-       <input type="text" class="form-control" name="tema" placeholder="" id="tema" maxlength="300">
+       <input type="text" class="form-control" name="tema" placeholder="" id="tema" value="<?= htmlspecialchars($evento['tema']) ?>" maxlength="300">
      </div> <br>
 
      <div class="col-md-2">
 <label class="form-label">Qtd. pessoas presentes ?</label>
-       <input type="number" class="form-control" name="qtdpresentes" placeholder="" id="qtdpresentes" maxlength="300">
+       <input type="number" class="form-control" name="qtdpresentes" placeholder="" id="qtdpresentes" value="<?= htmlspecialchars($evento['qtdpresentes']) ?>" maxlength="300">
        <label class="form-label">Pessoas/Casais</label>
        <select id="pessoas" class="form-select" name="pessoas" required>
-    <option value="">Selecione</option>
+    <option value="<?= htmlspecialchars($evento['pessoas']) ?>"><?= htmlspecialchars($evento['pessoas']) ?></option>
     <option value="Pessoas">Pessoas</option>
         <option value="Casais">Casais</option>
         </select>
         </div>
-     <div class="col-md-9">
+        <div class="col-md-9">
     <label for="mensagem" class="form-label">Descrição das atividades: (Relato das atividades ou eventos realizados durante 
     o encontro)</label>
-    <textarea name="atividades" id="atividades" class="form-control" rows="8" ></textarea>
+    <textarea name="atividades" id="atividades" class="form-control" rows="8"><?= htmlspecialchars($evento['atividades']) ?></textarea>
 </div><br>
+
 <div class="col-md-9">
     <label for="mensagem" class="form-label">Metas alcançadas: (Quais objetivos ou metas foram atingidos.)</label>
-    <textarea name="metas" id="metas" class="form-control" rows="8" ></textarea>
+    <textarea name="metas" id="metas" class="form-control" rows="8" ><?= htmlspecialchars($evento['metas']) ?></textarea>
 </div><br>
 <div class="col-md-9">
     <label for="mensagem" class="form-label">Dificuldades enfrentadas: (Quais desafios ou obstáculos surgiram durante a 
     execução das atividades.) </label>
-    <textarea name="dificuldades" id="dificuldades" class="form-control" rows="8" ></textarea>
+    <textarea name="dificuldades" id="dificuldades" class="form-control" rows="8"><?= htmlspecialchars($evento['dificuldades']) ?></textarea>
 </div><br>
 <div class="col-md-9">
     <label for="mensagem" class="form-label">Soluções implementadas: (Estratégias adotadas para superar os problemas 
     encontrados/ Junto com a Pastora) </label>
-    <textarea name="solucoes" id="solucoes" class="form-control" rows="8" ></textarea>
+    <textarea name="solucoes" id="solucoes" class="form-control" rows="8" ><?= htmlspecialchars($evento['solucoes']) ?></textarea>
 </div><br>
 
 <div class="col-md-9">
     <label for="mensagem" class="form-label">Recursos materiais: Materiais necessários (como equipamentos, espaço, materiais gráficos, 
     alimentos, etc.) </label>
-    <textarea name="materiais" id="materiais" class="form-control" rows="8" ></textarea>
+    <textarea name="materiais" id="materiais" class="form-control" rows="8"><?= htmlspecialchars($evento['materiais']) ?></textarea>
 </div><br>
 
 <div class="col-md-12">
   <label class="form-label">Recursos financeiros: (Quanto foi gasto nas atividades e quais recursos financeiros foram utilizados.)</label>
-  
+
   <div id="financeiro-lista">
-    <div class="row mb-2 align-items-center">
-      <div class="col-md-6">
-        <input type="text" name="produto[]" class="form-control" placeholder="Nome do produto" >
-      </div>
-      
-      <div class="col-md-4">
+    <?php foreach ($itens as $item): ?>
+      <div class="row mb-2 align-items-center">
+        <div class="col-md-6">
+          <input type="text" name="produto[]" class="form-control" value="<?= htmlspecialchars($item['nome_produto']) ?>" placeholder="Nome do produto">
+        </div>
+        <div class="col-md-4">
           <input type="number" name="valor[]" class="form-control" value="<?= htmlspecialchars($item['valor']) ?>" placeholder="Valor (R$)" step="0.01">
         </div>
         <div class="col-md-2">
@@ -186,7 +163,7 @@
           </button>
         </div>
       </div>
-   
+    <?php endforeach; ?>
   </div>
 
   <!-- Botão para adicionar -->
@@ -226,19 +203,19 @@ function removerCampo(botao) {
 
 <div class="col-md-9">
     <label for="mensagem" class="form-label">Recursos humanos: (Número de voluntários ou membros envolvidos no ministério.) </label>
-    <textarea name="recursos" id="recursos" class="form-control" rows="8" ></textarea>
+    <textarea name="recursos" id="recursos" class="form-control" rows="8" ><?= htmlspecialchars($evento['recursos']) ?></textarea>
 </div><br>
 <div class="col-md-9">
     <label for="mensagem" class="form-label">Próximas atividades: (O que está planejado para o próximo período.) </label>
-    <textarea name="proxatividade" id="proxatividade" class="form-control" rows="8" ></textarea>
+    <textarea name="proxatividade" id="proxatividade" class="form-control" rows="8"><?= htmlspecialchars($evento['proxatividade']) ?></textarea>
 </div><br>
 <div class="col-md-9">
     <label for="mensagem" class="form-label">Impacto no ministério e na igreja: (Como as atividades influenciaram a vida espiritual 
     dos membros, a comunidade ou o crescimento do ministério.) </label>
-    <textarea name="impacto" id="impacto" class="form-control" rows="8" ></textarea>
+    <textarea name="impacto" id="impacto" class="form-control" rows="8"><?= htmlspecialchars($evento['impacto']) ?></textarea>
 </div><br>
   <div class="col-md-10">
-    <button type="submit" name="submitEvento" id="submitEvento" class="btn btn-primary">Enviar</button>
+    <button type="submit" name="submitEvento" id="submitEvento" class="btn btn-primary">Atualizar</button>
   </div>
   </div>
 </form>

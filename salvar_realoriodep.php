@@ -46,7 +46,7 @@ for ($i = 0; $i < count($produtos); $i++) {
   $valor = floatval($valores[$i]);
   
   if ($stmtItem->execute()) {
-    echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href='relatorioDepartamento.php';</script>";
+    echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href='listar_relatoriosdep.php';</script>";
   } else {
     echo "Erro ao cadastrar: " . $stmt->error;
   }
