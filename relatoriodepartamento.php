@@ -176,17 +176,54 @@
       <div class="col-md-6">
         <input type="text" name="produto[]" class="form-control" placeholder="Nome do produto" >
       </div>
+      
       <div class="col-md-4">
-        <input type="number" name="valor[]" class="form-control" placeholder="Valor (R$)" step="0.01" >
+          <input type="number" name="valor[]" class="form-control" value="<?= htmlspecialchars($item['valor']) ?>" placeholder="Valor (R$)" step="0.01">
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-danger" onclick="removerCampo(this)">
+            &minus;
+          </button>
+        </div>
+      </div>
+   
+  </div>
+
+  <!-- Botão para adicionar -->
+  <button type="button" class="btn btn-success mt-2" onclick="adicionarCampo()">
+    + Adicionar item
+  </button>
+
+  <!-- Template oculto -->
+  <div id="template-financeiro" style="display: none;">
+    <div class="row mb-2 align-items-center">
+      <div class="col-md-6">
+        <input type="text" name="produto[]" class="form-control" placeholder="Nome do produto">
+      </div>
+      <div class="col-md-4">
+        <input type="number" name="valor[]" class="form-control" placeholder="Valor (R$)" step="0.01">
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-success" onclick="adicionarCampo()">
-          +
+        <button type="button" class="btn btn-danger" onclick="removerCampo(this)">
+          &minus;
         </button>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+function adicionarCampo() {
+  const template = document.querySelector('#template-financeiro').innerHTML;
+  const container = document.querySelector('#financeiro-lista');
+  container.insertAdjacentHTML('beforeend', template);
+}
+
+function removerCampo(botao) {
+  botao.closest('.row').remove();
+}
+</script>
+
 <div class="col-md-9">
     <label for="mensagem" class="form-label">Recursos humanos: (Número de voluntários ou membros envolvidos no ministério.) </label>
     <textarea name="recursos" id="recursos" class="form-control" rows="8" ></textarea>
