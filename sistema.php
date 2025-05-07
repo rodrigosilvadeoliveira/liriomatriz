@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <meta charset="=UTF-8">
+    <head>
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Login Adm</title>
+
+    <!-- Estilos -->
     <link rel="stylesheet" href="style.css">
-   
+
+    <!-- Ícone para aba do navegador -->
+    <link rel="icon" href="icons/icon-192.png" type="image/png">
+
+    <!-- Manifesto PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0d6efd">
 </head>
+
 <body>
 <img id="logo" src ="lirioMatriz_preto.png">
 <div>
@@ -41,6 +52,11 @@
     setTimeout(() => {
         window.location.href = "sistema.php?timeout=1"; 
     }, tempoLimite);
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js');
+  }
 </script>
 
 </body>

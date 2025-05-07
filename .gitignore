@@ -1,6 +1,6 @@
 # Ignorar arquivos de configuração sensíveis
 config.php
 configUser.php
-
+calculoMembros.php
 # Ignorar pasta de uploads de arquivos
 /uploads/
