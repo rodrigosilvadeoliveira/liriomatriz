@@ -400,17 +400,18 @@ display: none;
     font-size: 40px;
 
 }
-#incluirCadastro{
+.butnavegacao{
     margin-left: 15px;
-    background-image: linear-gradient(to right, rgb(172, 16, 130), rgb(90,20,220));
+    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
     width: auto;
     border: none;
     padding: 10px;
     color: white;
-    font-size: 15px;
+    font-size: 20px;
     cursor: pointer;
     border-radius: 10px;  
     align-items: flex-start;
+    text-decoration: none;
 }
 #menuHeader{
     margin-left: 15px;
@@ -423,6 +424,7 @@ display: none;
     cursor: pointer;
     border-radius: 10px;  
     align-items: flex-start;
+    text-decoration: none;
 }
 #cons_Adm{
     margin-left: 15px;
@@ -443,6 +445,7 @@ display: none;
 margin-top: 1.5%;
 margin-left: 1%;
 padding-right: 2%;
+overflow: auto;
 }
 #tabelaTotal{
     margin-top: 1.5%;
@@ -598,7 +601,7 @@ padding-right: 2%;
     width: 100%;
     max-width: 100%;
     overflow: auto;
-    margin-top: 2%;
+    margin-top: 1%;
     margin-left: 1%;
     overflow-x: auto; /* Adiciona rolagem lateral */
     white-space: nowrap;
@@ -1166,7 +1169,7 @@ video {
          }
          
           #logoLiriocabecalhoMobile{
-        width: 20%;
+        width: 17%;
         height: 20%;
          }
          .navbar-toggler{
@@ -1296,7 +1299,10 @@ video {
     #cabecalho{
         display: none;
     }
-
+#logoLiriocabecalhoMobile{
+        width: 26%;
+        height: 20%;
+}
  .tela-login{
         margin-top: 3%;
         width: 39%;
@@ -1374,7 +1380,7 @@ video {
         margin-left: 10%;
     }
     .produtos-container {
-        margin-top: 1%;   
+        margin-top: 0%;   
         margin-left: 2%;
     }
     .modal-body.text-center{

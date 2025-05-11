@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include_once('config.php');
 
 $perfil = $_SESSION['nivel_acesso'] ?? '';
@@ -46,7 +46,7 @@ $permissoes = [
     'edit_formularioMembros.php' => ['secretaria', 'master'],
     'cadastroEvento.php' => ['midia', 'master'],
     'cadastroevento.php' => ['midia', 'master'],
-
+'cadastrolive' => ['midia', 'master']
     
     
 ];

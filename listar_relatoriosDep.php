@@ -1,11 +1,17 @@
-<?php include("cabecalhoMembros.php")?>
+<?php include("cabecalhoigreja.php")?>
 <?php
-
-
+ include('verificarLogin.php');
+ verificarLogin();
 //session_start();
-include_once('config.php');
-   // print_r($_SESSION);
-    
+ include_once('config.php');
+
+     if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
+ {
+       unset($_SESSION['usuario']);
+       unset($_SESSION['senha']);
+       header('Location: login.php');
+      
+     }$logado = $_SESSION['usuario'];
 
 if ($conexao->connect_error) {
     die("Erro: " . $conexao->connect_error);
@@ -29,7 +35,11 @@ $result = $conexao->query($sql);
 <?php
     echo "<h1 id='BemVindo'>Bem vinda Pastora</u><p>Relatório Departamentos</p></h1>";
 ?>
+
 <br><br><br>
+<div class="navegacao">
+   <?php include("navegacao.php")?>
+   </div>
   <h2>Relatórios cadastrados</h2>
   <table class="table table-bordered table-hover">
     <thead class="table-dark">
