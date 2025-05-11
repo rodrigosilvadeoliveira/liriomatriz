@@ -1,0 +1,166 @@
+<?php include("cabecalhoIgreja.php")?>
+<?php
+include('verificarLogin.php');
+verificarLogin();
+//session_start();
+include('verifica_permissao.php');
+include_once('config.php');
+   // print_r($_SESSION);
+    if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
+    {
+      unset($_SESSION['usuario']);
+      unset($_SESSION['senha']);
+      header('Location: login.php');
+      
+    }$logado = $_SESSION['usuario'];
+    if(!empty($_GET['search']))
+    {
+        $data = $_GET['search'];
+        $sql = "SELECT * FROM evento WHERE imagem LIKE '%$data%' or produto LIKE '%$data%' or modelo LIKE '%$data%' or categoria LIKE '%$data%' ORDER BY id DESC";
+    }
+    else
+    {
+      $sql = "SELECT * FROM evento WHERE cartaz IN ('live') ORDER BY id DESC";
+
+
+    }
+    $result = $conexao->query($sql);
+
+
+if(isset($_POST['submitEvento']))
+{
+include_once("config.php");
+
+// Insira as informações da compra no banco de dados
+// Data e hora atual
+// $cartaz = isset($_POST['cartaz']) ? $_POST['cartaz'] : null;
+$cartaz = $_POST['cartaz'];
+$links = $_POST['links'];
+$nomeevento = $_POST['nomeevento'];
+
+$result = mysqli_query($conexao, "INSERT INTO evento(cartaz,links,nomeevento) 
+VALUES ('$cartaz','$links','$nomeevento')");
+
+header('Location: cadastrolive.php');
+}
+?>
+     
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Cadastro Live</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <br><br><br>
+<?php
+    echo "<h1 id='BemVindo'>Cadastrar Live no Site</h1>";
+?>
+<div  class="diaHoje">
+        <p type="hidden" class="date">
+            <?php
+                // Configura o fuso horário
+                date_default_timezone_set('America/Sao_Paulo');
+                
+                // Obtém a data atual no formato desejado
+                echo date('d/m/Y');
+            ?>
+<div class="navegacao">
+   <?php include("navegacao.php")?>
+   </div>
+<fieldset class="boxformulariodoSite" style="width:99%">
+    <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastrolive.php" method="POST" enctype="multipart/form-data">
+    
+      <h1>Cadastro Live</h1>
+    
+  
+      <!-- <label class="nomedoCampo">Imagem: *</label> -->
+      
+      <div class="col-md-5">
+    <label for="inputState" class="form-label">*Cadastro Live</label>
+    <br>
+    <select id="cartaz" class="form-select" name="cartaz" required>
+        <option value="live">Live</option>
+        
+    </select>
+</div>
+<br>
+  
+     <div class="col-md-5">
+<label class="form-label">Nome do Evento:</label>
+       <input type="text" class="form-control" name="nomeevento" placeholder="" id="nomeevento" maxlength="30">
+     </div> <br>
+
+     <div class="col-md-5">
+<label class="form-label">Informe Link se tiver:</label>
+       <input type="text" class="form-control" name="links" placeholder="" id="links" maxlength="50">
+     </div> <br>
+
+ 
+    <button type="submit" name="submitEvento" id="submitEvento" class="btn btn-primary" style="width: 20%; height: 10%; margin-top: 5%">Enviar</button>
+
+  
+</form>
+</fieldset>
+<table class="table" id="tabelaLista" style="width: 99%;">
+  <thead>
+    <tr>
+    <th scope="col">#</th>
+      
+      <th scope="col">Nome do Evento</th>
+      
+      <th scope="col">Links</th>
+      
+      <th scope="col">......</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php
+        while($user_data = mysqli_fetch_assoc($result))
+        {
+            echo "<tr>";
+            echo "<td>" .$user_data['id']. "</td>";
+            
+            
+            echo "<td>".$user_data['nomeevento']."</td>";
+            
+            echo "<td>".$user_data['links']."</td>";
+            
+            echo "<td> 
+            
+            <a class='btn btn-sm btn-danger' href='deletelive.php?id=$user_data[id]' title='Deletar'>
+                <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>
+                    <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
+                </svg>
+            </a>
+</td>";
+            echo "</tr>";
+
+        }
+
+
+
+  ?>
+    
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<script>
+    // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
+    const tempoLimite = 3600000;
+
+    // Redireciona para logout após o tempo limite
+    setTimeout(() => {
+        window.location.href = "sistema.php?timeout=1"; 
+    }, tempoLimite);
+</script>
+
+</body>
+
+
+</html>

@@ -1,4 +1,4 @@
-<?php include("cabecalhoIgreja.php")?>
+<?php include("cabecalhoigreja.php")?>
 <?php
 include('verificarLogin.php');
 verificarLogin();
@@ -21,14 +21,9 @@ include('verifica_permissao.php');
 <?php
     echo "<h1 id='BemVindo'>Acesso Master</h1>";
 ?>
-<div class="produtos-container">
-<a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros_busca.php">Pesquisa Membro(a)</a>
-<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
-<a id="incluirCadastro" href="consulta_logs.php" value="Novo Cadastro">Log</a>
-<a id="incluirCadastro" href="formularioMaster.php" value="Novo Cadastro">Cadastro Acesso</a>
-</div>
+<div class="navegacao">
+   <?php include("navegacao.php")?>
+   </div>
 <fieldset class="boxformularioMembrosAdm">
     <form class="row g-3" action="enviarcadastroadm.php" method="POST">
       <h1>Cadastro Usuarios</h1>

@@ -1,17 +1,17 @@
-<?php include("cabecalhoIgreja.php")?>
+<?php include("cabecalhoigreja.php")?>
 <?php
-// include('verificarLogin.php');
-// verificarLogin();
+ include('verificarLogin.php');
+ verificarLogin();
 //session_start();
-// include_once('config.php');
-   // print_r($_SESSION);
-//     if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
-//     {
-//       unset($_SESSION['usuario']);
-//       unset($_SESSION['senha']);
-//       header('Location: login.php');
+ include_once('config.php');
+// print_r($_SESSION);
+     if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
+ {
+       unset($_SESSION['usuario']);
+       unset($_SESSION['senha']);
+       header('Location: login.php');
       
-//     }$logado = $_SESSION['usuario'];
+     }$logado = $_SESSION['usuario'];
 //     if(!empty($_GET['search']))
 //     {
 //         $data = $_GET['search'];
@@ -68,7 +68,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Inscrição</title>
+    <title>Lirio Matriz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -77,6 +77,9 @@
     echo "<h1 id='BemVindo'>Relatório de Atividades</h1>";
 ?>
 
+<div class="navegacao">
+   <?php include("navegacao.php")?>
+   </div>
 
     <form id="insert_form" class="row g-3" name="realoriodep" action="salvar_realoriodep.php" method="POST" enctype="multipart/form-data">
     <div class="dadoscontato">

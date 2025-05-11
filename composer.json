@@ -8,6 +8,7 @@
     "require": {
         "phpoffice/phpspreadsheet": "^1.29",
         "dompdf/dompdf": "^3.1",
-        "masterminds/html5": "^2.9"
+        "masterminds/html5": "^2.9",
+        "phpmailer/phpmailer": "^6.10"
     }
 }

@@ -92,13 +92,9 @@ header('Location: cadastroEvento.php');
                 // Obtém a data atual no formato desejado
                 echo date('d/m/Y');
             ?>
-       <div id="tabelaSite">
-<div class="produtos-container">
-
-<a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
-
-</div>
-</div>
+<div class="navegacao">
+   <?php include("navegacao.php")?>
+   </div>
 <fieldset class="boxformulariodoSite">
     <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroEvento.php" method="POST" enctype="multipart/form-data">
     
