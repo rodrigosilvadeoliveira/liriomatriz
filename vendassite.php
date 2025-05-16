@@ -10,7 +10,7 @@ if (!isset($_SESSION['carrinho'])) {
 
 }
 
-$sql = "SELECT * FROM vendasprodutos WHERE modelo = 'panqueca' ORDER BY id DESC";
+$sql = "SELECT * FROM vendasprodutos WHERE estoque = 'sim' ORDER BY id ASC";
 $result = $conexao->query($sql);
 
 // Função para adicionar um produto ao carrinho
@@ -86,7 +86,7 @@ if (isset($_POST['id'])) {
                 echo '<img class="imagens" src="' . $produtoNoCarrinho['imagem'] . '">';
                 echo '<div class="produto-info">';
                 echo '<b>' . $produtoNoCarrinho['produto'] . '</b>';
-                echo '<p>' . $produtoNoCarrinho['modelo'] . ' - ' . $produtoNoCarrinho['caracteristicas'] . '</p>';
+                echo '<p>' . $produtoNoCarrinho['modelo'] .  '</p>';
                 echo '<p>SKU ' . $produtoNoCarrinho['id'] . '</p>';
                 echo '<p>R$ ' . $produtoNoCarrinho['valordevenda'] . '</p>';
                 echo '<form action="carrinho.php" method="post">';

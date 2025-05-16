@@ -27,14 +27,26 @@ include_once('config.php');
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     <script src="bootstrap.min.js"></script>
-</head>
+    </head>
+
 <body>
+    <div class="cabecalho" id="cabecalhodoSite">
+    <?php include('cabecalhoMembros.php');?>
+    </div>
 
 <br><br><br>
    
 <?php
     echo "<h1 id='BemVindoVendas'>Consulta de Vendas das Panquecas</h1>";
 ?>
+
+<div id="tabelaSite">
+<div class="produtos-container">
+        <a id="btncadastroadm" class="butnavegacao"href="vendasrealizadaspanquecas.php">Relatorio de vendas</a>
+        <a id="btncadastroadm" class="butnavegacao"href="consultaPedidoentregues.php">Pedidos entregues</a>
+        <a id="btncadastroadm" class="butnavegacao"href="consultaPedido.php">Pedidos Pendentes</a>
+        </div>
+        </div>
 
 <div>
     <!-- Botão para acionar a geração do arquivo Excel de toda consulta da pagina

@@ -658,6 +658,11 @@ overflow: auto;
     
     
 }
+.imgvoluntariado{
+    width: 80%;
+    height: 80%;
+    margin-left: 7%;
+}
 .linkredirect {
     width: 90%;
     max-width: 200px;
