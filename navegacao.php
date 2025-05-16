@@ -56,9 +56,13 @@ if (!empty($_GET['search'])) {
     
     <?php if (in_array($perfil, ['midia', 'master'])): ?>
          <a id="btnsiteimg" class="butnavegacao"href="cadastroEvento">Site imagens</a>
+        
+    <?php endif; ?>
+
+    <?php if (in_array($perfil, ['live', 'master'])): ?>
          <a id="btnsiteimg" class="butnavegacao"href="cadastrolive">Site Live</a>
     <?php endif; ?>
-    
+
 </div>
 </div>
 </body>

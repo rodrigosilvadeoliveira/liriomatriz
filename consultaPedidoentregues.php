@@ -1,4 +1,3 @@
-<?php include("cabecalhoIgreja.php")?>
 <?php
 //include('verificarLogin.php');
 //verificarLogin();
@@ -15,7 +14,7 @@ include_once('config.php');
     if(!empty($_GET['search']))
     {
         $data = $_GET['search'];
-        $sql = "SELECT * FROM vendasprodutos WHERE id LIKE '%$data%' or produto LIKE '%$data%' or modelo LIKE '%$data%' ORDER BY id DESC";
+        $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or produto LIKE '%$data%' or modelo LIKE '%$data%' ORDER BY id DESC";
     }
 
 ?>
@@ -26,26 +25,19 @@ include_once('config.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Lirio Matriz</title>
-    <link rel="stylesheet" href="style.css?t=<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-    
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <title>Matriz</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     <script src="bootstrap.min.js"></script>
     </head>
-
 <body>
-    <div class="cabecalho" id="cabecalhodoSite">
+  <div class="cabecalho" id="cabecalho">
     <?php include('cabecalhoMembros.php');?>
     </div>
-
     <br><br>
     
 <?php
-    echo "<h1 id='BemVindo'>Lista de Pedidos Pendentes</h1>";
+    echo "<h1 id='BemVindo'>Lista de Pedidos entregues</h1>";
     ?>
     
     <div id="tabelaSite">
@@ -55,6 +47,7 @@ include_once('config.php');
         <a id="btncadastroadm" class="butnavegacao"href="consultaPedido.php">Pedidos Pendentes</a>
         </div>
         </div>
+        
 <?php
 // Conexão ao banco de dados (substitua as credenciais pelo seu ambiente)
 include_once('config.php');
@@ -67,6 +60,7 @@ if ($conexao->connect_error) {
 $query = "SELECT
     c.id_clientes AS id_cliente,
     c.nome AS nome_cliente,
+    c.sobrenome AS sobrenome_cliente,
     c.telefone AS telefone_cliente,
     p.id_pedidos AS id_pedido,
     p.status AS status_pedido,
@@ -87,7 +81,7 @@ JOIN
 JOIN
     produto AS pr ON p.id_pedidos = pr.id_pedido
 WHERE
-    p.status = 'pendente'";
+    p.status = 'concluido'";
 
 $resultado = $conexao->query($query);
 
@@ -96,16 +90,17 @@ if ($resultado->num_rows > 0) {
     
     echo "<div class='scroll-horizontal'>";
     echo "<table class='table' id='tabelaLista'>";
-    echo "<tr><th>Pedido</th><th>Status</th></th><th>Nome</th><th>Telefone</th>
-    <th>Data do Pedido</th><th>SKU</th><th>Produto</th><th>Tp.Produto</th><th>Vl.Prod</th><th>Vl.Total</th>
-    <th><img class='' id='' src='img/tucano.png' align='' width='30' height='30'></th></tr>";
-    
+    echo "<tr><th>Pedido</th><th>Status</th></th><th>Nome</th><th>Sobrenome</th><th>Telefone</th>
+    <th>Data do Pedido</th><th>SKU</th><th>Produto</th><th>Marca</th><th>Vl.Prod</th><th>Vl.Total</th>
+    </tr>";
+    $valorTotal = 0; // Variável para armazenar o valor total
     while ($row = $resultado->fetch_assoc()) {
         echo "<tr>";
         echo "<td>" . $row['id_pedido'] . "</td>";
         echo "<td>" . $row['status_pedido'] . "</td>";
        
         echo "<td>" . $row['nome_cliente'] . "</td>";
+        echo "<td>" . $row['sobrenome_cliente'] . "</td>";
         echo "<td>" . $row['telefone_cliente'] . "</td>";
         
         
@@ -115,10 +110,18 @@ if ($resultado->num_rows > 0) {
         echo "<td>" . $row['modelo_produto'] . "</td>";
         echo "<td>" . $row['preco_unitario'] . "</td>";
         echo "<td>" . $row['linhatotal_produto'] . "</td>";
-        echo "<td><button class='concluir-button' data-id='" . $row['id_pedido'] . "'>Concluir</button></td>";
+        
+        echo "</tr>"; 
         echo "</tr>";
-    }
-    
+           
+        $valorTotal += $row['preco_unitario']; // Adicione o valor de venda ao valor total
+
+        }
+        echo "<tr>";
+        echo "<td colspan='4'><b>Valor Total:</b></td>";
+        echo "<td>" . $valorTotal . "</td>";
+        echo "</tr>";
+
     echo "</table>";
     echo "</div>";
 } else {

@@ -10,17 +10,17 @@ include_once('config.php');
     {
       unset($_SESSION['usuario']);
       unset($_SESSION['senha']);
-      header('Location: login.php');
+      header('Location: sistema.php');
       
     }$logado = $_SESSION['usuario'];
     if(!empty($_GET['search']))
     {
         $data = $_GET['search'];
-        $sql = "SELECT * FROM evento WHERE imagem LIKE '%$data%' or produto LIKE '%$data%' or modelo LIKE '%$data%' or categoria LIKE '%$data%' ORDER BY id DESC";
+        $sql = "SELECT * FROM vendasprodutos WHERE imagem LIKE '%$data%' or produto LIKE '%$data%' or modelo LIKE '%$data%' or categoria LIKE '%$data%' ORDER BY id DESC";
     }
     else
     {
-      $sql = "SELECT * FROM evento WHERE cartaz IN ('programacao', 'carrousel', 'home') ORDER BY id DESC";
+      $sql = "SELECT * FROM vendasprodutos WHERE estoque IN ('sim','não') ORDER BY id ASC";
 
 
     }
@@ -51,7 +51,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
     $imagem = "";
 }
 
-$result = mysqli_query($conexao, "INSERT INTO evento(imagem) 
+$result = mysqli_query($conexao, "INSERT INTO vendasprodutos(imagem) 
 VALUES ('$imagem')");
 
 header('Location: cadastroEvento.php');
@@ -64,9 +64,10 @@ include_once("config.php");
 // Insira as informações da compra no banco de dados
 // Data e hora atual
 // $cartaz = isset($_POST['cartaz']) ? $_POST['cartaz'] : null;
-$cartaz = $_POST['cartaz'];
-$links = $_POST['links'];
-$nomeevento = $_POST['nomeevento'];
+$produto = $_POST['produto'];
+$modelo = $_POST['modelo'];
+$valordevenda = $_POST['valordevenda'];
+$estoque = $_POST['estoque'];
 if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
   $imagem = "./img/".$_FILES["imagem"]["name"];
   move_uploaded_file($_FILES["imagem"]["tmp_name"] ,$imagem);
@@ -74,8 +75,8 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
 }else{
   $imagem = "";
 }
-$result = mysqli_query($conexao, "INSERT INTO evento(imagem,cartaz,links,nomeevento) 
-VALUES ('$imagem','$cartaz','$links','$nomeevento')");
+$result = mysqli_query($conexao, "INSERT INTO vendasprodutos(imagem,produto,modelo,valordevenda,estoque) 
+VALUES ('$imagem','$produto','$modelo','$valordevenda','$estoque')");
 
 header('Location: cadastroEvento.php');
 }
@@ -108,7 +109,7 @@ header('Location: cadastroEvento.php');
    <?php include("navegacao.php")?>
    </div>
 <fieldset class="boxformulariodoSite">
-    <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroEvento.php" method="POST" enctype="multipart/form-data">
+    <form id="insert_form" class="row g-3" name="cadastrodevendas" action="cadastrodevendas.php" method="POST" enctype="multipart/form-data">
     
       <h1>Cadastro de Imagens</h1>
     
@@ -116,13 +117,13 @@ header('Location: cadastroEvento.php');
       <!-- <label class="nomedoCampo">Imagem: *</label> -->
       
       <div class="col-md-5">
-    <label for="inputState" class="form-label">*Evento ou Cartaz na Home?</label>
+    <label for="inputState" class="form-label">*Produtos para Vendas</label>
     <br>
-    <select id="cartaz" class="form-select" name="cartaz" required>
+    <select id="produto" class="form-select" name="produto" required>
         <option value="">Selecione</option>
-        <option value="programacao">Programação</option>
-        <option value="carrousel">Banner Carrousel</option>
-        <option value="home">Imagem Home</option>
+        <option value="panquecadecarne">Panqueca de Carne</option>
+        <option value="panquecadefrango">Panqueca de Frango</option>
+        
     </select>
 </div>
 <div class="col-md-5">
@@ -131,29 +132,41 @@ header('Location: cadastroEvento.php');
      </div><br>
   
      <div class="col-md-5">
-<label class="form-label">Nome do Evento:</label>
-       <input type="text" class="form-control" name="nomeevento" placeholder="" id="nomeevento" maxlength="30">
+<label class="form-label">Cracteristica:</label>
+       <input type="text" class="form-control" name="modelo" placeholder="" id="modelo" maxlength="30">
      </div> <br>
 
      <div class="col-md-5">
-<label class="form-label">Informe Link se tiver:</label>
-       <input type="text" class="form-control" name="links" placeholder="" id="links" maxlength="50">
+<label class="form-label">valor de venda:</label>
+       <input type="text" class="form-control" name="valordevenda" placeholder="Exemplo 10.50" id="valordevenda" maxlength="50">
      </div> <br>
+
+  
+  <div class="col-md-5">
+    <label for="inputState" class="form-label">*Estoque</label>
+    <br>
+    <select id="estoque" class="form-select" name="estoque" required>
+        <option value="">Selecione</option>
+        <option value="sim">Sim</option>
+        <option value="não">Não</option>
+        
+    </select>
+</div>
 
   <div class="col-md-5">
     <button type="submit" name="submitEvento" id="submitEvento" class="btn btn-primary">Enviar</button>
   </div>
-  
 </form>
 </fieldset>
 <table class="table" id="tabelaLista" style="width: 99%;">
   <thead>
     <tr>
     <th scope="col">#</th>
-      <th scope="col">Banner</th>
-      <th scope="col">Nome do Evento</th>
-      <th scope="col">Tp.Divulgação</th>
-      <th scope="col">Links</th>
+      <th scope="col">Imagem</th>
+      <th scope="col">Produto</th>
+      <th scope="col">Cracteristica</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Em estoque</th>
       
       <th scope="col">......</th>
     </tr>
@@ -166,9 +179,9 @@ header('Location: cadastroEvento.php');
             echo "<td>" .$user_data['id']. "</td>";
             $imagem_url = str_replace(' ', '%20', $user_data['imagem']);
     echo "<td><img class='imagensevento' src='$imagem_url'></td>";
-            echo "<td>".$user_data['nomeevento']."</td>";
-            echo "<td>".$user_data['cartaz']."</td>";
-            echo "<td>".$user_data['links']."</td>";
+            echo "<td>".$user_data['produto']."</td>";
+            echo "<td>".$user_data['modelo']."</td>";
+            echo "<td>".$user_data['valordevenda']."</td>";
             
             echo "<td> 
             
