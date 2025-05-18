@@ -6,13 +6,13 @@
 
         $id = $_GET['id'];
 
-        $sqlSelect = "SELECT *  FROM cadastrovol WHERE id=$id";
+        $sqlSelect = "SELECT *  FROM cadastroadm WHERE id=$id";
 
         $result = $conexao->query($sqlSelect);
 
         if($result->num_rows > 0)
         {
-            $sqlDelete = "DELETE FROM cadastrovol WHERE id=$id";
+            $sqlDelete = "DELETE FROM cadastroadm WHERE id=$id";
             $resultDelete = $conexao->query($sqlDelete);
         }
     }

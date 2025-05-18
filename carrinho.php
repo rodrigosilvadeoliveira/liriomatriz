@@ -186,29 +186,37 @@ document.addEventListener("DOMContentLoaded", function () {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-97HPMQNNTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-97HPMQNNTQ');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Site</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Lirio Matriz</title>
+    <link rel="stylesheet" href="style.css?t=<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
-    <link rel="icon" href="img/logodaloja.png">
     <script src="bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-lWce9obiiWb1NzKd6ZkW3h/UrzVJx3rnTw1kz96Eo8/0s5HAHzVTmg2d8QQzWt8" crossorigin="anonymous"></script>
+    </head>
 
-</head>
 <body>
-    <header>
-<div class="cabecalho" id="cabecalho">
-<?php include('cabecalhoSite.php');?>
-</div> 
-    </header>
-
-
-<h1 class="titulocarrinho">Carrinho de Compras</h1>
+    <div class="cabecalho" id="cabecalhodoSite">
+    <?php include('cabecalhoSite.php');?>
+    </div>
+<br><br><br><br>
+<h1 class="titulocarrinho">Carrinho de reserva de pedidos</h1>
 <div class="continuarcomprando" id="continuarcomprando">
-<a href="produtosrosto.php"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+<a href="vendaspanquecas.php"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
 </svg> Continuar Comprando</a>
 </div>
@@ -264,11 +272,9 @@ $status = 'pendente';
     $stmt->bind_param("i", $id_clientes);
     $stmt->execute();
 
-    // Obtenha o ID do pedido gerado automaticamente
+
+if ($stmt && $stmt->affected_rows > 0) {
     $id_pedido = $conexao->insert_id;
-// Se o pedido foi confirmado com sucesso, exiba o modal
-if ($stmt->execute()) {
-    $id_pedido = $conexao->insert_id; // Defina o id_pedido
     echo '<script>
         var idPedido = ' . $id_pedido . ';
         $(document).ready(function(){
@@ -276,7 +282,7 @@ if ($stmt->execute()) {
         });
     </script>';
 } else {
-    // Lidere com o erro, se necessário
+    // Lide com o erro, se necessário
 }
     
     
@@ -357,7 +363,7 @@ $linhaTotal = $produtoNoCarrinho['valordevenda'] * $valorPadraoSelect;
                     </button>
                 </div>
                 <div class="modal-body">
-                Agradecemos sua preferência. Seu pedido (ID: <span id="id_pedido"><?= $id_pedido ?></span>) foi enviado com sucesso.
+                Agradecemos sua preferência. Anote numero do seu pedido (ID: <span id="id_pedido"><?= $id_pedido ?></span>) foi enviado com sucesso.
 </div>
 
                 <div class="modal-footer">
@@ -383,6 +389,8 @@ $linhaTotal = $produtoNoCarrinho['valordevenda'] * $valorPadraoSelect;
 <h1 class="dadosentrega">Retirar na igreja</h1>
 <div class="dadoscliente">   
 <br>
+Domingo 18/05/2025 após culto da manhã
+<br>
 Rua: Amanari, Nº629
 <br>
 Cep: 08247-060
@@ -400,8 +408,8 @@ São Paulo - SP</span>
   </div><br>
   
   <div class="col-md-5">
-    <label for="nome" class="form-label">*Sobrenome:</label>
-    <input type="text" name="sobrenome" id="sobrenome" class="form-control" required>
+
+    <input type="hidden" name="sobrenome" id="sobrenome" class="form-control">
   </div><br>
 
   <div class="col-6">

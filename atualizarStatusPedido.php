@@ -23,5 +23,6 @@ if (isset($_POST['idPedido'])) {
 } else {
     echo "ID do pedido não fornecido na solicitação.";
 }
-header('Location: consultarPedido.php');
+
 ?>
+
