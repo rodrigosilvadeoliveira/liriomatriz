@@ -426,7 +426,7 @@ display: none;
     align-items: flex-start;
     text-decoration: none;
 }
-#cons_Adm{
+.opcoesloja{
     margin-left: 15px;
     background-image: linear-gradient(to right, rgb(172, 16, 130), rgb(90,20,220));
     width: 10%;

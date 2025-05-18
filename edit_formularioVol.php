@@ -1,5 +1,8 @@
 <?php include("cabecalhoAdm.php")?>
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
@@ -53,7 +56,7 @@ else
 </a>
 -->
 <fieldset class="boxformularioAdm">
-    <form class="row g-3" action="saveEditvol.php" method="POST">
+    <form class="row g-3" action="save_editarvol.php" method="POST">
       <h1>Alteração Cadastro</h1>
     <div class="col-md-5">
     <label for="nome" class="form-label">Nome completo</label>
@@ -81,20 +84,21 @@ else
     <input type="email"  name="email" id="email" class="form-control" value="<?php echo $email ?>">
   </div>
   
-  <div class="col-3">
+  <div class="col-5">
     <label for="telefone" class="form-label">Telefone</label>
     <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="dd numero" value="<?php echo $telefone ?>">
   </div>
-  <div class="col-3">
+  <div class="col-5">
     <label for="celular" class="form-label">Celular</label>
     <input type="tel" class="form-control" name="celular" id="celular" placeholder="dd numero" value="<?php echo $celular ?>">
   </div>
 
-  <div class="col-3">
+ <div class="col-6">
   <input type="hidden" name="id" value="<?php echo $id ?>">
     <button type="submit" name="update" id="update" class="btn btn-primary">Atualizar</button>
-    <button href="consulta_voluntarios.php" name="update" id="cancelar" class="btn btn-primary">Cancelar</button>
+    
   </div>
+  
 </form>
 </fieldset>
 

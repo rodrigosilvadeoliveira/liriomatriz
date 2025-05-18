@@ -93,6 +93,7 @@ header('Location: cadastroForm.php');
     <br>
     <select id="inscricao" class="form-select" name="inscricao" required>
         <option value="curso_arena">Arena</option>
+        <option value="jantar_casais">Jantar de Casais</option>
         <option value="curso_lirioplay">Lirio Play</option>
         <option value="curso_mergulhar">Mergulhar</option>
         <option value="primeiros_passos">Primeiros Passos</option>

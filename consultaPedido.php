@@ -133,6 +133,15 @@ $conexao->close();
   </tbody>
 </table>
 </div>
+<div id="modal-confirmacao" style="display:none; position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000;">
+
+    <div style="background: #fff; padding: 20px; border-radius: 8px; width: 300px; 
+        margin: 100px auto; text-align: center; box-shadow: 0 0 10px #000;">
+        <p>Pedido concluído com sucesso!</p>
+        <button id="modal-ok">OK</button>
+    </div>
+</div>
 
 </body>
 <script>
@@ -231,28 +240,39 @@ function adicionarNovasCategorias() {
 adicionarNovasCategorias();
   </script>
    <script>
-    document.addEventListener('click', function (event) {
-        if (event.target.classList.contains('concluir-button')) {
-            const idPedido = event.target.getAttribute('data-id');
+   document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('concluir-button')) {
+        const idPedido = event.target.getAttribute('data-id');
 
-            // Aqui, você deve enviar uma solicitação AJAX para um arquivo PHP que atualizará o status do pedido
-            // Substitua 'atualizarStatusPedido.php' pelo nome do arquivo PHP que você irá criar para processar a atualização.
-            // Lembre-se de passar o ID do pedido como um parâmetro na solicitação.
-
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'atualizarStatusPedido.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    // Atualize a tabela ou faça outras ações após a conclusão bem-sucedida
-                    console.log('Status do pedido atualizado com sucesso');
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'atualizarStatusPedido.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const resposta = JSON.parse(xhr.responseText);
+                if (resposta.success) {
+                    mostrarModalConfirmacao();
                 } else {
-                    console.error('Erro ao atualizar o status do pedido');
+                    alert('Erro ao atualizar o pedido: ' + resposta.message);
                 }
-            };
-            xhr.send('idPedido=' + idPedido);
-        }
-    });
+            } else {
+                console.error('Erro na requisição');
+            }
+        };
+        xhr.send('idPedido=' + idPedido);
+    }
+});
+
+// Função para exibir o modal
+function mostrarModalConfirmacao() {
+    const modal = document.getElementById('modal-confirmacao');
+    modal.style.display = 'block';
+
+    const okBtn = document.getElementById('modal-ok');
+    okBtn.onclick = function () {
+        window.location.href = 'consultaPedido.php';
+    };
+}
 </script>
 
 </html>

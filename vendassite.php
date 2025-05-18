@@ -53,6 +53,15 @@ if (isset($_POST['id'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-97HPMQNNTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-97HPMQNNTQ');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -72,7 +81,7 @@ if (isset($_POST['id'])) {
     <?php include('cabecalhoSite.php');?>
     </div>
     <br><br>
-<h1 id="titulocategoria">Panquecas de Carne</h1>
+<h1 id="titulocategoria">Panquecas</h1>
 <div id="tabelaSite">
 <div class="produtos-container">
         <table>
