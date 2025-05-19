@@ -68,8 +68,9 @@ $result = $conexao->query($sql);
                 echo '<form action="'. $imagemHome['inscricao'] . '.php">';
                 echo "<td>".'<h2 id="inscrever">' . $imagemHome['inscricao'] . "</td>";
                 echo '</h2>';
-                echo "<td>".$imagemHome['inicio']."</td>";
-                echo "<td>".$imagemHome['fim']."</td>";
+                echo "<td>" . date('d/m/Y', strtotime($imagemHome['inicio'])) . "</td>";
+                echo "<td>" . date('d/m/Y', strtotime($imagemHome['fim'])) . "</td>";
+                
                 echo "<td>" . ' <input type="submit" class="linkredirect" value="Cadastrar">'."</td>";
                 echo '</tr>';
                 echo '</form>';
