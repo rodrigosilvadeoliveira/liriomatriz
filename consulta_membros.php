@@ -148,11 +148,11 @@ include_once('config.php');
 
             echo "<td>" .$user_data['sobrenome']. "</td>";
                         
-            echo "<td>" .$user_data['nascimento']. "</td>";
-
+             echo "<td>" . date('d/m/Y', strtotime($user_data['nascimento'])) . "</td>";
+               
             echo "<td>" .$user_data['batizado']. "</td>";
             
-            echo "<td>" .$user_data['datas']. "</td>";
+            echo "<td>" . date('d/m/Y', strtotime($user_data['datas'])) . "</td>";
 
             echo "<td>" .$user_data['telefone']. "</td>";
 
