@@ -51,6 +51,9 @@ $logStmt->execute();
             case 'master':
                 header('Location: formularioMaster');
                 break;
+            case 'live':
+                header('Location: cadastrolive');
+                break;
             default:
                 header('Location: acesso_negado');
                 break;
