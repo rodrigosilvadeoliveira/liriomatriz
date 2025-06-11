@@ -78,7 +78,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
 $result = mysqli_query($conexao, "INSERT INTO vendasprodutos(imagem,produto,modelo,valordevenda,estoque) 
 VALUES ('$imagem','$produto','$modelo','$valordevenda','$estoque')");
 
-header('Location: cadastroEvento.php');
+header('Location: cadastrodevendas.php');
 }
 ?>
      
@@ -121,8 +121,9 @@ header('Location: cadastroEvento.php');
     <br>
     <select id="produto" class="form-select" name="produto" required>
         <option value="">Selecione</option>
-        <option value="panquecadecarne">Panqueca de Carne</option>
-        <option value="panquecadefrango">Panqueca de Frango</option>
+        <option value="Panqueca de Carne">Panqueca de Carne</option>
+        <option value="Panqueca de Frango">Panqueca de Frango</option>
+        <option value="Feijoada">Feijoada</option>
         
     </select>
 </div>

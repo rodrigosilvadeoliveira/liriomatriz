@@ -84,47 +84,32 @@ if(!empty($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
-    <script src="bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Lirio Matriz</title>
+    <link rel="stylesheet" href="style.css?t=<?=time()?>">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://unpkg.com/cropperjs/dist/cropper.min.css" />
-    <link href="https://unpkg.com/cropperjs/dist/cropper.min.css" rel="stylesheet"/>
-    <script src="https://unpkg.com/cropperjs/dist/cropper.min.js"></script>
-    <script src="https://unpkg.com/cropperjs"></script>
-
-    <title>Liro Matriz</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <script src="bootstrap.min.js"></script>
+    </head>
 <body>
 <br>
 <br><br><br>
 <?php
     echo "<h1 id='BemVindo'>Alterar Cadastro</h1>";
 ?>
-<div class="produtos-container">
-<a id="incluirCadastro" value="Novo Volutario" href="cadastroMembrosAdm.php">Novo Membro(a)</a>
-<a id="incluirCadastro" value="Novo Volutario" href="consulta_membros.php">Consultar Membros</a>
-<a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
-<a id="incluirCadastro" href="cadastroForm.php" value="Novo Cadastro">Inscrições</a>
-</div>
+<div class="navegacao">
+   <?php include("navegacao.php")?>
+   </div>
 <fieldset class="boxformularioEditMembrosAdm">
 <form class="row g-3" action="saveEditMembros.php" method="POST" enctype="multipart/form-data">
 
       <h1>Alteração Cadastro</h1>
-<!--       <label for="nova_foto">Alterar Foto de Perfil:</label>
-<input type="file" id="nova_foto" name="nova_foto" accept="image/*" class="form-control">
-
-Imagem recortada prévia -->
-<img id="preview_foto" src="uploads/<?php echo $foto ?>" class="imagensevento mt-2 mb-2" />
-
-
-<!-- Campo oculto com base64 do recorte -->
-<input type="hidden" name="foto" id="foto" value="<?php echo $foto?>">
-
+<label for="nova_foto">Foto de Perfil:</label>
+<td><img class='imagensMembros' src='uploads/<?php echo $foto ?>'></td>
 
       <div class="col-md-5">
     <label for="nome" class="form-label">Nome</label>
@@ -245,10 +230,141 @@ Imagem recortada prévia -->
   
   <div class="col-3">
   <input type="hidden" name="id" value="<?php echo $id?>">
-    <button type="submit" name="update" id="updateMenbros" class="btn btn-primary">Atualizar</button>
-    <button href="consulta_membros.php" name="updateMembros" id="cancelarMembros" class="btn btn-primary">Cancelar</button>
   </div>
+  <!-- Upload e crop da foto de perfil -->
+  <div class="col-md-3">
+    <label for="upload_image" class="form-label">Foto de Perfil:</label>
+    <input type="file" name="upload_image" id="upload_image" accept="image/*" class="form-control" >
+    <input type="hidden" name="foto_crop" id="foto_crop">
+    <?php if (!empty($foto)): ?>
+  <!-- Mostra o nome da imagem ou uma miniatura -->
+  <small class="text-muted">Imagem atual: <?php echo htmlspecialchars($foto); ?></small>
+  <!-- Campo oculto com nome da imagem atual -->
+  <input type="hidden" name="imagem_atual" value="<?php echo htmlspecialchars($foto); ?>">
+<?php endif; ?>
+  </div>
+
+  <div class="col-md-3">
+    <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary">Enviar</button>
+  </div>
+  <div class="col-md-3">
+  <label class="form-label">Prévia da Foto:</label>
+  <div class="image-preview-container">
+    <img id="preview_cropped" class='imagensMembros' src='uploads/<?php echo $foto ?>' alt="Prévia da imagem" >
+    <div id="no-image-placeholder">
+      Nenhuma imagem selecionada
+    </div>
+  </div>
+</div>
 </form>
+
+<!-- Modal de Cropper -->
+<div class="modal fade" id="modal_crop" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Recortar Foto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="img-container">
+          <img id="image_crop" src="" alt="Imagem para recorte">
+        </div>
+      </div>
+      <div class="modal-footer-cropper">
+        <div class="btn-group me-2" role="group">
+          <button type="button" class="btn btn-outline-primary" onclick="cropper.rotate(-90)">
+            <i class="bi bi-arrow-counterclockwise"></i> Girar Esq
+          </button>
+          <button type="button" class="btn btn-outline-primary" onclick="cropper.rotate(90)">
+            <i class="bi bi-arrow-clockwise"></i> Girar Dir
+          </button>
+        </div>
+        <div class="btn-group me-2" role="group">
+        <button type="button" id="cncmodal" class="btn btn-secondary" data-bs-dismiss="modal">
+        Cancelar
+      </button>
+        <button type="button" id="crop_button" class="btn btn-primary">
+        Confirmar
+      </button>
+        
+       </div>
+    </div>
+  </div>
+</div>
+<!-- Scripts do Cropper -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<script>
+  let cropper;
+  const modal = new bootstrap.Modal(document.getElementById('modal_crop'));
+
+  document.getElementById('upload_image').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const image = document.getElementById('image_crop');
+        image.src = event.target.result;
+
+        image.onload = () => {
+          if (cropper) cropper.destroy();
+          
+          // Configurações melhoradas do Cropper
+          cropper = new Cropper(image, {
+            aspectRatio: 3 / 4,
+            viewMode: 1,
+            autoCropArea: 0.8,
+            responsive: true,
+            movable: true,
+            zoomable: true,
+            rotatable: true,
+            scalable: true,
+            minContainerWidth: 300,
+            minContainerHeight: 400,
+            ready: function() {
+              // Ajusta o zoom para mostrar a imagem inteira inicialmente
+              cropper.crop();
+            }
+          });
+          
+          modal.show();
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  document.getElementById('crop_button').addEventListener('click', function () {
+    // Tamanho maior para melhor qualidade
+    // No evento de clique do crop_button, adicione:
+document.getElementById('no-image-placeholder').style.display = 'none';
+document.getElementById('preview_cropped').style.display = 'block';
+    const canvas = cropper.getCroppedCanvas({
+      width: 600,  // Dobrando o tamanho para melhor qualidade
+      height: 800,
+      minWidth: 300,
+      minHeight: 400,
+      maxWidth: 1200,
+      maxHeight: 1600,
+      fillColor: '#fff',
+      imageSmoothingEnabled: true,
+      imageSmoothingQuality: 'high'
+    });
+    
+    if (canvas) {
+      const croppedImage = canvas.toDataURL('image/jpeg', 0.9); // 90% de qualidade
+      const preview = document.getElementById('preview_cropped');
+      preview.src = croppedImage;
+      preview.style.display = 'block';
+      document.getElementById('foto_crop').value = croppedImage;
+      modal.hide();
+    } else {
+      alert('Erro ao recortar a imagem. Tente novamente.');
+    }
+  });
+</script>
+
 
 <script>
   const checkboxes = document.querySelectorAll('input[name="departamentoum[]"]');

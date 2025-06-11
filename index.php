@@ -44,10 +44,8 @@ include_once('config.php');
 
         while ($imagemNoCarrousel = mysqli_fetch_assoc($result)) {
             echo '<div class="produto">';
-            echo '<img class="imagenscarroussel" src="' . $imagemNoCarrousel['imagem'] . '">';
-            echo '<div class="produto-info">';
-            // Resto do código do produto
-            echo '</div>';
+            echo '<a href="' . $imagemNoCarrousel['links'] . '">' . '<img class="imagenscarroussel" src="' . $imagemNoCarrousel['imagem'] . '">'.'</a>';
+           
             echo '</div>';
         }
         ?>
