@@ -71,16 +71,8 @@ include_once('config.php');
 include('config.php');
   
    
-  $sql = "SELECT * FROM produto ORDER BY id_produto DESC";
+  $sql = "SELECT * FROM produto WHERE produto = 'Teste' ORDER BY id_produto DESC";
   $result = $conexao->query($sql);
-
-  // Exiba a lista de produtos e calcule o valor total
-$valorTotal = 0; // Variável para armazenar o valor total
-
-        while($user_data = mysqli_fetch_assoc($result))
-        {
-            echo "<tr>";
-            echo "<td>" .$user_data['id_produto']. "</td>";
             
             echo "<td>" .$user_data['produto']. "</td>";
 

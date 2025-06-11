@@ -111,7 +111,7 @@ include_once('config.php');
 </table>
 </div>
 
-<div>
+<div class="table-container">
 <table class="table" id="tabelaLista">
   <thead>
     <tr>
@@ -148,7 +148,7 @@ include_once('config.php');
 
             echo "<td>" .$user_data['sobrenome']. "</td>";
                         
-             echo "<td>" . date('d/m/Y', strtotime($user_data['nascimento'])) . "</td>";
+            echo "<td>" . date('d/m/Y', strtotime($user_data['nascimento'])) . "</td>";
                
             echo "<td>" .$user_data['batizado']. "</td>";
             

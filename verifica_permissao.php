@@ -1,5 +1,5 @@
 <?php
-
+//session_start();
 include_once('config.php');
 
 $perfil = $_SESSION['nivel_acesso'] ?? '';
@@ -34,10 +34,13 @@ $permissoes = [
     'cadastroMembrosAdm' => ['secretaria', 'master'],
     'consulta_logs' => ['master'],
     'edit_formularioMembros' => ['secretaria', 'master'],
+    'consulta_niver' => ['secretaria', 'master'],
+    
     'cadastroEvento' => ['midia', 'master'],
 
     'formularioMaster.php' => ['master'],
     'formulariomaster.php' => ['master'],
+    'cadastrodevendas' => ['master'],
     'consulta_membros.php' => ['secretaria', 'master'],
     'consulta_membros_busca.php' => ['secretaria', 'master'],
     'cadastroForm.php' => ['secretaria', 'master'],
@@ -46,7 +49,7 @@ $permissoes = [
     'edit_formularioMembros.php' => ['secretaria', 'master'],
     'cadastroEvento.php' => ['midia', 'master'],
     'cadastroevento.php' => ['midia', 'master'],
-'cadastrolive' => ['midia', 'master']
+
     
     
 ];

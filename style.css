@@ -413,6 +413,33 @@ display: none;
     align-items: flex-start;
     text-decoration: none;
 }
+.butnavegacaoum{
+    margin-left: 15px;
+    background-image: linear-gradient(to right, rgb(57, 58, 113), rgb(57, 58, 113));
+    width: auto;
+    border: none;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;  
+    align-items: flex-start;
+    text-decoration: none;
+}
+.butnavegacaodois{
+    margin-left: 15px;
+    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
+    width: auto;
+    border: none;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;  
+    align-items: flex-start;
+    text-decoration: none;
+}
+
 #menuHeader{
     margin-left: 15px;
     background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
@@ -439,6 +466,11 @@ display: none;
     border-radius: 10px;
     
     
+}
+
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 #tabelaLista{
@@ -741,9 +773,7 @@ padding-right: 2%;
     
 }
 
-img {
-    max-width: 100%;
-  }
+
   .preview {
     width: 120px;
     height: 160px; /* proporção 3x4 */
@@ -853,7 +883,7 @@ img {
         box-sizing: border-box;
     }
     .imagensMembros {
-        width: 100px;
+        width: 120px;
         height: 100px;
         object-fit: cover;
         border-radius: 4px;
@@ -1448,13 +1478,7 @@ video {
         margin-left: 15%;
       }
       
-      .imagens{
-        width: 300px;
-        height: 300px;
-        margin: 1px;
-        /* max-width: 150px; Ajuste o tamanho das imagens conforme necessário*/
-        
-    }
+  
     
     #cncmodal{
         margin-left: -14%;
