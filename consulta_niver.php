@@ -42,11 +42,20 @@ verificarLogin();
    <?php include("navegacao.php")?>
    </div>
 <br>
+<br>
+<fieldset class="boxexportarMembros">
+<form method="GET" action="relatorio_aniverariantes.php">
+  <label for="mes">Informe o mês (1 a 12):</label>
+  <input type="number" name="mes" id="mes" min="1" max="12" required>
+  <button type="submit">Exportar Excel</button>
+</form>
+</fieldset>
+<br>
 <fieldset class="boxexportarMembros">
 <form method="GET" action="">
   <label for="mes">Informe o mês (1 a 12):</label>
   <input type="number" name="mes" id="mes" min="1" max="12" required>
-  <button type="submit">Buscar aniversariantes</button>
+  <button type="submit">Consulta em tela</button>
 </form>
 </fieldset>
 
