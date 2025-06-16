@@ -39,7 +39,14 @@ if (!empty($_GET['search'])) {
 <body>
     <div id="tabelaSite">
 <div class="produtos-container">
-    <?php if (in_array($perfil, ['secretaria', 'master'])): ?>
+<?php if (in_array($perfil, ['master'])): ?>
+         <a id="btnformmaster" class="butnavegacaoum"href="formularioMaster">Cadastro Acesso</a>
+         <a id="btnconslog" class="butnavegacaoum"href="cadastrodevendas">Cadastro Vendas</a>
+         <a id="btnconslog" class="butnavegacaoum"href="consulta_logs">Log</a>
+         <a id="btnconslog" class="butnavegacaoum"href="consultaacessos">Consulta Acessos</a>
+    <?php endif; ?>
+
+<?php if (in_array($perfil, ['secretaria', 'master'])): ?>
         <a id="btncadastroadm" class="butnavegacao"href="cadastroMembrosAdm">Novo Membro(a)</a>
         <a id="btnconsmmembro" class="butnavegacao"href="consulta_membros">Consultar Membros</a>
         <a id="btnbusca" class="butnavegacao"href="consulta_membros_busca">Pesquisa Membro(a)</a>
@@ -50,11 +57,6 @@ if (!empty($_GET['search'])) {
         <a id="btnsiteimg" class="butnavegacao"href="cadastroEvento">Site imagens</a>
     <?php endif; ?>
 
-    <?php if (in_array($perfil, ['master'])): ?>
-         <a id="btnformmaster" class="butnavegacaoum"href="formularioMaster">Cadastro Acesso</a>
-         <a id="btnconslog" class="butnavegacaoum"href="cadastrodevendas">Cadastro Vendas</a>
-         <a id="btnconslog" class="butnavegacaoum"href="consulta_logs">Log</a>
-    <?php endif; ?>
     
     <?php if (in_array($perfil, ['midia', 'master'])): ?>
          <a id="btnsiteimg" class="butnavegacaodois"href="cadastroEvento">Site imagens</a>
