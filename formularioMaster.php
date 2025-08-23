@@ -1,4 +1,4 @@
-<?php include("cabecalhoigreja.php")?>
+
 <?php
 include('verificarLogin.php');
 verificarLogin();

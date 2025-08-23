@@ -1,4 +1,3 @@
-<?php include("cabecalhoIgreja.php")?>
 <?php
 include('verificarLogin.php');
 verificarLogin();
@@ -105,6 +104,7 @@ header('Location: cadastrolive.php');
   
 </form>
 </fieldset>
+<div class="table-container">
 <table class="table" id="tabelaLista" style="width: 99%;">
   <thead>
     <tr>
