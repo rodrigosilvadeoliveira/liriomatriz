@@ -7,9 +7,36 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
 include_once('config.php');
 
-$sql = "SELECT * FROM membros";
+// Verifica se veio filtro da URL
+if(isset($_GET['filtro'])) {
+    $filtro = $_GET['filtro'];
+
+    if($filtro == "ate1ano") {
+        $sql = "SELECT * FROM membros
+                WHERE DATEDIFF(NOW(), datas) <= 365
+                ORDER BY nome ASC";
+
+    } elseif($filtro == "ate5anos") {
+        $sql = "SELECT * FROM membros
+                WHERE DATEDIFF(NOW(), datas) <= 365*5
+                ORDER BY nome ASC";
+
+    } elseif($filtro == "mais5anos") {
+        $sql = "SELECT * FROM membros
+                WHERE DATEDIFF(NOW(), datas) > 365*5
+                ORDER BY nome ASC";
+
+    } else {
+        $sql = "SELECT * FROM membros ORDER BY nome ASC";
+    }
+} else {
+    // sem filtro → todos
+    $sql = "SELECT * FROM membros ORDER BY nome ASC";
+}
+
 $result = $conexao->query($sql);
 
+// Totais (separado)
 $sqlmembros = "SELECT * FROM totalmembros";
 $resultmembros = $conexao->query($sqlmembros);
 
@@ -26,7 +53,7 @@ $sheet->setCellValue('F1', 'Telefone');
 $sheet->setCellValue('G1', 'Email');
 $sheet->setCellValue('H1', 'Voluntário');
 $sheet->setCellValue('I1', 'Lider');
-$sheet->setCellValue('J1', 'departamentos');
+$sheet->setCellValue('J1', 'Departamentos');
 $sheet->setCellValue('M1', 'Status');
 $sheet->setCellValue('N1', 'Idade');
 $sheet->setCellValue('O1', 'Responsavel');
@@ -35,8 +62,7 @@ $sheet->setCellValue('Q1', 'Foto');
 $sheet->setCellValue('R1', 'Total até 12 anos');
 $sheet->setCellValue('S1', 'Total a partir de 13 anos');
 
-
-// Estilo
+// Estilo cabeçalho
 $styles = [
     'font' => ['bold' => true, 'size' => 10, 'name' => 'Calibri'],
     'fill' => [
@@ -54,7 +80,6 @@ $sheet->getStyle('A1:S1')->applyFromArray($styles);
 $row = 2;
 if ($result) {
     while ($row_data = $result->fetch_assoc()) {
-        // Dados texto
         $sheet->setCellValue('A' . $row, $row_data['id']);
         $sheet->setCellValue('B' . $row, $row_data['nome']);
         $sheet->setCellValue('C' . $row, $row_data['sobrenome']);
@@ -70,32 +95,27 @@ if ($result) {
         $sheet->setCellValue('O' . $row, $row_data['responsavel']);
         $sheet->setCellValue('P' . $row, $row_data['batizado']);
 
-        // Imagem
+        // Foto
         $imageFile = $row_data['foto'];
-
-if (!empty($imageFile)) {
-    $imagePath = __DIR__ . '/uploads/' . $imageFile;
-
-    if (file_exists($imagePath)) {
-        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setName('Foto');
-        $drawing->setDescription('Foto do membro');
-        $drawing->setPath($imagePath);
-        $drawing->setHeight(80);
-        $drawing->setCoordinates('Q' . $row);
-        $drawing->setOffsetX(5);
-        $drawing->setOffsetY(5);
-        $drawing->setWorksheet($sheet);
-        $sheet->getRowDimension($row)->setRowHeight(80);
-    } else {
-        $sheet->setCellValue('S' . $row, 'Imagem não encontrada');
-    }
-} else {
-    $sheet->setCellValue('S' . $row, 'Sem imagem');
-}
-
-
-
+        if (!empty($imageFile)) {
+            $imagePath = __DIR__ . '/uploads/' . $imageFile;
+            if (file_exists($imagePath)) {
+                $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+                $drawing->setName('Foto');
+                $drawing->setDescription('Foto do membro');
+                $drawing->setPath($imagePath);
+                $drawing->setHeight(80);
+                $drawing->setCoordinates('Q' . $row);
+                $drawing->setOffsetX(5);
+                $drawing->setOffsetY(5);
+                $drawing->setWorksheet($sheet);
+                $sheet->getRowDimension($row)->setRowHeight(80);
+            } else {
+                $sheet->setCellValue('S' . $row, 'Imagem não encontrada');
+            }
+        } else {
+            $sheet->setCellValue('S' . $row, 'Sem imagem');
+        }
         $row++;
     }
 } else {

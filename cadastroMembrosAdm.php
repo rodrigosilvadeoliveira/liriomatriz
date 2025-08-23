@@ -76,9 +76,9 @@ $logado = $_SESSION['usuario'];
 </head>
 <body>
 <header>
-    <div class="cabecalho" id="cabecalho">
+<!-- <div class="cabecalho" id="cabecalho">
     <?php include('cabecalhoIgreja.php');?>
-    </div>    
+    </div>   -->
 
 </header>
 

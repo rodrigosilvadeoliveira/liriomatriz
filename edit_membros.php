@@ -1,18 +1,20 @@
 <?php include("cabecalhoMembros.php")?>
 
 <?php
+session_start();
+if (!isset($_SESSION['id'])) {
+    header("Location: acessonegadomembro.php");
+    exit();
+}
 
 include_once('config.php');
+$id = $_SESSION['id'];
 
-if(!empty($_GET['id'])) {
-  $id = $_GET['id'];
-  
-  // Prevenção contra SQL Injection (use prepared statements)
-  $sqlSelect = "SELECT * FROM membros WHERE id = ?";
-  $stmt = $conexao->prepare($sqlSelect);
-  $stmt->bind_param("i", $id);
-  $stmt->execute();
-  $result = $stmt->get_result();
+$sql = "SELECT * FROM membros WHERE id = ?";
+$stmt = $conexao->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
   
   if($result->num_rows > 0) {
       $user_data = $result->fetch_assoc();
@@ -68,14 +70,11 @@ if(!empty($_GET['id'])) {
       // ===== DADOS PARA O FORMULÁRIO =====
       // (Agora você pode usar as variáveis no seu HTML)
       
-  } else {
-      header('Location: consulta_Membros_busca.php');
-      exit();
-  }
-} else {
+  }  else {
   header('Location: consulta_Membros_busca.php');
   exit();
 }
+
 ?>
 
 <!DOCTYPE html>
