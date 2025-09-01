@@ -30,6 +30,9 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Relatórios', 'url' => 'listar_relatoriosdep'],
         ['title' => 'Site imagens', 'url' => 'cadastroEvento'],
         ['title' => 'Site Live', 'url' => 'cadastrolive'],
+        ['title' => 'Escala Louvor', 'url' => 'escalalouvor'],
+        ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
+        ['title' => 'Escala Som', 'url' => 'escalasom'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
 } elseif ($perfil === 'secretaria') {
@@ -54,6 +57,13 @@ if ($perfil === 'master') {
         ['title' => 'Site Live', 'url' => 'cadastrolive'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
+} elseif ($perfil === 'lider') {
+    $menuOptions = [
+        ['title' => 'Escala Louvor', 'url' => 'escalalouvor'],
+        ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
+        ['title' => 'Escala Som', 'url' => 'escalasom'],
+        ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
+    ];
 }
 
 // Agrupar opções por categoria para melhor organização
@@ -63,6 +73,9 @@ $categorizedOptions = [
     }),
     'Membros' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['cadastroMembrosAdm', 'consulta_membros', 'consulta_membros_busca', 'consulta_niver']);
+    }),
+    'Escala Voluntarios' => array_filter($menuOptions, function($item) {
+        return in_array($item['url'], ['escalalouvor', 'consultaescala', 'escalasom']);
     }),
     'Relatórios' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['relatoriodepartamento', 'listar_relatoriosdep']);
@@ -419,10 +432,10 @@ $categorizedOptions = array_filter($categorizedOptions);
         <nav>
             <img class="logo" src="LÍRIO MATRIZ (PRETO)_menor.png" alt="Logo">
 
-            <div class="user-info">
+            <!-- <div class="user-info">
                 <i class="fas fa-user"></i>
                 <span><?php echo $logado . ' (' . $perfil . ')'; ?></span>
-            </div>
+            </div> -->
 
             <div class="menu-container">
                 <div class="menu">
@@ -481,14 +494,7 @@ $categorizedOptions = array_filter($categorizedOptions);
     </div>
 
     <!-- Espaço para o conteúdo não ficar escondido atrás do header fixo -->
-    <div class="content-spacer">
-        <div class="welcome-message">
-            <h2>Bem-vindo, <?php echo $logado; ?>!</h2>
-            <p>Seu perfil de acesso é: <strong><?php echo $perfil; ?></strong></p>
-            <p>Use o menu acima para navegar pelo sistema.</p>
-        </div>
-        <!-- Conteúdo principal da página será inserido aqui -->
-    </div>
+    
 
     <script>
         // Menu mobile toggle

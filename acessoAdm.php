@@ -54,6 +54,9 @@ $logStmt->execute();
             case 'live':
                 header('Location: cadastrolive');
                 break;
+                case 'lider':
+                header('Location: escalalouvor');
+                break;
             default:
                 header('Location: acesso_negado');
                 break;
