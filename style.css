@@ -694,6 +694,12 @@ padding-right: 2%;
     height: 80%;
     margin-left: 7%;
 }
+.doacoes{
+    width: 57%;
+    margin-left: 20%;
+    margin-top: 12%;
+
+}
 .linkredirect {
     width: 90%;
     max-width: 200px;
@@ -1279,8 +1285,8 @@ video {
     
     }
     .imagens{
-        width: 200px;
-        height: 200px;
+        width: 296px;
+        height: 296px;
         margin: 1px;
         /* max-width: 150px; Ajuste o tamanho das imagens conforme necessário*/
         

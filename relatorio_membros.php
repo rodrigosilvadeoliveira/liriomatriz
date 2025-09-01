@@ -1,147 +1,46 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
-
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
-
 include_once('config.php');
 
-// Verifica se veio filtro da URL
-if(isset($_GET['filtro'])) {
-    $filtro = $_GET['filtro'];
+// Pega o mês da URL
+$mes = isset($_GET['mes']) ? intval($_GET['mes']) : date('n');
 
-    if($filtro == "ate1ano") {
-        $sql = "SELECT * FROM membros
-                WHERE DATEDIFF(NOW(), datas) <= 365
-                ORDER BY nome ASC";
-
-    } elseif($filtro == "ate5anos") {
-        $sql = "SELECT * FROM membros
-                WHERE DATEDIFF(NOW(), datas) <= 365*5
-                ORDER BY nome ASC";
-
-    } elseif($filtro == "mais5anos") {
-        $sql = "SELECT * FROM membros
-                WHERE DATEDIFF(NOW(), datas) > 365*5
-                ORDER BY nome ASC";
-
-    } else {
-        $sql = "SELECT * FROM membros ORDER BY nome ASC";
-    }
-} else {
-    // sem filtro → todos
-    $sql = "SELECT * FROM membros ORDER BY nome ASC";
-}
-
+// Consulta aniversariantes
+$sql = "SELECT nome, sobrenome, nascimento, email, telefone, status 
+        FROM membros 
+        WHERE MONTH(nascimento) = $mes
+        ORDER BY DAY(nascimento) ASC";
 $result = $conexao->query($sql);
 
-// Totais (separado)
-$sqlmembros = "SELECT * FROM totalmembros";
-$resultmembros = $conexao->query($sqlmembros);
+// Define headers para exportar em Excel
+header("Content-Type: application/vnd.ms-excel; charset=utf-8");
+header("Content-Disposition: attachment; filename=aniversariantes_mes_$mes.xls");
+header("Pragma: no-cache");
+header("Expires: 0");
 
-$spreadsheet = new Spreadsheet();
-$sheet = $spreadsheet->getActiveSheet();
+// Cabeçalho da tabela
+echo "<table border='1'>";
+echo "<tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Data de Nascimento</th>
+        <th>Status</th>
+      </tr>";
 
-// Cabeçalho
-$sheet->setCellValue('A1', 'id');
-$sheet->setCellValue('B1', 'Nome');
-$sheet->setCellValue('C1', 'Sobrenome');
-$sheet->setCellValue('D1', 'Data Nascimento');
-$sheet->setCellValue('E1', 'Membro Desde');
-$sheet->setCellValue('F1', 'Telefone');
-$sheet->setCellValue('G1', 'Email');
-$sheet->setCellValue('H1', 'Voluntário');
-$sheet->setCellValue('I1', 'Lider');
-$sheet->setCellValue('J1', 'Departamentos');
-$sheet->setCellValue('M1', 'Status');
-$sheet->setCellValue('N1', 'Idade');
-$sheet->setCellValue('O1', 'Responsavel');
-$sheet->setCellValue('P1', 'Batizado');
-$sheet->setCellValue('Q1', 'Foto');
-$sheet->setCellValue('R1', 'Total até 12 anos');
-$sheet->setCellValue('S1', 'Total a partir de 13 anos');
-
-// Estilo cabeçalho
-$styles = [
-    'font' => ['bold' => true, 'size' => 10, 'name' => 'Calibri'],
-    'fill' => [
-        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_GRADIENT_LINEAR,
-        'rotation' => 90,
-        'startColor' => ['argb' => 'FFA0A0A0'],
-        'endColor' => ['argb' => 'FFFFFFFF'],
-    ],
-    'alignment' => ['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT],
-    'borders' => ['top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]],
-];
-$sheet->getStyle('A1:S1')->applyFromArray($styles);
-
-// Inserir dados dos membros
-$row = 2;
-if ($result) {
-    while ($row_data = $result->fetch_assoc()) {
-        $sheet->setCellValue('A' . $row, $row_data['id']);
-        $sheet->setCellValue('B' . $row, $row_data['nome']);
-        $sheet->setCellValue('C' . $row, $row_data['sobrenome']);
-        $sheet->setCellValue('D' . $row, $row_data['nascimento']);
-        $sheet->setCellValue('E' . $row, $row_data['datas']);
-        $sheet->setCellValue('F' . $row, $row_data['telefone']);
-        $sheet->setCellValue('G' . $row, $row_data['email']);
-        $sheet->setCellValue('H' . $row, $row_data['voluntario']);
-        $sheet->setCellValue('I' . $row, $row_data['lider']);
-        $sheet->setCellValue('J' . $row, $row_data['departamentos']);
-        $sheet->setCellValue('M' . $row, $row_data['status']);
-        $sheet->setCellValue('N' . $row, $row_data['idade']);
-        $sheet->setCellValue('O' . $row, $row_data['responsavel']);
-        $sheet->setCellValue('P' . $row, $row_data['batizado']);
-
-        // Foto
-        $imageFile = $row_data['foto'];
-        if (!empty($imageFile)) {
-            $imagePath = __DIR__ . '/uploads/' . $imageFile;
-            if (file_exists($imagePath)) {
-                $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-                $drawing->setName('Foto');
-                $drawing->setDescription('Foto do membro');
-                $drawing->setPath($imagePath);
-                $drawing->setHeight(80);
-                $drawing->setCoordinates('Q' . $row);
-                $drawing->setOffsetX(5);
-                $drawing->setOffsetY(5);
-                $drawing->setWorksheet($sheet);
-                $sheet->getRowDimension($row)->setRowHeight(80);
-            } else {
-                $sheet->setCellValue('S' . $row, 'Imagem não encontrada');
-            }
-        } else {
-            $sheet->setCellValue('S' . $row, 'Sem imagem');
-        }
-        $row++;
+// Linhas com os dados
+if ($result && $result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>".utf8_decode($row['nome']." ".$row['sobrenome'])."</td>";
+        echo "<td>".utf8_decode($row['email'])."</td>";
+        echo "<td>".utf8_decode($row['telefone'])."</td>";
+        echo "<td>".date('d/m/Y', strtotime($row['nascimento']))."</td>";
+        echo "<td>".utf8_decode($row['status'])."</td>";
+        echo "</tr>";
     }
 } else {
-    echo "Erro ao carregar membros.";
+    echo "<tr><td colspan='5'>Nenhum aniversariante encontrado.</td></tr>";
 }
-
-// Inserir total de membros
-$row = 2;
-if ($resultmembros) {
-    while ($row_data = $resultmembros->fetch_assoc()) {
-        $sheet->setCellValue('R' . $row, $row_data['idademenor']);
-        $sheet->setCellValue('S' . $row, $row_data['idademaior']);
-        $row++;
-    }
-} else {
-    echo "Erro ao carregar totais.";
-}
-
-// Cabeçalhos HTTP para download
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="lista_membros.xlsx"');
-header('Cache-Control: max-age=0');
-
-// Salvar
-$writer = new Xlsx($spreadsheet);
-$writer->save('php://output');
-
-// Fechar conexão
-$conexao->close();
+echo "</table>";
+exit;
+?>

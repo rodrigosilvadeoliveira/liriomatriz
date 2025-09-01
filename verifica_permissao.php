@@ -1,5 +1,5 @@
 <?php
-//session_start();
+
 include_once('config.php');
 
 $perfil = $_SESSION['nivel_acesso'] ?? '';
@@ -37,6 +37,7 @@ $permissoes = [
     'consulta_niver' => ['secretaria', 'master'],
     
     'cadastroEvento' => ['midia', 'master'],
+    'escalalouvor' => ['lider','master'],
 
     'formularioMaster.php' => ['master'],
     'formulariomaster.php' => ['master'],
@@ -49,6 +50,10 @@ $permissoes = [
     'edit_formularioMembros.php' => ['secretaria', 'master'],
     'cadastroEvento.php' => ['midia', 'master'],
     'cadastroevento.php' => ['midia', 'master'],
+    'escalalouvor.php' => ['lider','master'],
+    'escalasom.php' => ['lider','master'],
+    'consultaescala.php' => ['lider','master'],
+    'consultaescala' => ['lider','master'],
 
     
     
