@@ -16,9 +16,9 @@ $resultlist = null;
 $escalaSalva = null;
 
 // Buscar sempre o último registro salvo (pela data ou pelo id maior)
-$sql = "SELECT * FROM escalas_som ORDER BY id DESC LIMIT 1";
+$sql = "SELECT * FROM escalas_salvas ORDER BY id DESC LIMIT 1";
 // Se preferir pela data: 
-// $sql = "SELECT * FROM escalas_som ORDER BY data_atualizacao DESC LIMIT 1";
+// $sql = "SELECT * FROM escalas_salvas ORDER BY data_atualizacao DESC LIMIT 1";
 
 $result = $conexao->query($sql);
 
@@ -28,7 +28,7 @@ if ($result && $result->num_rows > 0) {
 
 
 // Funções fixas (linhas da escala)
-$funcoes = ["Igreja", "Live", "somkids"];
+$funcoes = ["Bateria", "Violao", "Teclado","Vocal1", "Vocal2"];
 $nomesPorFuncao = [];
 
 // Mapear fotos por nome
@@ -150,7 +150,7 @@ $escalaSalvaJSON = $escalaSalva ? json_encode($escalaSalva, JSON_UNESCAPED_UNICO
    <div class="navegacao">
    <?php include("navegacao.php")?>
    </div>
- <h1><i class="fas fa-music"></i> Sistema de Escalas Musicais</h1>
+ <h1><i class="fas fa-music"></i> Sistema de Escalas "GC Mulheres"</h1>
    <h1> <p class="description">Gerencie e compartilhe escalas de forma fácil e rápida</p></h1>
     
   <div class="content">
@@ -177,7 +177,7 @@ $escalaSalvaJSON = $escalaSalva ? json_encode($escalaSalva, JSON_UNESCAPED_UNICO
       <table id="escalaTable" aria-label="Tabela de Escala">
         <thead>
           <tr id="headerRow">
-            <th>Escala Som</th>
+            <th>Louvor GC Mulheres</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
@@ -913,7 +913,7 @@ td.appendChild(wrap);
   // Função para salvar/atualizar escala no banco de dados
   function salvarEscalaNoBanco(escalaData, blobImagem, callback) {
   const formData = new FormData();
-  formData.append('acao', 'salvar_escalasom');
+  formData.append('acao', 'salvar_escala');
   formData.append('dados', JSON.stringify(escalaData));
 
   // 🔥 adiciona a imagem como arquivo
@@ -921,7 +921,7 @@ td.appendChild(wrap);
     formData.append('imagem', blobImagem, 'escala.png');
   }
 
-  fetch('salvar_escalasom.php', {
+  fetch('salvar_escala.php', {
     method: 'POST',
     body: formData
   })

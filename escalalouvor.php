@@ -28,7 +28,7 @@ if ($result && $result->num_rows > 0) {
 
 
 // Funções fixas (linhas da escala)
-$funcoes = ["Bateria", "Violao", "Teclado", "Baixo", "Ministro", "Back1", "Back2", "Back3", "Talckback"];
+$funcoes = ["Bateria", "Violao", "Teclado", "Baixo", "Ministro", "Vocal1", "Vocal2", "Vocal3", "Talckback"];
 $nomesPorFuncao = [];
 
 // Mapear fotos por nome
@@ -523,19 +523,29 @@ function addColumn() {
   }
 
   // Função para salvar a escala
-  function saveEscala() {
-    const escalaData = getEscalaData();
-    
-    if (!escalaData.nome) {
-      showToast('Por favor, informe um nome para a escala.', 'error');
-      return;
-    }
-    
-    // Salvar no banco de dados
-    salvarEscalaNoBanco(escalaData, () => {
-        closeSaveModal();
-    });
+  // Função para salvar a escala
+async function saveEscala() {
+  const escalaData = getEscalaData();
+  
+  if (!escalaData.nome) {
+    showToast('Por favor, informe um nome para a escala.', 'error');
+    return;
   }
+
+  try {
+    // 🔥 Gerar a imagem da escala
+    const { blob } = await gerarCanvasBlob();
+
+    // Salvar no banco com a imagem
+    salvarEscalaNoBanco(escalaData, blob, () => {
+      closeSaveModal();
+    });
+  } catch (e) {
+    console.error('Erro ao gerar imagem para salvar:', e);
+    showToast('Erro ao gerar imagem da escala.', 'error');
+  }
+}
+
 
   // Função para criar uma nova escala (limpar todas as colunas)
   function novaEscala() {
@@ -901,31 +911,34 @@ td.appendChild(wrap);
   }
 
   // Função para salvar/atualizar escala no banco de dados
-  function salvarEscalaNoBanco(escalaData, callback) {
-    // Criar um FormData para enviar os dados
-    const formData = new FormData();
-    formData.append('acao', 'salvar_escala');
-    formData.append('dados', JSON.stringify(escalaData));
-    
-    // Fazer requisição AJAX
-    fetch('salvar_escala.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            showToast('Escala salva com sucesso!');
-            if (callback) callback();
-        } else {
-            showToast('Erro ao salvar escala: ' + data.message, 'error');
-        }
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        showToast('Erro ao conectar com o servidor.', 'error');
-    });
+  function salvarEscalaNoBanco(escalaData, blobImagem, callback) {
+  const formData = new FormData();
+  formData.append('acao', 'salvar_escala');
+  formData.append('dados', JSON.stringify(escalaData));
+
+  // 🔥 adiciona a imagem como arquivo
+  if (blobImagem) {
+    formData.append('imagem', blobImagem, 'escala.png');
   }
+
+  fetch('salvar_escala.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      showToast('Escala salva com sucesso!');
+      if (callback) callback();
+    } else {
+      showToast('Erro ao salvar escala: ' + data.message, 'error');
+    }
+  })
+  .catch(error => {
+    console.error('Erro:', error);
+    showToast('Erro ao conectar com o servidor.', 'error');
+  });
+}
 
   // Eventos
   document.getElementById('btnAdd').addEventListener('click', addColumn);

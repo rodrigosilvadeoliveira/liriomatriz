@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Verificar se a ação é salvar_escala
-if (!isset($_POST['acao']) || $_POST['acao'] !== 'salvar_escala') {
+// Verificar se a ação é salvar_escalamidias
+if (!isset($_POST['acao']) || $_POST['acao'] !== 'salvar_escalamidias') {
     echo json_encode(['success' => false, 'message' => 'Ação não especificada']);
     exit;
 }
@@ -58,7 +58,7 @@ if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
 }
 
 // Sempre inserir um novo registro
-$sql = "INSERT INTO escalas_salvas (nome, descricao, dados_escala, usuario, imagem, data_atualizacao) 
+$sql = "INSERT INTO escalas_midias (nome, descricao, dados_escala, usuario, imagem, data_atualizacao) 
         VALUES (?, ?, ?, ?, ?, NOW())";
 
 $stmt = $conexao->prepare($sql);

@@ -12,7 +12,7 @@ if((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
 $logado = $_SESSION['usuario'];
 
 // Buscar lista de escalas salvas
-$sql = "SELECT id, nome, imagem FROM escalas_salvas ORDER BY id DESC";
+$sql = "SELECT id, nome, imagem FROM escalas_midias ORDER BY id DESC";
 $res = $conexao->query($sql);
 $escalas = [];
 while($row = $res->fetch_assoc()){
@@ -55,7 +55,7 @@ function diaSemana($dataIso) {
         <?php include("navegacao.php") ?>
     </div>
 <br><br>
-    <h2 class="mb-4">Consulta de Escalas Louvor</h2>
+    <h2 class="mb-4">Consulta de Escalas Midias</h2>
 
     <?php if(empty($escalas)){ ?>
         <p>Nenhuma escala encontrada.</p>
@@ -131,7 +131,7 @@ function diaSemana($dataIso) {
             e.stopPropagation(); // Impede que o evento propague para o elemento pai
             let id = $(this).data("id");
             if(confirm("Tem certeza que deseja excluir esta escala?")){
-                $.post("excluir_escala.php", {id:id}, function(resposta){
+                $.post("excluir_escalamidias.php", {id:id}, function(resposta){
                     if(resposta.trim() === "ok"){
                         location.reload(); // força atualização da página
                     } else {

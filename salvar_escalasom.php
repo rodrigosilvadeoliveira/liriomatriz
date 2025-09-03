@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Verificar se a ação é salvar_escala
-if (!isset($_POST['acao']) || $_POST['acao'] !== 'salvar_escala') {
+// Verificar se a ação é salvar_escalasom
+if (!isset($_POST['acao']) || $_POST['acao'] !== 'salvar_escalasom') {
     echo json_encode(['success' => false, 'message' => 'Ação não especificada']);
     exit;
 }
@@ -34,34 +34,48 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     exit;
 }
 
-// Verificar se já existe um registro com ID = 1
-$sqlCheck = "SELECT id FROM escalas_salvas WHERE id = 2";
-$resultCheck = $conexao->query($sqlCheck);
+// Preparar campos principais
+$nome       = $dados['nome'];
+$descricao  = $dados['descricao'] ?? '';
+$dadosEscala = json_encode($dados, JSON_UNESCAPED_UNICODE);
+$imagemPath = null;
 
-if ($resultCheck && $resultCheck->num_rows > 0) {
-    // Atualizar escala existente com ID = 1
-    $sql = "UPDATE escalas_salvas SET nome = ?, descricao = ?, dados_escala = ?, usuario = ?, data_atualizacao = NOW() WHERE id = 2";
-    $stmt = $conexao->prepare($sql);
-    $dadosEscala = json_encode($dados, JSON_UNESCAPED_UNICODE);
-    $stmt->bind_param("ssss", $dados['nome'], $dados['descricao'], $dadosEscala, $usuario);
-} else {
-    // Inserir nova escala com ID = 1
-    $sql = "INSERT INTO escalas_salvas (id, nome, descricao, dados_escala, usuario) VALUES (1, ?, ?, ?, ?)";
-    $stmt = $conexao->prepare($sql);
-    $dadosEscala = json_encode($dados, JSON_UNESCAPED_UNICODE);
-    $stmt->bind_param("ssss", $dados['nome'], $dados['descricao'], $dadosEscala, $usuario);
+// 🔥 Se veio uma imagem no POST, salvar em pasta
+if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
+    $nomeArquivo = 'escala_' . time() . '_' . rand(1000, 9999) . '.png';
+    $pastaDestino = __DIR__ . '/uploads_escalas';
+
+    if (!is_dir($pastaDestino)) {
+        mkdir($pastaDestino, 0777, true);
+    }
+
+    $destinoCompleto = $pastaDestino . '/' . $nomeArquivo;
+
+    if (move_uploaded_file($_FILES['imagem']['tmp_name'], $destinoCompleto)) {
+        // Salvar caminho relativo para acessar depois na aplicação
+        $imagemPath = 'uploads_escalas/' . $nomeArquivo;
+    }
 }
 
+// Sempre inserir um novo registro
+$sql = "INSERT INTO escalas_som (nome, descricao, dados_escala, usuario, imagem, data_atualizacao) 
+        VALUES (?, ?, ?, ?, ?, NOW())";
+
+$stmt = $conexao->prepare($sql);
+$stmt->bind_param("sssss", $nome, $descricao, $dadosEscala, $usuario, $imagemPath);
+
 if ($stmt->execute()) {
-    echo json_encode(['success' => true, 'message' => 'Escala salva com sucesso']);
+    echo json_encode([
+        'success' => true, 
+        'message' => 'Escala salva com sucesso',
+        'id' => $stmt->insert_id,
+        'imagem' => $imagemPath
+    ]);
 } else {
     echo json_encode(['success' => false, 'message' => 'Erro ao salvar escala: ' . $conexao->error]);
 }
 
-// Fechar statement se existir
-if (isset($stmt)) {
-    $stmt->close();
-}
-
+// Fechar statement e conexão
+$stmt->close();
 $conexao->close();
 ?>
