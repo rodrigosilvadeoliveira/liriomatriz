@@ -68,6 +68,7 @@ include('verifica_permissao.php');
     <select id="nivel_acesso" class="form-select" name="nivel_acesso">
     <option value="">Selecione</option>
     <option value="admin">Administrador</option>
+    <option value="consulta">Consulta</option>
     <option value="live">Live</option>
     <option value="master">Master</option>
     <option value="midia">Midias</option>

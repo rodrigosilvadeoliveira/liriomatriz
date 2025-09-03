@@ -16,9 +16,9 @@ $resultlist = null;
 $escalaSalva = null;
 
 // Buscar sempre o último registro salvo (pela data ou pelo id maior)
-$sql = "SELECT * FROM escalas_som ORDER BY id DESC LIMIT 1";
+$sql = "SELECT * FROM escalas_midias ORDER BY id DESC LIMIT 1";
 // Se preferir pela data: 
-// $sql = "SELECT * FROM escalas_som ORDER BY data_atualizacao DESC LIMIT 1";
+// $sql = "SELECT * FROM escalas_midias ORDER BY data_atualizacao DESC LIMIT 1";
 
 $result = $conexao->query($sql);
 
@@ -28,7 +28,7 @@ if ($result && $result->num_rows > 0) {
 
 
 // Funções fixas (linhas da escala)
-$funcoes = ["Igreja", "Live", "somkids"];
+$funcoes = ["CT", "LT", "LZ", "PH"];
 $nomesPorFuncao = [];
 
 // Mapear fotos por nome
@@ -177,7 +177,7 @@ $escalaSalvaJSON = $escalaSalva ? json_encode($escalaSalva, JSON_UNESCAPED_UNICO
       <table id="escalaTable" aria-label="Tabela de Escala">
         <thead>
           <tr id="headerRow">
-            <th>Escala Som</th>
+            <th>Escala Midias</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
@@ -913,7 +913,7 @@ td.appendChild(wrap);
   // Função para salvar/atualizar escala no banco de dados
   function salvarEscalaNoBanco(escalaData, blobImagem, callback) {
   const formData = new FormData();
-  formData.append('acao', 'salvar_escalasom');
+  formData.append('acao', 'salvar_escalamidias');
   formData.append('dados', JSON.stringify(escalaData));
 
   // 🔥 adiciona a imagem como arquivo
@@ -921,7 +921,7 @@ td.appendChild(wrap);
     formData.append('imagem', blobImagem, 'escala.png');
   }
 
-  fetch('salvar_escalasom.php', {
+  fetch('salvar_escalamidias.php', {
     method: 'POST',
     body: formData
   })

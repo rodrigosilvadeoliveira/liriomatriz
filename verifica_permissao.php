@@ -38,7 +38,7 @@ $permissoes = [
     
     'cadastroEvento' => ['midia', 'master'],
     'escalalouvor' => ['lider','master'],
-
+    'paginainicial.php' => ['lider','master','secretaria','midias','consulta'],
     'formularioMaster.php' => ['master'],
     'formulariomaster.php' => ['master'],
     'cadastrodevendas' => ['master'],
@@ -51,9 +51,20 @@ $permissoes = [
     'cadastroEvento.php' => ['midia', 'master'],
     'cadastroevento.php' => ['midia', 'master'],
     'escalalouvor.php' => ['lider','master'],
+    'escalalouvorkids' => ['lider','master'],
     'escalasom.php' => ['lider','master'],
+    'escalamidias.php' => ['lider','master'],
+    'escalamidias' => ['lider','master'],
+    'escalalouvorhomens.php' => ['lider','master'],
+    'escalalouvormulheres.php' => ['lider','master'],
     'consultaescala.php' => ['lider','master'],
     'consultaescala' => ['lider','master'],
+    'consultaescalasom' => ['lider','master'],
+    'consultaescalamidias' => ['lider','master'],
+    'consultaescalavol' => ['consulta'],
+    'consultaescalasomvol' => ['consulta'],
+    'consultaescalamidiasvol' => ['consulta'],
+    
 
     
     
@@ -62,7 +73,7 @@ $permissoes = [
 // Obtém o nome da página atual
 if (isset($permissoes[$paginaAtual])) {
     if (!in_array($perfil, $permissoes[$paginaAtual])) {
-        header("Location: acesso_negadoperfil.php");
+        header("Location: acesso_negado.php");
         exit;
     }
 }

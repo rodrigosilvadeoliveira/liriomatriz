@@ -1,17 +1,17 @@
 <?php
+include('verificarLogin.php');
+verificarLogin();
+include('verifica_permissao.php');
 include_once('config.php');
 
-// Verificação de login
-if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
+if((!isset($_SESSION['usuario']) == true) && ($_SESSION['senha']) == true) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
     header('Location: login.php');
-    exit;
 }
 
 $logado = $_SESSION['usuario'];
-$perfil = $_SESSION['nivel_acesso'];
-
+$resultlist = null;
 // Definir opções de menu baseadas no perfil
 $menuOptions = [];
 
@@ -24,7 +24,6 @@ if ($perfil === 'master') {
         ['title' => 'Consulta Acessos', 'url' => 'consultaacessos'],
         ['title' => 'Novo Membro(a)', 'url' => 'cadastroMembrosAdm'],
         ['title' => 'Consultar Membros', 'url' => 'consulta_membros'],
-        // ['title' => 'Pesquisa Membro(a)', 'url' => 'consulta_membros_busca'],
         ['title' => 'Aniversariantes', 'url' => 'consulta_niver'],
         ['title' => 'Inscrições', 'url' => 'cadastroForm.php'],
         ['title' => 'Cadastrar Relatórios', 'url' => 'relatoriodepartamento'],
@@ -47,7 +46,6 @@ if ($perfil === 'master') {
         ['title' => 'Inicio', 'url' => 'paginainicial'],
         ['title' => 'Novo Membro(a)', 'url' => 'cadastroMembrosAdm'],
         ['title' => 'Consultar Membros', 'url' => 'consulta_membros'],
-        // ['title' => 'Pesquisa Membro(a)', 'url' => 'consulta_membros_busca'],
         ['title' => 'Aniversariantes', 'url' => 'consulta_niver'],
         ['title' => 'Inscrições', 'url' => 'cadastroForm.php'],
         ['title' => 'Cadastrar Relatórios', 'url' => 'relatoriodepartamento'],
@@ -89,13 +87,15 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasomvol'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
+} else {
+    // Perfil padrão caso não se encaixe em nenhum dos anteriores
+    $menuOptions = [
+        ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
+    ];
 }
 
 // Agrupar opções por categoria para melhor organização
 $categorizedOptions = [
-    'Inicio' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], ['paginainicial']);
-    }),
     'Administração' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['formularioMaster', 'cadastrodevendas', 'consulta_logs', 'consultaacessos']);
     }),
@@ -123,7 +123,266 @@ $categorizedOptions = [
 ];
 
 // Remover categorias vazias
+$categorizedOptions = array_filter($categorizedOptions);
 
+// Definir cards do dashboard baseados no perfil
+$dashboardCards = [];
+
+if ($perfil === 'master') {
+    $dashboardCards = [
+        [
+            'icon' => 'fa-users',
+            'title' => 'Total de Membros',
+            'content' => 'Visualize o número total de membros cadastrados no sistema.',
+            'link' => 'consulta_membros',
+            'stats' => '1.245',
+            'color' => '#3498db'
+        ],
+        [
+            'icon' => 'fa-calendar-alt',
+            'title' => 'Próximos Eventos',
+            'content' => 'Confira os próximos eventos programados na igreja.',
+            'link' => 'cadastroEvento',
+            'stats' => '7',
+            'color' => '#e74c3c'
+        ],
+        [
+            'icon' => 'fa-chart-line',
+            'title' => 'Relatórios',
+            'content' => 'Acesse relatórios gerenciais e estatísticas do sistema.',
+            'link' => 'listar_relatoriosdep',
+            'stats' => '24',
+            'color' => '#2ecc71'
+        ],
+        [
+            'icon' => 'fa-music',
+            'title' => 'Escalas Ativas',
+            'content' => 'Visualize todas as escalas de louvor ativas no momento.',
+            'link' => 'consultaescala',
+            'stats' => '5',
+            'color' => '#9b59b6'
+        ],
+        [
+            'icon' => 'fa-user-plus',
+            'title' => 'Novos Membros',
+            'content' => 'Membros cadastrados nos últimos 30 dias.',
+            'link' => 'consulta_membros',
+            'stats' => '28',
+            'color' => '#f39c12'
+        ],
+        [
+            'icon' => 'fa-exclamation-triangle',
+            'title' => 'Alertas',
+            'content' => 'Verifique alertas e necessidades de atenção no sistema.',
+            'link' => 'consulta_logs',
+            'stats' => '3',
+            'color' => '#e67e22'
+        ]
+    ];
+} elseif ($perfil === 'secretaria') {
+    $dashboardCards = [
+        [
+            'icon' => 'fa-users',
+            'title' => 'Total de Membros',
+            'content' => 'Visualize o número total de membros cadastrados no sistema.',
+            'link' => 'consulta_membros',
+            'stats' => '1.245',
+            'color' => '#3498db'
+        ],
+        [
+            'icon' => 'fa-user-plus',
+            'title' => 'Novos Membros',
+            'content' => 'Membros cadastrados nos últimos 30 dias.',
+            'link' => 'consulta_membros',
+            'stats' => '28',
+            'color' => '#2ecc71'
+        ],
+        [
+            'icon' => 'fa-birthday-cake',
+            'title' => 'Aniversariantes',
+            'content' => 'Membros que fazem aniversário este mês.',
+            'link' => 'consulta_niver',
+            'stats' => '15',
+            'color' => '#e74c3c'
+        ],
+        [
+            'icon' => 'fa-file-alt',
+            'title' => 'Relatórios',
+            'content' => 'Relatórios departamentais disponíveis.',
+            'link' => 'listar_relatoriosdep',
+            'stats' => '12',
+            'color' => '#9b59b6'
+        ]
+    ];
+} elseif ($perfil === 'midia' || $perfil === 'live') {
+    $dashboardCards = [
+        [
+            'icon' => 'fa-video',
+            'title' => 'Lives Realizadas',
+            'content' => 'Transmissões ao vivo realizadas este mês.',
+            'link' => 'cadastrolive',
+            'stats' => '12',
+            'color' => '#e74c3c'
+        ],
+        [
+            'icon' => 'fa-eye',
+            'title' => 'Visualizações',
+            'content' => 'Média de visualizações por conteúdo.',
+            'link' => 'cadastroEvento',
+            'stats' => '2.4K',
+            'color' => '#2ecc71'
+        ]
+    ];
+} elseif ($perfil === 'lider') {
+    $dashboardCards = [
+        [
+            'icon' => 'fa-music',
+            'title' => 'Escalas de Louvor',
+            'content' => 'Escalas de louvor cadastradas no sistema.',
+            'link' => 'consultaescala',
+            'stats' => '8',
+            'color' => '#3498db'
+        ],
+        [
+            'icon' => 'fa-microphone',
+            'title' => 'Escalas de Som',
+            'content' => 'Escalas de técnicos de som ativas.',
+            'link' => 'consultaescalasom',
+            'stats' => '5',
+            'color' => '#e74c3c'
+        ],
+        [
+            'icon' => 'fa-photo-video',
+            'title' => 'Escalas de Mídia',
+            'content' => 'Escalas de técnicos de mídia ativas.',
+            'link' => 'consultaescalamidias',
+            'stats' => '6',
+            'color' => '#2ecc71'
+        ],
+        [
+            'icon' => 'fa-calendar-check',
+            'title' => 'Próximas Escalas',
+            'content' => 'Próximas escalas agendadas para os próximos 7 dias.',
+            'link' => 'consultaescala',
+            'stats' => '4',
+            'color' => '#9b59b6'
+        ]
+    ];
+} elseif ($perfil === 'consulta') {
+    $dashboardCards = [
+        [
+            'icon' => 'fa-music',
+            'title' => 'Escalas de Louvor',
+            'content' => 'Visualize as escalas de louvor cadastradas.',
+            'link' => 'consultaescalavol',
+            'stats' => '8',
+            'color' => '#3498db'
+        ],
+        [
+            'icon' => 'fa-microphone',
+            'title' => 'Escalas de Som',
+            'content' => 'Consulte as escalas de técnicos de som.',
+            'link' => 'consultaescalasomvol',
+            'stats' => '5',
+            'color' => '#e74c3c'
+        ],
+        [
+            'icon' => 'fa-photo-video',
+            'title' => 'Escalas de Mídia',
+            'content' => 'Consulte as escalas de técnicos de mídia.',
+            'link' => 'consultaescalamidiasvol',
+            'stats' => '6',
+            'color' => '#2ecc71'
+        ]
+    ];
+} else {
+    $dashboardCards = [
+        [
+            'icon' => 'fa-info-circle',
+            'title' => 'Bem-vindo',
+            'content' => 'Seu perfil possui acesso limitado ao sistema.',
+            'link' => '#',
+            'stats' => '',
+            'color' => '#3498db'
+        ]
+    ];
+}
+
+// CONEXÃO COM O BANCO DE DADOS E CONSULTA DE ATIVIDADES RECENTES
+$atividadesRecentes = [];
+
+try {
+    // Conectar ao banco de dados (substitua com suas credenciais)
+    $pdo = new PDO('mysql:host=localhost;dbname=seu_banco_de_dados', 'usuario', 'senha');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    // Consulta para obter as atividades recentes
+    $sql = "
+        (SELECT 'novo_membro' as tipo, nome, data_cadastro as data, NULL as descricao 
+         FROM membros 
+         ORDER BY data_cadastro DESC 
+         LIMIT 2)
+        UNION
+        (SELECT 'escala_atualizada' as tipo, NULL as nome, data_atualizacao as data, descricao 
+         FROM escalas 
+         ORDER BY data_atualizacao DESC 
+         LIMIT 2)
+        UNION
+        (SELECT 'relatorio_gerado' as tipo, departamento as nome, data_envio as data, NULL as descricao 
+         FROM relatorios 
+         ORDER BY data_envio DESC 
+         LIMIT 2)
+        ORDER BY data DESC 
+        LIMIT 5
+    ";
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $atividadesRecentes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+} catch (PDOException $e) {
+    // Em caso de erro, usar dados de exemplo
+    $atividadesRecentes = [
+        ['tipo' => 'novo_membro', 'nome' => 'João Silva', 'data' => date('Y-m-d H:i:s', strtotime('-2 hours')), 'descricao' => null],
+        ['tipo' => 'escala_atualizada', 'nome' => null, 'data' => date('Y-m-d H:i:s', strtotime('-1 day')), 'descricao' => 'Escala para o culto de domingo'],
+        ['tipo' => 'relatorio_gerado', 'nome' => 'Departamento de Jovens', 'data' => date('Y-m-d H:i:s', strtotime('-3 days')), 'descricao' => null]
+    ];
+}
+
+// Função para formatar a data relativa (há x tempo)
+function tempoDecorrido($data) {
+    $agora = new DateTime();
+    $dataAtividade = new DateTime($data);
+    $diferenca = $agora->diff($dataAtividade);
+    
+    if ($diferenca->y > 0) {
+        return "há " . $diferenca->y . " ano" . ($diferenca->y > 1 ? "s" : "");
+    } elseif ($diferenca->m > 0) {
+        return "há " . $diferenca->m . " mês" . ($diferenca->m > 1 ? "es" : "");
+    } elseif ($diferenca->d > 0) {
+        return "há " . $diferenca->d . " dia" . ($diferenca->d > 1 ? "s" : "");
+    } elseif ($diferenca->h > 0) {
+        return "há " . $diferenca->h . " hora" . ($diferenca->h > 1 ? "s" : "");
+    } elseif ($diferenca->i > 0) {
+        return "há " . $diferenca->i . " minuto" . ($diferenca->i > 1 ? "s" : "");
+    } else {
+        return "agora mesmo";
+    }
+}
+
+// Função para obter ícone e título com base no tipo de atividade
+function obterInfoAtividade($tipo) {
+    switch ($tipo) {
+        case 'novo_membro':
+            return ['icon' => 'fa-user-plus', 'title' => 'Novo membro cadastrado'];
+        case 'escala_atualizada':
+            return ['icon' => 'fa-music', 'title' => 'Escala de louvor atualizada'];
+        case 'relatorio_gerado':
+            return ['icon' => 'fa-file-alt', 'title' => 'Relatório gerado'];
+        default:
+            return ['icon' => 'fa-info-circle', 'title' => 'Atividade no sistema'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -131,9 +390,10 @@ $categorizedOptions = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navegação</title>
+    <title>Sistema Igreja - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Estilos anteriores mantidos */
         :root {
             --primary-color: #3498db;
             --secondary-color: #2c3e50;
@@ -399,6 +659,197 @@ $categorizedOptions = [
             text-align: center;
         }
 
+        /* Dashboard Cards */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .card-content {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-link:hover {
+            text-decoration: underline;
+        }
+
+        .card-stats {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        /* Quick Access */
+        .quick-access {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-color);
+        }
+
+        .quick-access-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .quick-access-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .quick-access-item:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .quick-access-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .quick-access-text {
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Recent Activity */
+        .recent-activity {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .activity-desc {
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .activity-time {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
         /* Responsive Styles */
         @media (max-width: 1024px) {
             .menu {
@@ -426,6 +877,16 @@ $categorizedOptions = [
 
             .user-info span {
                 display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-access-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -466,10 +927,10 @@ $categorizedOptions = [
         <nav>
             <img class="logo" src="LÍRIO MATRIZ (PRETO)_menor.png" alt="Logo">
 
-            <!-- <div class="user-info">
+            <div class="user-info">
                 <i class="fas fa-user"></i>
                 <span><?php echo $logado . ' (' . $perfil . ')'; ?></span>
-            </div> -->
+            </div>
 
             <div class="menu-container">
                 <div class="menu">
@@ -528,7 +989,107 @@ $categorizedOptions = [
     </div>
 
     <!-- Espaço para o conteúdo não ficar escondido atrás do header fixo -->
-    
+    <div class="content-spacer">
+        <!-- Mensagem de boas-vindas -->
+        <div class="welcome-message">
+            <h1>Bem-vindo(a), <?php echo $logado; ?>!</h1>
+            <p>Seu perfil de acesso: <?php echo $perfil; ?></p>
+            <p>Hoje é <?php echo date('d/m/Y'); ?></p>
+        </div>
+
+        <!-- Dashboard com cards informativos -->
+        <div class="dashboard-cards">
+            <?php foreach ($dashboardCards as $card): ?>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background: <?php echo $card['color']; ?>">
+                        <i class="fas <?php echo $card['icon']; ?>"></i>
+                    </div>
+                    <div class="card-title"><?php echo $card['title']; ?></div>
+                </div>
+                <div class="card-content">
+                    <?php echo $card['content']; ?>
+                </div>
+                <div class="card-footer">
+                    <a href="<?php echo $card['link']; ?>" class="card-link">Acessar <i class="fas fa-arrow-right"></i></a>
+                    <?php if (!empty($card['stats'])): ?>
+                    <div class="card-stats"><?php echo $card['stats']; ?></div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Acesso Rápido -->
+        <div class="quick-access">
+            <h2 class="section-title">Acesso Rápido</h2>
+            <div class="quick-access-grid">
+                <?php 
+                // Mostrar apenas os 6 primeiros itens do menu para acesso rápido
+                $count = 0;
+                foreach ($menuOptions as $option): 
+                    if ($count >= 6) break;
+                    if ($option['url'] != 'sair'):
+                ?>
+                <a href="<?php echo $option['url']; ?>" class="quick-access-item">
+                    <div class="quick-access-icon">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="quick-access-text"><?php echo $option['title']; ?></div>
+                </a>
+                <?php 
+                    $count++;
+                    endif;
+                endforeach; 
+                ?>
+            </div>
+        </div>
+
+        <!-- Atividade Recente -->
+        <div class="recent-activity">
+            <h2 class="section-title">Atividade Recente</h2>
+            <ul class="activity-list">
+                <?php if (count($atividadesRecentes) > 0): ?>
+                    <?php foreach ($atividadesRecentes as $atividade): 
+                        $info = obterInfoAtividade($atividade['tipo']);
+                    ?>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas <?php echo $info['icon']; ?>"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title"><?php echo $info['title']; ?></div>
+                            <div class="activity-desc">
+                                <?php 
+                                if ($atividade['tipo'] == 'novo_membro' && !empty($atividade['nome'])) {
+                                    echo $atividade['nome'] . ' foi cadastrado no sistema';
+                                } elseif ($atividade['tipo'] == 'escala_atualizada' && !empty($atividade['descricao'])) {
+                                    echo $atividade['descricao'] . ' foi publicada';
+                                } elseif ($atividade['tipo'] == 'relatorio_gerado' && !empty($atividade['nome'])) {
+                                    echo 'Relatório do ' . $atividade['nome'] . ' foi enviado';
+                                } else {
+                                    echo 'Atividade realizada no sistema';
+                                }
+                                ?>
+                            </div>
+                            <div class="activity-time"><?php echo tempoDecorrido($atividade['data']); ?></div>
+                        </div>
+                    </li>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Nenhuma atividade recente</div>
+                            <div class="activity-desc">As atividades serão exibidas aqui quando disponíveis</div>
+                        </div>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
 
     <script>
         // Menu mobile toggle

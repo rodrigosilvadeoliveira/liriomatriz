@@ -43,19 +43,22 @@ $logStmt->execute();
                 header('Location: vendasVol');
                 break;
             case 'secretaria':
-                header('Location: cadastroMembrosAdm');
+                header('Location: paginainicial');
                 break;
             case 'midia':
-                header('Location: cadastroEvento');
+                header('Location: paginainicial');
                 break;
             case 'master':
-                header('Location: formularioMaster');
+                header('Location: paginainicial');
                 break;
             case 'live':
                 header('Location: cadastrolive');
                 break;
-                case 'lider':
-                header('Location: escalalouvor');
+            case 'lider':
+                header('Location: paginainicial');
+                break;
+            case 'consulta':
+                header('Location: paginainicial');
                 break;
             default:
                 header('Location: acesso_negado');

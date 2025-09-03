@@ -48,7 +48,10 @@ if(!empty($_GET['search'])) {
     }
     $resultlist = $conexao->query($sql);
 }
-
+if ($resultlist === null) {
+    $sql = "SELECT * FROM membros ORDER BY id DESC";
+    $resultlist = $conexao->query($sql);
+}
 include('calculoMembros.php');
 
 // Consulta para estatísticas
