@@ -21,6 +21,6 @@ if(isset($_POST['submitAdm']))
     $result = mysqli_query($conexao, "INSERT INTO cadastroadm(nome,usuario,senha,email,telefone,celular,nivel_acesso) 
     VALUES ('$nome','$usuario','$senha','$email','$telefone','$celular','$nivel_acesso')");
 
-header('Location: formularioMaster.php');
+header('Location: formulariolider.php');
 }
 ?>

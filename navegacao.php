@@ -31,6 +31,7 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Relatórios', 'url' => 'listar_relatoriosdep'],
         ['title' => 'Site imagens', 'url' => 'cadastroEvento'],
         ['title' => 'Site Live', 'url' => 'cadastrolive'],
+        ['title' => 'Cadastro Voluntario', 'url' => 'cadastrovoluntariadoescala'],
         ['title' => 'Escala Louvor Igreja', 'url' => 'escalalouvor'],
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
         ['title' => 'Escala Louvor GC Homens', 'url' => 'escalalouvorhomens'],
@@ -70,6 +71,8 @@ if ($perfil === 'master') {
 } elseif ($perfil === 'lider') {
     $menuOptions = [
         ['title' => 'Inicio', 'url' => 'paginainicial'],
+        ['title' => 'Cadastro Acesso', 'url' => 'formulariolider'],
+        ['title' => 'Cadastro Voluntario', 'url' => 'cadastrovoluntariadoescala'],
         ['title' => 'Escala Louvor Igreja', 'url' => 'escalalouvor'],
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
         ['title' => 'Escala Louvor GC Homens', 'url' => 'escalalouvorhomens'],
@@ -97,10 +100,13 @@ $categorizedOptions = [
         return in_array($item['url'], ['paginainicial']);
     }),
     'Administração' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], ['formularioMaster', 'cadastrodevendas', 'consulta_logs', 'consultaacessos']);
+        return in_array($item['url'], ['formularioMaster', "formulariolider", 'cadastrodevendas', 'consulta_logs', 'consultaacessos']);
     }),
     'Membros' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['cadastroMembrosAdm', 'consulta_membros', 'consulta_niver']);
+    }),
+    'Voluntario' => array_filter($menuOptions, function($item) {
+        return in_array($item['url'], ['cadastrovoluntariadoescala']);
     }),
     'Escala Louvor' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escalalouvor','escalalouvorkids', 'escalalouvorhomens', 'escalalouvormulheres','consultaescala','consultaescalavol']);

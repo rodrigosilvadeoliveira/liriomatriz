@@ -204,7 +204,7 @@ $logado = $_SESSION['usuario'];
                 <h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>Informações do Volintario(a)</h5>
             </div>
                 
-                <form method="POST" action="enviarcadastroadm.php" enctype="multipart/form-data" class="row g-3">
+                <form method="POST" action="enviarcadastrolider.php" enctype="multipart/form-data" class="row g-3">
                     <div class="col-md-6">
                         <label for="nome" class="form-label -field">*Nome completo</label>
                         <input type="text" name="nome" id="nome" class="form-control" >
@@ -235,14 +235,9 @@ $logado = $_SESSION['usuario'];
     <label for="inputState" class="form-label">*Perfil:</label>
     <select id="nivel_acesso" class="form-select" name="nivel_acesso">
     <option value="">Selecione</option>
-    <option value="admin">Administrador</option>
     <option value="consulta">Consulta</option>
     <option value="lider">Lider</option>
-    <option value="live">Live</option>
-    <option value="master">Master</option>
-    <option value="midia">Midias</option>
-    <option value="secretaria">Secretaria</option>
-    <option value="voluntario">Voluntário</option>
+    
     </select>
 </div>
                     <div class="col-12 mt-4">
