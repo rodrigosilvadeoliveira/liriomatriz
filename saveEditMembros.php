@@ -88,7 +88,7 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
-    echo "<script>alert('Membro atualizado com sucesso!'); window.location.href='consulta_membros_busca.php';</script>";
+    echo "<script>alert('Membro atualizado com sucesso!'); window.location.href='consulta_membros.php';</script>";
 } else {
     echo "Erro ao atualizar: " . $stmt->error;
 }

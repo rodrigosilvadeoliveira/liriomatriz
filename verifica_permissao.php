@@ -50,6 +50,8 @@ $permissoes = [
     'edit_formularioMembros.php' => ['secretaria', 'master'],
     'cadastroEvento.php' => ['midia', 'master'],
     'cadastroevento.php' => ['midia', 'master'],
+    'cadastrovoluntariadoescala' => ['lider','master'],
+    'consulta_voluntariado' => ['lider','master'],
     'escalalouvor.php' => ['lider','master'],
     'escalalouvorkids' => ['lider','master'],
     'escalasom.php' => ['lider','master'],
@@ -64,6 +66,7 @@ $permissoes = [
     'consultaescalavol' => ['consulta'],
     'consultaescalasomvol' => ['consulta'],
     'consultaescalamidiasvol' => ['consulta'],
+    'formulariolider' => ['lider'],
     
 
     

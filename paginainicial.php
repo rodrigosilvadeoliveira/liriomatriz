@@ -30,6 +30,8 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Relatórios', 'url' => 'listar_relatoriosdep'],
         ['title' => 'Site imagens', 'url' => 'cadastroEvento'],
         ['title' => 'Site Live', 'url' => 'cadastrolive'],
+        ['title' => 'Cadastro Voluntario', 'url' => 'cadastrovoluntariadoescala'],
+        ['title' => 'Consulta Voluntario', 'url' => 'consulta_voluntariado'],
         ['title' => 'Escala Louvor Igreja', 'url' => 'escalalouvor'],
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
         ['title' => 'Escala Louvor GC Homens', 'url' => 'escalalouvorhomens'],
@@ -68,6 +70,8 @@ if ($perfil === 'master') {
 } elseif ($perfil === 'lider') {
     $menuOptions = [
         ['title' => 'Inicio', 'url' => 'paginainicial'],
+        ['title' => 'Cadastro Acesso', 'url' => 'formulariolider'],
+        ['title' => 'Cadastro Voluntario', 'url' => 'cadastrovoluntariadoescala'],
         ['title' => 'Escala Louvor Igreja', 'url' => 'escalalouvor'],
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
         ['title' => 'Escala Louvor GC Homens', 'url' => 'escalalouvorhomens'],
@@ -97,10 +101,13 @@ if ($perfil === 'master') {
 // Agrupar opções por categoria para melhor organização
 $categorizedOptions = [
     'Administração' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], ['formularioMaster', 'cadastrodevendas', 'consulta_logs', 'consultaacessos']);
+        return in_array($item['url'], ['formularioMaster', 'formulariolider', 'cadastrodevendas', 'consulta_logs', 'consultaacessos']);
     }),
     'Membros' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['cadastroMembrosAdm', 'consulta_membros', 'consulta_niver']);
+    }),
+    'Voluntario' => array_filter($menuOptions, function($item) {
+        return in_array($item['url'], ['cadastrovoluntariadoescala','consulta_voluntariado']);
     }),
     'Escala Louvor' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escalalouvor','escalalouvorkids', 'escalalouvorhomens', 'escalalouvormulheres','consultaescala','consultaescalavol']);
@@ -122,6 +129,12 @@ $categorizedOptions = [
     })
 ];
 
+
+                                            $sqlTotal = "SELECT COUNT(*) as total FROM membros";
+                                            $resultTotal = $conexao->query($sqlTotal);
+                                            $rowTotal = $resultTotal->fetch_assoc();
+                                            
+                                            
 // Remover categorias vazias
 $categorizedOptions = array_filter($categorizedOptions);
 
@@ -135,7 +148,7 @@ if ($perfil === 'master') {
             'title' => 'Total de Membros',
             'content' => 'Visualize o número total de membros cadastrados no sistema.',
             'link' => 'consulta_membros',
-            'stats' => '1.245',
+            'stats' => $rowTotal['total'],
             'color' => '#3498db'
         ],
         [
