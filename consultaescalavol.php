@@ -12,7 +12,7 @@ if((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
 $logado = $_SESSION['usuario'];
 
 // Buscar lista de escalas salvas
-$sql = "SELECT id, nome, imagem FROM escalas_salvas ORDER BY id DESC";
+$sql = "SELECT id, nome, imagem FROM escalas_louvor ORDER BY id DESC";
 $res = $conexao->query($sql);
 $escalas = [];
 while($row = $res->fetch_assoc()){
