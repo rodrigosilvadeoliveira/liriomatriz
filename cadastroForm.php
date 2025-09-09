@@ -1,4 +1,3 @@
-<?php include("cabecalhoIgreja.php")?>
 <?php
 include('verificarLogin.php');
 verificarLogin();
@@ -93,6 +92,7 @@ header('Location: cadastroForm.php');
     <br>
     <select id="inscricao" class="form-select" name="inscricao" required>
         <option value="curso_arena">Arena</option>
+        <option value="jantar_casais">Jantar de Casais</option>
         <option value="curso_lirioplay">Lirio Play</option>
         <option value="curso_mergulhar">Mergulhar</option>
         <option value="primeiros_passos">Primeiros Passos</option>
@@ -123,6 +123,7 @@ header('Location: cadastroForm.php');
   
 </form>
 </fieldset>
+<div class="table-container">
 <table class="table" id="tabelaLista" style="width: 99%;">
   <thead>
     <tr>

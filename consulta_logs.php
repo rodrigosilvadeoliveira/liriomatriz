@@ -73,6 +73,7 @@ include_once('config.php');
 </fieldset>
 
 <div>
+<div class="table-container">
 <table class="table" id="tabelaLista">
   <thead>
     <tr>
