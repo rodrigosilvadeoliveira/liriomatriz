@@ -16,7 +16,7 @@ $resultlist = null;
 $escalaSalva = null;
 
 // Buscar sempre o último registro salvo (pela data ou pelo id maior)
-$sql = "SELECT * FROM escalas_salvas ORDER BY id DESC LIMIT 1";
+$sql = "SELECT * FROM escalas_louvor ORDER BY id DESC LIMIT 1";
 // Se preferir pela data: 
 // $sql = "SELECT * FROM escalas_salvas ORDER BY data_atualizacao DESC LIMIT 1";
 
@@ -919,7 +919,7 @@ td.appendChild(wrap);
   // Função para salvar/atualizar escala no banco de dados
   function salvarEscalaNoBanco(escalaData, blobImagem, callback) {
   const formData = new FormData();
-  formData.append('acao', 'salvar_escala');
+  formData.append('acao', 'salvar_escalalouvor');
   formData.append('dados', JSON.stringify(escalaData));
 
   // 🔥 adiciona a imagem como arquivo
@@ -927,7 +927,7 @@ td.appendChild(wrap);
     formData.append('imagem', blobImagem, 'escala.png');
   }
 
-  fetch('salvar_escala.php', {
+  fetch('salvar_escalalouvor.php', {
     method: 'POST',
     body: formData
   })

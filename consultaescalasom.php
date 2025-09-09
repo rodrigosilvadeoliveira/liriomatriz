@@ -117,7 +117,7 @@ function diaSemana($dataIso) {
             } else {
                 if(detalhesDiv.is(":empty")){
                     // Requisição AJAX para carregar dados da escala
-                    $.get("carregar_escala.php", {id:id}, function(html){
+                    $.get("carregar_escalasom.php", {id:id}, function(html){
                         detalhesDiv.html(html).slideDown();
                     });
                 } else {

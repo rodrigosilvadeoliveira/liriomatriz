@@ -56,7 +56,7 @@ if (table_exists($conexao, 'escalas_membros')) {
     $stmt = $conexao->prepare(
         "SELECT es.nome AS escala_nome, em.escala_id 
          FROM escalas_membros em
-         JOIN escalas_salvas es ON em.escala_id = es.id
+         JOIN escalas_louvor es ON em.escala_id = es.id
          WHERE em.musico_nome = ? AND em.data = ?"
     );
     if (!$stmt) {
@@ -81,7 +81,7 @@ if (table_exists($conexao, 'escalas_membros')) {
     $stmt->close();
 } else {
     /* 2) Fallback: varrer tabelas com coluna dados_escala JSON */
-    $tablesToCheck = ['escalas_midias','escalas_som', 'escalas_salvas'];
+    $tablesToCheck = ['escalas_midias','escalas_som', 'escalas_louvor'];
     foreach ($tablesToCheck as $table) {
         if (!table_exists($conexao, $table)) continue;
 

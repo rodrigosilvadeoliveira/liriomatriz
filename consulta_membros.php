@@ -20,6 +20,7 @@ if(!empty($_GET['search'])) {
             WHERE id LIKE '%$data%' 
             OR nome LIKE '%$data%' 
             OR email LIKE '%$data%' 
+            OR departamentos LIKE '%$data%'
             ORDER BY nome ASC";
     $resultlist = $conexao->query($sql);
 } else if(isset($_GET['filtro'])) {
