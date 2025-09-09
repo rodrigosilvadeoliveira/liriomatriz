@@ -45,11 +45,11 @@ include('verifica_permissao.php');
     <input type="email"  name="email" id="email" class="form-control">
   </div>
   
-  <div class="col-3">
+  <div class="col-5">
     <label for="telefone" class="form-label">*Telefone</label>
     <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="dd numero">
   </div>
-  <div class="col-3">
+  <div class="col-5">
     <label for="celular" class="form-label">Celular</label>
     <input type="tel" class="form-control" name="celular" id="celular" placeholder="dd numero" required>
   </div>

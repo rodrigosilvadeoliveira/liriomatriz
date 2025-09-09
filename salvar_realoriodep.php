@@ -11,20 +11,23 @@ if ($conexao->connect_error) {
 // 1. Pega os dados principais do relatório
 $departamento   = $_POST['departamento'];
 $evento         = $_POST['evento'];
+$lideranca      = $_POST['lideranca'];
 $data           = $_POST['data'];
 $tema           = $_POST['tema'];
 $qtdpresentes   = $_POST['qtdpresentes'];
+$pessoas        = $_POST['pessoas'];
 $atividades     = $_POST['atividades'];
 $metas          = $_POST['metas'];
 $dificuldades   = $_POST['dificuldades'];
 $solucoes       = $_POST['solucoes'];
+$materiais       = $_POST['materiais'];
 $recursos       = $_POST['recursos'];
 $proxatividade  = $_POST['proxatividade'];
 $impacto        = $_POST['impacto'];
 
 // 2. Insere os dados principais
-$stmt = $conexao->prepare("INSERT INTO relatorios (departamento, evento, data, tema, qtdpresentes, atividades, metas, dificuldades, solucoes, recursos, proxatividade, impacto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssisssssss", $departamento, $evento, $data, $tema, $qtdpresentes, $atividades, $metas, $dificuldades, $solucoes, $recursos, $proxatividade, $impacto);
+$stmt = $conexao->prepare("INSERT INTO relatorios (departamento, evento, lideranca, data, tema, qtdpresentes, pessoas, atividades, metas, dificuldades, solucoes, materiais, recursos, proxatividade, impacto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("sssssisssssssss", $departamento, $evento, $lideranca, $data, $tema, $qtdpresentes, $pessoas, $atividades, $metas, $dificuldades, $solucoes, $materiais, $recursos, $proxatividade, $impacto);
 $stmt->execute();
 
 // 3. Pega o ID do relatório recém-inserido
@@ -43,7 +46,7 @@ for ($i = 0; $i < count($produtos); $i++) {
   $valor = floatval($valores[$i]);
   
   if ($stmtItem->execute()) {
-    echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href='relatorioDepartamento.php';</script>";
+    echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href='listar_relatoriosdep.php';</script>";
   } else {
     echo "Erro ao cadastrar: " . $stmt->error;
   }
