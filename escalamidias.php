@@ -18,7 +18,7 @@ $escalaSalva = null;
 // Buscar sempre o último registro salvo (pela data ou pelo id maior)
 $sql = "SELECT * FROM escalas_midias ORDER BY id DESC LIMIT 1";
 // Se preferir pela data: 
-// $sql = "SELECT * FROM escalas_midias ORDER BY data_atualizacao DESC LIMIT 1";
+// $sql = "SELECT * FROM escalas_salvas ORDER BY data_atualizacao DESC LIMIT 1";
 
 $result = $conexao->query($sql);
 
@@ -184,7 +184,13 @@ $escalaSalvaJSON = $escalaSalva ? json_encode($escalaSalva, JSON_UNESCAPED_UNICO
       </table>
     </div>
     
+    
+
+    
     <div class="action-buttons">
+      <button type="button" id="btnValidate" class="btn btn-warning">
+  <i class="fas fa-check"></i> Validar Escala
+      </button>
       <button type="button" id="btnSave" class="btn btn-info">
         <i class="fas fa-save"></i> Salvar Escala
       </button>
@@ -1009,6 +1015,42 @@ td.appendChild(wrap);
   <?php if ($escalaSalva): ?>
   carregarEscalaSalva('<?php echo addslashes($escalaSalva['dados_escala']); ?>');
   <?php endif; ?>
+
+  // Função para validar escala
+function validarEscala() {
+  const escalaData = getEscalaData();
+
+  if (escalaData.datas.length === 0) {
+    showToast('Adicione ao menos uma data para validar.', 'error');
+    return;
+  }
+
+  fetch('validar_escala.php', {
+    method: 'POST',
+    body: new URLSearchParams({
+      dados: JSON.stringify(escalaData)
+    })
+  })
+  .then(r => r.json())
+  .then(res => {
+    if (res.success) {
+      showToast(res.message, 'success');
+      alert(res.message);
+    } else {
+      showToast('Conflitos encontrados!', 'error');
+      // Mostra conflitos detalhados em modal/alert
+      alert(res.message);
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    showToast('Erro ao validar escala.', 'error');
+  });
+}
+
+// Ativar botão
+document.getElementById('btnValidate').addEventListener('click', validarEscala);
+
 </script>
 
 </body>
