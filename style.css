@@ -400,18 +400,46 @@ display: none;
     font-size: 40px;
 
 }
-#incluirCadastro{
+.butnavegacao{
     margin-left: 15px;
-    background-image: linear-gradient(to right, rgb(172, 16, 130), rgb(90,20,220));
+    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
     width: auto;
     border: none;
     padding: 10px;
     color: white;
-    font-size: 15px;
+    font-size: 20px;
     cursor: pointer;
     border-radius: 10px;  
     align-items: flex-start;
+    text-decoration: none;
 }
+.butnavegacaoum{
+    margin-left: 15px;
+    background-image: linear-gradient(to right, rgb(57, 58, 113), rgb(57, 58, 113));
+    width: auto;
+    border: none;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;  
+    align-items: flex-start;
+    text-decoration: none;
+}
+.butnavegacaodois{
+    margin-left: 15px;
+    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
+    width: auto;
+    border: none;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;  
+    align-items: flex-start;
+    text-decoration: none;
+}
+
 #menuHeader{
     margin-left: 15px;
     background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
@@ -423,8 +451,9 @@ display: none;
     cursor: pointer;
     border-radius: 10px;  
     align-items: flex-start;
+    text-decoration: none;
 }
-#cons_Adm{
+.opcoesloja{
     margin-left: 15px;
     background-image: linear-gradient(to right, rgb(172, 16, 130), rgb(90,20,220));
     width: 10%;
@@ -437,6 +466,11 @@ display: none;
     border-radius: 10px;
     
     
+}
+
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 #tabelaLista{
@@ -462,7 +496,7 @@ padding-right: 2%;
     display: none;
     }
 .imagenscarroussel{
-    width: 50%;
+    width: 47%;
     height: 5%;
     margin: 5px;
     padding: 2%;
@@ -571,13 +605,12 @@ padding-right: 2%;
     white-space: nowrap;
 }
 #tabelaSite {
-    width: 100%;
-    max-width: 100%;
-    overflow: auto;
-    margin-top: 2%;
-    margin-left: 1%;
-    overflow-x: auto; /* Adiciona rolagem lateral */
-    white-space: nowrap;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;     /* apenas rolagem horizontal */
+  margin-top: 2%;
+  margin-left: 1%;
+  white-space: nowrap;
 }
 
 #tabelaSite table {
@@ -627,6 +660,7 @@ padding-right: 2%;
     justify-content: flex-start;
     display: flex;
     flex-wrap: nowrap;
+    overflow-x: auto;
     
 }
 .produtos {
@@ -654,6 +688,17 @@ padding-right: 2%;
     width: 100%;
     
     
+}
+.imgvoluntariado{
+    width: 80%;
+    height: 80%;
+    margin-left: 7%;
+}
+.doacoes{
+    width: 57%;
+    margin-left: 20%;
+    margin-top: 12%;
+
 }
 .linkredirect {
     width: 90%;
@@ -717,7 +762,7 @@ padding-right: 2%;
     margin-top: 160px;
     text-align: center;
     font-family:  'Times New Roman', Times, serif;
-    color: ;
+    
 }
 .diaHoje {
     text-align: center;
@@ -728,15 +773,13 @@ padding-right: 2%;
 }
 
 #titulocategoria{
-    margin-top: 3%;
+    margin-top: 1%;
     text-align: center;
     font-family: cursive;
     
 }
 
-img {
-    max-width: 100%;
-  }
+
   .preview {
     width: 120px;
     height: 160px; /* proporção 3x4 */
@@ -821,6 +864,18 @@ img {
     margin-top: 2%;
 }
 
+ .imagensMembros {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  background-color: #f9f9f9;
+}
+
+
 
 @media (max-width: 1400px) {
     .imagens{
@@ -838,7 +893,7 @@ img {
         box-sizing: border-box;
     }
     .imagensMembros {
-        width: 100px;
+        width: 120px;
         height: 100px;
         object-fit: cover;
         border-radius: 4px;
@@ -957,11 +1012,11 @@ img {
         margin-top: 10%;
     }
     .imagenscarroussel{
-        margin-top: 3%;
-        width: 100%;
+        margin-top: -1%;
+        width: 60%;
         height: 90%;
         padding: 2%;
-        margin-left: -1%;
+        margin-left: 20%;
     
     }
     #titulocategoria{
@@ -1016,7 +1071,7 @@ border-radius: 10px;
     top: 0;
     left: 0;
     width: 100%;
-    height: 60%;
+    height: 90%;
     background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -1040,6 +1095,15 @@ video {
 }
 #closeModal{
     margin-top: 2%;
+}
+#tabelaSite {
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+    margin-top: 2%;
+    margin-left: 1%;
+    overflow-x: auto; /* Adiciona rolagem lateral */
+    white-space: nowrap;
 }
 }
 
@@ -1091,11 +1155,11 @@ video {
         margin-left: -1%;
     }
     .imagenscarroussel{
-        margin-top: 10%;
-        width: 100%;
+        margin-top: -1%;
+        width: 73%;
         height: 90%;
         padding: 2%;
-        margin-left: -1%;
+        margin-left: 13%;
     
     }
     #titulocategoria{
@@ -1137,9 +1201,19 @@ video {
     margin-top: 4%;
 }
 
+.boxformularioAdm{
+
+    width: 96%;
+    
+}
+
 }
 
 @media (max-width: 541px){
+    .opcoesloja{
+    width: 20%;
+    
+}
     .btn-group{
         
         width: 45%;
@@ -1166,7 +1240,7 @@ video {
          }
          
           #logoLiriocabecalhoMobile{
-        width: 20%;
+        width: 17%;
         height: 20%;
          }
          .navbar-toggler{
@@ -1211,8 +1285,8 @@ video {
     
     }
     .imagens{
-        width: 200px;
-        height: 200px;
+        width: 296px;
+        height: 296px;
         margin: 1px;
         /* max-width: 150px; Ajuste o tamanho das imagens conforme necessário*/
         
@@ -1288,7 +1362,11 @@ video {
         width: 72%;
     }
     .atalhos{
-        margin-top: 6%;
+        margin-top: 12%;
+    }
+    .login{
+
+        width: 82%;
     }
 }
 
@@ -1296,7 +1374,10 @@ video {
     #cabecalho{
         display: none;
     }
-
+ #logoLiriocabecalhoMobile{
+        width: 26%;
+        height: 20%;
+    }
  .tela-login{
         margin-top: 3%;
         width: 39%;
@@ -1374,7 +1455,7 @@ video {
         margin-left: 10%;
     }
     .produtos-container {
-        margin-top: 1%;   
+        margin-top: 0%;   
         margin-left: 2%;
     }
     .modal-body.text-center{
@@ -1398,7 +1479,6 @@ video {
         display: none;
       }
       
-      
       .btn.btn-outline-primary i.bi {
         margin-right: 0;
         font-size: 1rem;
@@ -1408,13 +1488,7 @@ video {
         margin-left: 15%;
       }
       
-      .imagens{
-        width: 300px;
-        height: 300px;
-        margin: 1px;
-        /* max-width: 150px; Ajuste o tamanho das imagens conforme necessário*/
-        
-    }
+  
     
     #cncmodal{
         margin-left: -14%;
@@ -1426,6 +1500,10 @@ video {
         height: 40%;
     }
     .atalhos{
-        margin-top: 8%;
+        margin-top: 12%;
+    }
+    .login{
+
+        width: 97%;
     }
 }
