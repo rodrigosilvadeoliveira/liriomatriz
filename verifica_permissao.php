@@ -1,8 +1,11 @@
 <?php
-// verifica_permissao.php
+
 include_once('config.php');
-// Verifica se o perfil do usuário está definido na sessão
+
 $perfil = $_SESSION['nivel_acesso'] ?? '';
+
+// Pega a página atual em letras minúsculas
+$paginaAtual = strtolower(basename($_SERVER['PHP_SELF']));
 
 // Define as permissões de acesso por página
 $permissoes = [
@@ -31,10 +34,14 @@ $permissoes = [
     'cadastroMembrosAdm' => ['secretaria', 'master'],
     'consulta_logs' => ['master'],
     'edit_formularioMembros' => ['secretaria', 'master'],
+    'consulta_niver' => ['secretaria', 'master'],
+    
     'cadastroEvento' => ['midia', 'master'],
-
+    'escalalouvor' => ['lider','master'],
+    'paginainicial.php' => ['lider','master','secretaria','midias','consulta'],
     'formularioMaster.php' => ['master'],
     'formulariomaster.php' => ['master'],
+    'cadastrodevendas' => ['master'],
     'consulta_membros.php' => ['secretaria', 'master'],
     'consulta_membros_busca.php' => ['secretaria', 'master'],
     'cadastroForm.php' => ['secretaria', 'master'],
@@ -43,18 +50,32 @@ $permissoes = [
     'edit_formularioMembros.php' => ['secretaria', 'master'],
     'cadastroEvento.php' => ['midia', 'master'],
     'cadastroevento.php' => ['midia', 'master'],
+    'cadastrovoluntariadoescala' => ['lider','master'],
+    'consulta_voluntariado' => ['lider','master'],
+    'escalalouvor.php' => ['lider','master'],
+    'escalalouvorkids' => ['lider','master'],
+    'escalasom.php' => ['lider','master'],
+    'escalamidias.php' => ['lider','master'],
+    'escalamidias' => ['lider','master'],
+    'escalalouvorhomens.php' => ['lider','master'],
+    'escalalouvormulheres.php' => ['lider','master'],
+    'consultaescala.php' => ['lider','master'],
+    'consultaescala' => ['lider','master'],
+    'consultaescalasom' => ['lider','master'],
+    'consultaescalamidias' => ['lider','master'],
+    'consultaescalavol' => ['consulta'],
+    'consultaescalasomvol' => ['consulta'],
+    'consultaescalamidiasvol' => ['consulta'],
+    'formulariolider' => ['lider'],
+    
 
     
     
 ];
 
 // Obtém o nome da página atual
-$paginaAtual = basename($_SERVER['PHP_SELF']);
-echo "Página atual: " . basename($_SERVER['PHP_SELF']);
-// Verifica se a página tem restrições e se o usuário tem permissão
 if (isset($permissoes[$paginaAtual])) {
     if (!in_array($perfil, $permissoes[$paginaAtual])) {
-        // Redireciona para uma página de acesso negado
         header("Location: acesso_negado.php");
         exit;
     }

@@ -42,8 +42,8 @@ include_once('config.php');
 ?>
 <br>
 <div class="atalhos">
-<a id="incluirCadastro" value="Novo Volutario" href="formularioAdm.php">Novo Volutario(a)</a>
-<a id="cons_Adm" value="Novo Volutario" href="consulta_Adm.php">Consultar Administradores</a>
+<a id="incluirCadastro" class="opcoesloja" href="formularioAdm.php">Novo Volutario(a)</a>
+<a id="cons_Adm" class="opcoesloja" href="consulta_Adm.php">Consultar Administradores</a>
 </div>
 <br>
 <div>

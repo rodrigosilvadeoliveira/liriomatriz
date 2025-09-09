@@ -1,4 +1,3 @@
-<?php include("cabecalhoIgreja.php")?>
 <?php
 include('verificarLogin.php');
 verificarLogin();
@@ -33,12 +32,24 @@ include_once("config.php");
 // Insira as informações da compra no banco de dados
 // Data e hora atual
 
-if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
-  $imagem = "./img/".$_FILES["imagem"]["name"];
-  move_uploaded_file($_FILES["imagem"]["tmp_name"] ,$imagem);
-}else{
-  $imagem = "";
+if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
+    $nome_original = $_FILES["imagem"]["name"];
+
+    // Substitui espaços por underlines e converte para minúsculas
+    $nome_limpo = strtolower(str_replace(' ', '_', $nome_original));
+
+    // Adiciona um timestamp para evitar nomes repetidos
+    $nome_final = time() . '_' . $nome_limpo;
+
+    $caminho_destino = "./img/" . $nome_final;
+
+    move_uploaded_file($_FILES["imagem"]["tmp_name"], $caminho_destino);
+
+    $imagem = $caminho_destino;
+} else {
+    $imagem = "";
 }
+
 $result = mysqli_query($conexao, "INSERT INTO evento(imagem) 
 VALUES ('$imagem')");
 
@@ -92,13 +103,9 @@ header('Location: cadastroEvento.php');
                 // Obtém a data atual no formato desejado
                 echo date('d/m/Y');
             ?>
-       <div id="tabelaSite">
-<div class="produtos-container">
-
-<a id="incluirCadastro" href="cadastroEvento.php" value="Novo Cadastro">Eventos</a>
-
-</div>
-</div>
+<div class="navegacao">
+   <?php include("navegacao.php")?>
+   </div>
 <fieldset class="boxformulariodoSite">
     <form id="insert_form" class="row g-3" name="cadastrodeevento" action="cadastroEvento.php" method="POST" enctype="multipart/form-data">
     
@@ -138,6 +145,7 @@ header('Location: cadastroEvento.php');
   
 </form>
 </fieldset>
+<div class="table-container">
 <table class="table" id="tabelaLista" style="width: 99%;">
   <thead>
     <tr>
@@ -156,8 +164,8 @@ header('Location: cadastroEvento.php');
         {
             echo "<tr>";
             echo "<td>" .$user_data['id']. "</td>";
-            
-            echo "<td><img class='imagensevento' src=".$user_data['imagem']." ></td>";
+            $imagem_url = str_replace(' ', '%20', $user_data['imagem']);
+    echo "<td><img class='imagensevento' src='$imagem_url'></td>";
             echo "<td>".$user_data['nomeevento']."</td>";
             echo "<td>".$user_data['cartaz']."</td>";
             echo "<td>".$user_data['links']."</td>";
