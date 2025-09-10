@@ -1,77 +1,41 @@
 <?php
 include('verificarLogin.php');
 verificarLogin();
+include('verifica_permissao.php');
 include_once('config.php');
 
-if(!empty($_GET['id'])) {
-  $id = $_GET['id'];
-  
-  // Prevenção contra SQL Injection (use prepared statements)
-  $sqlSelect = "SELECT * FROM membros WHERE id = ?";
-  $stmt = $conexao->prepare($sqlSelect);
-  $stmt->bind_param("i", $id);
-  $stmt->execute();
-  $result = $stmt->get_result();
-  
-  if($result->num_rows > 0) {
-      $user_data = $result->fetch_assoc();
-      
-      // Dados básicos
-      $id = $user_data['id'];
-      $nome = $user_data['nome'];
-      $sobrenome = $user_data['sobrenome'];
-      $telefone = $user_data['telefone'];
-      $email = $user_data['email'];
-      $batizado = $user_data['batizado'];
-      $voluntario = $user_data['voluntario'];
-      $lider = $user_data['lider'];
-      $status = $user_data['status'];
-      $responsavel = $user_data['responsavel'];
-      $foto = $user_data['foto'];
-      
-      // ===== TRATAMENTO DE DATAS =====
-      // Função para converter YYYY-MM-DD → DD-MM-YYYY
-      function formatarDataParaFront($data) {
-          if(empty($data) || $data == '0000-00-00') return '';
-          return date('d-m-Y', strtotime($data));
-      }
-      
-      // Convertendo datas para exibição
-      $nascimento_front = formatarDataParaFront($user_data['nascimento']);
-      
-      $datas_front = formatarDataParaFront($user_data['datas']);
-      
-      // ===== TRATAMENTO DE DEPARTAMENTOS =====
-      $departamentosCadastrados = $user_data['departamentos'];
-      $departamentosArray = !empty($departamentosCadastrados) ? explode(',', $departamentosCadastrados) : [];
-      
-      $departamentosOptions = [
-          'Criativo' => 'Criativo',
-          'Consagracao' => 'Consagração',
-          'Coral' => 'Coral',
-          'Danca' => 'Dança',
-          'Intercessao' => 'Intercessão',
-          'Kids' => 'Kids',
-          'Loja' => 'Loja',
-          'Louvor' => 'Louvor',
-          'Midias' => 'Midias',
-          'Oficiais' => 'Oficiais',
-          'Recepcao' => 'Recepção',
-          'Staff' => 'Staff',
-          'Sala_voluntarios' => 'Sala Voluntários',
-          'Som' => 'Mesa de Som',
-          'Teatro' => 'Teatro',
-          'Visitas' => 'Visitas'
-      ];
-      
-  } else {
-      header('Location: consulta_Membros_busca.php');
-      exit();
-  }
-} else {
-  header('Location: consulta_Membros_busca.php');
-  exit();
+// Verificar se foi passado um ID pela URL
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header('Location: listar_voluntarios.php');
+    exit();
 }
+
+$id_voluntario = $_GET['id'];
+
+// Verifica login
+if ((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
+    unset($_SESSION['usuario']);
+    unset($_SESSION['senha']);
+    header('Location: login.php');
+}
+$logado = $_SESSION['usuario'];
+
+// Consultar dados do voluntário no banco de dados
+$sql = "SELECT * FROM musicos WHERE id = ?";
+$stmt = $conexao->prepare($sql);
+$stmt->bind_param("i", $id_voluntario);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    header('Location: listar_voluntarios.php?erro=1');
+    exit();
+}
+
+$voluntario = $result->fetch_assoc();
+
+// Verifica imagem cortada da sessão ou usa a existente do banco
+$imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : (isset($voluntario['foto']) ? $voluntario['foto'] : '');
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +43,7 @@ if(!empty($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Membro</title>
+    <title>Edição de Voluntário</title>
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     
     <!-- Bootstrap CSS -->
@@ -92,6 +56,8 @@ if(!empty($_GET['id'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
     
     <style>
+        /* ... (seus estilos CSS permanecem os mesmos) ... */
+  
         :root {
             --primary-color: #4e73df;
             --secondary-color: #6f42c1;
@@ -130,7 +96,7 @@ if(!empty($_GET['id'])) {
             margin-bottom: 5px;
         }
         
-        .required-field::after {
+        .-field::after {
             content: " *";
             color: #dc3545;
         }
@@ -229,20 +195,11 @@ if(!empty($_GET['id'])) {
             gap: 10px;
         }
         
-        .current-photo {
-            width: 100px;
-            height: 133px;
-            object-fit: cover;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-        
         @media (max-width: 768px) {
             .departamentos-grid {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
-        }
-    </style>
+        }  </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -253,7 +210,7 @@ if(!empty($_GET['id'])) {
     <div class="container">
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
-            <h1 class="h3 text-gray-800"><i class="fas fa-user-edit me-2"></i>Editar Cadastro de Membro</h1>
+            <h1 class="h3 text-gray-800"><i class="fas fa-user-edit me-2"></i>Edição de Voluntário</h1>
             <div>
                 <?php include("navegacao.php") ?>
             </div>
@@ -261,198 +218,165 @@ if(!empty($_GET['id'])) {
         
         <!-- Mensagem de Boas-Vindas -->
         <div class="alert alert-primary mb-4">
-            <i class="fas fa-user me-2"></i> Bem-vindo, <strong><?php echo $_SESSION['usuario']; ?></strong>
+            <i class="fas fa-user me-2"></i> Bem-vindo, <strong><?php echo $logado; ?></strong>
         </div>
 
         <!-- Formulário -->
         <div class="card card-form">
             <div class="card-header card-header-custom">
-                <h5 class="card-title mb-0"><i class="fas fa-user-circle me-2"></i>Dados do Membro</h5>
+                <h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>Informações do Membro</h5>
             </div>
             <div class="card-body">
-                <form class="row g-3" action="saveEditMembros.php" method="POST" enctype="multipart/form-data">
-                    <!-- Foto atual -->
-                    <div class="col-md-12 mb-4">
-                        <div class="d-flex align-items-center">
-                            <div class="me-3">
-                                <img class="current-photo" src="uploads/<?php echo $foto ?>" alt="Foto atual do membro">
-                            </div>
-                            <div>
-                                <h6>Foto atual</h6>
-                                <small class="text-muted"><?php echo htmlspecialchars($foto); ?></small>
-                                <input type="hidden" name="imagem_atual" value="<?php echo htmlspecialchars($foto); ?>">
-                            </div>
+                <?php if (!empty($imagem)): ?>
+                <div class="row mb-4">
+                    <div class="col-md-4 mx-auto">
+                        <div class="profile-preview">
+                            <h5 class="mb-3">Prévia do Perfil</h5>
+                            <img src="<?php echo htmlspecialchars($imagem); ?>" alt="Imagem do usuário">
+                            <div class="fw-bold"><?php echo htmlspecialchars($voluntario['nome']); ?></div>
                         </div>
                     </div>
-
+                </div>
+                <?php endif; ?>
+                
+                <form method="POST" action="atualizar_voluntariado_escala.php" enctype="multipart/form-data" class="row g-3">
+                    <!-- Campo oculto para ID do voluntário -->
+                    <input type="hidden" name="id" value="<?php echo $id_voluntario; ?>">
+                    
                     <div class="col-md-6">
-                        <label for="nome" class="form-label required-field">Nome</label>
-                        <input type="text" name="nome" id="nome" class="form-control" value="<?php echo $nome?>" required>
+                        <label for="nome" class="form-label -field">Nome</label>
+                        <input type="text" name="nome" id="nome" class="form-control" value="<?php echo htmlspecialchars($voluntario['nome']); ?>" required>
                     </div>
-
+                    
+                                      
+                    <h2 class="mt-4">Voluntários Músicos</h2>
+                    
                     <div class="col-md-6">
-                        <label for="sobrenome" class="form-label required-field">Sobrenome</label>
-                        <input type="text" name="sobrenome" id="sobrenome" class="form-control" value="<?php echo $sobrenome?>" required>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="nascimento-text" class="form-label required-field">Data de Nascimento</label>
-                        <input type="date" name="nascimento" id="nascimento-date" class="form-control d-none">
-                        <input type="text" name="nascimento_text" id="nascimento-text" class="form-control" 
-                               placeholder="DD/MM/AAAA" 
-                               maxlength="10"
-                               oninput="formatarDataAuto(this, 'nascimento-date')"
-                               onkeydown="permitirApenasNumeros(event)"
-                               onblur="validarDataFinal(this, 'nascimento-date')" 
-                               value="<?= htmlspecialchars($nascimento_front) ?>" required>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="batizado" class="form-label required-field">Batizado</label>
-                        <select id="batizado" class="form-select" name="batizado" required>
-                            <option value="<?php echo $batizado?>" selected><?php echo ucfirst($batizado)?></option>
-                            <option value="não">Não</option>
-                            <option value="sim">Sim</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="datas-text" class="form-label required-field">Membro desde</label>
-                        <input type="date" name="datas" id="datas-date" class="form-control d-none">
-                        <input type="text" name="datas_text" id="datas-text" class="form-control" 
-                               placeholder="DD/MM/AAAA" 
-                               maxlength="10"
-                               oninput="formatarDataAuto(this, 'datas-date')"
-                               onkeydown="permitirApenasNumeros(event)"
-                               onblur="validarDataFinal(this, 'datas-date')" 
-                               value="<?= htmlspecialchars($datas_front) ?>" required>
+                        <label for="bateria" class="form-label">Bateria</label>
+                        <input type="text" name="bateria" id="bateria" class="form-control" value="<?php echo htmlspecialchars($voluntario['bateria'] ?? ''); ?>">
                     </div>
 
                     <div class="col-md-6">
-                        <label for="telefone" class="form-label required-field">Telefone</label>
-                        <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="(00) 00000-0000" value="<?php echo $telefone?>" required>
+                        <label for="violao" class="form-label">Violão</label>
+                        <input type="text" name="violao" id="violao" class="form-control" value="<?php echo htmlspecialchars($voluntario['violao'] ?? ''); ?>">
                     </div>
-
+                    
+                    <!-- Continue para todos os outros campos, preenchendo com os valores do banco -->
                     <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" value="<?php echo $email?>">
+                        <label for="teclado" class="form-label">Teclado</label>
+                        <input type="text" name="teclado" id="teclado" class="form-control" value="<?php echo htmlspecialchars($voluntario['teclado'] ?? ''); ?>">
                     </div>
-
                     <div class="col-md-6">
-                        <label for="voluntario" class="form-label required-field">Voluntário</label>
-                        <select id="voluntario" class="form-select" name="voluntario" required>
-                            <option value="<?php echo $voluntario?>" selected><?php echo ucfirst($voluntario)?></option>
-                            <option value="sim">Sim</option>
-                            <option value="não">Não</option>
-                        </select>
+                        <label for="baixo" class="form-label -field">Baixo</label>
+                        <input type="text" name="baixo" id="baixo" class="form-control" value="<?php echo htmlspecialchars($voluntario['baixo'] ?? ''); ?>">
                     </div>
-
                     <div class="col-md-6">
-                        <label for="lider" class="form-label required-field">Líder</label>
-                        <select id="lider" class="form-select" name="lider" required>
-                            <option value="<?php echo $lider?>" selected>
-                                <?php 
-                                $liderLabels = [
-                                    'não' => 'Não',
-                                    'consagracao' => 'Consagração',
-                                    'coral' => 'Coral',
-                                    'criativo' => 'Criativo',
-                                    'danca' => 'Dança',
-                                    'gccasados' => 'GC Casados',
-                                    'gcjovens' => 'GC Jovens',
-                                    'intercessao' => 'Intercessão',
-                                    'Kids' => 'Kids',
-                                    'loja' => 'Loja',
-                                    'louvor' => 'Louvor',
-                                    'midias' => 'Mídias',
-                                    'oficiais' => 'Oficiais',
-                                    'recepcao' => 'Recepção',
-                                    'salavoluntarios' => 'Sala Voluntários',
-                                    'som' => 'Mesa de Som',
-                                    'teatro' => 'Teatro',
-                                    'transito' => 'Trânsito',
-                                    'visitas' => 'Visitas'
-                                ];
-                                echo isset($liderLabels[$lider]) ? $liderLabels[$lider] : ucfirst($lider);
-                                ?>
-                            </option>
-                            <option value="não">Não</option>
-                            <option value="consagracao">Consagração</option>
-                            <option value="coral">Coral</option>
-                            <option value="criativo">Criativo</option>
-                            <option value="danca">Dança</option>
-                            <option value="gccasados">GC Casados</option>
-                            <option value="gcjovens">GC Jovens</option>
-                            <option value="intercessao">Intercessão</option>
-                            <option value="Kids">Kids</option>
-                            <option value="loja">Loja</option>
-                            <option value="louvor">Louvor</option>
-                            <option value="midias">Mídias</option>
-                            <option value="oficiais">Oficiais</option>
-                            <option value="recepcao">Recepção</option>
-                            <option value="salavoluntarios">Sala Voluntários</option>
-                            <option value="som">Mesa de Som</option>
-                            <option value="teatro">Teatro</option>
-                            <option value="transito">Trânsito</option>
-                            <option value="visitas">Visitas</option>
-                        </select>
+                        <label for="ministro" class="form-label -field">Ministro</label>
+                        <input type="text" name="ministro" id="ministro" class="form-control" value="<?php echo htmlspecialchars($voluntario['ministro'] ?? ''); ?>">
                     </div>
-
-                    <div class="col-12">
-                        <label class="form-label">Voluntário em qual(is) departamento(s):</label>
-                        <div class="departamentos-grid">
-                            <?php foreach ($departamentosOptions as $value => $label): ?>
-                                <?php $checked = in_array($value, $departamentosArray) ? 'checked' : ''; ?>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="departamentoum[]" 
-                                           value="<?= $value ?>" id="dept<?= $value ?>" <?= $checked ?>>
-                                    <label class="form-check-label" for="dept<?= $value ?>"><?= $label ?></label>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                        <small class="text-muted">* Selecione no máximo 3 departamentos</small>
-                    </div>
-
                     <div class="col-md-6">
-                        <label for="status" class="form-label required-field">Status do Membro</label>
-                        <select id="status" class="form-select" name="status" required>
-                            <option value="<?php echo $status?>" selected><?php echo ucfirst($status)?></option>
-                            <option value="ativo">Ativo</option>
-                            <option value="nãoAtivo">Não Ativo</option>
-                        </select>
+                        <label for="vocal1" class="form-label -field">Vocal1</label>
+                        <input type="text" name="vocal1" id="vocal1" class="form-control" value="<?php echo htmlspecialchars($voluntario['vocal1'] ?? ''); ?>">
                     </div>
-
                     <div class="col-md-6">
-                        <label for="responsavel" class="form-label">Responsável</label>
-                        <input type="text" name="responsavel" id="responsavel" class="form-control" 
-                               placeholder="Nome completo do responsável" value="<?php echo $responsavel?>">
+                        <label for="vocal2" class="form-label -field">Vocal2</label>
+                        <input type="text" name="vocal2" id="vocal2" class="form-control" value="<?php echo htmlspecialchars($voluntario['vocal2'] ?? ''); ?>">
                     </div>
-
                     <div class="col-md-6">
-                        <label for="upload_image" class="form-label">Nova Foto de Perfil</label>
+                        <label for="vocal3" class="form-label -field">Vocal3</label>
+                        <input type="text" name="vocal3" id="vocal3" class="form-control" value="<?php echo htmlspecialchars($voluntario['vocal3'] ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="talckback" class="form-label -field">Talckback</label>
+                        <input type="text" name="talckback" id="talckback" class="form-control" value="<?php echo htmlspecialchars($voluntario['talckback'] ?? ''); ?>">
+                    </div>
+                    <H1>Voluntarios Som</H1>
+                    <div class="col-md-6">
+                        <label for="igreja" class="form-label -field">Igreja</label>
+                        <input type="text" name="igreja" id="igreja" class="form-control" value="<?php echo htmlspecialchars($voluntario['igreja'] ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="live" class="form-label -field">Live</label>
+                        <input type="text" name="live" id="live" class="form-control" value="<?php echo htmlspecialchars($voluntario['live'] ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="somkids" class="form-label -field">Som Kids</label>
+                        <input type="text" name="somkids" id="somkids" class="form-control" value="<?php echo htmlspecialchars($voluntario['somkis'] ?? ''); ?>">
+                    </div>
+                    <H1>Voluntarios Midias</H1>
+                    <div class="col-md-6">
+                        <label for="ct" class="form-label -field">CT</label>
+                        <input type="text" name="ct" id="ct" class="form-control" value="<?php echo htmlspecialchars($voluntario['ct'] ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="c1" class="form-label -field">C1</label>
+                        <input type="text" name="c1" id="c1" class="form-control" value="<?php echo htmlspecialchars($voluntario['c1'] ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="c2" class="form-label -field">C2</label>
+                        <input type="text" name="c2" id="c2" class="form-control" value="<?php echo htmlspecialchars($voluntario['c2'] ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lt" class="form-label -field">LT</label>
+                        <input type="text" name="lt" id="lt" class="form-control" value="<?php echo htmlspecialchars($voluntario['lt'] ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lz" class="form-label -field">LZ</label>
+                        <input type="text" name="lz" id="lz" class="form-control" value="<?php echo htmlspecialchars($voluntario['lz'] ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="ph" class="form-label -field">PH</label>
+                        <input type="text" name="ph" id="ph" class="form-control" value="<?php echo htmlspecialchars($voluntario['ph'] ?? ''); ?>">
+                    </div>
+                        <H1>Voluntarios Dança</H1>
+                    <div class="col-md-6">
+                        <label for="danca" class="form-label -field">Dança</label>
+                        <input type="text" name="danca" id="danca" class="form-control" value="<?php echo htmlspecialchars($voluntario['danca'] ?? ''); ?>">
+                    </div>
+                    <H1>Voluntarios Criativo</H1>
+                    <div class="col-md-6">
+                        <label for="real_time" class="form-label -field">Real Time</label>
+                        <input type="text" name="real_time" id="real_time" class="form-control" value="<?php echo htmlspecialchars($voluntario['real_time'] ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="real_time_kids" class="form-label -field">Real Time Kids</label>
+                        <input type="text" name="real_time_kids" id="real_time_kids" class="form-control" value="<?php echo htmlspecialchars($voluntario['real_time_kids'] ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="recap" class="form-label -field">Recap</label>
+                        <input type="text" name="recap" id="recap" class="form-control" value="<?php echo htmlspecialchars($voluntario['recap'] ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="upload_image" class="form-label">Foto de Perfil</label>
                         <input type="file" name="upload_image" id="upload_image" accept="image/*" class="form-control">
-                        <input type="hidden" name="foto_crop" id="foto_crop">
-                        <small class="text-muted">Deixe em branco para manter a foto atual. Formatos: JPG, PNG, GIF. Tamanho máximo: 5MB</small>
+                        <input type="hidden" name="foto_crop" id="foto_crop" value="<?php echo htmlspecialchars($voluntario['foto'] ?? ''); ?>">
+                        <small class="text-muted">Deixe em branco para manter a foto atual</small>
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label">Prévia da Nova Foto</label>
+                        <label class="form-label">Prévia da Foto</label>
                         <div class="image-preview-container">
-                            <img id="preview_cropped" src="uploads/<?php echo $foto ?>" alt="Prévia da imagem">
-                            <div id="no-image-placeholder" style="display: none;">
-                                <i class="fas fa-image fa-2x mb-2"></i>
-                                <p>Nenhuma nova imagem selecionada</p>
-                            </div>
+                            <?php if (!empty($voluntario['foto'])): ?>
+                                <img id="preview_cropped" src="<?php echo htmlspecialchars($voluntario['foto']); ?>" alt="Prévia da imagem">
+                                <div id="no-image-placeholder" style="display: none;">
+                                    <i class="fas fa-image fa-2x mb-2"></i>
+                                    <p>Nenhuma imagem selecionada</p>
+                                </div>
+                            <?php else: ?>
+                                <img id="preview_cropped" src="" alt="Prévia da imagem" style="display: none;">
+                                <div id="no-image-placeholder">
+                                    <i class="fas fa-image fa-2x mb-2"></i>
+                                    <p>Nenhuma imagem selecionada</p>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
-
-                    <input type="hidden" name="id" value="<?php echo $id?>">
 
                     <div class="col-12 mt-4">
                         <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary-custom">
-                            <i class="fas fa-save me-2"></i>Salvar Alterações
+                            <i class="fas fa-save me-2"></i>Atualizar Cadastro
                         </button>
-                        <a href="consulta_Membros_busca.php" class="btn btn-secondary">
+                        <a href="listar_voluntarios.php" class="btn btn-secondary">
                             <i class="fas fa-times me-2"></i>Cancelar
                         </a>
                     </div>
@@ -476,10 +400,10 @@ if(!empty($_GET['id'])) {
                 </div>
                 <div class="modal-footer-cropper">
                     <div class="cropper-action-btn">
-                        <button type="button" class="btn btn-outline-primary" onclick="cropper.rotate(-90)">
+                        <button type="button" class="btn btn-outline-primary" id="rotate-left">
                             <i class="fas fa-undo me-1"></i> Girar Esq
                         </button>
-                        <button type="button" class="btn btn-outline-primary" onclick="cropper.rotate(90)">
+                        <button type="button" class="btn btn-outline-primary" id="rotate-right">
                             <i class="fas fa-redo me-1"></i> Girar Dir
                         </button>
                     </div>
@@ -508,6 +432,7 @@ if(!empty($_GET['id'])) {
         let cropper;
         const modal = new bootstrap.Modal(document.getElementById('modal_crop'));
 
+        // Event listener para o input de arquivo
         document.getElementById('upload_image').addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (file) {
@@ -523,9 +448,16 @@ if(!empty($_GET['id'])) {
                     const image = document.getElementById('image_crop');
                     image.src = event.target.result;
 
-                    image.onload = () => {
-                        if (cropper) cropper.destroy();
-                        
+                    // Limpar cropper anterior se existir
+                    if (cropper) {
+                        cropper.destroy();
+                    }
+                    
+                    // Mostrar o modal
+                    modal.show();
+                    
+                    // Inicializar o cropper após o modal ser mostrado completamente
+                    setTimeout(function() {
                         cropper = new Cropper(image, {
                             aspectRatio: 3 / 4,
                             viewMode: 1,
@@ -535,128 +467,74 @@ if(!empty($_GET['id'])) {
                             zoomable: true,
                             rotatable: true,
                             scalable: true,
-                            minContainerWidth: 300,
-                            minContainerHeight: 400,
                             ready: function() {
                                 cropper.crop();
                             }
                         });
-                        
-                        modal.show();
-                    };
+                    }, 300);
                 };
                 reader.readAsDataURL(file);
             }
         });
 
+        // Botões de rotação
+        document.getElementById('rotate-left').addEventListener('click', function() {
+            if (cropper) {
+                cropper.rotate(-90);
+            }
+        });
+
+        document.getElementById('rotate-right').addEventListener('click', function() {
+            if (cropper) {
+                cropper.rotate(90);
+            }
+        });
+
+        // Botão de confirmar recorte
         document.getElementById('crop_button').addEventListener('click', function () {
-            document.getElementById('no-image-placeholder').style.display = 'none';
-            
-            const canvas = cropper.getCroppedCanvas({
-                width: 600,
-                height: 800,
-                minWidth: 300,
-                minHeight: 400,
-                maxWidth: 1200,
-                maxHeight: 1600,
-                fillColor: '#fff',
-                imageSmoothingEnabled: true,
-                imageSmoothingQuality: 'high'
-            });
-            
-            if (canvas) {
-                const croppedImage = canvas.toDataURL('image/jpeg', 0.9);
-                const preview = document.getElementById('preview_cropped');
-                preview.src = croppedImage;
-                preview.style.display = 'block';
-                document.getElementById('foto_crop').value = croppedImage;
-                modal.hide();
-            } else {
-                alert('Erro ao recortar a imagem. Tente novamente.');
+            if (cropper) {
+                // Esconder placeholder e mostrar preview
+                document.getElementById('no-image-placeholder').style.display = 'none';
+                document.getElementById('preview_cropped').style.display = 'block';
+                
+                // Obter canvas recortado
+                const canvas = cropper.getCroppedCanvas({
+                    width: 300,
+                    height: 400,
+                    minWidth: 150,
+                    minHeight: 200,
+                    maxWidth: 600,
+                    maxHeight: 800,
+                    fillColor: '#fff',
+                    imageSmoothingEnabled: true,
+                    imageSmoothingQuality: 'high'
+                });
+                
+                if (canvas) {
+                    // Converter para data URL
+                    const croppedImage = canvas.toDataURL('image/jpeg', 0.9);
+                    
+                    // Atualizar preview e campo hidden
+                    const preview = document.getElementById('preview_cropped');
+                    preview.src = croppedImage;
+                    document.getElementById('foto_crop').value = croppedImage;
+                    
+                    // Fechar modal
+                    modal.hide();
+                } else {
+                    alert('Erro ao recortar a imagem. Tente novamente.');
+                }
             }
         });
 
-        // Limitar a seleção de departamentos a 3
-        const checkboxes = document.querySelectorAll('input[name="departamentoum[]"]');
-        checkboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                const checked = document.querySelectorAll('input[name="departamentoum[]"]:checked');
-                if (checked.length > 3) {
-                    this.checked = false;
-                    alert('Você pode selecionar no máximo 3 departamentos.');
-                }
-            });
+        // Limpar cropper quando o modal for fechado
+        document.getElementById('modal_crop').addEventListener('hidden.bs.modal', function () {
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            }
         });
 
-        // Funções para formatação de data
-        function permitirApenasNumeros(event) {
-            if (!/[0-9]|Backspace|Delete|ArrowLeft|ArrowRight|Tab/.test(event.key)) {
-                event.preventDefault();
-                return false;
-            }
-            return true;
-        }
-
-        function formatarDataAuto(input, dateFieldId) {
-            let value = input.value.replace(/\D/g, '');
-            
-            if (value.length > 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2);
-            }
-            if (value.length > 5) {
-                value = value.substring(0, 5) + '/' + value.substring(5);
-            }
-            
-            if (value.length > 10) {
-                value = value.substring(0, 10);
-            }
-            
-            input.value = value;
-            
-            if (value.length === 10) {
-                validarData(input, dateFieldId);
-            } else {
-                input.classList.remove('is-invalid');
-            }
-        }
-
-        function validarData(input, dateFieldId) {
-            const partes = input.value.split('/');
-            if (partes.length !== 3 || partes[0].length !== 2 || partes[1].length !== 2 || partes[2].length !== 4) {
-                input.classList.add('is-invalid');
-                return false;
-            }
-            
-            const dia = parseInt(partes[0], 10);
-            const mes = parseInt(partes[1], 10);
-            const ano = parseInt(partes[2], 10);
-            
-            if (mes < 1 || mes > 12 || dia < 1 || dia > 31 || ano < 1900 || ano > new Date().getFullYear()) {
-                input.classList.add('is-invalid');
-                return false;
-            }
-            
-            const diasPorMes = [31, (ano % 4 === 0 && (ano % 100 !== 0 || ano % 400 === 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-            if (dia > diasPorMes[mes - 1]) {
-                input.classList.add('is-invalid');
-                return false;
-            }
-            
-            input.classList.remove('is-invalid');
-            document.getElementById(dateFieldId).value = `${ano}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
-            return true;
-        }
-
-        function validarDataFinal(input, dateFieldId) {
-            if (input.value.length > 0 && input.value.length < 10) {
-                input.classList.add('is-invalid');
-            } else if (input.value.length === 10) {
-                if (!validarData(input, dateFieldId)) {
-                    input.value = '';
-                }
-            }
-        }
-        
         // Auto logout após 1 hora de inatividade
         const tempoLimite = 3600000;
         setTimeout(() => {

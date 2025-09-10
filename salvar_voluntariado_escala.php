@@ -31,6 +31,10 @@ $c2         = $_POST['c2'] ?? '';
 $lt         = $_POST['lt'] ?? '';
 $lz         = $_POST['lz'] ?? '';
 $ph         = $_POST['ph'] ?? '';
+$danca         = $_POST['danca'] ?? '';
+$realtime         = $_POST['real_time'] ?? '';
+$realtimekids         = $_POST['real_time_kids'] ?? '';
+$recap         = $_POST['recap'] ?? '';
 $foto_crop  = $_POST['foto_crop'] ?? '';
 
 // Tratando a imagem recortada (base64)
@@ -63,15 +67,15 @@ if (!empty($foto_crop)) {
 // Inserindo no banco
 $sql = "INSERT INTO musicos (
     nome, bateria, violao, teclado, baixo, ministro, vocal1, 
-    vocal2, vocal3, talckback, igreja, live, somkids, ct, c1, c2, lt, lz, ph, foto
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    vocal2, vocal3, talckback, igreja, live, somkids, ct, c1, c2, lt, lz, ph, danca, real_time, real_time_kids, recap, foto
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conexao->prepare($sql);
 $stmt->bind_param(
-  "ssssssssssssssssssss",
+  "ssssssssssssssssssssssss",
   $nome, $bateria, $violao, $teclado, $baixo, $ministro, $vocal1,
   $vocal2, $vocal3, $talckback, $igreja, $live, $somkids,
-  $ct, $c1, $c2, $lt, $lz, $ph, $foto_nome
+  $ct, $c1, $c2, $lt, $lz, $ph, $danca, $realtime, $realtimekids, $recap, $foto_nome
 );
 
 if ($stmt->execute()) {
