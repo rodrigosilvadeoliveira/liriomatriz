@@ -300,6 +300,24 @@ $logado = $_SESSION['usuario'];
                         <label for="ph" class="form-label -field">PH</label>
                         <input type="text" name="ph" id="ph" class="form-control" >
                     </div>
+                    <H1>Voluntarios Dança</H1>
+                    <div class="col-md-6">
+                        <label for="danca" class="form-label -field">Dança</label>
+                        <input type="text" name="danca" id="danca" class="form-control" >
+                    </div>
+                    <H1>Voluntarios Criativo</H1>
+                    <div class="col-md-6">
+                        <label for="real_time" class="form-label -field">Real Time</label>
+                        <input type="text" name="real_time" id="real_time" class="form-control" >
+                    </div>
+                    <div class="col-md-6">
+                        <label for="real_time_kids" class="form-label -field">Real Time Kids</label>
+                        <input type="text" name="real_time_kids" id="real_time_kids" class="form-control" >
+                    </div>
+                    <div class="col-md-6">
+                        <label for="recap" class="form-label -field">Recap</label>
+                        <input type="text" name="recap" id="recap" class="form-control" >
+                    </div>
                     <div class="col-md-6">
                         <label for="upload_image" class="form-label -field">Foto de Perfil</label>
                         <input type="file" name="upload_image" id="upload_image" accept="image/*" class="form-control" >

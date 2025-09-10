@@ -45,7 +45,7 @@ $resultTotal = $conexao->query($sqlTotal);
 $rowTotal = $resultTotal->fetch_assoc();
 
 // Lista de instrumentos/funções para verificar
-$instrumentos = ['bateria', 'violao', 'teclado', 'baixo', 'ministro', 'vocal1', 'vocal2', 'vocal3', 'talckback', 'igreja', 'live', 'somkids', 'ct', 'c1', 'c2', 'lt', 'lz', 'ph'];
+$instrumentos = ['bateria', 'violao', 'teclado', 'baixo', 'ministro', 'vocal1', 'vocal2', 'vocal3', 'talckback', 'igreja', 'live', 'somkids', 'ct', 'c1', 'c2', 'lt', 'lz', 'ph', 'danca'];
 $contagemInstrumentos = [];
 
 // Verificar quais colunas existem na tabela e têm valores preenchidos
@@ -478,7 +478,8 @@ foreach ($instrumentos as $instrumento) {
                                         'c2' => 'C2',
                                         'lt' => 'LT',
                                         'lz' => 'LZ',
-                                        'ph' => 'PH'
+                                        'ph' => 'PH',
+                                        'danca' => 'Dança'
                                     ];
                                     
                                     foreach ($instrumentos as $instrumento): 
@@ -587,7 +588,7 @@ foreach ($instrumentos as $instrumento) {
                                             
                                             echo "<td>
                                                 <div class='btn-group'>
-                                                    <a class='btn btn-sm btn-primary action-btn' href='edicao_musicos.php?id=$user_data[id]' title='Editar'>
+                                                    <a class='btn btn-sm btn-primary action-btn' href='edit_voluntarioescala.php?id=$user_data[id]' title='Editar'>
                                                         <i class='fas fa-edit'></i>
                                                     </a>
                                                     <button class='btn btn-sm btn-info action-btn view-musician' data-id='$user_data[id]' title='Visualizar'>
@@ -668,7 +669,7 @@ foreach ($instrumentos as $instrumento) {
                 `);
                 
                 // Set the edit link
-                $('#editMusicianBtn').attr('href', 'edicao_musicos.php?id=' + musicianId);
+                $('#editMusicianBtn').attr('href', 'edit_voluntarioescala.php?id=' + musicianId);
                 
                 // Show the modal
                 var modal = new bootstrap.Modal(document.getElementById('musicianModal'));

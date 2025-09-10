@@ -12,7 +12,7 @@ if((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
 $logado = $_SESSION['usuario'];
 
 // Buscar lista de escalas salvas
-$sql = "SELECT id, nome, imagem FROM escalas_som ORDER BY id DESC";
+$sql = "SELECT id, nome, imagem FROM escalas_danca ORDER BY id DESC";
 $res = $conexao->query($sql);
 $escalas = [];
 while($row = $res->fetch_assoc()){
@@ -42,6 +42,8 @@ function diaSemana($dataIso) {
         .escala-funcao { display:flex; align-items:center; margin:6px 0; padding:8px; background:#ecf0f1; border-radius:8px; }
         .escala-funcao img { width:40px; height:40px; border-radius:50%; object-fit:cover; margin-right:10px; border:2px solid #fff; box-shadow:0 2px 4px rgba(0,0,0,0.2); }
         .escala-funcao strong { color:#2980b9; margin-right:5px; }
+        .btn-excluir { background:#e74c3c; border:none; color:#fff; padding:5px 10px; border-radius:6px; font-size:14px; cursor:pointer; }
+        .btn-excluir:hover { background:#c0392b; }
         .btn-visualizar { background:#3498db; border:none; color:#fff; padding:5px 10px; border-radius:6px; font-size:14px; cursor:pointer; margin-right: 8px; }
         .btn-visualizar:hover { background:#2980b9; }
         .modal-img { max-width: 100%; height: auto; }
@@ -62,7 +64,8 @@ function diaSemana($dataIso) {
             <div class="escala-nome" data-id="<?php echo $escala['id']; ?>">
                 <strong><?php echo htmlspecialchars($escala['nome']); ?></strong>
                 <button class="btn-visualizar" data-id="<?php echo $escala['id']; ?>" data-imagem="<?php echo htmlspecialchars($escala['imagem']); ?>">Visualizar</button>
-                 </div>
+                <button class="btn-excluir" data-id="<?php echo $escala['id']; ?>">Excluir</button>
+            </div>
             <div class="detalhes" id="detalhes-<?php echo $escala['id']; ?>"></div>
         <?php } ?>
     <?php } ?>
@@ -114,7 +117,7 @@ function diaSemana($dataIso) {
             } else {
                 if(detalhesDiv.is(":empty")){
                     // Requisição AJAX para carregar dados da escala
-                    $.get("carregar_escalasom.php", {id:id}, function(html){
+                    $.get("carregar_escaladanca.php", {id:id}, function(html){
                         detalhesDiv.html(html).slideDown();
                     });
                 } else {
@@ -124,7 +127,19 @@ function diaSemana($dataIso) {
         });
 
         // Excluir escala
-        
+        $(".btn-excluir").click(function(e){
+            e.stopPropagation(); // Impede que o evento propague para o elemento pai
+            let id = $(this).data("id");
+            if(confirm("Tem certeza que deseja excluir esta escala?")){
+                $.post("excluir_escaladanca.php", {id:id}, function(resposta){
+                    if(resposta.trim() === "ok"){
+                        location.reload(); // força atualização da página
+                    } else {
+                        alert("Erro ao excluir escala: " + resposta);
+                    }
+                });
+            }
+        });
     });
     </script>
 </body>

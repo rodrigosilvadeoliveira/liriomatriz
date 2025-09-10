@@ -12,7 +12,7 @@ if((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
 $logado = $_SESSION['usuario'];
 
 // Buscar lista de escalas salvas
-$sql = "SELECT id, nome, imagem FROM escalas_som ORDER BY id DESC";
+$sql = "SELECT id, nome, imagem FROM escalas_criativo ORDER BY id DESC";
 $res = $conexao->query($sql);
 $escalas = [];
 while($row = $res->fetch_assoc()){
@@ -53,7 +53,7 @@ function diaSemana($dataIso) {
         <?php include("navegacao.php") ?>
     </div>
 <br><br>
-    <h2 class="mb-4">Consulta de Escalas Som</h2>
+    <h2 class="mb-4">Consulta de Escalas Dança</h2>
 
     <?php if(empty($escalas)){ ?>
         <p>Nenhuma escala encontrada.</p>
@@ -114,7 +114,7 @@ function diaSemana($dataIso) {
             } else {
                 if(detalhesDiv.is(":empty")){
                     // Requisição AJAX para carregar dados da escala
-                    $.get("carregar_escalasom.php", {id:id}, function(html){
+                    $.get("carregar_escalacriativo.php", {id:id}, function(html){
                         detalhesDiv.html(html).slideDown();
                     });
                 } else {

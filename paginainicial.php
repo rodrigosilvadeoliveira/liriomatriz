@@ -32,6 +32,10 @@ if ($perfil === 'master') {
         ['title' => 'Site Live', 'url' => 'cadastrolive'],
         ['title' => 'Cadastro Voluntario', 'url' => 'cadastrovoluntariadoescala'],
         ['title' => 'Consulta Voluntario', 'url' => 'consulta_voluntariado'],
+        ['title' => 'Escala Criativo', 'url' => 'escalacriativo'],
+        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativo'],
+        ['title' => 'Escala Dança', 'url' => 'escaladanca'],
+        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
         ['title' => 'Escala Louvor Igreja', 'url' => 'escalalouvor'],
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
         ['title' => 'Escala Louvor GC Homens', 'url' => 'escalalouvorhomens'],
@@ -72,6 +76,10 @@ if ($perfil === 'master') {
         ['title' => 'Inicio', 'url' => 'paginainicial'],
         ['title' => 'Cadastro Acesso', 'url' => 'formulariolider'],
         ['title' => 'Cadastro Voluntario', 'url' => 'cadastrovoluntariadoescala'],
+        ['title' => 'Escala Criativo', 'url' => 'escalacriativo'],
+        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativo'],
+        ['title' => 'Escala Dança', 'url' => 'escaladanca'],
+        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
         ['title' => 'Escala Louvor Igreja', 'url' => 'escalalouvor'],
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
         ['title' => 'Escala Louvor GC Homens', 'url' => 'escalalouvorhomens'],
@@ -86,6 +94,8 @@ if ($perfil === 'master') {
 } elseif ($perfil === 'consulta') {
     $menuOptions = [
         ['title' => 'Inicio', 'url' => 'paginainicial'],
+        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativovol'],
+        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladancavol'],
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescalavol'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidiasvol'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasomvol'],
@@ -109,13 +119,19 @@ $categorizedOptions = [
     'Voluntario' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['cadastrovoluntariadoescala','consulta_voluntariado']);
     }),
-    'Escala Louvor' => array_filter($menuOptions, function($item) {
+    'Criativo' => array_filter($menuOptions, function($item) {
+        return in_array($item['url'], ['escalacriativo', 'consultaescalacriativo', 'consultaescalacriativovol']);
+    }),
+    'Dança' => array_filter($menuOptions, function($item) {
+        return in_array($item['url'], ['escaladanca','consultaescaladanca', 'consultaescaladancavol']);
+    }),
+    'Louvor' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escalalouvor','escalalouvorkids', 'escalalouvorhomens', 'escalalouvormulheres','consultaescala','consultaescalavol']);
     }),
-    'Escala Midias' => array_filter($menuOptions, function($item) {
+    'Midias' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], [ 'escalamidias', 'consultaescalamidias', 'consultaescalamidiasvol']);
     }),
-    'Escala Som' => array_filter($menuOptions, function($item) {
+    'Som' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escalasom', 'consultaescalasom', 'consultaescalasomvol']);
     }),
     'Relatórios' => array_filter($menuOptions, function($item) {
@@ -454,6 +470,7 @@ function obterInfoAtividade($tipo) {
 
         .logo {
             height: 40px;
+            filter: brightness(0) invert(1)
         }
 
         .user-info {
