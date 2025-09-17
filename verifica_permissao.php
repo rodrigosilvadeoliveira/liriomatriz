@@ -57,11 +57,13 @@ $permissoes = [
     'escalasom.php' => ['lider','master'],
     'escalamidias.php' => ['lider','master'],
     'escalamidias' => ['lider','master'],
+    'escalacriativo' => ['lider','master'],
     'escaladanca' => ['lider','master'],
     'escalalouvorhomens.php' => ['lider','master'],
     'escalalouvormulheres.php' => ['lider','master'],
     'consultaescala.php' => ['lider','master'],
     'consultaescala' => ['lider','master'],
+    'consultaescalacriativo' => ['lider','master'],
     'consultaescalasom' => ['lider','master'],
     'consultaescalamidias' => ['lider','master'],
     'consultaescaladanca' => ['lider','master'],
@@ -71,7 +73,8 @@ $permissoes = [
     'consultaescalamidiasvol' => ['consulta'],
     'formulariolider' => ['lider'],
     'edit_voluntarioescala' => ['lider','master'],
-    
+     'musicas' => ['lider','master','ministro'],
+     'consultarepertorio' => ['lider','master', 'consulta'],
 
     
     

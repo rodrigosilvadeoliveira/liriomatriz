@@ -12,6 +12,88 @@ if((!isset($_SESSION['usuario']) == true) && ($_SESSION['senha']) == true) {
 
 $logado = $_SESSION['usuario'];
 $resultlist = null;
+try {
+    $pdo = new PDO('mysql:host=Localhost;dbname=liriomatriz', 'root', '');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Erro na conexão: " . $e->getMessage());
+}
+
+// Função para contar escalas ativas
+function contarEscalasAtivas($pdo) {
+    try {
+        $sql = "SELECT COUNT(id) as total FROM escalas_louvor";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $resultado['total'];
+    } catch (PDOException $e) {
+        error_log("Erro ao contar escalas: " . $e->getMessage());
+        return 0;
+    }
+}
+function contarEscalasAtivasSom($pdo) {
+    try {
+        $sql = "SELECT COUNT(id) as total FROM escalas_som";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $resultado['total'];
+    } catch (PDOException $e) {
+        error_log("Erro ao contar escalas: " . $e->getMessage());
+        return 0;
+    }
+}
+function contarEscalasAtivasMidias($pdo) {
+    try {
+        $sql = "SELECT COUNT(id) as total FROM escalas_midias";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $resultado['total'];
+    } catch (PDOException $e) {
+        error_log("Erro ao contar escalas: " . $e->getMessage());
+        return 0;
+    }
+}
+function contarAniversariantesMes($pdo) {
+    try {
+        $mesAtual = date('m'); // Obtém o mês atual (01 a 12)
+        
+        $sql = "SELECT COUNT(id) as total FROM membros 
+                WHERE MONTH(nascimento) = :mes_atual";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':mes_atual', $mesAtual, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $resultado['total'];
+        
+    } catch (PDOException $e) {
+        error_log("Erro ao contar aniversariantes: " . $e->getMessage());
+        return 0;
+    }
+}
+function contarNovosMembros($pdo) {
+    try {
+        $dataLimite = date('Y-m-d', strtotime('-30 days'));
+        
+        $sql = "SELECT COUNT(id) as total FROM membros 
+                WHERE data_cadastro >= :data_limite";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':data_limite', $dataLimite, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $resultado['total'];
+        
+    } catch (PDOException $e) {
+        error_log("Erro ao contar novos membros: " . $e->getMessage());
+        return 0;
+    }
+}
 // Definir opções de menu baseadas no perfil
 $menuOptions = [];
 
@@ -40,11 +122,14 @@ if ($perfil === 'master') {
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
         ['title' => 'Escala Louvor GC Homens', 'url' => 'escalalouvorhomens'],
         ['title' => 'Escala Louvor GC Mulheres', 'url' => 'escalalouvormulheres'],
+        ['title' => 'Escala Louvor GC Jovens', 'url' => 'escalalouvorJovens'],
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
         ['title' => 'Escala Midias', 'url' => 'escalamidias'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Escala Som', 'url' => 'escalasom'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Repertorio', 'url' => 'musicas'],
+        ['title' => 'Consulta Repertorio', 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
 } elseif ($perfil === 'secretaria') {
@@ -84,11 +169,14 @@ if ($perfil === 'master') {
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
         ['title' => 'Escala Louvor GC Homens', 'url' => 'escalalouvorhomens'],
         ['title' => 'Escala Louvor GC Mulheres', 'url' => 'escalalouvormulheres'],
+        ['title' => 'Escala Louvor GC Jovens', 'url' => 'escalalouvorJovens'],
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
         ['title' => 'Escala Midias', 'url' => 'escalamidias'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Escala Som', 'url' => 'escalasom'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Repertório', 'url' => 'musicas'],
+        ['title' => 'Consulta Repertório', 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
 } elseif ($perfil === 'consulta') {
@@ -99,6 +187,19 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescalavol'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidiasvol'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasomvol'],
+        ['title' => 'Consulta Repertório', 'url' => 'consultarepertorio'],
+        ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
+    ];
+} elseif ($perfil === 'ministro') {
+    $menuOptions = [
+        ['title' => 'Inicio', 'url' => 'paginainicial'],
+        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativo'],
+        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
+        ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
+        ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
+        ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Repertório', 'url' => 'musicas'],
+        ['title' => 'Consulta Repertório', 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
 } else {
@@ -113,6 +214,9 @@ $categorizedOptions = [
     'Administração' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['formularioMaster', 'formulariolider', 'cadastrodevendas', 'consulta_logs', 'consultaacessos']);
     }),
+    'Musicas' => array_filter($menuOptions, function($item) {
+        return in_array($item['url'], ['musicas', 'consultarepertorio']);
+    }),
     'Membros' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['cadastroMembrosAdm', 'consulta_membros', 'consulta_niver']);
     }),
@@ -126,7 +230,7 @@ $categorizedOptions = [
         return in_array($item['url'], ['escaladanca','consultaescaladanca', 'consultaescaladancavol']);
     }),
     'Louvor' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], ['escalalouvor','escalalouvorkids', 'escalalouvorhomens', 'escalalouvormulheres','consultaescala','consultaescalavol']);
+        return in_array($item['url'], ['escalalouvor','escalalouvorkids', 'escalalouvorhomens', 'escalalouvormulheres', 'escalalouvorJovens','consultaescala','consultaescalavol']);
     }),
     'Midias' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], [ 'escalamidias', 'consultaescalamidias', 'consultaescalamidiasvol']);
@@ -144,13 +248,14 @@ $categorizedOptions = [
         return in_array($item['url'], ['cadastroForm.php', 'sair']);
     })
 ];
-
-
-                                            $sqlTotal = "SELECT COUNT(*) as total FROM membros";
-                                            $resultTotal = $conexao->query($sqlTotal);
-                                            $rowTotal = $resultTotal->fetch_assoc();
-                                            
-                                            
+try {
+    $sqlTotal = "SELECT COUNT(*) as total FROM membros";
+    $stmtTotal = $pdo->prepare($sqlTotal);
+    $stmtTotal->execute();
+    $rowTotal = $stmtTotal->fetch(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $rowTotal = ['total' => 0];
+}
 // Remover categorias vazias
 $categorizedOptions = array_filter($categorizedOptions);
 
@@ -188,7 +293,7 @@ if ($perfil === 'master') {
             'title' => 'Escalas Ativas',
             'content' => 'Visualize todas as escalas de louvor ativas no momento.',
             'link' => 'consultaescala',
-            'stats' => '5',
+            'stats' => contarEscalasAtivas($pdo),
             'color' => '#9b59b6'
         ],
         [
@@ -196,8 +301,16 @@ if ($perfil === 'master') {
             'title' => 'Novos Membros',
             'content' => 'Membros cadastrados nos últimos 30 dias.',
             'link' => 'consulta_membros',
-            'stats' => '28',
+            'stats' => contarNovosMembros($pdo),
             'color' => '#f39c12'
+        ],
+        [
+            'icon' => 'fa-birthday-cake',
+            'title' => 'Aniversariantes',
+            'content' => 'Membros que fazem aniversário este mês.',
+            'link' => 'consulta_niver',
+            'stats' => contarAniversariantesMes($pdo),
+            'color' => '#e74c3c'
         ],
         [
             'icon' => 'fa-exclamation-triangle',
@@ -215,7 +328,7 @@ if ($perfil === 'master') {
             'title' => 'Total de Membros',
             'content' => 'Visualize o número total de membros cadastrados no sistema.',
             'link' => 'consulta_membros',
-            'stats' => '1.245',
+            'stats' => $rowTotal['total'],
             'color' => '#3498db'
         ],
         [
@@ -223,7 +336,7 @@ if ($perfil === 'master') {
             'title' => 'Novos Membros',
             'content' => 'Membros cadastrados nos últimos 30 dias.',
             'link' => 'consulta_membros',
-            'stats' => '28',
+            'stats' => contarNovosMembros($pdo),
             'color' => '#2ecc71'
         ],
         [
@@ -231,7 +344,7 @@ if ($perfil === 'master') {
             'title' => 'Aniversariantes',
             'content' => 'Membros que fazem aniversário este mês.',
             'link' => 'consulta_niver',
-            'stats' => '15',
+            'stats' => contarAniversariantesMes($pdo),
             'color' => '#e74c3c'
         ],
         [
@@ -269,7 +382,7 @@ if ($perfil === 'master') {
             'title' => 'Escalas de Louvor',
             'content' => 'Escalas de louvor cadastradas no sistema.',
             'link' => 'consultaescala',
-            'stats' => '8',
+            'stats' => contarEscalasAtivas($pdo),
             'color' => '#3498db'
         ],
         [
@@ -277,7 +390,7 @@ if ($perfil === 'master') {
             'title' => 'Escalas de Som',
             'content' => 'Escalas de técnicos de som ativas.',
             'link' => 'consultaescalasom',
-            'stats' => '5',
+            'stats' => contarEscalasAtivasSom($pdo),
             'color' => '#e74c3c'
         ],
         [
@@ -285,7 +398,7 @@ if ($perfil === 'master') {
             'title' => 'Escalas de Mídia',
             'content' => 'Escalas de técnicos de mídia ativas.',
             'link' => 'consultaescalamidias',
-            'stats' => '6',
+            'stats' => contarEscalasAtivasMidias($pdo),
             'color' => '#2ecc71'
         ],
         [
@@ -304,7 +417,7 @@ if ($perfil === 'master') {
             'title' => 'Escalas de Louvor',
             'content' => 'Visualize as escalas de louvor cadastradas.',
             'link' => 'consultaescalavol',
-            'stats' => '8',
+            'stats' => contarEscalasAtivas($pdo),
             'color' => '#3498db'
         ],
         [
@@ -312,7 +425,7 @@ if ($perfil === 'master') {
             'title' => 'Escalas de Som',
             'content' => 'Consulte as escalas de técnicos de som.',
             'link' => 'consultaescalasomvol',
-            'stats' => '5',
+           'stats' => contarEscalasAtivasSom($pdo),
             'color' => '#e74c3c'
         ],
         [
@@ -320,7 +433,7 @@ if ($perfil === 'master') {
             'title' => 'Escalas de Mídia',
             'content' => 'Consulte as escalas de técnicos de mídia.',
             'link' => 'consultaescalamidiasvol',
-            'stats' => '6',
+            'stats' => contarEscalasAtivasMidias($pdo),
             'color' => '#2ecc71'
         ]
     ];
