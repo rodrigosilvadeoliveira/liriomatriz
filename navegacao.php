@@ -40,12 +40,16 @@ if ($perfil === 'master') {
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
         ['title' => 'Escala Louvor GC Homens', 'url' => 'escalalouvorhomens'],
         ['title' => 'Escala Louvor GC Mulheres', 'url' => 'escalalouvormulheres'],
+        ['title' => 'Escala Louvor GC Jovens', 'url' => 'escalalouvorJovens'],
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
         ['title' => 'Escala Midias', 'url' => 'escalamidias'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Escala Som', 'url' => 'escalasom'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Repertorio', 'url' => 'musicas'],
+        ['title' => 'Consulta Repertorio', 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
+        
     ];
 } elseif ($perfil === 'secretaria') {
     $menuOptions = [
@@ -86,21 +90,37 @@ if ($perfil === 'master') {
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
         ['title' => 'Escala Louvor GC Homens', 'url' => 'escalalouvorhomens'],
         ['title' => 'Escala Louvor GC Mulheres', 'url' => 'escalalouvormulheres'],
+        ['title' => 'Escala Louvor GC Jovens', 'url' => 'escalalouvorJovens'],
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
         ['title' => 'Escala Midias', 'url' => 'escalamidias'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Escala Som', 'url' => 'escalasom'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Repertório', 'url' => 'musicas'],
+        ['title' => 'Consulta Repertório', 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
 } elseif ($perfil === 'consulta') {
     $menuOptions = [
         ['title' => 'Inicio', 'url' => 'paginainicial'],
-        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativovol']
+        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativovol'],
         ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladancavol'],
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescalavol'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidiasvol'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasomvol'],
+        ['title' => 'Consulta Repertório', 'url' => 'consultarepertorio'],
+        ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
+    ];
+} elseif ($perfil === 'ministro') {
+    $menuOptions = [
+       ['title' => 'Inicio', 'url' => 'paginainicial'],
+        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativo'],
+        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
+        ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
+        ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
+        ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Repertório', 'url' => 'musicas'],
+        ['title' => 'Consulta Repertório', 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
 }
@@ -113,22 +133,28 @@ $categorizedOptions = [
     'Administração' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['formularioMaster', "formulariolider", 'cadastrodevendas', 'consulta_logs', 'consultaacessos']);
     }),
+    'Musicas' => array_filter($menuOptions, function($item) {
+        return in_array($item['url'], ['musicas', 'consultarepertorio']);
+    }),
     'Membros' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['cadastroMembrosAdm', 'consulta_membros', 'consulta_niver']);
     }),
     'Voluntario' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['cadastrovoluntariadoescala', 'consulta_voluntariado']);
     }),
-    'Escala Dança' => array_filter($menuOptions, function($item) {
+     'Criativo' => array_filter($menuOptions, function($item) {
+        return in_array($item['url'], ['escalacriativo', 'consultaescalacriativo', 'consultaescalacriativovol']);
+    }),
+    'Dança' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escaladanca','consultaescaladanca','consultaescaladancavol']);
     }),
-    'Escala Louvor' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], ['escalalouvor','escalalouvorkids', 'escalalouvorhomens', 'escalalouvormulheres','consultaescala','consultaescalavol']);
+    'Louvor' => array_filter($menuOptions, function($item) {
+        return in_array($item['url'], ['escalalouvor','escalalouvorkids', 'escalalouvorhomens', 'escalalouvormulheres', 'escalalouvorJovens','consultaescala','consultaescalavol']);
     }),
-    'Escala Midias' => array_filter($menuOptions, function($item) {
+    'Midias' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], [ 'escalamidias', 'consultaescalamidias', 'consultaescalamidiasvol']);
     }),
-    'Escala Som' => array_filter($menuOptions, function($item) {
+    'Som' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escalasom', 'consultaescalasom', 'consultaescalasomvol']);
     }),
     'Relatórios' => array_filter($menuOptions, function($item) {
