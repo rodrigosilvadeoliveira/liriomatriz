@@ -59,6 +59,7 @@ $permissoes = [
     'escalamidias' => ['lider','master'],
     'escalacriativo' => ['lider','master'],
     'escaladanca' => ['lider','master'],
+    'escalakids' => ['lider','master'],
     'escalalouvorhomens.php' => ['lider','master'],
     'escalalouvormulheres.php' => ['lider','master'],
     'consultaescala.php' => ['lider','master'],
@@ -67,14 +68,19 @@ $permissoes = [
     'consultaescalasom' => ['lider','master'],
     'consultaescalamidias' => ['lider','master'],
     'consultaescaladanca' => ['lider','master'],
-    'consultaescalavol' => ['consulta'],
-    'consultaescalasomvol' => ['consulta'],
-    'consultaescaladancavol' => ['consulta'],
-    'consultaescalamidiasvol' => ['consulta'],
-    'formulariolider' => ['lider'],
+    'consultaescalakids' => ['lider','master'],
+    'consultaescalastaff' => ['lider','master'],
+    'consultaescalasomvol' => ['consulta', 'ministro'],
+    'consultaescaladancavol' => ['consulta', 'ministro'],
+    'consultaescalamidiasvol' => ['consulta', 'ministro'],
+    'consultaescalastaffvol' => ['consulta', 'ministro'],
+    'consultaescalakidsvol' => ['consulta', 'ministro'],
+    'formulariolider' => ['consulta', 'ministro'],
     'edit_voluntarioescala' => ['lider','master'],
      'musicas' => ['lider','master','ministro'],
      'consultarepertorio' => ['lider','master', 'consulta'],
+     'edit_musica' => ['lider','master', 'minitro'],
+
 
     
     

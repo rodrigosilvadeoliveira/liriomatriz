@@ -66,135 +66,15 @@ $escalaSalvaJSON = $escalaSalva ? json_encode($escalaSalva, JSON_UNESCAPED_UNICO
   <title>Sistema de Escalas Musicais</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styledaescala.css">
-  <style>
-    .select-avatar {
-      display: flex; align-items: center; gap: 8px;
-    }
-    .select-avatar .avatar {
-      width: 28px; height: 28px; border-radius: 50%; object-fit: cover;
-      border: 1px solid #ddd;
-    }
-    .print-cell {
-      display: flex; align-items: center; gap: 8px; justify-content: center;
-    }
-    .print-cell .avatar {
-      width: 28px; height: 28px; border-radius: 50%; object-fit: cover; border: 1px solid #ddd;
-    }
-
-    .remove-col {
-        background: transparent;
-        border: none;
-        color: #f72585;
-        cursor: pointer;
-        margin-left: 8px;
-        font-size: 14px;
-        padding: 2px 5px;
-    }
-
-    .remove-col:hover {
-        background: rgba(247, 37, 133, 0.1);
-        border-radius: 3px;
-    }
-
-    .spinner {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        border: 2px solid #f3f3f3;
-        border-top: 2px solid #3498db;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin-right: 5px;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-    
-    .btn-new {
-        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-        border: none;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-    
-    .btn-new:hover {
-        background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    
-    /* Estilos para a barra de progresso */
-    .progress-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.7);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 10000;
-        color: white;
-        font-size: 18px;
-    }
-
-    .progress-bar {
-        width: 80%;
-        max-width: 400px;
-        height: 20px;
-        background: #333;
-        border-radius: 10px;
-        margin-top: 20px;
-        overflow: hidden;
-    }
-
-    .progress-fill {
-        height: 100%;
-        background: #4cc9f0;
-        width: 0%;
-        transition: width 0.3s ease;
-    }
-    
-    /* Melhorias para visualização em mobile */
-    @media (max-width: 768px) {
-        .container {
-            padding: 10px;
-        }
-        
-        .controls {
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .action-buttons {
-            flex-wrap: wrap;
-        }
-        
-        .action-buttons button {
-            flex: 1 0 45%;
-            margin-bottom: 10px;
-        }
-    }
-  </style>
-</head>
+  <link rel="stylesheet" href="styledaescala.css?v=<?=time()?>">
+  </head>
 <body>
 
 <div class="container">
    <div class="navegacao">
    <?php include("navegacao.php")?>
    </div>
+   <br><br>
  <h1><i class="fas fa-music"></i> Sistema de Escalas Musicais</h1>
    <h1> <p class="description">Gerencie e compartilhe escalas de forma fácil e rápida</p></h1>
     

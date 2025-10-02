@@ -209,9 +209,9 @@ $logado = $_SESSION['usuario'];
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
             <h1 class="h3 text-gray-800"><i class="fas fa-user-plus me-2"></i>Cadastro de Voluntario</h5>
-            <div>
-                <?php include("navegacao.php") ?>
-            </div>
+                <div>
+                    <?php include("navegacao.php") ?>
+                </div>
         </div>
 
         <!-- Mensagem de Boas-Vindas -->
@@ -246,15 +246,15 @@ $logado = $_SESSION['usuario'];
                         <label for="nome" class="form-label -field">Nome</label>
                         <input type="text" name="nome" id="nome" class="form-control">
                     </div>
-                    
-                        <h5>
-                            <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#musicos"
-                                role="button" aria-expanded="false" aria-controls="musicos">Voluntários Músicos <i
-                                    class="fas fa-chevron-down ms-2"></i>
-                            </a>
-                        </h5>
-                        <div class="collapse" id="musicos">
-                            <div class="row">
+
+                    <h5>
+                        <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#musicos"
+                            role="button" aria-expanded="false" aria-controls="musicos">Voluntários Músicos <i
+                                class="fas fa-chevron-down ms-2"></i>
+                        </a>
+                    </h5>
+                    <div class="collapse" id="musicos">
+                        <div class="row">
                             <div class="col-md-6">
                                 <label for="bateria" class="form-label -field">Bateria</label>
                                 <input type="text" name="bateria" id="bateria" class="form-control">
@@ -293,125 +293,188 @@ $logado = $_SESSION['usuario'];
                                 <input type="text" name="talckback" id="talckback" class="form-control">
                             </div>
                         </div>
-            </div>
-            <h5>
-                <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#som" role="button"
-                    aria-expanded="false" aria-controls="som">
-                    Voluntários Som <i class="fas fa-chevron-down ms-2"></i>
-                </a>
-            </h5>
-            <div class="collapse" id="som">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="igreja" class="form-label -field">Igreja</label>
-                        <input type="text" name="igreja" id="igreja" class="form-control">
                     </div>
-                    <div class="col-md-6">
-                        <label for="live" class="form-label -field">Live</label>
-                        <input type="text" name="live" id="live" class="form-control">
+                    <h5>
+                        <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#som" role="button"
+                            aria-expanded="false" aria-controls="som">
+                            Voluntários Som <i class="fas fa-chevron-down ms-2"></i>
+                        </a>
+                    </h5>
+                    <div class="collapse" id="som">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="igreja" class="form-label -field">Igreja</label>
+                                <input type="text" name="igreja" id="igreja" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="live" class="form-label -field">Live</label>
+                                <input type="text" name="live" id="live" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="somkids" class="form-label -field">Som Kids</label>
+                                <input type="text" name="somkids" id="somkids" class="form-control">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="somkids" class="form-label -field">Som Kids</label>
-                        <input type="text" name="somkids" id="somkids" class="form-control">
+                    <h5>
+                        <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#midias"
+                            role="button" aria-expanded="false" aria-controls="som">Voluntários Midias <i
+                                class="fas fa-chevron-down ms-2"></i>
+                        </a>
+                    </h5>
+                    <div class="collapse" id="midias">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="ct" class="form-label -field">CT</label>
+                                <input type="text" name="ct" id="ct" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="c1" class="form-label -field">C1</label>
+                                <input type="text" name="c1" id="c1" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="c2" class="form-label -field">C2</label>
+                                <input type="text" name="c2" id="c2" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lt" class="form-label -field">LT</label>
+                                <input type="text" name="lt" id="lt" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lz" class="form-label -field">LZ</label>
+                                <input type="text" name="lz" id="lz" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="ph" class="form-label -field">PH</label>
+                                <input type="text" name="ph" id="ph" class="form-control">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <h5>
-                <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#midias" role="button"
-                    aria-expanded="false" aria-controls="som">
-                    Voluntários Midias <i class="fas fa-chevron-down ms-2"></i>
-                </a>
-            </h5>
-            <div class="collapse" id="midias">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="ct" class="form-label -field">CT</label>
-                        <input type="text" name="ct" id="ct" class="form-control">
+                    <h5>
+                        <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#dancas"
+                            role="button" aria-expanded="false" aria-controls="som">
+                            Voluntários dança <i class="fas fa-chevron-down ms-2"></i>
+                        </a>
+                    </h5>
+                    <div class="collapse" id="dancas">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="danca" class="form-label -field">Dança</label>
+                                <input type="text" name="danca" id="danca" class="form-control">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="c1" class="form-label -field">C1</label>
-                        <input type="text" name="c1" id="c1" class="form-control">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="c2" class="form-label -field">C2</label>
-                        <input type="text" name="c2" id="c2" class="form-control">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="lt" class="form-label -field">LT</label>
-                        <input type="text" name="lt" id="lt" class="form-control">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="lz" class="form-label -field">LZ</label>
-                        <input type="text" name="lz" id="lz" class="form-control">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="ph" class="form-label -field">PH</label>
-                        <input type="text" name="ph" id="ph" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <h5>
-                <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#dancas" role="button"
-                    aria-expanded="false" aria-controls="som">
-                    Voluntários dança <i class="fas fa-chevron-down ms-2"></i>
-                </a>
-            </h5>
-            <div class="collapse" id="dancas">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="danca" class="form-label -field">Dança</label>
-                        <input type="text" name="danca" id="danca" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <h5>
-                <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#criativo" role="button"
-                    aria-expanded="false" aria-controls="som">
-                    Voluntários criativo <i class="fas fa-chevron-down ms-2"></i>
-                </a>
-            </h5>
-            <div class="collapse" id="criativo">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="real_time" class="form-label -field">Real Time</label>
-                        <input type="text" name="real_time" id="real_time" class="form-control">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="real_time_kids" class="form-label -field">Real Time Kids</label>
-                        <input type="text" name="real_time_kids" id="real_time_kids" class="form-control">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="recap" class="form-label -field">Recap</label>
-                        <input type="text" name="recap" id="recap" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <label for="upload_image" class="form-label -field">Foto de Perfil</label>
-                <input type="file" name="upload_image" id="upload_image" accept="image/*" class="form-control">
-                <input type="hidden" name="foto_crop" id="foto_crop">
-                <small class="text-muted">Formatos aceitos: JPG, PNG, GIF. Tamanho máximo: 5MB</small>
-            </div>
+                    <h5>
+                        <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#criativo"
+                            role="button" aria-expanded="false" aria-controls="som">
+                            Voluntários criativo <i class="fas fa-chevron-down ms-2"></i>
+                        </a>
+                    </h5>
+                    <div class="collapse" id="criativo">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="real_time" class="form-label -field">Real Time</label>
+                                <input type="text" name="real_time" id="real_time" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="real_time_kids" class="form-label -field">Real Time Kids</label>
+                                <input type="text" name="real_time_kids" id="real_time_kids" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="recap" class="form-label -field">Recap</label>
+                                <input type="text" name="recap" id="recap" class="form-control">
+                            </div>
 
-            <div class="col-md-6">
-                <label class="form-label">Prévia da Foto</label>
-                <div class="image-preview-container">
-                    <img id="preview_cropped" src="" alt="Prévia da imagem" style="display: none;">
-                    <div id="no-image-placeholder">
-                        <i class="fas fa-image fa-2x mb-2"></i>
-                        <p>Nenhuma imagem selecionada</p>
+                            <div class="col-md-6">
+                                <label for="real_time_treinamento" class="form-label -field">Real Time Treinamento
+                                </label>
+                                <input type="text" name="real_time_treinamento" id="real_time_treinamento"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="recap_treinamento" class="form-label -field">Recap Treinamento</label>
+                                <input type="text" name="recap_treinamento" id="recap_treinamento" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="real_time_adolescentes" class="form-label -field">Real Time
+                                    Adolescentes</label>
+                                <input type="text" name="real_time_adolescentes" id="real_time_adolescentes"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="real_time_homens" class="form-label -field">Real Time Homens</label>
+                                <input type="text" name="real_time_homens" id="real_time_homens" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="real_time_mulheres" class="form-label -field">Real Time Mulheres</label>
+                                <input type="text" name="real_time_mulheres" id="real_time_mulheres"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="real_time_jovens" class="form-label -field">Real Time Jovens</label>
+                                <input type="text" name="real_time_jovens" id="real_time_jovens" class="form-control">
+                            </div>
+                            </div>
+                        </div>
+                        <h5>
+                            <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#staff"
+                                role="button" aria-expanded="false" aria-controls="som">
+                                Voluntários Staff <i class="fas fa-chevron-down ms-2"></i>
+                            </a>
+                        </h5>
+                        <div class="collapse" id="staff">
+                            <div class="col-md-6">
+                                <label for="staff1" class="form-label -field">Staff 1</label>
+                                <input type="text" name="staff1" id="staff1" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="staff2" class="form-label -field">Staff 2</label>
+                                <input type="text" name="staff2" id="staff2" class="form-control">
+                            </div>
+                        </div>
+                
+                    <h5>
+                            <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#kids"
+                                role="button" aria-expanded="false" aria-controls="som">
+                                Voluntários Kids <i class="fas fa-chevron-down ms-2"></i>
+                            </a>
+                        </h5>
+                        <div class="collapse" id="kids">
+                            <div class="col-md-6">
+                                <label for="prof" class="form-label -field">Prof</label>
+                                <input type="text" name="prof" id="prof" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="apoio" class="form-label -field">Apoio</label>
+                                <input type="text" name="apoio" id="apoio" class="form-control">
+                            </div>
+                        </div>
+                    <div class="col-md-6">
+                        <label for="upload_image" class="form-label -field">Foto de Perfil</label>
+                        <input type="file" name="upload_image" id="upload_image" accept="image/*" class="form-control">
+                        <input type="hidden" name="foto_crop" id="foto_crop">
+                        <small class="text-muted">Formatos aceitos: JPG, PNG, GIF. Tamanho máximo: 5MB</small>
                     </div>
-                </div>
-            </div>
 
-            <div class="col-12 mt-4">
-                <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary-custom">
-                    <i class="fas fa-save me-2"></i>Salvar Cadastro
-                </button>
+                    <div class="col-md-6">
+                        <label class="form-label">Prévia da Foto</label>
+                        <div class="image-preview-container">
+                            <img id="preview_cropped" src="" alt="Prévia da imagem" style="display: none;">
+                            <div id="no-image-placeholder">
+                                <i class="fas fa-image fa-2x mb-2"></i>
+                                <p>Nenhuma imagem selecionada</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary-custom">
+                            <i class="fas fa-save me-2"></i>Salvar Cadastro
+                        </button>
+                    </div>
+                </form>
             </div>
-            </form>
         </div>
-    </div>
     </div>
 
     <!-- Modal de Cropper -->
