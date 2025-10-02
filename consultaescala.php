@@ -48,6 +48,21 @@ function diaSemana($dataIso) {
         .btn-download:hover { background:#2980b9; }
         .modal-img { max-width: 100%; height: auto; }
         .pdf-preview { width: 100%; height: 500px; border: none; }
+    .btn-consulta-repertorio {
+            background: black;
+            border: none;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+        .btn-consulta-repertorio:hover {
+            background: #44ada9ff;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body class="container py-4">
@@ -56,8 +71,10 @@ function diaSemana($dataIso) {
         <?php include("navegacao.php") ?>
     </div>
 <br><br>
-    <h2 class="mb-4">Consulta de Escalas Louvor</h2>
-
+     <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Consulta de Escalas Som</h2>
+        <a href="consultarepertorio.php" class="btn-consulta-repertorio">Consulta Repertório</a>
+    </div>
     <?php if(empty($escalas)){ ?>
         <p>Nenhuma escala encontrada.</p>
     <?php } else { ?>

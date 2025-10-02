@@ -28,6 +28,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $realtime = $_POST['real_time'];
     $realtimekids = $_POST['real_time_kids'];
     $recap = $_POST['recap'];
+    $real_time_treinamento = $_POST['real_time_treinamento'] ?? '';
+    $recap_treinamento = $_POST['recap_treinamento'] ?? '';
+    $real_time_adolescentes = $_POST['real_time_adolescentes'] ?? '';
+    $real_time_homens = $_POST['real_time_homens'] ?? '';
+    $real_time_mulheres = $_POST['real_time_mulheres'] ?? '';
+    $real_time_jovens = $_POST['real_time_jovens'] ?? '';
+    $staff1 = $_POST['staff1'] ?? '';
+    $staff2 = $_POST['staff2'] ?? '';
+    $prof = $_POST['prof'] ?? '';
+    $apoio = $_POST['apoio'] ?? '';
+    
     // Verificar se uma nova imagem foi enviada
     if (!empty($_POST['foto_crop']) && strpos($_POST['foto_crop'], 'data:image') === 0) {
         // Processar a nova imagem
@@ -35,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $foto_perfil = processarImagem($foto_crop, $id);
     } else {
         // Manter a imagem existente
-        $foto_perfil = $_POST['foto_crop'];
+        $foto_perfil = $_POST['foto_atual'] ?? '';
     }
     
     // Atualizar no banco de dados
@@ -43,15 +54,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             nome = ?, bateria = ?, violao = ?, teclado = ?, baixo = ?, 
             ministro = ?, vocal1 = ?, vocal2 = ?, vocal3 = ?, talckback = ?, 
             igreja = ?, live = ?, somkids = ?, ct = ?, c1 = ?, c2 = ?, 
-            lt = ?, lz = ?, ph = ?, danca = ?, real_time = ?, real_time_kids = ?, recap = ?, foto = ? 
+            lt = ?, lz = ?, ph = ?, danca = ?, real_time = ?, real_time_kids = ?, 
+            recap = ?, real_time_treinamento = ?, recap_treinamento = ?, 
+            real_time_adolescentes = ?, real_time_homens = ?, real_time_mulheres = ?, 
+            real_time_jovens = ?, staff1 = ?, staff2 = ?, prof = ?, apoio = ?, foto = ? 
             WHERE id = ?";
     
     $stmt = $conexao->prepare($sql);
-    $stmt->bind_param("ssssssssssssssssssssssssi", 
+    $stmt->bind_param("ssssssssssssssssssssssssssssssssssi", 
         $nome, $bateria, $violao, $teclado, $baixo, 
         $ministro, $vocal1, $vocal2, $vocal3, $talckback, 
         $igreja, $live, $somkids, $ct, $c1, $c2, 
-        $lt, $lz, $ph, $danca, $realtime, $realtimekids, $recap, $foto_perfil, $id);
+        $lt, $lz, $ph, $danca, $realtime, $realtimekids, 
+        $recap, $real_time_treinamento, $recap_treinamento,
+        $real_time_adolescentes, $real_time_homens, $real_time_mulheres,
+        $real_time_jovens, $staff1, $staff2, $prof, $apoio, $foto_perfil, $id);
     
     if ($stmt->execute()) {
         $_SESSION['mensagem'] = "Voluntário atualizado com sucesso!";
@@ -61,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: editar_voluntario.php?id=$id");
     }
     
+    $stmt->close();
     exit();
 }
 
@@ -73,6 +91,11 @@ function processarImagem($data_url, $id) {
     // Gerar nome único para o arquivo
     $nome_arquivo = 'voluntario_' . $id . '_' . time() . '.jpg';
     $caminho_arquivo = 'uploads/' . $nome_arquivo;
+    
+    // Criar diretório se não existir
+    if (!file_exists('uploads')) {
+        mkdir('uploads', 0755, true);
+    }
     
     // Salvar a imagem
     file_put_contents($caminho_arquivo, $data);

@@ -15,6 +15,7 @@ $logado = $_SESSION['usuario'];
 // Inserir música no banco
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome_musica'])) {
     $nome = mysqli_real_escape_string($conexao, $_POST['nome_musica']);
+    $tema = mysqli_real_escape_string($conexao, $_POST['tema_musica']);
     $tipos = isset($_POST['tipo']) ? implode(',', $_POST['tipo']) : '';
     $arquivo = null;
 
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome_musica'])) {
         }
     }
 
-    $sqlInsert = "INSERT INTO musicas (nome, tipo, arquivo) VALUES ('$nome', '$tipos', '$arquivo')";
+    $sqlInsert = "INSERT INTO musicas (nome, tema, tipo, arquivo) VALUES ('$nome','$tema', '$tipos', '$arquivo')";
     $conexao->query($sqlInsert);
 }
 
@@ -49,6 +50,12 @@ $resultMusicas = $conexao->query($sql);
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+<style>
+    /* Estilo para ocultar a coluna ID */
+    .hidden-id {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
@@ -58,9 +65,9 @@ $resultMusicas = $conexao->query($sql);
 <div class="container-fluid" style="margin-top:80px;">
   <h3 class="mb-4">Cadastro de Músicas</h3>
   <div class="alert alert-info">
-    <a href="verificar_repertorios.php" target="_blank" class="btn btn-sm btn-warning">
+    <!-- <a href="verificar_repertorios.php" target="_blank" class="btn btn-sm btn-warning">
         🔧 Verificar Sistema
-    </a>
+    </a> -->
 </div>
   <!-- Mensagens de feedback -->
 <?php
@@ -105,6 +112,10 @@ if (isset($_GET['error'])) {
         <div class="col-md-4">
           <label class="form-label">Nome da Música</label>
           <input type="text" name="nome_musica" class="form-control" required>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Tema</label>
+          <input type="text" name="tema_musica" class="form-control" required>
         </div>
 
         <div class="col-md-4">
@@ -162,9 +173,10 @@ if (isset($_GET['error'])) {
     <thead>
       <tr>
         <th>Ordem</th>
-        <th>ID</th>
+        <th class="hidden-id">ID</th>
         <th>Nome</th>
         <th>Tipo</th>
+        <th>Tema</th>
         <th>Arquivo</th>
         <th>Ações</th>
       </tr>
@@ -185,9 +197,10 @@ if (isset($_GET['error'])) {
           echo "</select>
                 </td>";
           
-          echo "<td>".$row['id']."</td>";
+          echo "<td class='hidden-id'>".$row['id']."</td>";
           echo "<td>".$row['nome']."</td>";
           echo "<td>".$row['tipo']."</td>";
+          echo "<td>".$row['tema']."</td>";
           
           if ($row['arquivo']) {
             echo "<td><a href='uploads/musicas/".$row['arquivo']."' target='_blank'>Abrir PDF</a></td>";
@@ -241,7 +254,10 @@ $(document).ready(function() {
     language: { url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/pt-BR.json' },
     responsive: true,
     order: [[1, 'desc']],
-    lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]]
+    lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
+    columnDefs: [
+      { targets: 'hidden-id', visible: false } // Oculta a coluna ID
+    ]
   });
 
   // Captura músicas selecionadas com ordem

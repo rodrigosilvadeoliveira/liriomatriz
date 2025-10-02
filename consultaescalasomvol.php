@@ -32,23 +32,7 @@ function diaSemana($dataIso) {
     <meta charset="UTF-8">
     <title>Consulta Escala</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background: #f4f6f9; font-family: Arial, sans-serif; }
-        .escala-nome { cursor:pointer; padding:12px; background:#fff; margin-bottom:10px; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
-        .escala-nome:hover { background:#eaf2fb; }
-        .detalhes { display:none; margin-top:10px; }
-        .escala-card { background:#fff; border-radius:12px; padding:15px; margin-bottom:15px; box-shadow:0 4px 6px rgba(0,0,0,0.1); }
-        .escala-data { font-size:18px; font-weight:bold; color:#2c3e50; margin-bottom:12px; }
-        .escala-funcao { display:flex; align-items:center; margin:6px 0; padding:8px; background:#ecf0f1; border-radius:8px; }
-        .escala-funcao img { width:40px; height:40px; border-radius:50%; object-fit:cover; margin-right:10px; border:2px solid #fff; box-shadow:0 2px 4px rgba(0,0,0,0.2); }
-        .escala-funcao strong { color:#2980b9; margin-right:5px; }
-        .btn-excluir { background:#e74c3c; border:none; color:#fff; padding:5px 10px; border-radius:6px; font-size:14px; cursor:pointer; }
-        .btn-excluir:hover { background:#c0392b; }
-        .btn-download { background:#3498db; border:none; color:#fff; padding:5px 10px; border-radius:6px; font-size:14px; cursor:pointer; margin-right: 8px; }
-        .btn-download:hover { background:#2980b9; }
-        .modal-img { max-width: 100%; height: auto; }
-        .pdf-preview { width: 100%; height: 500px; border: none; }
-    </style>
+    <link rel="stylesheet" href="styleconsultaescala.css?v=<?=time()?>">
 </head>
 <body class="container py-4">
 
@@ -56,7 +40,10 @@ function diaSemana($dataIso) {
         <?php include("navegacao.php") ?>
     </div>
 <br><br>
-    <h2 class="mb-4">Consulta de Escalas Som</h2>
+     <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Consulta de Escalas Som</h2>
+        <a href="consultarepertorio.php" class="btn-consulta-repertorio">Consulta Repertório</a>
+    </div>
 
     <?php if(empty($escalas)){ ?>
         <p>Nenhuma escala encontrada.</p>

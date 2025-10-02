@@ -34,6 +34,27 @@ function diaSemana($dataIso) {
         .btn-excluir { background:#e74c3c; border:none; color:#fff; padding:5px 10px; border-radius:6px; font-size:14px; cursor:pointer; }
         .btn-excluir:hover { background:#c0392b; }
         .repertorio-card { background:#fff; border-radius:12px; padding:20px; margin-top:20px; box-shadow:0 4px 6px rgba(0,0,0,0.1); }
+        .musicas-list { 
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .musicas-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .musicas-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #000;
+            font-size: 18px;
+        }
+        .table td {
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body class="container py-4">
@@ -62,9 +83,20 @@ function diaSemana($dataIso) {
                             // Formata a data para exibir no formato dd/mm/aaaa
                             $dataBR = date('d/m/Y', strtotime($rowRepertorio['data_repertorio']));
                             
+                            // Processa a lista de músicas
+                            $musicasArray = explode(',', $rowRepertorio['nome_musicas']);
+                            $musicasHTML = '<ul class="musicas-list">';
+                            foreach ($musicasArray as $musica) {
+                                $musica = trim(htmlspecialchars($musica));
+                                if (!empty($musica)) {
+                                    $musicasHTML .= '<li>' . $musica . '</li>';
+                                }
+                            }
+                            $musicasHTML .= '</ul>';
+                            
                             echo "<tr>";
                             echo "<td>" . $dataBR . "</td>";
-                            echo "<td>" . htmlspecialchars($rowRepertorio['nome_musicas']) . "</td>";
+                            echo "<td>" . $musicasHTML . "</td>";
                             
                             if ($rowRepertorio['arquivo_repertorio']) {
                                 // Cria o link para o arquivo PDF

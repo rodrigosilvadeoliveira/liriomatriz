@@ -211,25 +211,25 @@ $logado = $_SESSION['usuario'];
                     </div>
                 
                     <div class="col-md-6">
-                        <label for="bateria" class="form-label -field">*Login</label>
-                        <input type="text" name="bateria" id="bateria" class="form-control" >
+                        <label for="usuario" class="form-label -field">*Login</label>
+                        <input type="text" name="usuario" id="usuario" class="form-control" >
                     </div>
 
                     <div class="col-md-6">
-                        <label for="violao" class="form-label -field">*Senha</label>
-                        <input type="text" name="violao" id="violao" class="form-control" >
+                        <label for="senha" class="form-label -field">*Senha</label>
+                        <input type="text" name="senha" id="senha" class="form-control" >
                     </div>
                     <div class="col-md-6">
-                        <label for="teclado" class="form-label -field">Email</label>
-                        <input type="text" name="teclado" id="teclado" class="form-control" >
+                        <label for="email" class="form-label -field">Email</label>
+                        <input type="text" name="email" id="email" class="form-control" >
                     </div>
                     <div class="col-md-6">
-                        <label for="baixo" class="form-label -field">*Telefone</label>
-                        <input type="text" name="baixo" id="baixo" class="form-control" >
+                        <label for="telefone" class="form-label -field">*Telefone</label>
+                        <input type="text" name="telefone" id="telefone" class="form-control" >
                     </div>
                     <div class="col-md-6">
-                        <label for="ministro" class="form-label -field">Celular</label>
-                        <input type="text" name="ministro" id="ministro" class="form-control" >
+                        <label for="celular" class="form-label -field">Celular</label>
+                        <input type="text" name="celular" id="celular" class="form-control" >
                     </div>
   <div class="col-md-3">
     <label for="inputState" class="form-label">*Perfil:</label>
@@ -243,6 +243,7 @@ $logado = $_SESSION['usuario'];
     <option value="midia">Midias</option>
     <option value="secretaria">Secretaria</option>
     <option value="voluntario">Voluntário</option>
+    
     </select>
 </div>
                     <div class="col-12 mt-4">

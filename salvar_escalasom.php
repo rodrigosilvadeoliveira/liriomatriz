@@ -32,9 +32,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
                 mkdir($uploadDir, 0777, true);
             }
             
-            // Gerar nome único para o arquivo
-            $fileName = uniqid('escala_') . '.pdf';
+            // Obter o nome do arquivo do POST ou usar um padrão
+            $fileName = isset($_POST['fileName']) ? $_POST['fileName'] : uniqid('escala_') . '.pdf';
+            
+            // Limpar o nome do arquivo para segurança
+            $fileName = preg_replace('/[^a-zA-Z0-9_\-\.]/', '_', $fileName);
+            
+            // Garantir que termina com .pdf
+            if (!preg_match('/\.pdf$/i', $fileName)) {
+                $fileName .= '.pdf';
+            }
+            
             $pdfPath = $uploadDir . $fileName;
+            
+            // Verificar se o arquivo já existe e adicionar sufixo numérico se necessário
+            $counter = 1;
+            $originalFileName = $fileName;
+            while (file_exists($pdfPath)) {
+                $fileName = pathinfo($originalFileName, PATHINFO_FILENAME) . '_' . $counter . '.pdf';
+                $pdfPath = $uploadDir . $fileName;
+                $counter++;
+            }
             
             // Mover arquivo para o diretório
             if (!move_uploaded_file($_FILES['pdf']['tmp_name'], $pdfPath)) {
@@ -55,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
         if ($conexao->query($sql)) {
             $response['success'] = true;
             $response['message'] = 'Escala salva com sucesso!';
+            $response['pdf_path'] = $pdfPath; // Opcional: retornar o caminho do PDF
         } else {
             // Se falhar a inserção, remover o arquivo PDF
             if ($pdfPath && file_exists($pdfPath)) {

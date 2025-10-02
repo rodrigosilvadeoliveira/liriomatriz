@@ -63,131 +63,11 @@ $escalaSalvaJSON = $escalaSalva ? json_encode($escalaSalva, JSON_UNESCAPED_UNICO
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>Sistema de Escalas Musicais</title>
+  <title>Sistema de Escalas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styledaescala.css">
-  <style>
-    .select-avatar {
-      display: flex; align-items: center; gap: 8px;
-    }
-    .select-avatar .avatar {
-      width: 28px; height: 28px; border-radius: 50%; object-fit: cover;
-      border: 1px solid #ddd;
-    }
-    .print-cell {
-      display: flex; align-items: center; gap: 8px; justify-content: center;
-    }
-    .print-cell .avatar {
-      width: 28px; height: 28px; border-radius: 50%; object-fit: cover; border: 1px solid #ddd;
-    }
-
-    .remove-col {
-        background: transparent;
-        border: none;
-        color: #f72585;
-        cursor: pointer;
-        margin-left: 8px;
-        font-size: 14px;
-        padding: 2px 5px;
-    }
-
-    .remove-col:hover {
-        background: rgba(247, 37, 133, 0.1);
-        border-radius: 3px;
-    }
-
-    .spinner {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        border: 2px solid #f3f3f3;
-        border-top: 2px solid #3498db;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin-right: 5px;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-    
-    .btn-new {
-        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-        border: none;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-    
-    .btn-new:hover {
-        background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    
-    /* Estilos para a barra de progresso */
-    .progress-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.7);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 10000;
-        color: white;
-        font-size: 18px;
-    }
-
-    .progress-bar {
-        width: 80%;
-        max-width: 400px;
-        height: 20px;
-        background: #333;
-        border-radius: 10px;
-        margin-top: 20px;
-        overflow: hidden;
-    }
-
-    .progress-fill {
-        height: 100%;
-        background: #4cc9f0;
-        width: 0%;
-        transition: width 0.3s ease;
-    }
-    
-    /* Melhorias para visualização em mobile */
-    @media (max-width: 768px) {
-        .container {
-            padding: 10px;
-        }
-        
-        .controls {
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .action-buttons {
-            flex-wrap: wrap;
-        }
-        
-        .action-buttons button {
-            flex: 1 0 45%;
-            margin-bottom: 10px;
-        }
-    }
-  </style>
+  <link rel="stylesheet" href="styledaescala.css?v=<?=time()?>">
+  
 </head>
 <body>
 
@@ -195,7 +75,8 @@ $escalaSalvaJSON = $escalaSalva ? json_encode($escalaSalva, JSON_UNESCAPED_UNICO
    <div class="navegacao">
    <?php include("navegacao.php")?>
    </div>
- <h1><i class="fas fa-music"></i> Sistema de Escalas Musicais</h1>
+   <br><br>
+ <h1><i class="fa-solid fa-camera"></i> Sistema de Escalas</h1>
    <h1> <p class="description">Gerencie e compartilhe escalas de forma fácil e rápida</p></h1>
     
   <div class="content">
@@ -951,11 +832,29 @@ function getImageFileName() {
 }
 
 function getPdfFileName() {
-  const ts = new Date();
-  const pad = n => String(n).padStart(2,'0');
-  return `escala_musical_${ts.getFullYear()}${pad(ts.getMonth()+1)}${pad(ts.getDate())}.pdf`;
+    const nomeEscala = document.getElementById('escalaName').value;
+    
+    // Se não houver nome definido, usar um padrão com data
+    if (!nomeEscala || nomeEscala.trim() === '') {
+        const ts = new Date();
+        const pad = n => String(n).padStart(2, '0');
+        return `escala_musical_${ts.getFullYear()}${pad(ts.getMonth()+1)}${pad(ts.getDate())}.pdf`;
+    }
+    
+    // Limpar o nome para ser válido como nome de arquivo
+    let fileName = nomeEscala
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Remove acentos
+        .replace(/[^a-zA-Z0-9\s_-]/g, '') // Remove caracteres inválidos
+        .replace(/\s+/g, '_') // Substitui espaços por underscores
+        .toLowerCase();
+    
+    // Garantir que termina com .pdf
+    if (!fileName.toLowerCase().endsWith('.pdf')) {
+        fileName += '.pdf';
+    }
+    
+    return fileName;
 }
-
 // Função para baixar a imagem
 function downloadImage(blob, fileName) {
   const url = URL.createObjectURL(blob);
@@ -1197,34 +1096,34 @@ function carregarEscalaSalva(dadosEscala) {
 
 // Função para salvar/atualizar escala no banco de dados
 function salvarEscalaNoBanco(escalaData, blobPdf, callback) {
-  const formData = new FormData();
-  formData.append('acao', 'salvar_escalacriativo');
-  formData.append('dados', JSON.stringify(escalaData));
+    const formData = new FormData();
+    formData.append('acao', 'salvar_escalacriativo');
+    formData.append('dados', JSON.stringify(escalaData));
+    formData.append('fileName', getPdfFileName()); // Adicionar o nome do arquivo
 
-  // adiciona o PDF como arquivo
-  if (blobPdf) {
-    formData.append('pdf', blobPdf, 'escala.pdf');
-  }
-
-  fetch('salvar_escalacriativo.php', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      showToast('Escala salva com sucesso!');
-      if (callback) callback();
-    } else {
-      showToast('Erro ao salvar escala: ' + data.message, 'error');
+    // adiciona o PDF como arquivo
+    if (blobPdf) {
+        formData.append('pdf', blobPdf, getPdfFileName()); // Usar o mesmo nome para o arquivo
     }
-  })
-  .catch(error => {
-    console.error('Erro:', error);
-    showToast('Erro ao conectar com o servidor.', 'error');
-  });
-}
 
+    fetch('salvar_escalacriativo.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showToast('Escala salva com sucesso!');
+            if (callback) callback();
+        } else {
+            showToast('Erro ao salvar escala: ' + data.message, 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        showToast('Erro ao conectar com o servidor.', 'error');
+    });
+}
 // Função para validar escala
 function validarEscala() {
   const escalaData = getEscalaData();

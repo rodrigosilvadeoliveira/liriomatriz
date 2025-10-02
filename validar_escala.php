@@ -81,7 +81,7 @@ if (table_exists($conexao, 'escalas_membros')) {
     $stmt->close();
 } else {
     /* 2) Fallback: varrer tabelas com coluna dados_escala JSON */
-    $tablesToCheck = ['escalas_midias','escalas_som', 'escalas_louvor', 'escalas_danca', 'escalas_criativo'];
+    $tablesToCheck = ['escalas_midias','escalas_som', 'escalas_louvor', 'escalas_danca', 'escalas_criativo', 'escalas_staff', 'escalas_kids'];
     foreach ($tablesToCheck as $table) {
         if (!table_exists($conexao, $table)) continue;
 
