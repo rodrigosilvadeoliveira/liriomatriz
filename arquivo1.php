@@ -12,6 +12,9 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
 $logado = $_SESSION['usuario'];
 $perfil = $_SESSION['nivel_acesso'];
 
+$perfil_usuario = $_SESSION['nivel_acesso'] ?? 'consulta'; // valor padrão caso não exista
+$pode_excluir = in_array($perfil_usuario, ['master', 'lider']);
+
 // Definir opções de menu baseadas no perfil
 $menuOptions = [];
 
@@ -44,12 +47,14 @@ if ($perfil === 'master') {
         ['title' => 'Escala Louvor GC Mulheres', 'url' => 'escalalouvormulheres'],
         ['title' => 'Escala Louvor GC Jovens', 'url' => 'escalalouvorJovens'],
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
+        ['title' => 'Guia de informações louvor', 'url' => 'checklistlouvor'],
         ['title' => 'Escala Midias', 'url' => 'escalamidias'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Escala Staff', 'url' => 'escalastaff'],
         ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaff'],
         ['title' => 'Escala Som', 'url' => 'escalasom'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
         ['title' => 'Repertorio', 'url' => 'musicas'],
         ['title' => 'Consulta Repertorio', 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
@@ -98,10 +103,12 @@ if ($perfil === 'master') {
         ['title' => 'Escala Louvor GC Mulheres', 'url' => 'escalalouvormulheres'],
         ['title' => 'Escala Louvor GC Jovens', 'url' => 'escalalouvorJovens'],
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
+        ['title' => 'Guia de informações louvor', 'url' => 'checklistlouvor'],
         ['title' => 'Escala Midias', 'url' => 'escalamidias'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Escala Som', 'url' => 'escalasom'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
         ['title' => 'Escala Staff', 'url' => 'escalastaff'],
         ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaff'],
         ['title' => 'Repertório', 'url' => 'musicas'],
@@ -111,26 +118,30 @@ if ($perfil === 'master') {
 } elseif ($perfil === 'consulta') {
     $menuOptions = [
         ['title' => 'Inicio', 'url' => 'paginainicial'],
-        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativovol'],
-        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladancavol'],
-        ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakidsvol'],
-        ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescalavol'],
-        ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidiasvol'],
-        ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasomvol'],
-        ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaffvol'],
+        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativo'],
+        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
+        ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
+        ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
+        ['title' => 'Guia de informações louvor', 'url' => 'checklistlouvor'],
+        ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
+        ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
+        ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaff'],
         ['title' => 'Consulta Repertório', 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
 } elseif ($perfil === 'ministro') {
     $menuOptions = [
        ['title' => 'Inicio', 'url' => 'paginainicial'],
-        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativovol'],
-        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladancavol'],
-        ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescalavol'],
-        ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakidsvol'],
-        ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidiasvol'],
-        ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasomvol'],
-        ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaffvol'],
+        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativo'],
+        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
+        ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
+        ['title' => 'Guia de informações louvor', 'url' => 'checklistlouvor'],
+        ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
+        ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
+        ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
+        ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaff'],
         ['title' => 'Repertório', 'url' => 'musicas'],
         ['title' => 'Consulta Repertório', 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
@@ -158,22 +169,22 @@ $categorizedOptions = [
         return in_array($item['url'], ['escalacriativo', 'consultaescalacriativo', 'consultaescalacriativovol']);
     }),
     'Dança' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], ['escaladanca','consultaescaladanca','consultaescaladancavol']);
+        return in_array($item['url'], ['escaladanca','consultaescaladanca']);
     }),
     'Kids' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], ['escalakids','consultaescalakids','consultaescalakidsvol']);
+        return in_array($item['url'], ['escalakids','consultaescalakids']);
     }),
     'Louvor' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], ['escalalouvor','escalalouvorkids', 'escalalouvorhomens', 'escalalouvormulheres', 'escalalouvorJovens','consultaescala','consultaescalavol']);
+        return in_array($item['url'], ['escalalouvor','escalalouvorkids', 'escalalouvorhomens', 'escalalouvormulheres', 'escalalouvorJovens','consultaescala', 'checklistlouvor']);
     }),
     'Midias' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], [ 'escalamidias', 'consultaescalamidias', 'consultaescalamidiasvol']);
+        return in_array($item['url'], [ 'escalamidias', 'consultaescalamidias']);
     }),
     'Som' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], ['escalasom', 'consultaescalasom', 'consultaescalasomvol']);
+        return in_array($item['url'], ['escalasom', 'consultaescalasom', 'checklistsom']);
     }),
-        'Staff' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], ['escalastaff', 'consultaescalastaff', 'consultaescalastaffvol']);
+    'Staff' => array_filter($menuOptions, function($item) {
+        return in_array($item['url'], ['escalastaff', 'consultaescalastaff']);
     }),
     'Relatórios' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['relatoriodepartamento', 'listar_relatoriosdep']);
@@ -198,455 +209,333 @@ $categorizedOptions = array_filter($categorizedOptions);
     <title>Lirio Matriz</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-    :root {
-        --primary-color: #3498db;
-        --secondary-color: #2c3e50;
-        --accent-color: #e74c3c;
-        --light-color: #ecf0f1;
-        --dark-color: #34495e;
-        --text-color: #2c3e50;
-        --text-light: #f8f9fa;
-        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        --transition: all 0.3s ease;
-    }
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --text-color: #2c3e50;
+            --text-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f8f9fa;
-        color: var(--text-color);
-        line-height: 1.6;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
 
-    /* Header Styles */
-    header {
-        background: linear-gradient(135deg, var(--secondary-color), var(--dark-color));
-        color: var(--text-light);
-        padding: 0;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        box-shadow: var(--shadow);
-    }
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--dark-color));
+            color: var(--text-light);
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
 
-    nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.8rem 1.5rem;
-        position: relative;
-    }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 1.5rem;
+        }
 
-    .logo {
-        height: 40px;
-        filter: brightness(0) invert(1);
-        flex-shrink: 0;
-    }
+        .logo {
+            height: 40px;
+            filter: brightness(0) invert(1)
+        }
 
-    .user-info {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-right: 15px;
-        color: var(--text-light);
-        font-size: 0.9rem;
-        flex-shrink: 0;
-    }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 15px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
 
-    .user-info i {
-        font-size: 1.2rem;
-    }
+        .user-info i {
+            font-size: 1.2rem;
+        }
 
-    /* Menu Styles - COM SCROLL HORIZONTAL CORRIGIDO */
-    .menu-container {
-        display: flex;
-        align-items: center;
-        flex: 1;
-        margin-left: 20px;
-        position: relative;
-        min-width: 0; /* Importante para flexbox com overflow */
-    }
+        /* Menu Styles */
+        .menu-container {
+            display: flex;
+            align-items: center;
+        }
 
-    .menu {
-        display: flex;
-        gap: 5px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        white-space: nowrap;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(255,255,255,0.3) transparent;
-        padding: 5px 0;
-        max-width: 100%;
-        flex: 1;
-        -webkit-overflow-scrolling: touch; /* Suaviza scroll no iOS */
-    }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
 
-    /* Scrollbar personalizada para Webkit */
-    .menu::-webkit-scrollbar {
-        height: 6px;
-    }
+        .menu-toggle span {
+            background: var(--text-light);
+            height: 3px;
+            width: 25px;
+            margin: 3px 0;
+            border-radius: 2px;
+            transition: var(--transition);
+        }
 
-    .menu::-webkit-scrollbar-track {
-        background: rgba(255,255,255,0.1);
-        border-radius: 3px;
-        margin: 0 10px;
-    }
-
-    .menu::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,0.3);
-        border-radius: 3px;
-    }
-
-    .menu::-webkit-scrollbar-thumb:hover {
-        background: rgba(255,255,255,0.5);
-    }
-
-    /* Para Firefox */
-    .menu {
-        scrollbar-width: thin;
-        scrollbar-color: rgba(255,255,255,0.3) transparent;
-    }
-
-    .menu-category {
-        position: relative;
-        flex-shrink: 0; /* Impede que os itens encolham */
-    }
-
-    .category-title {
-        color: var(--text-light);
-        text-decoration: none;
-        padding: 10px 15px;
-        border-radius: 6px;
-        transition: var(--transition);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        white-space: nowrap;
-        font-size: 0.9rem;
-        background: transparent;
-        border: none;
-        font-family: inherit;
-    }
-
-    .category-title:hover {
-        background: rgba(255, 255, 255, 0.15);
-    }
-
-    .category-title i {
-        font-size: 0.7rem;
-        transition: transform 0.3s ease;
-    }
-
-    .menu-category:hover .category-title i {
-        transform: rotate(180deg);
-    }
-
-    .submenu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: white;
-        min-width: 220px;
-        max-width: 300px;
-        border-radius: 8px;
-        box-shadow: var(--shadow);
-        padding: 10px 0;
-        z-index: 1000;
-        max-height: 400px;
-        overflow-y: auto;
-    }
-
-    .menu-category:hover .submenu {
-        display: block;
-    }
-
-    .submenu a {
-        display: block;
-        padding: 12px 20px;
-        color: var(--text-color);
-        text-decoration: none;
-        transition: var(--transition);
-        border-left: 3px solid transparent;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 0.9rem;
-    }
-
-    .submenu a:hover {
-        background: #f0f4f8;
-        border-left: 3px solid var(--primary-color);
-        padding-left: 17px;
-    }
-
-    .submenu a.btn-danger {
-        color: #e74c3c;
-        font-weight: bold;
-    }
-
-    .submenu a.btn-danger:hover {
-        background: #ffeaea;
-        border-left: 3px solid #e74c3c;
-    }
-
-    /* Indicador visual de que há mais itens */
-    .menu-container::after {
-        content: '';
-        position: absolute;
-        right: 40px;
-        top: 0;
-        height: 100%;
-        width: 30px;
-        background: linear-gradient(90deg, transparent, var(--secondary-color));
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .menu-container.scrollable::after {
-        opacity: 1;
-    }
-
-    /* Menu Toggle para mobile */
-    .menu-toggle {
-        display: none;
-        flex-direction: column;
-        cursor: pointer;
-        padding: 8px;
-        margin-left: 10px;
-        flex-shrink: 0;
-    }
-
-    .menu-toggle span {
-        background: var(--text-light);
-        height: 3px;
-        width: 25px;
-        margin: 3px 0;
-        border-radius: 2px;
-        transition: var(--transition);
-    }
-
-    /* Mobile Menu Styles */
-    .mobile-menu {
-        display: none;
-        position: fixed;
-        top: 57px;
-        left: 0;
-        width: 100%;
-        height: calc(100vh - 57px);
-        background: var(--light-color);
-        z-index: 999;
-        overflow-y: auto;
-        padding: 20px;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-    }
-
-    .mobile-menu.active {
-        transform: translateX(0);
-    }
-
-    .mobile-category {
-        margin-bottom: 15px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .mobile-category-title {
-        padding: 15px 10px;
-        font-weight: bold;
-        color: var(--secondary-color);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-    }
-
-    .mobile-category-title i {
-        transition: transform 0.3s ease;
-    }
-
-    .mobile-category-title.active i {
-        transform: rotate(180deg);
-    }
-
-    .mobile-submenu {
-        display: none;
-        padding: 0 10px 15px;
-    }
-
-    .mobile-submenu a {
-        display: block;
-        padding: 12px 15px;
-        color: var(--text-color);
-        text-decoration: none;
-        border-radius: 6px;
-        margin-bottom: 5px;
-        background: white;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        transition: var(--transition);
-    }
-
-    .mobile-submenu a:hover {
-        background: #f0f4f8;
-        transform: translateX(5px);
-    }
-
-    .mobile-submenu a.btn-danger {
-        color: #e74c3c;
-        font-weight: bold;
-        border-left: 3px solid #e74c3c;
-    }
-
-    .search-container {
-        margin: 15px 0;
-        position: relative;
-    }
-
-    .search-container input {
-        width: 100%;
-        padding: 12px 15px;
-        padding-left: 40px;
-        border: 1px solid #ddd;
-        border-radius: 25px;
-        font-size: 1rem;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    .search-container i {
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #888;
-    }
-
-    /* Content spacer */
-    .content-spacer {
-        margin-top: 70px;
-        padding: 20px;
-    }
-
-    /* Welcome message */
-    .welcome-message {
-        background: white;
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: var(--shadow);
-        text-align: center;
-    }
-
-    /* Responsive Styles */
-    @media (max-width: 1024px) {
         .menu {
-            gap: 3px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .menu-category {
+            position: relative;
         }
 
         .category-title {
-            padding: 8px 12px;
-            font-size: 0.85rem;
-        }
-        
-        nav {
-            padding: 0.8rem 1rem;
-        }
-    }
-
-    @media (max-width: 900px) {
-        .menu {
-            display: none;
-        }
-
-        .menu-toggle {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: var(--transition);
+            cursor: pointer;
             display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .mobile-menu {
+        .category-title:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .category-title i {
+            font-size: 0.8rem;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 220px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .menu-category:hover .submenu {
             display: block;
         }
 
-        .user-info span {
+        .submenu a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .submenu a:hover {
+            background: #f0f4f8;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 17px;
+        }
+
+        .submenu a.btn-danger {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .submenu a.btn-danger:hover {
+            background: #ffeaea;
+            border-left: 3px solid #e74c3c;
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
             display: none;
+            position: fixed;
+            top: 57px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 57px);
+            background: var(--light-color);
+            z-index: 999;
+            overflow-y: auto;
+            padding: 20px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
         }
-        
-        .menu-container {
-            margin-left: 10px;
-            flex: none;
+
+        .mobile-menu.active {
+            transform: translateX(0);
         }
-        
-        .menu-container::after {
+
+        .mobile-category {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .mobile-category-title {
+            padding: 15px 10px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .mobile-category-title i {
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-category-title.active i {
+            transform: rotate(180deg);
+        }
+
+        .mobile-submenu {
             display: none;
+            padding: 0 10px 15px;
         }
-    }
 
-    @media (max-width: 768px) {
-        nav {
-            padding: 0.8rem 0.5rem;
+        .mobile-submenu a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: var(--transition);
         }
-        
-        .logo {
-            height: 35px;
+
+        .mobile-submenu a:hover {
+            background: #f0f4f8;
+            transform: translateX(5px);
         }
-        
-        .menu-toggle {
-            padding: 6px;
+
+        .mobile-submenu a.btn-danger {
+            color: #e74c3c;
+            font-weight: bold;
+            border-left: 3px solid #e74c3c;
         }
-        
-        .menu-toggle span {
-            width: 20px;
+
+        .search-container {
+            margin: 15px 0;
+            position: relative;
         }
-    }
 
-    /* Animation for menu toggle */
-    .menu-toggle.active span:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
-    }
+        .search-container input {
+            width: 100%;
+            padding: 12px 15px;
+            padding-left: 40px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
 
-    .menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-    }
+        .search-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
 
-    .menu-toggle.active span:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
-    }
+        /* Content spacer */
+        .content-spacer {
+            margin-top: 70px;
+            padding: 0px;
+        }
 
-    /* Scrollbar styling for mobile menu */
-    .mobile-menu::-webkit-scrollbar {
-        width: 6px;
-    }
+        /* Welcome message */
+        .welcome-message {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
 
-    .mobile-menu::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .menu {
+                gap: 2px;
+            }
 
-    .mobile-menu::-webkit-scrollbar-thumb {
-        background: #ccc;
-        border-radius: 10px;
-    }
+            .category-title {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+        }
 
-    .mobile-menu::-webkit-scrollbar-thumb:hover {
-        background: #aaa;
-    }
+        @media (max-width: 900px) {
+            .menu {
+                display: none;
+            }
 
-    /* Melhorias para o scroll horizontal */
-    .menu {
-        scroll-behavior: smooth;
-    }
-    
-    /* Garantir que o menu não quebre */
-    .menu-category {
-        display: inline-block;
-    }
-</style>
+            .menu-toggle {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .user-info span {
+                display: none;
+            }
+        }
+
+        /* Animation for menu toggle */
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Scrollbar styling for mobile menu */
+        .mobile-menu::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .mobile-menu::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .mobile-menu::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
+        }
+
+        .mobile-menu::-webkit-scrollbar-thumb:hover {
+            background: #aaa;
+        }
+    </style>
 </head>
 <body>
     <header>

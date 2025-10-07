@@ -33,6 +33,7 @@ function diaSemana($dataIso) {
     <title>Consulta Escala</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styleconsultaescala.css?v=<?=time()?>">
+    
 </head>
 <body class="container py-4">
 
@@ -53,10 +54,8 @@ function voltar() {
     window.history.back();
 }
 </script>
-     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Consulta de Escalas Som</h2>
-        <a href="consultarepertorio.php" class="btn-consulta-repertorio">Consulta Repertório</a>
-    </div>
+    <h2 class="mb-4">Consulta de Escalas Som</h2>
+
     <?php if(empty($escalas)){ ?>
         <p>Nenhuma escala encontrada.</p>
     <?php } else { ?>
@@ -68,7 +67,9 @@ function voltar() {
                 <?php else: ?>
                     <span class="btn-download" style="background-color: #95a5a6; cursor: not-allowed;">PDF Indisponível</span>
                 <?php endif; ?>
+                <?php if($pode_excluir): ?>
                 <button class="btn-excluir" data-id="<?php echo $escala['id']; ?>">Excluir</button>
+             <?php endif; ?>
             </div>
             <div class="detalhes" id="detalhes-<?php echo $escala['id']; ?>"></div>
         <?php } ?>

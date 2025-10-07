@@ -55,6 +55,13 @@ $resultMusicas = $conexao->query($sql);
     .hidden-id {
       display: none;
     }
+    #textos{
+    margin-top: 1%;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    color: ;
+}
   </style>
 </head>
 <body>
@@ -65,6 +72,23 @@ $resultMusicas = $conexao->query($sql);
 <div class="container-fluid" style="margin-top:80px;">
   <h3 class="mb-4">Cadastro de Músicas</h3>
   <div class="alert alert-info">
+    <h5>
+                        <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#tabernaculo"
+                            role="button" aria-expanded="false" aria-controls="musicos">Tabernaculo <i
+                                class="fas fa-chevron-down ms-2"></i>
+                        </a>
+                    </h5>
+                    <div class="collapse" id="tabernaculo">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 id="textos">    
+    <p><b>Átrio:</b> é onde a maioria do povo de Deus se reúne – e fica. Lá, cantamos cânticos de júbilo, de guerra, de testemunho e de convite ao louvor.</p>
+    <p><b>Santo Lugar:</b> é o lugar do sacerdote, é um aprofundamento. É um lugar de ministração de louvor através de cânticos de comunhão, de Edificação no Espírito Santo, de clamor, de Exaltação.</p>
+    <p><b>Santo dos Santos:</b> antes do sacrifício de Jesus, o véu dividia o espaço onde estava a arca da presença do Senhor, e lá, somente o sacerdote poderia entrar uma vez ao ano. Após a cruz, esse véu foi rasgado de alto a baixo, e o acesso a Deus foi aberto a todos os filhos adoradores que foram salvos, lavados e edificados em Cristo. E quais os hinos desta etapa da adoração? Hinos de Contemplação, de Adoração</p>
+       </h3>
+      </div>
+     </div>
+    </div>
     <!-- <a href="verificar_repertorios.php" target="_blank" class="btn btn-sm btn-warning">
         🔧 Verificar Sistema
     </a> -->
@@ -115,7 +139,7 @@ if (isset($_GET['error'])) {
         </div>
         <div class="col-md-4">
           <label class="form-label">Tema</label>
-          <input type="text" name="tema_musica" class="form-control" required>
+          <input type="text" name="tema_musica" class="form-control">
         </div>
 
         <div class="col-md-4">
@@ -246,12 +270,14 @@ echo "</td>";
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
 <script>
 $(document).ready(function() {
   $('#tabelaMusicas').DataTable({
     language: { url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/pt-BR.json' },
+    stateSave: true,
     responsive: true,
     order: [[1, 'desc']],
     lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],

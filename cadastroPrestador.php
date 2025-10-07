@@ -1,12 +1,10 @@
 <?php
-
 include_once('config.php');
 
 // Verifica imagem cortada da sessão
 $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
 
 // Verifica login
-
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +12,7 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Membros</title>
+    <title>Cadastro de Prestador de Serviços</title>
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     
     <!-- Bootstrap CSS -->
@@ -95,14 +93,14 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
             padding: 20px;
         }
         
-        .departamentos-grid {
+        .servicos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 10px;
             margin-top: 10px;
         }
         
-        .departamentos-grid .form-check {
+        .servicos-grid .form-check {
             background-color: #f8f9fa;
             padding: 8px 12px;
             border-radius: 5px;
@@ -165,7 +163,7 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
         }
         
         @media (max-width: 768px) {
-            .departamentos-grid {
+            .servicos-grid {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
         }
@@ -173,15 +171,14 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-      <?php include('cabecalhoMembros.php') ?>
-      
-    </nav>
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+      <?php include('cabecalhoServicos.php') ?>
+    </nav> -->
 
     <div class="container">
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
-            <h1 class="h3 text-gray-800"><i class="fas fa-user-plus me-2"></i>Cadastro de Membros</h1>
+            <h1 class="h3 text-gray-800"><i class="fas fa-briefcase me-2"></i>Cadastro de Prestador de Serviços</h1>
             <div>
                
             </div>
@@ -189,13 +186,13 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
         
         <!-- Mensagem de Boas-Vindas -->
         <div class="alert alert-primary mb-4">
-            
+            <i class="fas fa-info-circle me-2"></i>Preencha os dados abaixo para cadastrar seu serviço em nossa plataforma.
         </div>
 
         <!-- Formulário -->
         <div class="card card-form">
             <div class="card-header card-header-custom">
-                <h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>Informações do Membro</h5>
+                <h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>Informações do Prestador</h5>
             </div>
             <div class="card-body">
                 <?php if (!empty($imagem)): ?>
@@ -203,9 +200,9 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
                     <div class="col-md-4 mx-auto">
                         <div class="profile-preview">
                             <h5 class="mb-3">Prévia do Perfil</h5>
-                            <img src="<?php echo htmlspecialchars($imagem); ?>" alt="Imagem do usuário">
-                            <div class="fw-bold">Nome</div>
-                            <div class="text-muted">Sobrenome</div>
+                            <img src="<?php echo htmlspecialchars($imagem); ?>" alt="Imagem do prestador">
+                            <div class="fw-bold">Nome do Prestador</div>
+                            <div class="text-muted">Serviço Prestado</div>
                             <div class="text-primary">email@exemplo.com</div>
                             <div class="text-dark">(00) 0000-0000</div>
                         </div>
@@ -213,48 +210,20 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
                 </div>
                 <?php endif; ?>
                 
-                <form method="POST" action="salvar_membro.php" enctype="multipart/form-data" class="row g-3">
+                <form method="POST" action="salvar_prestador.php" enctype="multipart/form-data" class="row g-3">
                     <div class="col-md-6">
-                        <label for="nome" class="form-label required-field">Nome</label>
+                        <label for="nome" class="form-label required-field">Nome Completo</label>
                         <input type="text" name="nome" id="nome" class="form-control" required>
                     </div>
 
                     <div class="col-md-6">
-                        <label for="sobrenome" class="form-label required-field">Sobrenome</label>
-                        <input type="text" name="sobrenome" id="sobrenome" class="form-control" required>
+                        <label for="nome_empresa" class="form-label">Nome da Empresa (se houver)</label>
+                        <input type="text" name="nome_empresa" id="nome_empresa" class="form-control">
                     </div>
 
-                    <div class="col-md-4">
-                        <label for="nascimento-text" class="form-label required-field">Data de Nascimento</label>
-                        <input type="date" name="nascimento" id="nascimento-date" class="form-control d-none">
-                        <input type="text" name="nascimento_text" id="nascimento-text" class="form-control" 
-                               placeholder="DD/MM/AAAA" 
-                               maxlength="10"
-                               oninput="formatarDataAuto(this, 'nascimento-date')"
-                               onkeydown="permitirApenasNumeros(event)"
-                               onblur="validarDataFinal(this, 'nascimento-date')"
-                               required>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="batizado" class="form-label required-field">Batizado</label>
-                        <select id="batizado" class="form-select" name="batizado" required>
-                            <option value="">Selecione</option>
-                            <option value="não">Não</option>
-                            <option value="sim">Sim</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="datas-text" class="form-label required-field">Membro desde</label>
-                        <input type="date" name="datas" id="datas-date" class="form-control d-none">
-                        <input type="text" name="datas_text" id="datas-text" class="form-control" 
-                               placeholder="DD/MM/AAAA" 
-                               maxlength="10"
-                               oninput="formatarDataAuto(this, 'datas-date')"
-                               onkeydown="permitirApenasNumeros(event)"
-                               onblur="validarDataFinal(this, 'datas-date')"
-                               required>
+                    <div class="col-md-6">
+                        <label for="cpf_cnpj" class="form-label required-field">CPF/CNPJ</label>
+                        <input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control" required>
                     </div>
 
                     <div class="col-md-6">
@@ -263,125 +232,154 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
                     </div>
 
                     <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" id="email" class="form-control">
+                        <label for="email" class="form-label required-field">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="instagram" class="form-label">Instagram</label>
-                        <input type="instagram" name="instagram" id="instagram" class="form-control">
+                        <label for="instagram" class="form-label required-field">Link instagram</label>
+                        <input type="instagram" name="instagram" id="instagram" class="form-control" required>
                     </div>
 
                     <div class="col-md-6">
-                        <label for="voluntario" class="form-label required-field">Voluntário</label>
-                        <select id="voluntario" class="form-select" name="voluntario" required>
+                        <label for="cidade" class="form-label required-field">Cidade</label>
+                        <input type="text" name="cidade" id="cidade" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="estado" class="form-label required-field">Estado</label>
+                        <select id="estado" class="form-select" name="estado" required>
                             <option value="">Selecione</option>
-                            <option value="sim">Sim</option>
-                            <option value="não">Não</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
                         </select>
                     </div>
 
                     <div class="col-md-6">
-                        <label for="lider" class="form-label required-field">Líder</label>
-                        <select id="lider" class="form-select" name="lider" required>
-                            <option value="">Selecione</option>
-                            <option value="não">Não</option>
-                            <option value="consagracao">Consagração</option>
-                            <option value="coral">Coral</option>
-                            <option value="criativo">Criativo</option>
-                            <option value="danca">Dança</option>
-                            <option value="gccasados">GC Casados</option>
-                            <option value="gcjovens">GC Jovens</option>
-                            <option value="intercessao">Intercessão</option>
-                            <option value="Kids">Kids</option>
-                            <option value="loja">Loja</option>
-                            <option value="louvor">Louvor</div>
-                            <option value="midias">Mídias</option>
-                            <option value="oficiais">Oficiais</option>
-                            <option value="recepcao">Recepção</option>
-                            <option value="salavoluntarios">Sala Voluntários</option>
-                            <option value="som">Mesa de Som</option>
-                            <option value="teatro">Teatro</option>
-                            <option value="transito">Trânsito</option>
-                            <option value="visitas">Visitas</option>
-                        </select>
+                        <label for="experiencia" class="form-label">Anos de Experiência</label>
+                        <input type="number" name="experiencia" id="experiencia" class="form-control" min="0" max="50">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="valor_medio" class="form-label">Valor Médio do Serviço (R$)</label>
+                        <input type="text" name="valor_medio" id="valor_medio" class="form-control" placeholder="Ex: 150,00">
                     </div>
 
                     <div class="col-12">
-                        <label class="form-label">Voluntário em qual(is) departamento(s):</label>
-                        <div class="departamentos-grid">
+                        <label class="form-label required-field">Tipo de Serviço Prestado:</label>
+                        <div class="servicos-grid">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Criativo" id="deptCriativo">
-                                <label class="form-check-label" for="deptCriativo">Criativo</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Eletricista" id="servEletricista">
+                                <label class="form-check-label" for="servEletricista">Eletricista</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Consagracao" id="deptConsagracao">
-                                <label class="form-check-label" for="deptConsagracao">Consagração</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Encanador" id="servEncanador">
+                                <label class="form-check-label" for="servEncanador">Encanador</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Coral" id="deptCoral">
-                                <label class="form-check-label" for="deptCoral">Coral</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Pintor" id="servPintor">
+                                <label class="form-check-label" for="servPintor">Pintor</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Danca" id="deptDanca">
-                                <label class="form-check-label" for="deptDanca">Dança</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Pedreiro" id="servPedreiro">
+                                <label class="form-check-label" for="servPedreiro">Pedreiro</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Intercessao" id="deptIntercessao">
-                                <label class="form-check-label" for="deptIntercessao">Intercessão</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Marceneiro" id="servMarceneiro">
+                                <label class="form-check-label" for="servMarceneiro">Marceneiro</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Kids" id="deptKids">
-                                <label class="form-check-label" for="deptKids">Kids</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Confeiteiro" id="servConfeiteiro">
+                                <label class="form-check-label" for="servConfeiteiro">Confeiteiro</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Loja" id="deptLoja">
-                                <label class="form-check-label" for="deptLoja">Loja</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Costureira" id="servCostureira">
+                                <label class="form-check-label" for="servCostureira">Costureira</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Louvor" id="deptLouvor">
-                                <label class="form-check-label" for="deptLouvor">Louvor</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Motorista" id="servMotorista">
+                                <label class="form-check-label" for="servMotorista">Motorista</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Midias" id="deptMidias">
-                                <label class="form-check-label" for="deptMidias">Mídias</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Diarista" id="servDiarista">
+                                <label class="form-check-label" for="servDiarista">Diarista</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Oficiais" id="deptOficiais">
-                                <label class="form-check-label" for="deptOficiais">Oficiais</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Jardineiro" id="servJardineiro">
+                                <label class="form-check-label" for="servJardineiro">Jardineiro</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Recepcao" id="deptRecepcao">
-                                <label class="form-check-label" for="deptRecepcao">Recepção</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Técnico Informática" id="servTecnicoInfo">
+                                <label class="form-check-label" for="servTecnicoInfo">Técnico Informática</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Staff" id="deptStaff">
-                                <label class="form-check-label" for="deptStaff">Staff</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Designer Gráfico" id="servDesigner">
+                                <label class="form-check-label" for="servDesigner">Designer Gráfico</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Sala_voluntarios" id="deptSalaVoluntarios">
-                                <label class="form-check-label" for="deptSalaVoluntarios">Sala Voluntários</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Fotógrafo" id="servFotografo">
+                                <label class="form-check-label" for="servFotografo">Fotógrafo</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Som" id="deptSom">
-                                <label class="form-check-label" for="deptSom">Mesa de Som</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Personal Trainer" id="servPersonal">
+                                <label class="form-check-label" for="servPersonal">Personal Trainer</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Teatro" id="deptTeatro">
-                                <label class="form-check-label" for="deptTeatro">Teatro</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Babá" id="servBaba">
+                                <label class="form-check-label" for="servBaba">Babá</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="departamentoum[]" value="Visitas" id="deptVisitas">
-                                <label class="form-check-label" for="deptVisitas">Visitas</label>
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Outros" id="servOutros">
+                                <label class="form-check-label" for="servOutros">Outros</label>
                             </div>
                         </div>
-                        <small class="text-muted">* Selecione no máximo 3 departamentos</small>
+                        <small class="text-muted">* Selecione os serviços que você presta</small>
                     </div>
-                    
-                    <input type="hidden" id="status" name="status" value="ativo">
+
+                    <div class="col-12">
+                        <label for="descricao" class="form-label required-field">Descrição do Serviço</label>
+                        <textarea name="descricao" id="descricao" class="form-control" rows="4" placeholder="Descreva detalhadamente os serviços que você oferece..." required></textarea>
+                    </div>
 
                     <div class="col-md-6">
-                        <label for="responsavel" class="form-label">Responsável</label>
-                        <input type="text" name="responsavel" id="responsavel" class="form-control" placeholder="Nome completo do responsável">
+                        <label for="disponibilidade" class="form-label required-field">Disponibilidade</label>
+                        <select id="disponibilidade" class="form-select" name="disponibilidade" required>
+                            <option value="">Selecione</option>
+                            <option value="Segunda a Sexta">Segunda a Sexta</option>
+                            <option value="Finais de Semana">Finais de Semana</option>
+                            <option value="Todos os Dias">Todos os Dias</option>
+                            <option value="Plantão">Plantão</option>
+                            <option value="Horário Comercial">Horário Comercial</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="raio_atendimento" class="form-label">Raio de Atendimento (km)</label>
+                        <input type="number" name="raio_atendimento" id="raio_atendimento" class="form-control" min="0" max="100" placeholder="Ex: 20">
                     </div>
 
                     <div class="col-md-6">
@@ -403,8 +401,8 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
                     </div>
 
                     <div class="col-12 mt-4">
-                        <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary-custom">
-                            <i class="fas fa-save me-2"></i>Salvar Cadastro
+                        <button type="submit" name="submitPrestador" id="submitPrestador" class="btn btn-primary-custom">
+                            <i class="fas fa-save me-2"></i>Cadastrar Serviço
                         </button>
                     </div>
                 </form>
@@ -528,87 +526,51 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
             }
         });
 
-        // Limitar a seleção de departamentos a 3
-        const checkboxes = document.querySelectorAll('input[name="departamentoum[]"]');
-        checkboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                const checked = document.querySelectorAll('input[name="departamentoum[]"]:checked');
-                if (checked.length > 3) {
-                    this.checked = false;
-                    alert('Você pode selecionar no máximo 3 departamentos.');
-                }
-            });
+        // Formatação do campo de valor
+        document.getElementById('valor_medio').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = (value / 100).toFixed(2) + '';
+            value = value.replace(".", ",");
+            value = value.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+            value = value.replace(/(\d)(\d{3}),/g, "$1.$2,");
+            e.target.value = value;
         });
 
-        // Funções para formatação de data
-        function permitirApenasNumeros(event) {
-            if (!/[0-9]|Backspace|Delete|ArrowLeft|ArrowRight|Tab/.test(event.key)) {
-                event.preventDefault();
-                return false;
-            }
-            return true;
-        }
-
-        function formatarDataAuto(input, dateFieldId) {
-            let value = input.value.replace(/\D/g, '');
+        // Formatação do CPF/CNPJ
+        document.getElementById('cpf_cnpj').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
             
-            if (value.length > 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2);
-            }
-            if (value.length > 5) {
-                value = value.substring(0, 5) + '/' + value.substring(5);
-            }
-            
-            if (value.length > 10) {
-                value = value.substring(0, 10);
-            }
-            
-            input.value = value;
-            
-            if (value.length === 10) {
-                validarData(input, dateFieldId);
+            if (value.length <= 11) {
+                // Formatação para CPF
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
             } else {
-                input.classList.remove('is-invalid');
+                // Formatação para CNPJ
+                value = value.replace(/(\d{2})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1/$2');
+                value = value.replace(/(\d{4})(\d{1,2})$/, '$1-$2');
             }
-        }
+            
+            e.target.value = value;
+        });
 
-        function validarData(input, dateFieldId) {
-            const partes = input.value.split('/');
-            if (partes.length !== 3 || partes[0].length !== 2 || partes[1].length !== 2 || partes[2].length !== 4) {
-                input.classList.add('is-invalid');
-                return false;
+        // Formatação do telefone
+        document.getElementById('telefone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length <= 10) {
+                value = value.replace(/(\d{2})(\d)/, '($1) $2');
+                value = value.replace(/(\d{4})(\d)/, '$1-$2');
+            } else {
+                value = value.replace(/(\d{2})(\d)/, '($1) $2');
+                value = value.replace(/(\d{5})(\d)/, '$1-$2');
             }
             
-            const dia = parseInt(partes[0], 10);
-            const mes = parseInt(partes[1], 10);
-            const ano = parseInt(partes[2], 10);
-            
-            if (mes < 1 || mes > 12 || dia < 1 || dia > 31 || ano < 1900 || ano > new Date().getFullYear()) {
-                input.classList.add('is-invalid');
-                return false;
-            }
-            
-            const diasPorMes = [31, (ano % 4 === 0 && (ano % 100 !== 0 || ano % 400 === 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-            if (dia > diasPorMes[mes - 1]) {
-                input.classList.add('is-invalid');
-                return false;
-            }
-            
-            input.classList.remove('is-invalid');
-            document.getElementById(dateFieldId).value = `${ano}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
-            return true;
-        }
+            e.target.value = value;
+        });
 
-        function validarDataFinal(input, dateFieldId) {
-            if (input.value.length > 0 && input.value.length < 10) {
-                input.classList.add('is-invalid');
-            } else if (input.value.length === 10) {
-                if (!validarData(input, dateFieldId)) {
-                    input.value = '';
-                }
-            }
-        }
-        
         // Auto logout após 1 hora de inatividade
         const tempoLimite = 3600000;
         setTimeout(() => {
