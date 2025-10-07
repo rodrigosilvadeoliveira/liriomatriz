@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Administrativo - Sistema Teste Matriz</title>
+    <title>Sistema Lirio Matriz</title>
     <style>
         :root {
             --primary-color: #4361ee;
@@ -94,9 +94,10 @@
         }
         
         #logo {
-            max-width: 80px;
+            max-width: 215px;
             height: auto;
             filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+            margin-top: -15%;
         }
         
         .title {
@@ -291,6 +292,7 @@
             
             .title {
                 font-size: 1.5rem;
+                margin-top: -15%;
             }
             
             #formlogin {
@@ -377,7 +379,7 @@
             <img id="logo" src="lirioMatriz_preto.png" alt="Logo Sistema Teste Matriz">
         </div>
         <h1 class="title">Sistema <br><u>Lirio Matriz</u></h1>
-        <p class="subtitle">Área Administrativa</p>
+        <p class="subtitle">Área do Voluntario(a)</p>
     </div>
     
     <!-- Container do formulário - AGORA CENTRALIZADO -->
