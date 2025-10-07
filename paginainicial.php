@@ -514,7 +514,7 @@ include('navegacao.php');
         </div>
 
         <!-- Atividade Recente -->
-        <div class="recent-activity">
+        <!-- <div class="recent-activity">
             <h2 class="section-title">Atividade Recente</h2>
             <ul class="activity-list">
                 <?php if (count($atividadesRecentes) > 0): ?>
@@ -557,7 +557,7 @@ include('navegacao.php');
                 <?php endif; ?>
             </ul>
         </div>
-    </div>
+    </div> -->
 
   <?php
 include('footer_sistema.php');

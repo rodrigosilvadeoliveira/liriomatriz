@@ -40,6 +40,19 @@ function diaSemana($dataIso) {
         <?php include("navegacao.php") ?>
     </div>
 <br><br>
+<div class="action-buttons">
+            <button class="btn-voltar" onclick="voltar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+                Voltar
+            </button>
+           </div>
+        <script>
+function voltar() {
+    window.history.back();
+}
+</script>
     <h2 class="mb-4">Consulta de Escalas Dança</h2>
 
     <?php if(empty($escalas)){ ?>
@@ -53,7 +66,9 @@ function diaSemana($dataIso) {
                 <?php else: ?>
                     <span class="btn-download" style="background-color: #95a5a6; cursor: not-allowed;">PDF Indisponível</span>
                 <?php endif; ?>
+                <?php if($pode_excluir): ?>
                 <button class="btn-excluir" data-id="<?php echo $escala['id']; ?>">Excluir</button>
+             <?php endif; ?>
             </div>
             <div class="detalhes" id="detalhes-<?php echo $escala['id']; ?>"></div>
         <?php } ?>
