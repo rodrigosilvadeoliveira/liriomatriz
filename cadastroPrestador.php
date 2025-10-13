@@ -232,12 +232,12 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
                     </div>
 
                     <div class="col-md-6">
-                        <label for="email" class="form-label required-field">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" required>
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control">
                     </div>
                     <div class="col-md-6">
-                        <label for="instagram" class="form-label required-field">Link instagram</label>
-                        <input type="instagram" name="instagram" id="instagram" class="form-control" required>
+                        <label for="instagram" class="form-label">Link instagram</label>
+                        <input type="instagram" name="instagram" id="instagram" class="form-control">
                     </div>
 
                     <div class="col-md-6">

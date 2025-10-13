@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <body>
     <div class="cabecalho" id="cabecalhodoSite">
-    <?php include('cabecalhoSite.php');?>
+    <?php include('sitecabecalho.php');?>
     </div>
 <br><br><br><br>
 <h1 class="titulocarrinho">Carrinho de reserva de pedidos</h1>
@@ -433,7 +433,7 @@ São Paulo - SP</span>
 <br>
 <!--</fieldset>-->
 <div class="footer" id="footer">
-      <?php include('footerSite.php');?>
+      <?php include('sitefooter.php');?>
       </div>
 </body>
 

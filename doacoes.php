@@ -18,7 +18,7 @@
 <body>
 <header>
     <div class="cabecalho" id="cabecalhodoSite">
-    <?php include('cabecalhoSite.php');?>
+    <?php include('sitecabecalho.php');?>
     </div>
 
 </header>
@@ -41,7 +41,7 @@ foreach ($slides as $slide) {
 }
 ?>
 <div class="footer" id="footer">
-      <?php include('footerSite.php');?>
+      <?php include('sitefooter.php');?>
       </div>
 
 

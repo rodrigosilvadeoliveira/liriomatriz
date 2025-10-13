@@ -4,3 +4,7 @@ configUser.php
 calculoMembros.php
 # Ignorar pasta de uploads de arquivos
 /uploads/
+/uploads_escalas
+/pdf_escalas
+/img
+/mesa

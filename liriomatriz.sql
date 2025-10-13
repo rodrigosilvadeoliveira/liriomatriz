@@ -85,7 +85,7 @@ INSERT INTO `evento` (`id`, `imagem`, `cartaz`, `inscricao`, `links`, `nomeevent
 (59, './img/dizimos.jpeg', 'carrousel', '', '', 'Contribuir com Amor', NULL, NULL),
 (62, './img/AmoraCasa.jpeg', 'carrousel', '', '', 'Amor a Casa', NULL, NULL),
 (64, './img/fervor2025.jpeg', 'carrousel', '', '', 'Fervor 2025', NULL, NULL),
-(73, './img/Progamacao.jpeg', 'home', '', 'programacaoSite.php', 'promogramaçaoHome', NULL, NULL);
+(73, './img/Progamacao.jpeg', 'home', '', 'siteprogramacao.php', 'promogramaçaoHome', NULL, NULL);
 
 -- --------------------------------------------------------
 

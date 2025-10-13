@@ -29,7 +29,7 @@ $result = $conexao->query($sql);
     
 <body>
     <div class="cabecalho" id="cabecalhodoSite">
-    <?php include('cabecalhoSite.php');?>
+    <?php include('sitecabecalho.php');?>
     </div>
 <br >
 <br >
@@ -59,7 +59,7 @@ $result = $conexao->query($sql);
 </div>
 </div>
 <div class="footer" id="footer">
-      <?php include('footerSite.php');?>
+      <?php include('sitefooter.php');?>
       </div>
    
 </body>
