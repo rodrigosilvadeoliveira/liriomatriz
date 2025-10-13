@@ -101,7 +101,7 @@ class HTMLPurifier_Lexer
                         break;
                     }
 
-                    if (class_exists('DOMDocument', false) &&
+                    if (class_exists('DOMDocument') &&
                         method_exists('DOMDocument', 'loadHTML') &&
                         !extension_loaded('domxml')
                     ) {
@@ -270,20 +270,6 @@ class HTMLPurifier_Lexer
     }
 
     /**
-     * Special Internet Explorer conditional comments should be removed.
-     * @param string $string HTML string to process.
-     * @return string HTML with conditional comments removed.
-     */
-    protected static function removeIEConditional($string)
-    {
-        return preg_replace(
-            '#<!--\[if [^>]+\]>.*?<!\[endif\]-->#si', // probably should generalize for all strings
-            '',
-            $string
-        );
-    }
-
-    /**
      * Callback function for escapeCDATA() that does the work.
      *
      * @warning Though this is public in order to let the callback happen,
@@ -322,8 +308,6 @@ class HTMLPurifier_Lexer
 
         // escape CDATA
         $html = $this->escapeCDATA($html);
-
-        $html = $this->removeIEConditional($html);
 
         // extract body from document if applicable
         if ($config->get('Core.ConvertDocumentToFragment')) {
@@ -370,17 +354,7 @@ class HTMLPurifier_Lexer
     public function extractBody($html)
     {
         $matches = array();
-        $result = preg_match('|(.*?)<body[^>]*>(.*)<script>
-    // Tempo de inatividade em milissegundos (1 hora = 3600000 ms)
-    const tempoLimite = 3600000;
-
-    // Redireciona para logout após o tempo limite
-    setTimeout(() => {
-        window.location.href = "sistema.php?timeout=1"; 
-    }, tempoLimite);
-</script>
-
-</body>|is', $html, $matches);
+        $result = preg_match('|(.*?)<body[^>]*>(.*)</body>|is', $html, $matches);
         if ($result) {
             // Make sure it's not in a comment
             $comment_start = strrpos($matches[1], '<!--');

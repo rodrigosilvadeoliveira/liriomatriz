@@ -28,7 +28,7 @@ $result = $conexao->query($sql);
 
 <body>
 <div class="cabecalho" id="cabecalhodoSite">
-    <?php include('cabecalhoSite.php');?>
+    <?php include('sitecabecalho.php');?>
     </div>
 
 <h1 id="titulonapagina">Conheça mais sobre Cursos e Áreas do Voluntariádo e faça sua inscrição</h1>
@@ -88,7 +88,7 @@ $result = $conexao->query($sql);
     </table>
     </div>
 <div class="footer" id="footer">
-      <?php include('footerSite.php');?>
+      <?php include('sitefooter.php');?>
       </div>
 
 

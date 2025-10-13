@@ -57,6 +57,9 @@ $logStmt->execute();
             case 'lider':
                 header('Location: paginainicial');
                 break;
+            case 'ministro':
+                header('Location: paginainicial');
+                break;
             case 'consulta':
                 header('Location: paginainicial');
                 break;

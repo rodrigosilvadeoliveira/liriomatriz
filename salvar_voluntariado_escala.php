@@ -12,26 +12,41 @@ if ($conexao->connect_error) {
 }
 
 // Recebendo dados do formulário
-$nome       = $_POST['nome'] ?? '';
-$bateria    = $_POST['bateria'] ?? '';
-$violao     = $_POST['violao'] ?? '';
-$teclado    = $_POST['teclado'] ?? '';
-$baixo      = $_POST['baixo'] ?? '';
-$ministro   = $_POST['ministro'] ?? '';
-$vocal1     = $_POST['vocal1'] ?? '';
-$vocal2     = $_POST['vocal2'] ?? '';
-$vocal3     = $_POST['vocal3'] ?? '';
-$talckback  = $_POST['talckback'] ?? '';
-$igreja     = $_POST['igreja'] ?? '';
-$live       = $_POST['live'] ?? '';
-$somkids    = $_POST['somkids'] ?? '';
-$ct         = $_POST['ct'] ?? '';
-$c1         = $_POST['c1'] ?? '';
-$c2         = $_POST['c2'] ?? '';
-$lt         = $_POST['lt'] ?? '';
-$lz         = $_POST['lz'] ?? '';
-$ph         = $_POST['ph'] ?? '';
-$foto_crop  = $_POST['foto_crop'] ?? '';
+$id                      = $_POST['id'] ?? '';
+$nome                    = $_POST['nome'] ?? '';
+$bateria                 = $_POST['bateria'] ?? '';
+$violao                  = $_POST['violao'] ?? '';
+$teclado                 = $_POST['teclado'] ?? '';
+$baixo                   = $_POST['baixo'] ?? '';
+$ministro                = $_POST['ministro'] ?? '';
+$vocal1                  = $_POST['vocal1'] ?? '';
+$vocal2                  = $_POST['vocal2'] ?? '';
+$vocal3                  = $_POST['vocal3'] ?? '';
+$talckback               = $_POST['talckback'] ?? '';
+$igreja                  = $_POST['igreja'] ?? '';
+$live                    = $_POST['live'] ?? '';
+$somkids                 = $_POST['somkids'] ?? '';
+$ct                      = $_POST['ct'] ?? '';
+$c1                      = $_POST['c1'] ?? '';
+$c2                      = $_POST['c2'] ?? '';
+$lt                      = $_POST['lt'] ?? '';
+$lz                      = $_POST['lz'] ?? '';
+$ph                      = $_POST['ph'] ?? '';
+$danca                   = $_POST['danca'] ?? '';
+$real_time               = $_POST['real_time'] ?? '';
+$real_time_kids          = $_POST['real_time_kids'] ?? '';
+$recap                   = $_POST['recap'] ?? '';
+$real_time_treinamento   = $_POST['real_time_treinamento'] ?? '';
+$recap_treinamento       = $_POST['recap_treinamento'] ?? '';
+$real_time_adolescentes  = $_POST['real_time_adolescentes'] ?? '';
+$real_time_homens        = $_POST['real_time_homens'] ?? '';
+$real_time_mulheres      = $_POST['real_time_mulheres'] ?? '';
+$real_time_jovens        = $_POST['real_time_jovens'] ?? '';
+$staff1                  = $_POST['staff1'] ?? '';
+$staff2                  = $_POST['staff2'] ?? '';
+$prof                  = $_POST['prof'] ?? '';
+$apoio                  = $_POST['apoio'] ?? '';
+$foto_crop               = $_POST['foto_crop'] ?? '';
 
 // Tratando a imagem recortada (base64)
 $foto_nome = null;
@@ -62,16 +77,22 @@ if (!empty($foto_crop)) {
 
 // Inserindo no banco
 $sql = "INSERT INTO musicos (
-    nome, bateria, violao, teclado, baixo, ministro, vocal1, 
-    vocal2, vocal3, talckback, igreja, live, somkids, ct, c1, c2, lt, lz, ph, foto
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    id, nome, bateria, violao, teclado, baixo, ministro, vocal1, 
+    vocal2, vocal3, talckback, igreja, live, somkids, ct, c1, c2, lt, lz, ph, danca, 
+    real_time, real_time_kids, recap, real_time_treinamento, recap_treinamento, 
+    real_time_adolescentes, real_time_homens, real_time_mulheres, real_time_jovens, 
+    staff1, staff2, prof, apoio, foto
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conexao->prepare($sql);
 $stmt->bind_param(
-  "ssssssssssssssssssss",
-  $nome, $bateria, $violao, $teclado, $baixo, $ministro, $vocal1,
+  "sssssssssssssssssssssssssssssssssss",
+  $id, $nome, $bateria, $violao, $teclado, $baixo, $ministro, $vocal1,
   $vocal2, $vocal3, $talckback, $igreja, $live, $somkids,
-  $ct, $c1, $c2, $lt, $lz, $ph, $foto_nome
+  $ct, $c1, $c2, $lt, $lz, $ph, $danca, 
+  $real_time, $real_time_kids, $recap, $real_time_treinamento, $recap_treinamento,
+  $real_time_adolescentes, $real_time_homens, $real_time_mulheres, $real_time_jovens,
+  $staff1, $staff2, $prof, $apoio, $foto_nome
 );
 
 if ($stmt->execute()) {

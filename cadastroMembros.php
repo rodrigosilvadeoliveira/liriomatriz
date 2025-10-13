@@ -266,6 +266,10 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" id="email" class="form-control">
                     </div>
+                    <div class="col-md-6">
+                        <label for="instagram" class="form-label">Instagram</label>
+                        <input type="instagram" name="instagram" id="instagram" class="form-control">
+                    </div>
 
                     <div class="col-md-6">
                         <label for="voluntario" class="form-label required-field">Voluntário</label>

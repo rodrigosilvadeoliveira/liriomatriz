@@ -2,14 +2,14 @@
 <?php
  include('verificarLogin.php');
  verificarLogin();
-//session_start();
+session_start();
  include_once('config.php');
 
-     if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
- {
-       unset($_SESSION['usuario']);
-       unset($_SESSION['senha']);
-       header('Location: login.php');
+   if((!isset($_SESSION['usuario'])== true) and ($_SESSION['senha']) == true)
+{
+      unset($_SESSION['usuario']);
+    unset($_SESSION['senha']);
+  header('Location: login.php');
       
      }$logado = $_SESSION['usuario'];
 
@@ -28,18 +28,25 @@ $result = $conexao->query($sql);
   <meta charset="UTF-8">
   <title>Lista de Relatórios</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="p-4">
 
-   
+<br>   
 <?php
-    echo "<h1 id='BemVindo'>Bem vinda Pastora</u><p>Relatório Departamentos</p></h1>";
+    echo "<h1 id='BemVindo'>Bem vindo ao</u><p>Relatório Departamentos</p></h1>";
 ?>
-
-<br><br><br>
 <div class="navegacao">
    <?php include("navegacao.php")?>
    </div>
+<br><br><br>
+<div id="tabelaSite">
+<div class="produtos-container">
+  <a id="btncadrelatorio" class="butnavegacao"href="relatoriodepartamento">Cadastrar Relatórios</a>
+        <a id="btnconsrela" class="butnavegacao"href="listar_relatoriosdep">Consultar Relatórios</a>
+</div>
+</div>
+
   <h2>Relatórios cadastrados</h2>
   <table class="table table-bordered table-hover">
     <thead class="table-dark">

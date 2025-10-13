@@ -78,7 +78,7 @@ if (isset($_POST['id'])) {
 
 <body>
     <div class="cabecalho" id="cabecalhodoSite">
-    <?php include('cabecalhoSite.php');?>
+    <?php include('sitecabecalho.php');?>
     </div>
     <br><br>
 <h1 id="titulocategoria">Panquecas</h1>
@@ -124,7 +124,7 @@ $(document).ready(function(){
 </script>
 
 <div class="footer" id="footer">
-      <?php include('footerSite.php');?>
+      <?php include('sitefooter.php');?>
       </div>
 </div>
 </body>

@@ -81,7 +81,7 @@ if (table_exists($conexao, 'escalas_membros')) {
     $stmt->close();
 } else {
     /* 2) Fallback: varrer tabelas com coluna dados_escala JSON */
-    $tablesToCheck = ['escalas_midias','escalas_som', 'escalas_louvor'];
+    $tablesToCheck = ['escalas_midias','escalas_som', 'escalas_louvor', 'escalas_danca', 'escalas_criativo', 'escalas_staff', 'escalas_kids'];
     foreach ($tablesToCheck as $table) {
         if (!table_exists($conexao, $table)) continue;
 
@@ -104,7 +104,8 @@ if (table_exists($conexao, 'escalas_membros')) {
                     // varrer funções existentes
                     foreach ($esExist as $fExist => $mapExist) {
                         if (isset($mapExist[$iso]) && $mapExist[$iso] == $musico) {
-                            $conflicts[] = "O músico \"{$musico}\" já está em '{$row['nome']}' (tabela {$table}) no dia {$iso}";
+                            $dataFormatada = date('d/m/Y', strtotime($iso));
+                            $conflicts[] = "Voluntatio(a) \"{$musico}\" está em '{$row['nome']}' ({$table}) no dia {$dataFormatada}";
                         }
                     }
                 }
@@ -117,7 +118,23 @@ if (table_exists($conexao, 'escalas_membros')) {
 $conflicts = array_values(array_unique($conflicts));
 
 if (!empty($conflicts)) {
-    respond(['success' => false, 'message' => implode("<br>", $conflicts), 'conflicts' => $conflicts]);
+    // mensagem formatada apenas com \n
+    $formattedMessage = "⚠️ Foram encontrados os seguintes conflitos:\n";
+    $formattedMessage .= "• " . implode("\n• ", $conflicts);
+
+    respond([
+        'success'   => false,
+        'message'   => $formattedMessage, // texto cru com \n
+        'conflicts' => $conflicts
+    ]);
 }
 
-respond(['success' => true, 'message' => 'Nenhum conflito encontrado.']);
+// RESPOSTA PARA SUCESSO (FALTANTE NO CÓDIGO ORIGINAL)
+// Esta é a linha que estava faltando:
+respond([
+    'success' => true,
+    'message' => 'Escala validada com sucesso! Nenhum conflito encontrado.'
+]);
+
+// Nota: O exit já está dentro da função respond(), então não precisa chamar exit novamente
+?>

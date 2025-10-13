@@ -57,7 +57,7 @@ $meses = [
         .card { box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15); margin-bottom: 1.5rem; }
         .card-header { background-color: #f8f9fc; border-bottom: 1px solid #e3e6f0; }
         .sidebar { background-color: #4e73df; color: white; height: 100vh; position: fixed; top: 73px; left: 0; width: 250px; padding: 20px; }
-        .main-content { margin-left: 250px; padding: 20px; margin-top: 73px; }
+        .main-content { margin-left: 0px; padding: 20px; margin-top: 73px; }
         .navbar-brand { font-weight: 700; }
         .alert-primary { background-color: #e8f4ff; border-color: #b3d9ff; color: #0066cc; }
         .table th { border-top: none; font-weight: 600; color: #4e73df; }
@@ -73,8 +73,6 @@ $meses = [
 
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
-            <div class="col-lg-2 col-md-3 d-md-block sidebar collapse p-0"></div>
 
             <!-- Main Content -->
             <main class="col-lg-10 col-md-9 ms-sm-auto main-content">
