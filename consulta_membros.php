@@ -106,10 +106,10 @@ $resultmembros = $conexao->query($sqlMembros);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        .navbar-custom {
+        /* .navbar-custom {
             background-color: var(--primary-color);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+        } */
         
         .sidebar {
             min-height: calc(100vh - 73px);

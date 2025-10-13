@@ -60,7 +60,7 @@ $result = $conexao->query($sql);
 </div>
 
 <div class="footer" id="footer">
-      <?php include('footerSite.php');?>
+      <?php include('sitefooter.php');?>
       </div>
 
 

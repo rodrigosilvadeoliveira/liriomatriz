@@ -1,4 +1,4 @@
-<?php include("cabecalhoSite.php")?>
+<?php include("sitecabecalho.php")?>
 <?php
 session_start();
 
@@ -59,7 +59,7 @@ $result = $conexao->query($sql);
 </div>
 
 <div class="footer" id="footer">
-      <?php include('footerSite.php');?>
+      <?php include('sitefooter.php');?>
       </div>
 
 
