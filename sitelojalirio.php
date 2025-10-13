@@ -1,4 +1,3 @@
-
 <?php include("sitecabecalho.php")?>
     
 <html lang="en">
