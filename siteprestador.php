@@ -268,7 +268,7 @@ sort($todos_servicos);
     
 <body>
     <div class="cabecalho" id="cabecalhodoSite">
-        <?php include('cabecalhoSite.php');?>
+        <?php include('sitecabecalho.php');?>
     </div>
     
     <br><br>
@@ -428,7 +428,7 @@ sort($todos_servicos);
     </div>
 
     <div class="footer" id="footer">
-        <?php include('footerSite.php');?>
+        <?php include('sitefooter.php');?>
     </div>
 
     <!-- Font Awesome -->

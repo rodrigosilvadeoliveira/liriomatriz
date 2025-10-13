@@ -73,6 +73,7 @@
             list-style: none;
             margin: 0;
             padding: 0;
+            font-size: 21px;
         }
 
         .nav-item {
@@ -343,19 +344,22 @@
                         <a class="nav-link" href="novoComecoSite">Novo Começo</a>
                     </li>
                     <li class="nav-item">
-                       <a class="nav-link" href="voluntariadoSite">Voluntariado</a>
+                       <a class="nav-link" href="sitevoluntariado">Voluntariado</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="programacaoSite">Programação</a>
+                       <a class="nav-link" href="sitekids">Kids</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="mergulharSite">Mergulhar</a>
+                        <a class="nav-link" href="siteprogramacao">Programação</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sitemergulhar">Mergulhar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="inscricoes">Inscrições</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="lojateste">Loja</a>
+                        <a class="nav-link" href="lojalirio">Loja</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="doacoes">Doar</a>
@@ -387,19 +391,23 @@
                     <a class="mobile-nav-link" href="novoComecoSite">Novo Começo</a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="voluntariadoSite">Voluntariado</a>
+                    <a class="mobile-nav-link" href="sitevoluntariado">Voluntariado</a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="programacaoSite">Programação</a>
+                    <a class="mobile-nav-link" href="sitekids">Kids</a>
+                </li>
+                
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link" href="siteprogramacao">Programação</a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="mergulharSite">Mergulhar</a>
+                    <a class="mobile-nav-link" href="sitemergulhar">Mergulhar</a>
                 </li>
                 <li class="mobile-nav-item">
                     <a class="mobile-nav-link" href="inscricoes">Inscrições</a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="lojateste">Loja</a>
+                    <a class="mobile-nav-link" href="lojalirio">Loja</a>
                 </li>
                 <li class="mobile-nav-item">
                     <a class="mobile-nav-link mobile-nav-cta" href="doacoes">Doar</a>

@@ -186,7 +186,7 @@ $result = $conexao->query($sql);
 
 <body>
     <div class="cabecalho" id="cabecalhodoSite">
-        <?php include('cabecalhoSite.php');?>
+        <?php include('sitecabecalho.php');?>
     </div>
 
     <h1 id="titulonapagina">Ao Vivo na Liro Matriz</h1>
@@ -242,7 +242,7 @@ $result = $conexao->query($sql);
     </div>
 
     <div class="footer" id="footer">
-        <?php include('footerSite.php');?>
+        <?php include('sitefooter.php');?>
     </div>
 
     <!-- Bootstrap JS -->

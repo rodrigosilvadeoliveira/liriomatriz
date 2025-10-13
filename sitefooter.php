@@ -282,7 +282,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="programacaoSite.php" class="footer-link">
+                        <a href="siteprogramacao.php" class="footer-link">
                             <span class="footer-icon">
                                 <i class="fas fa-calendar-alt"></i>
                             </span>

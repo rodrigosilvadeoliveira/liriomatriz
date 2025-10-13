@@ -18,7 +18,7 @@
 <body>
 <header>
     <div class="cabecalho" id="cabecalhodoSite">
-    <?php include('cabecalhoSite.php');?>
+    <?php include('sitecabecalho.php');?>
     </div>    
 
 </header>
@@ -33,7 +33,7 @@
         <iframe id="novocomeco" src="https://docs.google.com/forms/d/e/1FAIpQLSexuTFLBXX6HUnjjVQ9VObYxnXutQ9DLVD5IHD6PltfMXPrnw/viewform?pli=1" width="640" height="950" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
     </div>
 <div class="footer" id="footer">
-      <?php include('footerSite.php');?>
+      <?php include('sitefooter.php');?>
       </div>
 
 
