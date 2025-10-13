@@ -356,13 +356,13 @@
                         <a class="nav-link" href="sitemergulhar">Mergulhar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="inscricoes">Inscrições</a>
+                        <a class="nav-link" href="siteinscricoes">Inscrições</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="lojalirio">Loja</a>
+                        <a class="nav-link" href="sitelojalirio">Loja</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="doacoes">Doar</a>
+                        <a class="nav-link" href="sitedoacoes">Doar</a>
                     </li>
                 </ul>
             </nav>
@@ -404,13 +404,13 @@
                     <a class="mobile-nav-link" href="sitemergulhar">Mergulhar</a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="inscricoes">Inscrições</a>
+                    <a class="mobile-nav-link" href="siteinscricoes">Inscrições</a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="lojalirio">Loja</a>
+                    <a class="mobile-nav-link" href="sitelojalirio">Loja</a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link mobile-nav-cta" href="doacoes">Doar</a>
+                    <a class="mobile-nav-link mobile-nav-cta" href="sitedoacoes">Doar</a>
                 </li>
             </ul>
         </div>
