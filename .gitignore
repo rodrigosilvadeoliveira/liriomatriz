@@ -2,9 +2,10 @@
 config.php
 configUser.php
 calculoMembros.php
-# Ignorar pasta de uploads de arquivos
+
+# Ignorar pastas de uploads e outras pastas geradas
 /uploads/
-/uploads_escalas
-/pdf_escalas
-/img
-/mesa
+/uploads_escalas/
+/pdf_escalas/
+/img/
+/mesa/
