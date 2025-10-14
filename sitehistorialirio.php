@@ -37,7 +37,6 @@ include_once('config.php');
     <?php include('sitecabecalho.php');?>
     </div>
 <br >
-<main>
 <div id="tabelacarrousel" class="carroussel">
     <div class="carroussel-container">
         <?php
@@ -165,10 +164,8 @@ Abraços de carinho e fé.
 Rozilda Paixão
 Pastora na Lirio Matriz
 </h3>                                                                                                                                                                                                                                                                                                                
-</main>
-<div class="footer" id="footer">
-      <?php include('sitefooter.php');?>
-      </div>     
+
+     
       <script>
 $(document).ready(function(){
     $('.carroussel-container').slick({
@@ -179,7 +176,9 @@ $(document).ready(function(){
     });
 });
 </script>     
-
+<div class="footer" id="footer">
+      <?php include('sitefooter.php');?>
+      </div>
 
 </body>
 </html>
