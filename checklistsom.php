@@ -146,8 +146,11 @@ $logado = $_SESSION['usuario'];
                             <div class="col-md-6">
                                 <h3 id="textos">
                                     <p><b>A.</b> Ligar o 1º estabilizador de energia (automaticamente liga o compressor)</p>
+                                    <img class="mesa" src="./mesa/estabilizadores1.jpg" alt="Logo"></p>
                                     <p><b>B.</b> Ligar a mesa de som (Botão power atrás da mesa)</p>
+                                    <img class="mesa" src="./mesa/botãoligar.jpg" alt="Logo"></p>
                                     <p><b>C.</b> Liga estabilizadores 2º e 3º (caixas frontais e P.A)</p>
+                                    <img class="mesa" src="./mesa/estabilizadores2e3.jpg" alt="Logo"></p>
                                     <p><b>D.</b> Subir volume Geral das P.A no “zero”</p>
                                     <p><b>E.</b> Ligar na tomada receptores dos mics sem Fio.</p>
                                     <p><b>F.</b> Selecionar a cena <b>(Louvor padrão)</b> ou <b>(Coral1309 para cultos de "CEIA")</b></p>
@@ -173,10 +176,12 @@ $logado = $_SESSION['usuario'];
                             <div class="col-md-6">
                                 <h3 id="textos">
                                     <p><b> A.</b> Desligar estabilizadores 2º e 3º</p>
+                                    <img class="mesa" src="./mesa/estabilizadores2e3.jpg" alt="Logo"></p>
                                     <p><b>B.</b> Na mesa de som clicar no botão Setup, selecionar Shutdown e confirmar.
                                         Desligar (Botão power atrás da mesa)</p>
-                                    <p><b>C.</b> Desligar o 1º estabilizador de energia (automaticamente desliga o compressor)
-                                    </p>
+                                        <img class="mesa" src="./mesa/botãoligar.jpg" alt="Logo"></p>
+                                    <p><b>C.</b> Desligar o 1º estabilizador de energia (automaticamente desliga o compressor)</p>
+                                    <img class="mesa" src="./mesa/estabilizadores1.jpg" alt="Logo"></p>
                                 </h3>
                             </div>
                         </div>
