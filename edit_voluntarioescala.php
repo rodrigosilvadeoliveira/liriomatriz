@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
@@ -36,6 +37,7 @@ $voluntario = $result->fetch_assoc();
 
 // Verifica imagem cortada da sessão ou usa a existente do banco
 $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : (isset($voluntario['foto']) ? $voluntario['foto'] : '');
+include('registroslog.php');
 ?>
 
 <!DOCTYPE html>

@@ -20,6 +20,7 @@ if ($conexao->connect_error) {
 // Consulta relatórios
 $sql = "SELECT * FROM relatorios ORDER BY criado_em DESC";
 $result = $conexao->query($sql);
+include('registroslog.php');
 ?>
 
 <!DOCTYPE html>

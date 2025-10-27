@@ -47,7 +47,7 @@ if ($perfil === 'master') {
         ['title' => 'Escala Louvor GC Mulheres', 'url' => 'escalalouvormulheres'],
         ['title' => 'Escala Louvor GC Jovens', 'url' => 'escalalouvorJovens'],
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
-        ['title' => 'Guia de informações louvor', 'url' => 'checklistlouvor'],
+        ['title' => 'R.I e informações gerais', 'url' => 'checklistlouvor'],
         ['title' => 'Escala Midias', 'url' => 'escalamidias'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Escala Staff', 'url' => 'escalastaff'],
@@ -103,7 +103,7 @@ if ($perfil === 'master') {
         ['title' => 'Escala Louvor GC Mulheres', 'url' => 'escalalouvormulheres'],
         ['title' => 'Escala Louvor GC Jovens', 'url' => 'escalalouvorJovens'],
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
-        ['title' => 'Guia de informações louvor', 'url' => 'checklistlouvor'],
+        ['title' => 'R.I e informações gerais', 'url' => 'checklistlouvor'],
         ['title' => 'Escala Midias', 'url' => 'escalamidias'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Escala Som', 'url' => 'escalasom'],
@@ -122,7 +122,7 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
         ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
-        ['title' => 'Guia de informações louvor', 'url' => 'checklistlouvor'],
+        ['title' => 'R.I e informações gerais', 'url' => 'checklistlouvor'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
         ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
@@ -136,7 +136,7 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativo'],
         ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
-        ['title' => 'Guia de informações louvor', 'url' => 'checklistlouvor'],
+        ['title' => 'R.I e informações gerais', 'url' => 'checklistlouvor'],
         ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
@@ -199,6 +199,7 @@ $categorizedOptions = [
 
 // Remover categorias vazias
 $categorizedOptions = array_filter($categorizedOptions);
+
 ?>
 
 <!DOCTYPE html>
@@ -252,6 +253,7 @@ $categorizedOptions = array_filter($categorizedOptions);
             align-items: center;
             justify-content: space-between;
             padding: 0.8rem 1.5rem;
+            
         }
 
         .logo {
@@ -346,7 +348,7 @@ $categorizedOptions = array_filter($categorizedOptions);
             color: var(--text-color);
             text-decoration: none;
             transition: var(--transition);
-            border-left: 3px solid transparent;
+            border-left: 3px solid blue;
         }
 
         .submenu a:hover {
@@ -423,6 +425,7 @@ $categorizedOptions = array_filter($categorizedOptions);
             background: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             transition: var(--transition);
+            border-left: 3px solid blue;
         }
 
         .mobile-submenu a:hover {
@@ -474,7 +477,50 @@ $categorizedOptions = array_filter($categorizedOptions);
             box-shadow: var(--shadow);
             text-align: center;
         }
+        /* Destacar item específico apenas na categoria Louvor */
+.menu-category .submenu a[href="checklistlouvor"] {
+    color: #e74c3c !important;
+    font-weight: bold;
+}
 
+.menu-category .submenu a[href="checklistlouvor"]:hover {
+    color: #c0392b !important;
+    border-left: 3px solid #e74c3c;
+}
+
+/* Para a versão mobile - apenas na categoria Som */
+.mobile-category .mobile-submenu a[href="checklistlouvor"] {
+    color: #e74c3c !important;
+    font-weight: bold;
+    border-left: 3px solid #e74c3c;
+}
+
+.mobile-category .mobile-submenu a[href="checklistlouvor"]:hover {
+    background: #ffeaea;
+    color: #c0392b !important;
+}
+        /* Destacar item específico apenas na categoria Som */
+.menu-category .submenu a[href="checklistsom"] {
+    color: #e74c3c !important;
+    font-weight: bold;
+}
+
+.menu-category .submenu a[href="checklistsom"]:hover {
+    color: #c0392b !important;
+    border-left: 3px solid #e74c3c;
+}
+
+/* Para a versão mobile - apenas na categoria Som */
+.mobile-category .mobile-submenu a[href="checklistsom"] {
+    color: #e74c3c !important;
+    font-weight: bold;
+    border-left: 3px solid #e74c3c;
+}
+
+.mobile-category .mobile-submenu a[href="checklistsom"]:hover {
+    background: #ffeaea;
+    color: #c0392b !important;
+}
         /* Responsive Styles */
         @media (max-width: 1024px) {
             .menu {
@@ -487,23 +533,18 @@ $categorizedOptions = array_filter($categorizedOptions);
             }
         }
 
-        @media (max-width: 900px) {
-            .menu {
-                display: none;
-            }
+        /* Agora o menu horizontal nunca será exibido — só o menu hambúrguer */
+.menu {
+    display: none !important;
+}
 
-            .menu-toggle {
-                display: flex;
-            }
+.menu-toggle {
+    display: flex !important;
+}
 
-            .mobile-menu {
-                display: block;
-            }
-
-            .user-info span {
-                display: none;
-            }
-        }
+.mobile-menu {
+    display: block !important;
+}
 
         /* Animation for menu toggle */
         .menu-toggle.active span:nth-child(1) {

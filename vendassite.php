@@ -48,6 +48,7 @@ if (isset($_POST['id'])) {
     adicionarProdutoAoCarrinho($idProduto, $conexao);
 }
 
+include('registroslog.php');
 ?>
 
 <!DOCTYPE html>

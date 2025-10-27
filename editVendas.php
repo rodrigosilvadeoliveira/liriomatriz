@@ -1,5 +1,6 @@
 <?php include("cabecalhoAdm.php")?>
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
@@ -35,7 +36,9 @@ include('verifica_permissao.php');
     {
         header('Location: vendasrealizadas.php');
     }
+include('registroslog.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 
@@ -239,7 +240,9 @@ if (isset($_POST['submitAdm'])) {
     $stmtCheck->close();
     $conexao->close();
 }
+include('registroslog.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

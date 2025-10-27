@@ -1,5 +1,6 @@
 <?php include("cabecalhoVol.php")?>
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 //session_start();
