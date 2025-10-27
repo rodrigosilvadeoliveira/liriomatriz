@@ -75,6 +75,7 @@ $result = $stmt->get_result();
   exit();
 }
 
+include('registroslog.php');
 ?>
 
 <!DOCTYPE html>

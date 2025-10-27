@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
@@ -74,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome_musica'])) {
         $erro = "Erro ao atualizar a música: " . $conexao->error;
     }
 }
+include('registroslog.php');
 ?>
 
 <!DOCTYPE html>

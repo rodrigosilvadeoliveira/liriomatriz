@@ -42,27 +42,17 @@ $logStmt->execute();
             case 'voluntario':
                 header('Location: vendasVol');
                 break;
-            case 'secretaria':
-                header('Location: paginainicial');
-                break;
-            case 'midia':
-                header('Location: paginainicial');
-                break;
-            case 'master':
-                header('Location: paginainicial');
-                break;
-            case 'live':
-                header('Location: cadastrolive');
-                break;
-            case 'lider':
-                header('Location: paginainicial');
-                break;
-            case 'ministro':
-                header('Location: paginainicial');
-                break;
-            case 'consulta':
-                header('Location: paginainicial');
-                break;
+             case 'secretaria':
+    case 'midia':
+    case 'master':
+    case 'live':
+    case 'lider':
+    case 'ministro':
+    case 'consulta':
+        // Marca para mostrar banner na página inicial
+       // $_SESSION['mostrar_banner_login'] = true;
+        header('Location: paginainicial');
+        break;
             default:
                 header('Location: acesso_negado');
                 break;

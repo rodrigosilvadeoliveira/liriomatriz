@@ -1,5 +1,6 @@
 <?php include("cabecalhoAdm.php")?>
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');

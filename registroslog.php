@@ -1,16 +1,4 @@
 <?php
-date_default_timezone_set('America/Sao_Paulo');
-include('verificarLogin.php');
-verificarLogin();
-include_once("config.php");
-
-// Verifica sessão
-if((!isset($_SESSION['usuario']) == true) && ($_SESSION['senha']) == true) {
-    unset($_SESSION['usuario']);
-    unset($_SESSION['senha']);
-    header('Location: login.php');
-}
-$logado = $_SESSION['usuario'];
 $data_login = date('Y-m-d'); // formato: 2025-04-21
 $hora_login = date('H:i:s'); // formato: 14:30:05
 $pagina = basename($_SERVER['PHP_SELF']); // pega o nome do arquivo atual, ex: membros.php
@@ -34,18 +22,4 @@ $logStmt = $conexao->prepare($logSql);
 $logStmt->bind_param("ssssss", $usuario, $nome_usuario, $nivel_acesso, $data_login, $hora_login, $pagina);
 $logStmt->execute();
 $logStmt->close();
-
-$id = intval($_POST['id'] ?? 0);
-
-if($id > 0){
-    $sql = "DELETE FROM escalas_som WHERE id = $id";
-    if($conexao->query($sql)){
-        echo "ok";
-    } else {
-        echo "Erro ao excluir.";
-    }
-} else {
-    echo "ID inválido.";
-}
-
 ?>

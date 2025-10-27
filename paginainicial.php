@@ -1,10 +1,12 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
+ini_set('display_errors', 1);
 include_once('config.php');
 
-if((!isset($_SESSION['usuario']) == true) && ($_SESSION['senha']) == true) {
+if(!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
     header('Location: login.php');
@@ -253,6 +255,31 @@ function obterInfoAtividade($tipo) {
 
 $pageTitle = "Sistema Igreja - Home";
 include('navegacao.php');
+
+$data_login = date('Y-m-d'); // formato: 2025-04-21
+$hora_login = date('H:i:s'); // formato: 14:30:05
+$pagina = basename($_SERVER['PHP_SELF']); // pega o nome do arquivo atual, ex: membros.php
+
+// Busca o nome e o nível de acesso do usuário atual
+$usuario = $_SESSION['usuario'];
+$nivel_acesso = $_SESSION['nivel_acesso'] ?? 'desconhecido';
+
+// (opcional) Se quiser pegar também o nome do usuário na tabela de usuários:
+$stmtUser = $conexao->prepare("SELECT nome FROM cadastroadm WHERE usuario = ?");
+$stmtUser->bind_param("s", $usuario);
+$stmtUser->execute();
+$resultUser = $stmtUser->get_result();
+$rowUser = $resultUser->fetch_assoc();
+$nome_usuario = $rowUser['nome'] ?? $usuario; // se não encontrar, usa o login mesmo
+
+// Inserir o registro no log
+$logSql = "INSERT INTO log_login (usuario, nome, nivel_acesso, data_login, hora_login, acao)
+           VALUES (?, ?, ?, ?, ?, ?)";
+$logStmt = $conexao->prepare($logSql);
+$logStmt->bind_param("ssssss", $usuario, $nome_usuario, $nivel_acesso, $data_login, $hora_login, $pagina);
+$logStmt->execute();
+$logStmt->close();
+
 ?> <!-- Mensagem de boas-vindas -->
 <style>
     /* CSS anterior mantido */
@@ -447,6 +474,23 @@ include('navegacao.php');
         font-size: 0.85rem;
         color: #888;
     }
+     .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+        }
+        
+        /* Vídeo responsivo */
+        .video-voluntarios {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
 
     /* Responsive Styles para cards */
     @media (max-width: 768px) {
@@ -457,6 +501,9 @@ include('navegacao.php');
         .quick-access-grid {
             grid-template-columns: repeat(2, 1fr);
         }
+        .video-container {
+                margin-bottom: 2rem;
+            }
     }
 </style>
         <div class="welcome-message">
@@ -465,6 +512,14 @@ include('navegacao.php');
             <p>Hoje é <?php echo date('d/m/Y'); ?></p>
         </div>
 
+<!-- Container do vídeo responsivo -->
+        <div class="video-container">
+            <video class="video-voluntarios" controls loop muted playsinline autoplay>
+                <source src="voluntariado.mp4" type="video/mp4">
+                <source src="voluntariado.webm" type="video/webm">
+                Seu navegador não suporta a tag de vídeo.
+            </video>
+        </div>
         <!-- Dashboard com cards informativos -->
         <div class="dashboard-cards">
             <?php foreach ($dashboardCards as $card): ?>

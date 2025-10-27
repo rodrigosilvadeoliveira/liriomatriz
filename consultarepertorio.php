@@ -1,27 +1,34 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
 include_once('config.php');
 
-if((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
+if ((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
     header('Location: login.php');
 }
 $logado = $_SESSION['usuario'];
 
-// Buscar lista de repertórios
-$sqlRepertorios = "SELECT id, data_repertorio, nome_musicas, arquivo_repertorio FROM repertorio ORDER BY data_repertorio DESC";
+// Buscar lista de repertórios (agora com o campo periodo)
+$sqlRepertorios = "SELECT id, data_repertorio, periodo, nome_musicas, arquivo_repertorio 
+                   FROM repertorio 
+                   ORDER BY data_repertorio DESC";
 $resultRepertorios = $conexao->query($sqlRepertorios);
 
-// Função PHP para traduzir dia da semana (não está sendo usada neste arquivo, mas mantive por precaução)
+// Função auxiliar para traduzir o dia da semana
 function diaSemana($dataIso) {
     $dias = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
     $time = strtotime($dataIso);
     return $dias[date('w', $time)];
 }
+
+include('registroslog.php');
+include('registroslog.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -55,6 +62,12 @@ function diaSemana($dataIso) {
         .table td {
             vertical-align: middle;
         }
+        tbody, td, tfoot, th, thead, tr {
+    border-color: black;
+    border-style: solid;
+    border-width: 0;
+}
+ 
     </style>
 </head>
 <body class="container py-4">
@@ -70,7 +83,7 @@ function diaSemana($dataIso) {
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Data</th>
+                        <th>Data / Período</th>
                         <th>Músicas</th>
                         <th>Arquivo PDF</th>
                         <th>Ações</th>
@@ -80,10 +93,11 @@ function diaSemana($dataIso) {
                     <?php
                     if ($resultRepertorios->num_rows > 0) {
                         while ($rowRepertorio = $resultRepertorios->fetch_assoc()) {
-                            // Formata a data para exibir no formato dd/mm/aaaa
+                            // Formata a data para dd/mm/aaaa
                             $dataBR = date('d/m/Y', strtotime($rowRepertorio['data_repertorio']));
-                            
-                            // Processa a lista de músicas
+                            $periodo = htmlspecialchars($rowRepertorio['periodo']);
+
+                            // Processa lista de músicas
                             $musicasArray = explode(',', $rowRepertorio['nome_musicas']);
                             $musicasHTML = '<ul class="musicas-list">';
                             foreach ($musicasArray as $musica) {
@@ -95,17 +109,16 @@ function diaSemana($dataIso) {
                             $musicasHTML .= '</ul>';
                             
                             echo "<tr>";
-                            echo "<td>" . $dataBR . "</td>";
-                            echo "<td>" . $musicasHTML . "</td>";
+                            // Mostra data e período juntos
+                            echo "<td><strong>{$dataBR}</strong><br><small>{$periodo}</small></td>";
+                            echo "<td>{$musicasHTML}</td>";
                             
-                            if ($rowRepertorio['arquivo_repertorio']) {
-                                // Cria o link para o arquivo PDF
+                            if (!empty($rowRepertorio['arquivo_repertorio'])) {
                                 echo "<td><a href='uploads/" . htmlspecialchars($rowRepertorio['arquivo_repertorio']) . "' target='_blank' class='btn btn-info btn-sm'><i class='fas fa-file-pdf'></i> Abrir</a></td>";
                             } else {
                                 echo "<td>--</td>";
                             }
                             
-                            // Botão de Excluir Repertório
                             echo "<td><button class='btn-excluir' data-id='" . $rowRepertorio['id'] . "'>Excluir</button></td>";
                             echo "</tr>";
                         }
@@ -124,7 +137,7 @@ function diaSemana($dataIso) {
     $(document).ready(function(){
         // Excluir Repertório
         $(".btn-excluir").click(function(e){
-            e.preventDefault(); // Impede o comportamento padrão do botão
+            e.preventDefault();
             let id = $(this).data("id");
             if(confirm("Tem certeza que deseja excluir este repertório e o arquivo PDF associado?")){
                 $.post("excluir_repertorio.php", {id:id}, function(resposta){

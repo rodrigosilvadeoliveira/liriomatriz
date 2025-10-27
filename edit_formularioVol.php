@@ -35,6 +35,7 @@ else
 {
     header('Location: consulta_voluntarios.php');
 }
+include('registroslog.php');
 ?>
 
 <!DOCTYPE html>

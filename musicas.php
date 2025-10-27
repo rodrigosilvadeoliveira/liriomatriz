@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
@@ -40,6 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome_musica'])) {
 // Consulta músicas cadastradas
 $sql = "SELECT * FROM musicas ORDER BY nome DESC";
 $resultMusicas = $conexao->query($sql);
+
+include('registroslog.php');
+
+include('registroslog.php');
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +70,8 @@ $resultMusicas = $conexao->query($sql);
   </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
   <?php include("navegacao.php") ?>
 </nav>
 
@@ -73,12 +79,12 @@ $resultMusicas = $conexao->query($sql);
   <h3 class="mb-4">Cadastro de Músicas</h3>
   <div class="alert alert-info">
     <h5>
-                        <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#tabernaculo"
-                            role="button" aria-expanded="false" aria-controls="musicos">Tabernaculo <i
+                        <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#musicos"
+                            role="button" aria-expanded="false" aria-controls="musicos">Musicas do Tabernaculo <i
                                 class="fas fa-chevron-down ms-2"></i>
                         </a>
                     </h5>
-                    <div class="collapse" id="tabernaculo">
+                    <div class="collapse" id="musicos">
                         <div class="row">
                             <div class="col-md-6">
                                 <h3 id="textos">    
@@ -89,10 +95,12 @@ $resultMusicas = $conexao->query($sql);
       </div>
      </div>
     </div>
-    <!-- <a href="verificar_repertorios.php" target="_blank" class="btn btn-sm btn-warning">
+  <!--<div class="alert alert-info">
+     <a href="verificar_repertorios.php" target="_blank" class="btn btn-sm btn-warning">
         🔧 Verificar Sistema
     </a> -->
 </div>
+
   <!-- Mensagens de feedback -->
 <?php
 if (isset($_GET['success']) && $_GET['success'] == 'repertorio_created') {
@@ -181,10 +189,27 @@ if (isset($_GET['error'])) {
       <form id="formRepertorio" method="POST" action="incluir_repertorio.php">
         <div class="row mb-3">
           <div class="col-md-3">
-            <label class="form-label">Data do Repertório</label>
+            <label class="form-label"><b>Data do Repertório:</b></label>
             <input type="date" name="data_repertorio" class="form-control" required>
           </div>
-          <div class="col-md-2 d-flex align-items-end">
+          <div class="col-md-6">
+                        <label for="periodo" class="form-label required-field"><b>Periodo:</b></label>
+                        <select id="periodo" class="form-select" name="periodo">
+                            <option value="">Selecione</option>
+                            <option value="Quinta Be power">Quinta Be power</option>
+                            <option value="Domingo Manhã">Domingo Manhã</option>
+                            <option value="Domingo Noite">Domingo Noite</option>
+                            <option value="Kids be power">Kids be power</option>
+                            <option value="Kids manhã">Kids manhã</option>
+                            <option value="Kids noite">Kids noite</option>
+                            <option value="GC Adolescentes">GC Adolescentes</option>
+                            <option value="GC Jovens">GC Jovens</option>
+                            <option value="GC Homens">GC Homens</option>
+                            <option value="GC Mulheres">GC Mulheres</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                    </div>
+<div class="col-md-2 d-flex align-items-end">
             <button type="submit" class="btn btn-success">
               <i class="fas fa-plus"></i> Incluir Repertório
             </button>
@@ -277,7 +302,6 @@ echo "</td>";
 $(document).ready(function() {
   $('#tabelaMusicas').DataTable({
     language: { url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/pt-BR.json' },
-    stateSave: true,
     responsive: true,
     order: [[1, 'desc']],
     lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
