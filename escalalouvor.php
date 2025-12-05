@@ -977,7 +977,7 @@ async function shareOnWhatsApp() {
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       await navigator.share({
         files: [file],
-        title: 'Escala Musical',
+        title: 'Escala Louvor',
         text: 'Segue a escala gerada:'
       });
       showToast('Escala compartilhada com sucesso!');
@@ -1136,7 +1136,7 @@ function validarEscala() {
     return;
   }
 
-  fetch('validar_escala.php', {
+  fetch('validar_escalalouvor.php', {
     method: 'POST',
     body: new URLSearchParams({
       dados: JSON.stringify(escalaData)

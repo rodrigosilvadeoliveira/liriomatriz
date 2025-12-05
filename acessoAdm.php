@@ -50,7 +50,7 @@ $logStmt->execute();
     case 'ministro':
     case 'consulta':
         // Marca para mostrar banner na página inicial
-       // $_SESSION['mostrar_banner_login'] = true;
+        $_SESSION['mostrar_banner_login'] = true;
         header('Location: paginainicial');
         break;
             default:

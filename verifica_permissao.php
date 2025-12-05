@@ -76,8 +76,10 @@ $permissoes = [
      'edit_musica' => ['lider','master', 'minitro'],
     'checklistsom' => ['lider','master','ministro', 'consulta'],
     'checklistlouvor' => ['lider','master','ministro', 'consulta'],
+    'checklistlive' => ['lider','master','ministro', 'consulta'],
+     'incluir_repertorio' => ['lider','master','ministro', 'consulta'],
 
-    
+
     
 ];
 

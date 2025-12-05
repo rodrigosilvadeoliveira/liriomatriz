@@ -958,7 +958,7 @@ async function shareOnWhatsApp() {
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       await navigator.share({
         files: [file],
-        title: 'Escala Musical',
+        title: 'Escala Kids',
         text: 'Segue a escala gerada:'
       });
       showToast('Escala compartilhada com sucesso!');

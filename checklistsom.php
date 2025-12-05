@@ -265,12 +265,10 @@ include('registroslog.php');
                             </div>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
     </div>
-
 
 
     <!-- Bootstrap & jQuery -->

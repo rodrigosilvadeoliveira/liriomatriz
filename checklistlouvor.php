@@ -66,73 +66,76 @@ include('registroslog.php');
             border-radius: 10px 10px 0 0 !important;
             padding: 15px 20px;
         }
-        .card-title {
-    margin-bottom: var(--bs-card-title-spacer-y);
-    color: var(--bs-card-title-color);
-    text-align: center;
-}
-.text-decoration-none {
-    text-decoration: none !important;
-    text-align: center;
-}
 
-        
-#textos{
-    margin-top: 1%;
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 24px;
-    color: ;
-}
-.x32 {
+        .card-title {
+            margin-bottom: var(--bs-card-title-spacer-y);
+            color: var(--bs-card-title-color);
+            text-align: center;
+        }
+
+        .text-decoration-none {
+            text-decoration: none !important;
+            text-align: center;
+        }
+
+
+        #textos {
+            margin-top: 1%;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 24px;
+            color: ;
+        }
+
+        .x32 {
 
             height: 175px;
-            
+
         }
-.mesa {
+
+        .mesa {
 
             height: 168px;
-            
-        }
-           .col-md-6 {
-        flex: 0 0 auto;
-        width: 100%;
-    }
 
-        @media (max-width: 768px) {
-           
         }
+
+        .col-md-6 {
+            flex: 0 0 auto;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {}
     </style>
 </head>
 
 <body>
     <!-- Navbar -->
- 
+
 
     <div class="container">
         <!-- Cabeçalho -->
-        
-        
-                <div>
-                    <?php include("navegacao.php") ?>
-                </div>
-       
+
+
+        <div>
+            <?php include("navegacao.php") ?>
+        </div>
+
 
         <!-- Mensagem de Boas-Vindas -->
-      
+
 
         <!-- Formulário -->
         <div id='textos'>
-        <!-- <img class="x32" src="./mesa/x32.png" alt="Logo"></p> -->
+            <!-- <img class="x32" src="./mesa/x32.png" alt="Logo"></p> -->
         </div>
         <div class="card card-form">
             <div class="card-header card-header-custom">
-                <h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>Informações para ministério de Louvor e regimento interno</h5>
+                <h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>Informações para ministério de Louvor
+                    e regimento interno</h5>
             </div>
             <div class="card-body">
 
-                <form method="POST" action="" enctype="multipart/form-data"
-                    class="row g-3">
+                <form method="POST" action="" enctype="multipart/form-data" class="row g-3">
 
                     <h5>
                         <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#tabernaculo"
@@ -143,16 +146,24 @@ include('registroslog.php');
                     <div class="collapse" id="tabernaculo">
                         <div class="row">
                             <div class="col-md-6">
-                                <h3 id="textos">    
-    <p><b>Átrio:</b> é onde a maioria do povo de Deus se reúne – e fica. Lá, cantamos cânticos de júbilo, de guerra, de testemunho e de convite ao louvor.</p>
-    <p><b>Santo Lugar:</b> é o lugar do sacerdote, é um aprofundamento. É um lugar de ministração de louvor através de cânticos de comunhão, de Edificação no Espírito Santo, de clamor, de Exaltação.</p>
-    <p><b>Santo dos Santos:</b> antes do sacrifício de Jesus, o véu dividia o espaço onde estava a arca da presença do Senhor, e lá, somente o sacerdote poderia entrar uma vez ao ano. Após a cruz, esse véu foi rasgado de alto a baixo, e o acesso a Deus foi aberto a todos os filhos adoradores que foram salvos, lavados e edificados em Cristo. E quais os hinos desta etapa da adoração? Hinos de Contemplação, de Adoração</p>
-       </h3>
-      </div>
-     </div>
-    </div>
+                                <h3 id="textos">
+                                    <p><b>Átrio:</b> é onde a maioria do povo de Deus se reúne – e fica. Lá, cantamos
+                                        cânticos de júbilo, de guerra, de testemunho e de convite ao louvor.</p>
+                                    <p><b>Santo Lugar:</b> é o lugar do sacerdote, é um aprofundamento. É um lugar de
+                                        ministração de louvor através de cânticos de comunhão, de Edificação no Espírito
+                                        Santo, de clamor, de Exaltação.</p>
+                                    <p><b>Santo dos Santos:</b> antes do sacrifício de Jesus, o véu dividia o espaço
+                                        onde estava a arca da presença do Senhor, e lá, somente o sacerdote poderia
+                                        entrar uma vez ao ano. Após a cruz, esse véu foi rasgado de alto a baixo, e o
+                                        acesso a Deus foi aberto a todos os filhos adoradores que foram salvos, lavados
+                                        e edificados em Cristo. E quais os hinos desta etapa da adoração? Hinos de
+                                        Contemplação, de Adoração</p>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
 
-    <h5>
+                    <h5>
                         <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#ensaio"
                             role="button" aria-expanded="false" aria-controls="musicos">2.Ensaios <i
                                 class="fas fa-chevron-down ms-2"></i>
@@ -162,40 +173,41 @@ include('registroslog.php');
                         <div class="row">
                             <div class="col-md-6">
                                 <h3 id="textos">
-    <p><b>Quintas:</b></p>
-    <p>Todos as 19:00.</p>
-    <p><b>Sabados:</b> 
-    <p>Instrumentos - 17:00</p>
-    <p>Vozes - 18:00</p>
-    <p><b>Domingos:</b> 
-    <p>Passagem de som - 08:00</p>
-    <p><b>Importante:</b>Atraso - Tolerado 15 minutos (avisado no  pv) - em casos extraordinarios me procurem o lider</p>
-       </h3>
-      </div>
-     </div>
-    </div>
+                                    <p><b>Quintas:</b></p>
+                                    <p>Todos as 19:00.</p>
+                                    <p><b>Sabados:</b>
+                                    <p>Instrumentos - 17:00</p>
+                                    <p>Vozes - 18:00</p>
+                                    <p><b>Domingos:</b>
+                                    <p>Passagem de som - 08:00</p>
+                                    <p><b>Importante:</b>Atraso - Tolerado 15 minutos (avisado no pv) - em casos
+                                        extraordinarios me procurem o lider</p>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
 
                     <h5>
                         <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#importante"
-                            role="button" aria-expanded="false" aria-controls="musicos">3.Informações durante os cultos <i
-                                class="fas fa-chevron-down ms-2"></i>
+                            role="button" aria-expanded="false" aria-controls="musicos">3.Informações durante os cultos
+                            <i class="fas fa-chevron-down ms-2"></i>
                         </a>
                     </h5>
                     <div class="collapse" id="importante">
                         <div class="row">
                             <div class="col-md-6">
                                 <h3 id="textos">
-    
-    <p>Sempre vamos subir 1h10 depois do inicio do culto, ou seja ..</p>
-    <p>Quinta - 21:10</p>
-    <p>Domingo - 10:10</p>
-    <p>Usar Vestimentas pretas - Dúvidas procurem o Lider</p>
-       </h3>
-      </div>
-     </div>
-    </div>
 
-    <h5>
+                                    <p>Sempre vamos subir 1h10 depois do inicio do culto, ou seja ..</p>
+                                    <p>Quinta - 21:10</p>
+                                    <p>Domingo - 10:10</p>
+                                    <p>Usar Vestimentas pretas - Dúvidas procurem o Lider</p>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5>
                         <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#wifi"
                             role="button" aria-expanded="false" aria-controls="musicos">4.Rede WI-FI <i
                                 class="fas fa-chevron-down ms-2"></i>
@@ -205,34 +217,79 @@ include('registroslog.php');
                         <div class="row">
                             <div class="col-md-6">
                                 <h3 id="textos">
-        <p><b>Rede:</b> TPlink som</p>
-        <p><b>Semha:</b> 124578A23</p>
-    <p>Rede não possui acesso a internet, somente conecta o APP a mesa de som</p>
-       </h3>
-      </div>
-     </div>
-    </div>
-</div>
-      <h5>
-                        <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#app"
-                            role="button" aria-expanded="false" aria-controls="musicos">5.Como utilizar APP do ponto de retorno<i
-                                class="fas fa-chevron-down ms-2"></i>
-                        </a>
-                    </h5>
-                    <div class="collapse" id="app">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h3 id="textos">
-        <p><b>Estamos preparando material com passo a passo</b></p>
-       
-       </h3>
-      </div>
-     </div>
-    </div>
-</div>
-                </form>
+                                    <p><b>Rede:</b> TPlink som</p>
+                                    <p><b>Semha:</b> 124578A23</p>
+                                    <p>Rede não possui acesso a internet, somente conecta o APP a mesa de som</p>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
             </div>
+            <h5>
+                <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#app" role="button"
+                    aria-expanded="false" aria-controls="musicos">
+                    5.Ponto de retorno (Primeiro Acesso)<i class="fas fa-chevron-down ms-2"></i>
+                </a>
+            </h5>
+            <div class="collapse" id="app">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 id="textos">
+                            <p><b>Atenção: </b>Deve estar conectado a rede WIFI "TPlink som"
+                            <p><b>A.</b>Se não tiver o aplicativo "Mixing Station" realizar o download da Playstore ou
+                                Apple
+                                Store</p>
+                            <img class="mesa" src="./mesa/mixingStation.jpg" alt="Logo"></p>
+                            <p><b>B.</b>Após instalação Abrir o aplicativo e clicar em "Add Mixer"</p>
+                            <img class="mesa" src="./mesa/mixingAdd.jpg" alt="Logo"></p>
+                            <p><b>C.</b>Clicar na Marca Behringer</p>
+                            <img class="mesa" src="./mesa/mixingAdd1.jpg" alt="Logo"></p>
+                            <p><b>D.</b>Clicar o Modelo X32/M32</p>
+                            <img class="mesa" src="./mesa/mixingAdd2.jpg" alt="Logo"></p>
+                            <p><b>E.</b>Clicar em Custom</p>
+                            <img class="mesa" src="./mesa/mixingAdd3.jpg" alt="Logo"></p>
+                            <p><b>E.</b>Clicar no Bus "1-Bateria, 2-Baixo, 3-vocal1, 4-vocal2, 5-vocal3, 6-teclado,
+                                7-violão, 8-Ministro.</p>
+                            <img class="mesa" src="./mesa/mixingAdd4.jpg" alt="Logo"></p>
+                            <p><b>E.</b>Clicar em Connect</p>
+                            <img class="mesa" src="./mesa/mixingAdd5.jpg" alt="Logo"></p>
+                            <p><b>F.</b>Clicar Nomavemte em Connect</p>
+                            <img class="mesa" src="./mesa/mixingAdd6.jpg" alt="Logo"></p>
+                            <p><b>G.</b>Conexão realizada com Sucesso</p>
+                            <img class="mesa" src="./mesa/mixingAdd7.jpg" alt="Logo"></p>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            <h5>
+                <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#regulagem" role="button"
+                    aria-expanded="false" aria-controls="livr">
+                    6: Regulagem ponto de retorno<i class="fas fa-chevron-down ms-2"></i>
+                </a>
+            </h5>
+            <div class="collapse" id="regulagem">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 id="textos">
+                            <p><b>Anteção: </b>Deve estar conectado a rede WIFI "SOM-5G", verificar se aplaca de audio
+                                esta ligada</p>
+                            <img class="mesa" src="./mesa/maudio1.jpg" alt="Logo"></p>
+                            <p><b>A.</b>Abrir o aplicativo Mixing Station e clicar em Search no BUS desejado</p>
+                            <img class="mesa" src="./mesa/mixingSearch.jpg" alt="Logo"></p>
+                            <p><b>B.</b>Clicar Nomavemte em Connect</p>
+                            <img class="mesa" src="./mesa/mixingAdd6.jpg" alt="Logo"></p>
+                            <p><b>C.</b>Conexão realizada com Sucesso</p>
+                            <img class="mesa" src="./mesa/mixingAdd7.jpg" alt="Logo"></p>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+
+            </form>
         </div>
+    </div>
     </div>
 
 

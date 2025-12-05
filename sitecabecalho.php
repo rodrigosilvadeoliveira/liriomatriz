@@ -340,9 +340,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="index">Início</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="novoComecoSite">Novo Começo</a>
-                    </li>
+                  
                     <li class="nav-item">
                        <a class="nav-link" href="sitevoluntariado">Voluntariado</a>
                     </li>
@@ -356,7 +354,7 @@
                         <a class="nav-link" href="sitemergulhar">Mergulhar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="siteinscricoes">Inscrições</a>
+                        <a class="nav-link" href="siteprestador">Divulgação</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="sitelojalirio">Loja</a>
@@ -387,9 +385,7 @@
                 <li class="mobile-nav-item">
                     <a class="mobile-nav-link active" href="index">Início</a>
                 </li>
-                <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="novoComecoSite">Novo Começo</a>
-                </li>
+             
                 <li class="mobile-nav-item">
                     <a class="mobile-nav-link" href="sitevoluntariado">Voluntariado</a>
                 </li>
@@ -404,7 +400,7 @@
                     <a class="mobile-nav-link" href="sitemergulhar">Mergulhar</a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="siteinscricoes">Inscrições</a>
+                    <a class="mobile-nav-link" href="siteprestador">Divulgação</a>
                 </li>
                 <li class="mobile-nav-item">
                     <a class="mobile-nav-link" href="sitelojalirio">Loja</a>
@@ -481,4 +477,4 @@
         }
     </script>
 </body>
-</html>
+</html>0

@@ -5,7 +5,6 @@ include_once('config.php');
 $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
 
 // Verifica login
-include('registroslog.php');
 ?>
 
 <!DOCTYPE html>
@@ -223,8 +222,8 @@ include('registroslog.php');
                     </div>
 
                     <div class="col-md-6">
-                        <label for="cpf_cnpj" class="form-label required-field">CPF/CNPJ</label>
-                        <input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control" required>
+                        <label for="cpf_cnpj" class="form-label">CPF/CNPJ</label>
+                        <input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control">
                     </div>
 
                     <div class="col-md-6">
@@ -233,12 +232,12 @@ include('registroslog.php');
                     </div>
 
                     <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label required-field">Email</label>
                         <input type="email" name="email" id="email" class="form-control">
                     </div>
                     <div class="col-md-6">
-                        <label for="instagram" class="form-label">Link instagram</label>
-                        <input type="instagram" name="instagram" id="instagram" class="form-control">
+                        <label for="instagram" class="form-label required-field">Link instagram</label>
+                        <input type="instagram" name="instagram" id="instagram" class="form-control" placeholder="informar tag sem @">
                     </div>
 
                     <div class="col-md-6">
@@ -294,12 +293,28 @@ include('registroslog.php');
                         <label class="form-label required-field">Tipo de Serviço Prestado:</label>
                         <div class="servicos-grid">
                             <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Brechó" id="servBrechó">
+                                <label class="form-check-label" for="servBrecho">Brechó</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Decoração" id="servDecoração">
+                                <label class="form-check-label" for="servDecoracao">Decoração</label>
+                            </div>
+                            <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="servicos[]" value="Eletricista" id="servEletricista">
                                 <label class="form-check-label" for="servEletricista">Eletricista</label>
                             </div>
                             <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Esterica" id="servEsterica">
+                                <label class="form-check-label" for="servEsterica">Estérica</label>
+                            </div>
+                            <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="servicos[]" value="Encanador" id="servEncanador">
                                 <label class="form-check-label" for="servEncanador">Encanador</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Flores" id="servFlores">
+                                <label class="form-check-label" for="servPedreiro">Flores</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="servicos[]" value="Pintor" id="servPintor">
@@ -310,8 +325,16 @@ include('registroslog.php');
                                 <label class="form-check-label" for="servPedreiro">Pedreiro</label>
                             </div>
                             <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="PetShop" id="servPetShop">
+                                <label class="form-check-label" for="servPedreiro">Pet Shop</label>
+                            </div>
+                            <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="servicos[]" value="Marceneiro" id="servMarceneiro">
                                 <label class="form-check-label" for="servMarceneiro">Marceneiro</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="servicos[]" value="Cabelereira" id="servCabelereira">
+                                <label class="form-check-label" for="servCabelereira">Cabelereira</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="servicos[]" value="Confeiteiro" id="servConfeiteiro">

@@ -264,6 +264,23 @@ $pagina = basename($_SERVER['PHP_SELF']); // pega o nome do arquivo atual, ex: m
 $usuario = $_SESSION['usuario'];
 $nivel_acesso = $_SESSION['nivel_acesso'] ?? 'desconhecido';
 
+$resultlist = null;
+
+// Pega o mês selecionado
+$mes = isset($_GET['mes']) ? intval($_GET['mes']) : date('n');
+
+// Consulta aniversariantes do mês
+$sql = "SELECT id, nome, sobrenome, nascimento, email, telefone, foto, status 
+        FROM membros 
+        WHERE MONTH(nascimento) = $mes
+        ORDER BY DAY(nascimento) ASC";
+$resultlist = $conexao->query($sql);
+
+// Array de meses para exibição
+$meses = [
+    1=>"Janeiro",2=>"Fevereiro",3=>"Março",4=>"Abril",5=>"Maio",6=>"Junho",
+    7=>"Julho",8=>"Agosto",9=>"Setembro",10=>"Outubro",11=>"Novembro",12=>"Dezembro"
+];
 // (opcional) Se quiser pegar também o nome do usuário na tabela de usuários:
 $stmtUser = $conexao->prepare("SELECT nome FROM cadastroadm WHERE usuario = ?");
 $stmtUser->bind_param("s", $usuario);
@@ -280,9 +297,76 @@ $logStmt->bind_param("ssssss", $usuario, $nome_usuario, $nivel_acesso, $data_log
 $logStmt->execute();
 $logStmt->close();
 
-?> <!-- Mensagem de boas-vindas -->
+$bannerSql = "SELECT imagem, links FROM evento WHERE cartaz = 'avisos' ORDER BY id DESC LIMIT 1";
+$bannerResult = $conexao->query($bannerSql);
+$bannerData = $bannerResult->num_rows > 0 ? $bannerResult->fetch_assoc() : null;
+$bannerAtual = $bannerData ? $bannerData['imagem'] : null;
+$linkBanner = $bannerData ? $bannerData['links'] : null;
+
+// Verifica se deve mostrar o banner
+$mostrarBanner = isset($_SESSION['mostrar_banner_login']) && $_SESSION['mostrar_banner_login'];
+$imagemBanner = isset($_SESSION['banner_imagem']) ? $_SESSION['banner_imagem'] : $bannerAtual;
+?>
+ <!-- Mensagem de boas-vindas -->
 <style>
-    /* CSS anterior mantido */
+    .banner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .banner-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            text-align: center;
+        }
+        
+        .banner-image {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+        
+        .close-banner {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        
+        .close-banner:hover {
+            background: #c0392b;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .banner-message {
+            color: white;
+            margin-top: 15px;
+            font-size: 14px;
+        }
 
     /* Dashboard Cards */
     .dashboard-cards {
@@ -491,7 +575,18 @@ $logStmt->close();
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             display: block;
         }
-
+        
+        .member-img { width: 45px; height: 45px; object-fit: cover; border-radius: 50%; }
+        
+        .card { box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15); margin-bottom: 1.5rem; }
+        .card-header { background-color: #f8f9fc; border-bottom: 1px solid #e3e6f0; }
+        .sidebar { background-color: #4e73df; color: white; height: 100vh; position: fixed; top: 73px; left: 0; width: 250px; padding: 20px; }
+        .main-content { margin-left: 0px; padding: 20px; margin-top: 73px; }
+        .navbar-brand { font-weight: 700; }
+        .alert-primary { background-color: #e8f4ff; border-color: #b3d9ff; color: #0066cc; }
+        .table th { border-top: none; font-weight: 600; color: #4e73df; }
+        .empty-state { text-align: center; padding: 2rem; color: #6c757d; }
+        .empty-state i { font-size: 3rem; margin-bottom: 1rem; color: #dee2e6; }
     /* Responsive Styles para cards */
     @media (max-width: 768px) {
         .dashboard-cards {
@@ -506,6 +601,59 @@ $logStmt->close();
             }
     }
 </style>
+<div id="bannerModal" class="banner-overlay <?php echo !$mostrarBanner || empty($imagemBanner) ? 'hidden' : ''; ?>">
+    <div class="banner-content">
+        <button class="close-banner" onclick="fecharBanner()">×</button>
+        <?php if (!empty($imagemBanner)): ?>
+            <?php if (!empty($linkBanner)): ?>
+                <a href="<?php echo htmlspecialchars($linkBanner); ?>" target="_blank" style="display: block;">
+                    <img src="<?php echo htmlspecialchars($imagemBanner); ?>" alt="Aviso" class="banner-image">
+                </a>
+            <?php else: ?>
+                <img src="<?php echo htmlspecialchars($imagemBanner); ?>" alt="Aviso" class="banner-image">
+            <?php endif; ?>
+        <?php else: ?>
+            <div style="color: white; padding: 20px;">
+                <p>Nenhum aviso encontrado</p>
+                <button onclick="fecharBanner()">Fechar</button>
+            </div>
+        <?php endif; ?>
+        <div class="banner-message">
+            <?php if (!empty($linkBanner)): ?>
+                Clique na imagem para acessar o link | Clique fora ou pressione ESC para fechar
+            <?php else: ?>
+                Clique fora da imagem ou pressione ESC para fechar
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+    <script>
+        function fecharBanner() {
+            // Esconde o banner
+            document.getElementById('bannerModal').classList.add('hidden');
+            
+            // Remove a sessão via AJAX para não mostrar novamente no refresh
+            fetch('remover_banner_session.php')
+                .catch(error => console.error('Erro:', error));
+        }
+        
+        // Fechar com ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                fecharBanner();
+            }
+        });
+        
+        // Fechar clicando fora da imagem
+        document.getElementById('bannerModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                fecharBanner();
+            }
+        });
+        
+        // Fecha automaticamente após 15 segundos (opcional)
+        setTimeout(fecharBanner, 15000);
+    </script>
         <div class="welcome-message">
             <h1>Bem-vindo(a), <?php echo $logado; ?>!</h1>
             <p>Seu perfil de acesso: <?php echo $perfil; ?></p>
@@ -520,6 +668,59 @@ $logStmt->close();
                 Seu navegador não suporta a tag de vídeo.
             </video>
         </div>
+
+        <div class="card">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title mb-0">Aniversariantes de <?php echo $meses[$mes]; ?></h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="tabelaAniversariantes" class="table table-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Foto</th>
+                                        <th>Nome</th>
+                                        <th>Dia aniversario</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if ($resultlist && $resultlist->num_rows > 0) {
+                                        while($user_data = mysqli_fetch_assoc($resultlist)) {
+                                            echo "<tr>";
+                                            $foto = !empty($user_data['foto']) ? 'uploads/'.$user_data['foto'] : '';
+                                            if (!empty($foto)) {
+                                                echo "<td><img class='member-img' src='$foto' alt='Foto'></td>";
+                                            } else {
+                                                $iniciais = substr($user_data['nome'], 0, 1) . substr($user_data['sobrenome'], 0, 1);
+                                                echo "<td><div class='member-img bg-primary text-white d-flex align-items-center justify-content-center'>$iniciais</div></td>";
+                                            }
+                                            echo "<td style='text-align: center'>".$user_data['nome']."</td>";
+                                            // echo "<td>".$user_data['nome']." ".$user_data['sobrenome']."</td>";
+                                           
+                                            echo "<td style='text-align: center'>".date('d/m', strtotime($user_data['nascimento']))."</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='6' class='text-center py-4'>";
+                                        echo "<div class='empty-state'>";
+                                        echo "<i class='fas fa-birthday-cake'></i>";
+                                        echo "<h5>Nenhum aniversariante encontrado</h5>";
+                                        echo "<p>Não há aniversariantes para o mês selecionado.</p>";
+                                        echo "</div>";
+                                        echo "</td></tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
         <!-- Dashboard com cards informativos -->
         <div class="dashboard-cards">
             <?php foreach ($dashboardCards as $card): ?>
@@ -543,6 +744,29 @@ $logStmt->close();
             <?php endforeach; ?>
         </div>
 
+                <!-- Tabela -->
+                
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tabelaAniversariantes').DataTable({
+                responsive: true,
+                autoWidth: false, // Corrige problema de colunas
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/pt-BR.json'
+                },
+                order: [[4, 'asc']],
+                pageLength: 10,
+                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]]
+            });
+        });
+    </script>
         <!-- Acesso Rápido -->
         <div class="quick-access">
             <h2 class="section-title">Acesso Rápido</h2>

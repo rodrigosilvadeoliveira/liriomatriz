@@ -1081,7 +1081,7 @@ function carregarEscalaSalva(dadosEscala) {
 // Função para salvar/atualizar escala no banco de dados
 function salvarEscalaNoBanco(escalaData, blobPdf, callback) {
   const formData = new FormData();
-  formData.append('acao', 'salvar_escalalouvor');
+  formData.append('acao', 'salvar_escalalouvorkids');
   formData.append('dados', JSON.stringify(escalaData));
 
   // adiciona o PDF como arquivo
@@ -1089,7 +1089,7 @@ function salvarEscalaNoBanco(escalaData, blobPdf, callback) {
     formData.append('pdf', blobPdf, 'escala.pdf');
   }
 
-  fetch('salvar_escalalouvor.php', {
+  fetch('salvar_escalalouvorkids.php', {
     method: 'POST',
     body: formData
   })
@@ -1117,7 +1117,7 @@ function validarEscala() {
     return;
   }
 
-  fetch('validar_escala.php', {
+  fetch('validar_escalalouvorkids.php', {
     method: 'POST',
     body: new URLSearchParams({
       dados: JSON.stringify(escalaData)

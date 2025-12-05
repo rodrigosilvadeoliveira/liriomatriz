@@ -388,14 +388,15 @@ sort($todos_servicos);
     <div class="contato-item">
         <i class="fab fa-instagram"></i>
         <span>
-            <a href="<?php echo htmlspecialchars($prestador['instagram']); ?>" 
+            <a href="https://www.instagram.com/<?php echo htmlspecialchars($prestador['instagram']); ?>" 
                target="_blank" 
+               rel="noopener noreferrer"
                class="instagram-link">
                 @<?php echo htmlspecialchars($prestador['instagram']); ?>
             </a>
         </span>
     </div>
-<?php endif; ?>                                    
+<?php endif; ?>                                   
                                     <?php if (!empty($prestador['disponibilidade'])): ?>
                                         <div class="contato-item">
                                             <i class="fas fa-clock"></i>

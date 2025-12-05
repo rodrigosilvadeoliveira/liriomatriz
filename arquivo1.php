@@ -43,9 +43,8 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
         ['title' => 'Escala Louvor Igreja', 'url' => 'escalalouvor'],
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
-        ['title' => 'Escala Louvor GC Homens', 'url' => 'escalalouvorhomens'],
-        ['title' => 'Escala Louvor GC Mulheres', 'url' => 'escalalouvormulheres'],
-        ['title' => 'Escala Louvor GC Jovens', 'url' => 'escalalouvorJovens'],
+        ['title' => 'Escala Louvor GCs', 'url' => 'escalalouvorhomens'],
+       
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
         ['title' => 'R.I e informações gerais', 'url' => 'checklistlouvor'],
         ['title' => 'Escala Midias', 'url' => 'escalamidias'],
@@ -54,6 +53,7 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaff'],
         ['title' => 'Escala Som', 'url' => 'escalasom'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Guia mesa na Live', 'url' => 'checklistlive'],
         ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
         ['title' => 'Repertorio', 'url' => 'musicas'],
         ['title' => 'Consulta Repertorio', 'url' => 'consultarepertorio'],
@@ -99,15 +99,15 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
         ['title' => 'Escala Louvor Igreja', 'url' => 'escalalouvor'],
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
-        ['title' => 'Escala Louvor GC Homens', 'url' => 'escalalouvorhomens'],
-        ['title' => 'Escala Louvor GC Mulheres', 'url' => 'escalalouvormulheres'],
-        ['title' => 'Escala Louvor GC Jovens', 'url' => 'escalalouvorJovens'],
+        ['title' => 'Escala Louvor GCs', 'url' => 'escalalouvorhomens'],
+       
         ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
         ['title' => 'R.I e informações gerais', 'url' => 'checklistlouvor'],
         ['title' => 'Escala Midias', 'url' => 'escalamidias'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Escala Som', 'url' => 'escalasom'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Guia mesa na Live', 'url' => 'checklistlive'],
         ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
         ['title' => 'Escala Staff', 'url' => 'escalastaff'],
         ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaff'],
@@ -125,6 +125,7 @@ if ($perfil === 'master') {
         ['title' => 'R.I e informações gerais', 'url' => 'checklistlouvor'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Guia mesa na Live', 'url' => 'checklistlive'],
         ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
         ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaff'],
         ['title' => 'Consulta Repertório', 'url' => 'consultarepertorio'],
@@ -140,6 +141,7 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
         ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
         ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
+        ['title' => 'Guia mesa na Live', 'url' => 'checklistlive'],
         ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
         ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaff'],
         ['title' => 'Repertório', 'url' => 'musicas'],
@@ -181,7 +183,7 @@ $categorizedOptions = [
         return in_array($item['url'], [ 'escalamidias', 'consultaescalamidias']);
     }),
     'Som' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], ['escalasom', 'consultaescalasom', 'checklistsom']);
+        return in_array($item['url'], ['escalasom', 'consultaescalasom', 'checklistsom', 'checklistlive']);
     }),
     'Staff' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escalastaff', 'consultaescalastaff']);
@@ -199,7 +201,6 @@ $categorizedOptions = [
 
 // Remover categorias vazias
 $categorizedOptions = array_filter($categorizedOptions);
-
 ?>
 
 <!DOCTYPE html>
@@ -521,6 +522,29 @@ $categorizedOptions = array_filter($categorizedOptions);
     background: #ffeaea;
     color: #c0392b !important;
 }
+
+.menu-category .submenu a[href="checklistlive"] {
+    color: #e74c3c !important;
+    font-weight: bold;
+}
+
+.menu-category .submenu a[href="checklistlive"]:hover {
+    color: #c0392b !important;
+    border-left: 3px solid #e74c3c;
+}
+
+/* Para a versão mobile - apenas na categoria Som */
+.mobile-category .mobile-submenu a[href="checklistlive"] {
+    color: #e74c3c !important;
+    font-weight: bold;
+    border-left: 3px solid #e74c3c;
+}
+
+.mobile-category .mobile-submenu a[href="checklistlive"]:hover {
+    background: #ffeaea;
+    color: #c0392b !important;
+}
+
         /* Responsive Styles */
         @media (max-width: 1024px) {
             .menu {

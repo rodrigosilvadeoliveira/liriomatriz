@@ -25,17 +25,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome_musica'])) {
         $pasta = "uploads/musicas/";
         if (!is_dir($pasta)) mkdir($pasta, 0777, true);
 
-        $ext = pathinfo($_FILES['arquivo_pdf']['name'], PATHINFO_EXTENSION);
+        $nome_arquivo_original = $_FILES['arquivo_pdf']['name'];
+        $ext = pathinfo($nome_arquivo_original, PATHINFO_EXTENSION);
+        
         if (strtolower($ext) == "pdf") {
-            $novoNome = uniqid().".".$ext;
-            if (move_uploaded_file($_FILES['arquivo_pdf']['tmp_name'], $pasta.$novoNome)) {
-                $arquivo = $novoNome;
+            // Verificar se arquivo já existe e adicionar sufixo se necessário
+            $caminho_completo = $pasta . $nome_arquivo_original;
+            $contador = 1;
+            $nome_base = pathinfo($nome_arquivo_original, PATHINFO_FILENAME);
+            
+            while (file_exists($caminho_completo)) {
+                $nome_arquivo_original = $nome_base . '_' . $contador . '.' . $ext;
+                $caminho_completo = $pasta . $nome_arquivo_original;
+                $contador++;
+            }
+            
+            if (move_uploaded_file($_FILES['arquivo_pdf']['tmp_name'], $caminho_completo)) {
+                $arquivo = $nome_arquivo_original; // Salva o nome original no banco
             }
         }
     }
 
     $sqlInsert = "INSERT INTO musicas (nome, tema, tipo, arquivo) VALUES ('$nome','$tema', '$tipos', '$arquivo')";
     $conexao->query($sqlInsert);
+
 }
 
 // Consulta músicas cadastradas

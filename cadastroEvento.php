@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 //session_start();
@@ -20,7 +19,7 @@ include_once('config.php');
     }
     else
     {
-      $sql = "SELECT * FROM evento WHERE cartaz IN ('programacao', 'carrousel', 'home') ORDER BY id DESC";
+      $sql = "SELECT * FROM evento WHERE cartaz IN ('programacao', 'carrousel', 'home', 'avisos') ORDER BY id DESC";
 
 
     }
@@ -120,8 +119,9 @@ header('Location: cadastroEvento.php');
     <br>
     <select id="cartaz" class="form-select" name="cartaz" required>
         <option value="">Selecione</option>
-        <option value="programacao">Programação</option>
+        <option value="avisos">Avisos</option>
         <option value="carrousel">Banner Carrousel</option>
+        <option value="programacao">Programação</option>
         <option value="home">Imagem Home</option>
     </select>
 </div>

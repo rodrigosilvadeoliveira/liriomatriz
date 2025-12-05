@@ -31,12 +31,14 @@ if (isset($_POST['submitAdm'])) {
             $perfilLogado = isset($_SESSION['nivel_acesso']) ? strtolower(trim($_SESSION['nivel_acesso'])) : '';
 
             if ($perfilLogado === 'master') {
-                header('Location: formularioMaster.php');
+                
+                echo "<script>alert('Cadastrado realizado com sucesso!'); window.location.href='formularioMaster.php';</script>";
+                
             } elseif ($perfilLogado === 'lider') {
-                header('Location: formulariolider.php');
+                 echo "<script>alert('Cadastrado realizado com sucesso!'); window.location.href='formularioMaster.php';</script>";
             } else {
                 // fallback caso não tenha sessão ou perfil inválido
-                header('Location: index.php');
+                header('Location: sistema.php');
             }
             exit;
         } else {

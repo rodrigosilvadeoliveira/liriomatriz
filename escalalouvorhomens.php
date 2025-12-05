@@ -17,7 +17,7 @@ $resultlist = null;
 $escalaSalva = null;
 
 // Buscar sempre o último registro salvo (pela data ou pelo id maior)
-$sql = "SELECT * FROM escalas_louvor ORDER BY id DESC LIMIT 1";
+$sql = "SELECT * FROM escalas_homens ORDER BY id DESC LIMIT 1";
 $result = $conexao->query($sql);
 
 if ($result && $result->num_rows > 0) {
@@ -25,7 +25,7 @@ if ($result && $result->num_rows > 0) {
 }
 
 // Funções fixas (linhas da escala)
-$funcoes = ["Bateria", "Violao", "Teclado","Vocal1", "Vocal2"];
+$funcoes = ["Bateria", "Violao", "Teclado", "Baixo", "Ministro", "Vocal1", "Vocal2", "Vocal3", "Talckback"];
 $nomesPorFuncao = [];
 
 // Mapear fotos por nome
@@ -69,8 +69,8 @@ include('registroslog.php');
   <title>Sistema de Escalas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styledaescala.css">
-  
+  <link rel="stylesheet" href="styledaescala.css?v=<?=time()?>">
+
 </head>
 <body>
 
@@ -106,7 +106,7 @@ include('registroslog.php');
       <table id="escalaTable" aria-label="Tabela de Escala">
         <thead>
           <tr id="headerRow">
-            <th>Escala GC Homens</th>
+            <th>Escala Louvor Igreja</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
@@ -977,7 +977,7 @@ async function shareOnWhatsApp() {
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       await navigator.share({
         files: [file],
-        title: 'Escala Musical',
+        title: 'Escala Louvor',
         text: 'Segue a escala gerada:'
       });
       showToast('Escala compartilhada com sucesso!');
@@ -1100,7 +1100,7 @@ function carregarEscalaSalva(dadosEscala) {
 // Função para salvar/atualizar escala no banco de dados
 function salvarEscalaNoBanco(escalaData, blobPdf, callback) {
     const formData = new FormData();
-    formData.append('acao', 'salvar_escalalouvor');
+    formData.append('acao', 'salvar_escalahomens');
     formData.append('dados', JSON.stringify(escalaData));
     formData.append('fileName', getPdfFileName()); // Adicionar o nome do arquivo
 
@@ -1109,7 +1109,7 @@ function salvarEscalaNoBanco(escalaData, blobPdf, callback) {
         formData.append('pdf', blobPdf, getPdfFileName()); // Usar o mesmo nome para o arquivo
     }
 
-    fetch('salvar_escalalouvor.php', {
+    fetch('salvar_escalahomens.php', {
         method: 'POST',
         body: formData
     })
@@ -1136,7 +1136,7 @@ function validarEscala() {
     return;
   }
 
-  fetch('validar_escala.php', {
+  fetch('validar_escalalouvorgcs.php', {
     method: 'POST',
     body: new URLSearchParams({
       dados: JSON.stringify(escalaData)
