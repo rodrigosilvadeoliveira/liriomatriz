@@ -2,10 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eb651e3a-61d2-4981-aec4-5fbbf877d45f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/escalalouvor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cabecalhoSite.php" beforeDir="false" afterPath="$PROJECT_DIR$/cabecalhoSite.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navegacao.php" beforeDir="false" afterPath="$PROJECT_DIR$/navegacao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carregar_escala.php" beforeDir="false" afterPath="$PROJECT_DIR$/carregar_escala.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carregar_escalacriativo.php" beforeDir="false" afterPath="$PROJECT_DIR$/carregar_escalacriativo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carregar_escaladanca.php" beforeDir="false" afterPath="$PROJECT_DIR$/carregar_escaladanca.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carregar_escalakids.php" beforeDir="false" afterPath="$PROJECT_DIR$/carregar_escalakids.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carregar_escalamidias.php" beforeDir="false" afterPath="$PROJECT_DIR$/carregar_escalamidias.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carregar_escalasom.php" beforeDir="false" afterPath="$PROJECT_DIR$/carregar_escalasom.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carregar_escalastaff.php" beforeDir="false" afterPath="$PROJECT_DIR$/carregar_escalastaff.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consultaescala.php" beforeDir="false" afterPath="$PROJECT_DIR$/consultaescala.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consultaescalacriativo.php" beforeDir="false" afterPath="$PROJECT_DIR$/consultaescalacriativo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consultaescaladanca.php" beforeDir="false" afterPath="$PROJECT_DIR$/consultaescaladanca.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consultaescalakids.php" beforeDir="false" afterPath="$PROJECT_DIR$/consultaescalakids.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consultaescalamidias.php" beforeDir="false" afterPath="$PROJECT_DIR$/consultaescalamidias.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consultaescalasom.php" beforeDir="false" afterPath="$PROJECT_DIR$/consultaescalasom.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consultaescalastaff.php" beforeDir="false" afterPath="$PROJECT_DIR$/consultaescalastaff.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paginainicial.php" beforeDir="false" afterPath="$PROJECT_DIR$/paginainicial.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

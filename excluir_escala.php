@@ -19,7 +19,7 @@ $id = $_POST['id'] ?? 0;
 $tabela = $_POST['tabela'] ?? 'escalas_louvor';
 
 // Validar tabela permitida
-$tabelas_permitidas = ['escalas_louvor', 'escalas_homens', 'escalas_louvorkids'];
+$tabelas_permitidas = ['escalas_louvor', 'escalas_louvornoite', 'escalas_homens', 'escalas_louvorkids'];
 if (!in_array($tabela, $tabelas_permitidas)) {
     die("Tabela não permitida.");
 }

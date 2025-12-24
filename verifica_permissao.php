@@ -53,6 +53,7 @@ $permissoes = [
     'cadastrovoluntariadoescala' => ['lider','master'],
     'consulta_voluntariado' => ['lider','master'],
     'escalalouvor.php' => ['lider','master'],
+    'escalalouvornoite.php' => ['lider','master'],
     'escalalouvorkids' => ['lider','master'],
     'escalasom.php' => ['lider','master'],
     'escalamidias.php' => ['lider','master'],

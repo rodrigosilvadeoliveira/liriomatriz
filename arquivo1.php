@@ -41,7 +41,8 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
         ['title' => 'Escala Kids', 'url' => 'escalakids'],
         ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
-        ['title' => 'Escala Louvor Igreja', 'url' => 'escalalouvor'],
+        ['title' => 'Escala Quinta e Domingo Manhã', 'url' => 'escalalouvor'],
+	['title' => 'Escala Louvor Domingo Noite', 'url' => 'escalalouvornoite'],
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
         ['title' => 'Escala Louvor GCs', 'url' => 'escalalouvorhomens'],
        
@@ -97,7 +98,8 @@ if ($perfil === 'master') {
         ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
         ['title' => 'Escala Kids', 'url' => 'escalakids'],
         ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
-        ['title' => 'Escala Louvor Igreja', 'url' => 'escalalouvor'],
+        ['title' => 'Escala Quinta e Domingo Manhã', 'url' => 'escalalouvor'],
+	['title' => 'Escala Louvor Domingo Noite', 'url' => 'escalalouvornoite'],
         ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
         ['title' => 'Escala Louvor GCs', 'url' => 'escalalouvorhomens'],
        
@@ -177,7 +179,7 @@ $categorizedOptions = [
         return in_array($item['url'], ['escalakids','consultaescalakids']);
     }),
     'Louvor' => array_filter($menuOptions, function($item) {
-        return in_array($item['url'], ['escalalouvor','escalalouvorkids', 'escalalouvorhomens', 'escalalouvormulheres', 'escalalouvorJovens','consultaescala', 'checklistlouvor']);
+        return in_array($item['url'], ['escalalouvor','escalalouvornoite','escalalouvorkids', 'escalalouvorhomens', 'escalalouvormulheres', 'escalalouvorJovens','consultaescala', 'checklistlouvor']);
     }),
     'Midias' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], [ 'escalamidias', 'consultaescalamidias']);

@@ -14,7 +14,8 @@ $logado = $_SESSION['usuario'];
 
 // Definir tabelas disponíveis
 $tabelas_escalas = [
-    'escalas_louvor' => 'Escalas de Louvor',
+    'escalas_louvor' => 'Quinta e Domingo Manhã',
+    'escalas_louvornoite' => 'Domingo Noite',
     'escalas_homens' => 'Escala GCs',
     'escalas_louvorkids' => 'Escala Louvor Kids'
 ];
@@ -127,8 +128,9 @@ include('registroslog.php');
         
         .escala-data {
             font-size: 24px;
-            color: #7f8c8d;
+            color: #black;
             margin-top: 5px;
+            background-color: azure;
         }
         
         .escala-acoes {
@@ -293,13 +295,48 @@ include('registroslog.php');
                     $total = obterEstatisticasTabela($conexao, $tabela_id);
                 ?>
                 <div class="col-md-3 col-sm-6 mb-3">
-                    <div class="tabela-card <?php echo $tabela_selecionada == $tabela_id ? 'active' : ''; ?>" 
-                         onclick="window.location.href='?tabela=<?php echo $tabela_id; ?>'"
-                         style="cursor: pointer;">
-                        <div class="tabela-nome"><?php echo htmlspecialchars($tabela_nome); ?></div>
-                        <div class="tabela-count"><?php echo $total; ?> escala(s)</div>
-                    </div>
-                </div>
+    <div class="tabela-card <?php echo $tabela_selecionada == $tabela_id ? 'active' : ''; ?>" 
+         onclick="window.location.href='?tabela=<?php echo $tabela_id; ?>'"
+         style="cursor: pointer;">
+        <!-- Ícone baseado no tipo de escala -->
+        <div class="d-flex align-items-center mb-2">
+            <?php 
+            // Definir ícone baseado no tipo de tabela
+            $icone = '';
+            $cor_icone = '';
+            
+            switch($tabela_id) {
+                case 'escalas_louvor':
+                    // Para louvor tradicional - sol para manhã
+                    $icone = 'bi-sun';
+                    $cor_icone = $tabela_selecionada == $tabela_id ? '#FFD700' : '#FFA500';
+                    break;
+		case 'escalas_louvornoite':
+                    // Para louvor tradicional - sol para manhã
+                    $icone = 'bi-moon-stars';
+                    $cor_icone = $tabela_selecionada == $tabela_id ? '#FFD700' : '#FFA500';
+                    break;
+                case 'escalas_homens':
+                    // Para GCs - pessoas reunidas
+                    $icone = 'bi-people';
+                    $cor_icone = $tabela_selecionada == $tabela_id ? '#3498db' : '#2980b9';
+                    break;
+                case 'escalas_louvorkids':
+                    // Para kids - crianças felizes
+                    $icone = 'bi-emoji-smile';
+                    $cor_icone = $tabela_selecionada == $tabela_id ? '#e74c3c' : '#c0392b';
+                    break;
+                default:
+                    $icone = 'bi-music-note-beamed';
+                    $cor_icone = '#2c3e50';
+            }
+            ?>
+            <i class="bi <?php echo $icone; ?> me-2" style="font-size: 24px; color: <?php echo $cor_icone; ?>;"></i>
+            <div class="tabela-nome"><?php echo htmlspecialchars($tabela_nome); ?></div>
+        </div>
+        <div class="tabela-count"><?php echo $total; ?> escala(s)</div>
+    </div>
+</div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -325,12 +362,12 @@ include('registroslog.php');
                                     <?php echo htmlspecialchars($escala['nome']); ?>
                                     <span class="badge-tabela"><?php echo $tabelas_escalas[$tabela_selecionada]; ?></span>
                                 </div>
-                                <?php if(isset($escala['data_criacao'])): ?>
+                               <!--     <?php if(isset($escala['data_criacao'])): ?>
                                     <div class="escala-data">
-                                        <i class="bi bi-calendar"></i> 
+                                    <i class="bi bi-calendar"></i> 
                                         <?php echo date('d/m/Y H:i', strtotime($escala['data_criacao'])); ?>
                                     </div>
-                                <?php endif; ?>
+                                <?php endif; ?>-->
                             </div>
                             <div class="escala-acoes">
                                 <?php if (!empty($escala['pdf_path'])): ?>
@@ -420,6 +457,23 @@ $(document).ready(function(){
             }
         }
     });
+    $(document).on("click", ".toggleEscala", function(){
+    let card = $(this).closest(".p-3");
+
+    let usuario = card.find(".apenas-usuario");
+    let todos = card.find(".todos");
+
+    if(todos.is(":visible")){
+        todos.slideUp();
+        usuario.slideDown();
+        $(this).text("Ver todos");
+    } else {
+        usuario.slideUp();
+        todos.slideDown();
+        $(this).text("Mostrar apenas minha escala");
+    }
+});
+
 });
     function visualizarPDF(pdfPath) {
         event.stopPropagation();

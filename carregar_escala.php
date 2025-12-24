@@ -1,12 +1,14 @@
 <?php
 include_once('config.php');
-
+session_start();
+$logado = $_SESSION['usuario'] ?? '';
+$logadoLower = mb_strtolower(trim($logado));
 // Pega parâmetros
 $id = intval($_GET['id'] ?? 0);
 $tabela = $_GET['tabela'] ?? 'escalas_louvor';
 
 // Validar tabela permitida
-$tabelas_permitidas = ['escalas_louvor', 'escalas_homens', 'escalas_louvorkids'];
+$tabelas_permitidas = ['escalas_louvor', 'escalas_louvornoite', 'escalas_homens', 'escalas_louvorkids'];
 if (!in_array($tabela, $tabelas_permitidas)) {
     echo "<div class='alert alert-danger'>Tabela não permitida.</div>";
     exit;
@@ -75,39 +77,188 @@ function diaSemana($dataIso) {
 }
 
 // Monta saída
+// Monta saída
 echo "<div class='container-fluid p-0'>";
-foreach ($dados['datas'] as $dataInfo) {
-    $dataIso = $dataInfo['iso'];
-    $dataFormatada = date('d/m', strtotime($dataIso));
-    $diaSemana = diaSemana($dataIso);
 
-    echo "<div class='escala-card mb-3'>";
-    echo "<div class='escala-data p-3 border-bottom'><i class='bi bi-calendar'></i> {$dataFormatada} - {$diaSemana}</div>";
-    
+/***********************
+ * LISTA COMPLETA (oculta inicialmente)
+ ***********************/
+$listaCompleta = "";
 
-   foreach ($dados['escalas'] as $funcao => $dias) {
-    if (isset($dias[$dataIso])) {
-        $musico = $dias[$dataIso];
-        
-        // ADICIONE ESTA VERIFICAÇÃO
-        if (!empty(trim($musico))) {  // Verifica se não está vazio/nulo
-            $foto = isset($musicos[$musico]) && $musicos[$musico] != '' 
-                    ? $musicos[$musico] 
-                    : 'uploads/default.png';
-            
-            echo "<div class='escala-funcao'>
-                    <img src='$foto' alt='$musico' class='me-3'>
-                    <div>
-                        <strong class='text-primary'>$funcao:</strong> 
-                        <span class='ms-1'>$musico</span>
-                    </div>
-                  </div>";
+/***********************
+ * LISTA DO USUÁRIO LOGADO
+ * + Regra Todos
+ ***********************/
+$listaUsuario = "";
+$temParticipacao = false;
+
+$diasUsuario = [];
+$diasTodos = [];
+$temTodosNaEscala = false;
+
+/*
+ * 1️⃣ Mapeia os dias do usuário logado e do Todos
+*/
+foreach($dados['escalas'] as $funcao => $dias){
+    foreach($dias as $dataIso => $musico){
+        $musico = trim($musico);
+
+       if(mb_strtolower($musico) === $logadoLower){
+    $diasUsuario[] = $dataIso;
+}
+
+
+        if(stripos($musico, "Todos") !== false){
+            $temTodosNaEscala = true;
+            $diasTodos[] = $dataIso;
         }
     }
 }
 
-    
-    echo "</div>";
+$diasUsuario = array_unique($diasUsuario);
+$diasTodos = array_unique($diasTodos);
+
+$diasPermitidos = $diasUsuario;
+
+if($temTodosNaEscala){
+    $diasPermitidos = array_unique(array_merge($diasUsuario, $diasTodos));
 }
+
+/*
+ * 2️⃣ Monta as duas visões
+*/
+foreach ($dados['datas'] as $dataInfo) {
+
+    $dataIso = $dataInfo['iso'];
+    $dataFormatada = date('d/m', strtotime($dataIso));
+    $diaSemana = diaSemana($dataIso);
+
+    /***************
+     * LISTA COMPLETA (todos)
+     ***************/
+    $listaCompleta .= "<div class='mb-2 border rounded'>
+        <div class='escala-data p-2'><i class='bi bi-calendar'></i> {$dataFormatada} - {$diaSemana}</div>";
+
+    foreach ($dados['escalas'] as $funcao => $dias) {
+        if (isset($dias[$dataIso])) {
+            
+            $musico = trim($dias[$dataIso]);
+            if($musico == '') continue;
+
+            $foto = isset($musicos[$musico]) && $musicos[$musico] != '' 
+                ? $musicos[$musico]
+                : 'uploads/default.png';
+
+            $listaCompleta .= "
+                <div class='escala-funcao'>
+                    <img src='$foto'>
+                    <div>
+                        <strong class='text-primary'>$funcao:</strong> 
+                        <span>$musico</span>
+                    </div>
+                </div>";
+        }
+    }
+
+    $listaCompleta .= "</div>";
+
+    /***************
+     * LISTA USUÁRIO LOGADO + REGRA SILVA
+     ***************/
+    if(!in_array($dataIso, $diasPermitidos)){
+        continue;
+    }
+
+    $bloco = "";
+    $temBlocoDia = false;
+
+    foreach ($dados['escalas'] as $funcao => $dias) {
+        if (isset($dias[$dataIso])) {
+
+            $musico = trim($dias[$dataIso]);
+
+            // Só exibe logado ou Todos
+            $musicoLower = mb_strtolower($musico);
+
+if(
+    $musicoLower !== $logadoLower &&
+    stripos($musicoLower, "todos") === false
+){
+    continue;
+}
+
+
+            $temParticipacao = true;
+            $temBlocoDia = true;
+
+            $foto = isset($musicos[$musico]) && $musicos[$musico] != '' 
+                ? $musicos[$musico]
+                : 'uploads/default.png';
+
+            $tag = "";
+            if($musico === $logado){
+                $tag = "<span class='badge bg-primary ms-2'>Você</span>";
+            } elseif(stripos($musico, "Todos") !== false){
+                $tag = "<span class='badge bg-warning ms-2'>Todos</span>";
+            }
+
+            $bloco .= "
+            <div class='escala-funcao'>
+                <img src='$foto'>
+                <div>
+                    <strong class='text-primary'>$funcao:</strong>
+                    <span>$musico</span> $tag
+                </div>
+            </div>";
+        }
+    }
+
+    if($temBlocoDia){
+        $listaUsuario .= "
+        <div class='mb-2 border rounded'>
+            <div class='escala-data p-2'>
+                <i class='bi bi-calendar'></i> {$dataFormatada} - {$diaSemana}
+            </div>
+            $bloco
+        </div>";
+    }
+}
+
+if(!$temParticipacao){
+    $listaUsuario .= "
+        <div class='alert alert-warning'>
+            Você não está escalado em nenhuma data desta escala.
+        </div>";
+}
+
+/***************
+ * RENDERIZAÇÃO
+ ***************/
+echo "
+<div id='view-user'>
+    $listaUsuario
+</div>
+
+<button class='btn btn-dark mt-2' onclick='verTodos(this)' >
+    Ver todos
+</button>
+
+<div id='view-all' style='display:none' class='mt-3'>
+    $listaCompleta
+</div>
+
+<script>
+function verTodos(btn){
+    const all = btn.parentElement.querySelector('#view-all');
+    const user = btn.parentElement.querySelector('#view-user');
+
+    user.style.display = 'none';
+    all.style.display = 'block';
+    btn.style.display = 'none';
+}
+</script>
+";
+
 echo "</div>";
+
 ?>

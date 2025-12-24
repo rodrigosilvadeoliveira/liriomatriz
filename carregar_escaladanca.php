@@ -40,19 +40,29 @@ foreach ($dados['datas'] as $dataInfo) {
     $dataFormatada = date('d/m', strtotime($dataIso));
     $diaSemana = diaSemana($dataIso);
 
-    echo "<div class='escala-card'>";
+    echo "<div class=''>";
     echo "<div class='escala-data'>{$dataFormatada} - {$diaSemana}</div>";
 
     foreach ($dados['escalas'] as $funcao => $dias) {
-        if (isset($dias[$dataIso])) {
-            $musico = $dias[$dataIso];
-            $foto = isset($musicos[$musico]) && $musicos[$musico] != '' ? $musicos[$musico] : 'uploads/default.png';
+    if (isset($dias[$dataIso])) {
+        $musico = $dias[$dataIso];
+        
+        // ADICIONE ESTA VERIFICAÇÃO
+        if (!empty(trim($musico))) {  // Verifica se não está vazio/nulo
+            $foto = isset($musicos[$musico]) && $musicos[$musico] != '' 
+                    ? $musicos[$musico] 
+                    : 'uploads/default.png';
+            
             echo "<div class='escala-funcao'>
-                    <img src='$foto' alt='$musico'>
-                    <div><strong>$funcao:</strong> $musico</div>
+                    <img src='$foto' alt='$musico' class='me-3'>
+                    <div>
+                        <strong class='text-primary'>$funcao:</strong> 
+                        <span class='ms-1'>$musico</span>
+                    </div>
                   </div>";
         }
     }
+}
 
     echo "</div>";
 }

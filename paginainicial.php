@@ -663,8 +663,8 @@ $imagemBanner = isset($_SESSION['banner_imagem']) ? $_SESSION['banner_imagem'] :
 <!-- Container do vídeo responsivo -->
         <div class="video-container">
             <video class="video-voluntarios" controls loop muted playsinline autoplay>
-                <source src="voluntariado.mp4" type="video/mp4">
-                <source src="voluntariado.webm" type="video/webm">
+                <source src="teatro.mp4" type="video/mp4">
+                <!-- <source src="voluntariado.webm" type="video/webm"> -->
                 Seu navegador não suporta a tag de vídeo.
             </video>
         </div>

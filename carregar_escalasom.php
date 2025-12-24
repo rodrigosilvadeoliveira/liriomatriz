@@ -40,7 +40,7 @@ foreach ($dados['datas'] as $dataInfo) {
     $dataFormatada = date('d/m', strtotime($dataIso));
     $diaSemana = diaSemana($dataIso);
 
-    echo "<div class='escala-card'>";
+    echo "<div class=''>";
     echo "<div class='escala-data'>{$dataFormatada} - {$diaSemana}</div>";
 
     foreach ($dados['escalas'] as $funcao => $dias) {

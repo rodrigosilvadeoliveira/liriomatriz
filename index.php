@@ -14,7 +14,7 @@ error_reporting(E_ALL); // Relatar todos os tipos de erro (para fins de desenvol
 date_default_timezone_set('America/Sao_Paulo'); // Definir fuso horário para Brasil/Brasília
 include_once('config.php');
    // print_r($_SESSION);
-    include('registroslog.php');
+    
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +33,26 @@ include_once('config.php');
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     <script src="bootstrap.min.js"></script>
     </head>
+    <style>
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+        }
+        
+        /* Vídeo responsivo */
+        .video-voluntarios {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+     
+    </style>
 
 <body>
     <div class="cabecalho" id="cabecalhodoSite">
@@ -40,6 +60,15 @@ include_once('config.php');
     </div>
 <br >
 <main>
+
+<div class="video-container">
+            <video class="video-voluntarios" controls loop muted playsinline autoplay>
+                <source src="teatro.mp4" type="video/mp4">
+                <!-- <source src="voluntariado.webm" type="video/webm"> -->
+                Seu navegador não suporta a tag de vídeo.
+            </video>
+        </div>
+
 <div id="tabelacarrousel" class="carroussel">
     <div class="carroussel-container">
         <?php
@@ -54,7 +83,7 @@ include_once('config.php');
         ?>
     </div>
 </div>
-<h1 id="titulocategoria">Você encontra na Lirio Matriz</h1>
+        <h1 id="titulocategoria">Você encontra na Lirio Matriz</h1>
 <div id="tabelaSite">
 <div class="produtos-container">
         <table>
