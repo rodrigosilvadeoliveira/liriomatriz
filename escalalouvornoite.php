@@ -106,7 +106,7 @@ include('registroslog.php');
       <table id="escalaTable" aria-label="Tabela de Escala">
         <thead>
           <tr id="headerRow">
-            <th>Escala Louvor Igreja</th>
+            <th>Domingo a Noite</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
