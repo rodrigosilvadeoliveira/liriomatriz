@@ -1,5 +1,8 @@
+<?php
+include_once('config_language.php');
+?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="<?= $_SESSION['lang'] ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -338,30 +341,41 @@
             <nav class="desktop-nav">
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index">Início</a>
+                        <a class="nav-link active" href="index"><?= __('header_inicio') ?></a>
                     </li>
                   
                     <li class="nav-item">
-                       <a class="nav-link" href="sitevoluntariado">Voluntariado</a>
+                       <a class="nav-link" href="sitevoluntariado"><?= __('header_voluntariado') ?></a>
                     </li>
                     <li class="nav-item">
-                       <a class="nav-link" href="sitekids">Kids</a>
+                       <a class="nav-link" href="sitekids"><?= __('header_kids') ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="siteprogramacao">Programação</a>
+                        <a class="nav-link" href="siteprogramacao"><?= __('header_programacao') ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="sitemergulhar">Mergulhar</a>
+                        <a class="nav-link" href="sitemergulhar"><?= __('header_mergulhar') ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="siteprestador">Divulgação</a>
+                        <a class="nav-link" href="siteprestador"><?= __('header_divulgacao') ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="sitelojalirio">Loja</a>
+                        <a class="nav-link" href="sitelojalirio"><?= __('header_loja') ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="sitedoacoes">Doar</a>
+                        <a class="nav-link" href="sitedoacoes"><?= __('header_doar') ?></a>
                     </li>
+                    <li class="nav-item">
+    <a class="nav-link" href="?lang=pt">
+        <img src="https://flagcdn.com/w40/br.png" width="24" alt="Português">
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="?lang=en">
+        <img src="https://flagcdn.com/w40/us.png" width="24" alt="English">
+    </a>
+</li>
                 </ul>
             </nav>
 
@@ -383,31 +397,40 @@
             </div>
             <ul class="mobile-nav-menu">
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link active" href="index">Início</a>
+                    <a class="mobile-nav-link active" href="index"><?= __('header_inicio') ?></a>
                 </li>
              
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="sitevoluntariado">Voluntariado</a>
+                    <a class="mobile-nav-link" href="sitevoluntariado"><?= __('header_voluntariado') ?></a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="sitekids">Kids</a>
+                    <a class="mobile-nav-link" href="sitekids"><?= __('header_kids') ?></a>
                 </li>
                 
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="siteprogramacao">Programação</a>
+                    <a class="mobile-nav-link" href="siteprogramacao"><?= __('header_programacao') ?></a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="sitemergulhar">Mergulhar</a>
+                    <a class="mobile-nav-link" href="sitemergulhar"><?= __('header_mergulhar') ?></a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="siteprestador">Divulgação</a>
+                    <a class="mobile-nav-link" href="siteprestador"><?= __('header_divulgacao') ?></a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link" href="sitelojalirio">Loja</a>
+                    <a class="mobile-nav-link" href="sitelojalirio"><?= __('header_loja') ?></a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a class="mobile-nav-link mobile-nav-cta" href="sitedoacoes">Doar</a>
+                    <a class="mobile-nav-link mobile-nav-cta" href="sitedoacoes"><?= __('header_doar') ?></a>
                 </li>
+                <li class="mobile-nav-item">
+    <a class="nav-link" href="?lang=pt">
+        <img src="https://flagcdn.com/w40/br.png" width="24" alt="Português">
+    </a>
+     <a class="nav-link" href="?lang=en">
+        <img src="https://flagcdn.com/w40/us.png" width="24" alt="English">
+    </a>
+</li>
+
             </ul>
         </div>
 
@@ -477,4 +500,4 @@
         }
     </script>
 </body>
-</html>0
+</html>

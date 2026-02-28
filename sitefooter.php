@@ -1,3 +1,6 @@
+<?php
+include_once('config_language.php');
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -259,18 +262,18 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <img src="LÍRIO MATRIZ (PRETO)_menor.png" alt="Lírio Matriz" class="footer-logo">
-                <p>Transformando vidas através do amor e fé.</p>
+                <p><?= __(key: 'titulofooter') ?></p>
             </div>
             
             <div class="footer-links">
-                <h3 class="footer-heading">Links Úteis</h3>
+                <h3 class="footer-heading"><?= __(key: 'linksuteis') ?></h3>
                 <ul class="footer-links-list">
                     <li>
                         <a href="sobre.php" class="footer-link">
                             <span class="footer-icon">
                                 <i class="fas fa-church"></i>
                             </span>
-                            Sobre a Lírio
+                            <?= __(key: 'sobre') ?>
                         </a>
                     </li>
                     <li>
@@ -278,7 +281,7 @@
                             <span class="footer-icon">
                                 <i class="fas fa-phone"></i>
                             </span>
-                            Fale Conosco
+                            <?= __(key: 'faleconosco') ?>
                         </a>
                     </li>
                     <li>
@@ -286,7 +289,7 @@
                             <span class="footer-icon">
                                 <i class="fas fa-calendar-alt"></i>
                             </span>
-                            Programação
+                            <?= __(key: 'header_programacao') ?>
                         </a>
                     </li>
                     <li>
@@ -294,14 +297,14 @@
                             <span class="footer-icon">
                                 <i class="fas fa-hands-helping"></i>
                             </span>
-                            Voluntariado
+                            <?= __(key: 'header_voluntariado') ?>
                         </a>
                     </li>
                 </ul>
             </div>
             
             <div class="footer-contact">
-                <h3 class="footer-heading">Contato</h3>
+                <h3 class="footer-heading"><?= __(key: 'contato') ?></h3>
                 <div class="contact-info">
                     <div class="contact-item">
                         <span class="contact-icon">
@@ -316,7 +319,7 @@
                         <span class="contact-icon">
                             <i class="fas fa-clock"></i>
                         </span>
-                        <span>Horários de culto:<br>Quarta 20h | Domingo 9h</span>
+                        <span><?= __(key: 'horario') ?><br><?= __(key: 'horario2') ?></span>
                     </div>
                     
                     <div class="social-links">

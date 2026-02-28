@@ -36,7 +36,7 @@ $result = $conexao->query($sql);
 <br >
 <br >
 
-<h1 id="titulohome">Programação</h1>
+<h1 id="titulohome"><?= __('header_programacao') ?></h1>
 
 <div id="programacaosite">
 <div class="produtos-container">

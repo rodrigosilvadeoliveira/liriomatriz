@@ -128,15 +128,26 @@
         <!-- Container das imagens em coluna -->
         <div class="imagens-container">
             <?php
-            $slides = glob("img/kids/*.jpg");
-            if (count($slides) > 0) {
-                foreach ($slides as $slide) {
-                    echo '<img class="img-voluntariado" src="'.$slide.'?t='.time().'" />';
-                }
-            } else {
-                echo '<p style="text-align: center; padding: 2rem;">Nenhuma imagem disponível no momento.</p>';
-            }
-            ?>
+
+$idioma = $_SESSION['lang'] ?? 'pt';
+
+// Segurança extra
+$idiomasPermitidos = ['pt', 'en'];
+if (!in_array($idioma, $idiomasPermitidos)) {
+    $idioma = 'pt';
+}
+
+$diretorio = "img/kids/" . $idioma . "/";
+$slides = glob($diretorio . "*.jpeg");
+
+if (!empty($slides)) {
+    foreach ($slides as $slide) {
+        echo '<img class="img-voluntariado" src="'.$slide.'?t='.time().'" />';
+    }
+} else {
+    echo '<p style="text-align:center; padding:2rem;">'.__('sem_imagem').'</p>';
+}
+?>
         </div>
     </main>
 

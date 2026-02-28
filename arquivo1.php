@@ -1,5 +1,6 @@
 <?php
 include_once('config.php');
+include_once('config_language.php');
 
 // Verificação de login
 if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
@@ -14,65 +15,63 @@ $perfil = $_SESSION['nivel_acesso'];
 
 $perfil_usuario = $_SESSION['nivel_acesso'] ?? 'consulta'; // valor padrão caso não exista
 $pode_excluir = in_array($perfil_usuario, ['master', 'lider']);
-
+$pode_editar = in_array($perfil_usuario, ['master', 'lider']);
 // Definir opções de menu baseadas no perfil
 $menuOptions = [];
 
 if ($perfil === 'master') {
     $menuOptions = [
-        ['title' => 'Inicio', 'url' => 'paginainicial'],
-        ['title' => 'Cadastro Acesso', 'url' => 'formularioMaster'],
-        ['title' => 'Cadastro Vendas', 'url' => 'cadastrodevendas'],
+        ['title' => __('header_inicio') , 'url' => 'paginainicial'],
+        ['title' => __('cadastro_acesso'), 'url' => 'formularioMaster'],
+        ['title' => __('cadastro_vendas'), 'url' => 'cadastrodevendas'],
         ['title' => 'Log', 'url' => 'consulta_logs'],
-        ['title' => 'Consulta Acessos', 'url' => 'consultaacessos'],
-        ['title' => 'Novo Membro(a)', 'url' => 'cadastroMembrosAdm'],
-        ['title' => 'Consultar Membros', 'url' => 'consulta_membros'],
-        ['title' => 'Aniversariantes', 'url' => 'consulta_niver'],
-        ['title' => 'Inscrições', 'url' => 'cadastroForm.php'],
-        ['title' => 'Cadastrar Relatórios', 'url' => 'relatoriodepartamento'],
-        ['title' => 'Consultar Relatórios', 'url' => 'listar_relatoriosdep'],
-        ['title' => 'Site imagens', 'url' => 'cadastroEvento'],
+        ['title' => __('consulta_acessos') , 'url' => 'consultaacessos'],
+        ['title' => __('novo_membro') , 'url' => 'cadastroMembrosAdm'],
+        ['title' => __('consultar_membros') , 'url' => 'consulta_membros'],
+        ['title' => __('aniversariantes') , 'url' => 'consulta_niver'],
+        ['title' => __('inscricoes') , 'url' => 'cadastroForm.php'],
+        ['title' => __('cadastrar_relatorio') , 'url' => 'relatoriodepartamento'],
+        ['title' => __('consulta_relatorio') , 'url' => 'listar_relatoriosdep'],
+        ['title' => __('site_imagens') , 'url' => 'cadastroEvento'],
         ['title' => 'Site Live', 'url' => 'cadastrolive'],
-        ['title' => 'Cadastro Voluntario', 'url' => 'cadastrovoluntariadoescala'],
-        ['title' => 'Consulta Voluntario', 'url' => 'consulta_voluntariado'],
-        ['title' => 'Escala Criativo', 'url' => 'escalacriativo'],
-        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativo'],
-        ['title' => 'Escala Dança', 'url' => 'escaladanca'],
-        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
-        ['title' => 'Escala Kids', 'url' => 'escalakids'],
-        ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
-        ['title' => 'Escala Quinta e Domingo Manhã', 'url' => 'escalalouvor'],
-	['title' => 'Escala Louvor Domingo Noite', 'url' => 'escalalouvornoite'],
-        ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
-        ['title' => 'Escala Louvor GCs', 'url' => 'escalalouvorhomens'],
+        ['title' => __('cadastro_voluntario') , 'url' => 'cadastrovoluntariadoescala'],
+        ['title' => __('consulta_voluntario') , 'url' => 'consulta_voluntariado'],
+        ['title' => __('escala_criativo') , 'url' => 'escalacriativo'],
+        ['title' => __('consultar_escala_criativo') , 'url' => 'consultaescalacriativo'],
+        ['title' =>__('escala_danca') , 'url' => 'escaladanca'],
+        ['title' =>__('consultar_escala_danca') , 'url' => 'consultaescaladanca'],
+        ['title' =>__('_escala_kids') , 'url' => 'escalakids'],
+        ['title' =>__('consultar_escala_kids') , 'url' => 'consultaescalakids'],
+        ['title' =>__('escala_quinta_domingo_manha') , 'url' => 'escalalouvor'],
+	    ['title' =>__('escala_domingo_noite'), 'url' => 'escalalouvornoite'],
+        ['title' =>__('escala_louvor_kids') , 'url' => 'escalalouvorkids'],
+        ['title' =>__('escala_louvor_gcs') , 'url' => 'escalalouvorhomens'],
        
-        ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
-        ['title' => 'R.I e informações gerais', 'url' => 'checklistlouvor'],
-        ['title' => 'Escala Midias', 'url' => 'escalamidias'],
-        ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
-        ['title' => 'Escala Staff', 'url' => 'escalastaff'],
-        ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaff'],
-        ['title' => 'Escala Som', 'url' => 'escalasom'],
-        ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
-        ['title' => 'Guia mesa na Live', 'url' => 'checklistlive'],
-        ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
-        ['title' => 'Repertorio', 'url' => 'musicas'],
-        ['title' => 'Consulta Repertorio', 'url' => 'consultarepertorio'],
+        ['title' =>__('consultar_escala_louvor') , 'url' => 'consultaescala'],
+        ['title' =>__('ri_louvor') , 'url' => 'checklistlouvor'],
+        ['title' =>__('escala_midias') , 'url' => 'escalamidias'],
+        ['title' =>__('consultar_escala_midias') , 'url' => 'consultaescalamidias'],
+        ['title' =>__('escala_staff') , 'url' => 'escalastaff'],
+        ['title' => __('consultar_escala_staff'), 'url' => 'consultaescalastaff'],
+        ['title' => __('escala_som') , 'url' => 'escalasom'],
+        ['title' => __('consultar_escala_som'), 'url' => 'consultaescalasom'],
+        ['title' =>__('guia_mesa_live') , 'url' => 'checklistlive'],
+        ['title' =>__('guia_mesa_som') , 'url' => 'checklistsom'],
+        ['title' =>__('repertorio') , 'url' => 'musicas'],
+        ['title' =>__('consultar_repertorio') , 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
         
     ];
 } elseif ($perfil === 'secretaria') {
     $menuOptions = [
-        ['title' => 'Inicio', 'url' => 'paginainicial'],
-        ['title' => 'Novo Membro(a)', 'url' => 'cadastroMembrosAdm'],
-        ['title' => 'Consultar Membros', 'url' => 'consulta_membros'],
-        // ['title' => 'Pesquisa Membro(a)', 'url' => 'consulta_membros_busca'],
-        ['title' => 'Aniversariantes', 'url' => 'consulta_niver'],
-        ['title' => 'Inscrições', 'url' => 'cadastroForm.php'],
-        ['title' => 'Cadastrar Relatórios', 'url' => 'relatoriodepartamento'],
-        ['title' => 'Consultar Relatórios', 'url' => 'listar_relatoriosdep'],
-        ['title' => 'Site imagens', 'url' => 'cadastroEvento'],
-        ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
+        ['title' => __('header_inicio') , 'url' => 'paginainicial'],
+        ['title' => __('novo_membro') , 'url' => 'cadastroMembrosAdm'],
+        ['title' => __('consultar_membros') , 'url' => 'consulta_membros'],
+        ['title' => __('aniversariantes') , 'url' => 'consulta_niver'],
+        ['title' => __('inscricoes') , 'url' => 'cadastroForm.php'],
+        ['title' => __('cadastrar_relatorio') , 'url' => 'relatoriodepartamento'],
+        ['title' => __('consulta_relatorio') , 'url' => 'listar_relatoriosdep'],
+        ['title' => __('site_imagens') , 'url' => 'cadastroEvento'],        ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
 } elseif ($perfil === 'midia') {
     $menuOptions = [
@@ -88,115 +87,117 @@ if ($perfil === 'master') {
     ];
 } elseif ($perfil === 'lider') {
     $menuOptions = [
-        ['title' => 'Inicio', 'url' => 'paginainicial'],
-        ['title' => 'Cadastro Acesso', 'url' => 'formulariolider'],
-        ['title' => 'Cadastro Voluntario', 'url' => 'cadastrovoluntariadoescala'],
-        ['title' => 'Consulta Voluntario', 'url' => 'consulta_voluntariado'],
-        ['title' => 'Escala Criativo', 'url' => 'escalacriativo'],
-        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativo'],
-        ['title' => 'Escala Dança', 'url' => 'escaladanca'],
-        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
-        ['title' => 'Escala Kids', 'url' => 'escalakids'],
-        ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
-        ['title' => 'Escala Quinta e Domingo Manhã', 'url' => 'escalalouvor'],
-	['title' => 'Escala Louvor Domingo Noite', 'url' => 'escalalouvornoite'],
-        ['title' => 'Escala Louvor Kids', 'url' => 'escalalouvorkids'],
-        ['title' => 'Escala Louvor GCs', 'url' => 'escalalouvorhomens'],
+        ['title' => __('header_inicio') , 'url' => 'paginainicial'],
+        ['title' => __('cadastro_acesso_lider') , 'url' => 'formulariolider'],
+        ['title' => __('cadastro_voluntario') , 'url' => 'cadastrovoluntariadoescala'],
+        ['title' => __('consulta_voluntario') , 'url' => 'consulta_voluntariado'],
+        ['title' => __('escala_criativo') , 'url' => 'escalacriativo'],
+        ['title' => __('consultar_escala_criativo') , 'url' => 'consultaescalacriativo'],
+        ['title' =>__('escala_danca') , 'url' => 'escaladanca'],
+        ['title' =>__('consultar_escala_danca') , 'url' => 'consultaescaladanca'],
+        ['title' =>__('_escala_kids') , 'url' => 'escalakids'],
+        ['title' =>__('consultar_escala_kids') , 'url' => 'consultaescalakids'],
+        ['title' =>__('escala_quinta_domingo_manha') , 'url' => 'escalalouvor'],
+	    ['title' =>__('escala_domingo_noite'), 'url' => 'escalalouvornoite'],
+        ['title' =>__('escala_louvor_kids') , 'url' => 'escalalouvorkids'],
+        ['title' =>__('escala_louvor_gcs') , 'url' => 'escalalouvorhomens'],
        
-        ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
-        ['title' => 'R.I e informações gerais', 'url' => 'checklistlouvor'],
-        ['title' => 'Escala Midias', 'url' => 'escalamidias'],
-        ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
-        ['title' => 'Escala Som', 'url' => 'escalasom'],
-        ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
-        ['title' => 'Guia mesa na Live', 'url' => 'checklistlive'],
-        ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
-        ['title' => 'Escala Staff', 'url' => 'escalastaff'],
-        ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaff'],
-        ['title' => 'Repertório', 'url' => 'musicas'],
-        ['title' => 'Consulta Repertório', 'url' => 'consultarepertorio'],
+        ['title' =>__('consultar_escala_louvor') , 'url' => 'consultaescala'],
+        ['title' =>__('ri_louvor') , 'url' => 'checklistlouvor'],
+        ['title' =>__('escala_midias') , 'url' => 'escalamidias'],
+        ['title' =>__('consultar_escala_midias') , 'url' => 'consultaescalamidias'],
+        ['title' =>__('escala_staff') , 'url' => 'escalastaff'],
+        ['title' => __('consultar_escala_staff'), 'url' => 'consultaescalastaff'],
+        ['title' => __('escala_som') , 'url' => 'escalasom'],
+        ['title' => __('consultar_escala_som'), 'url' => 'consultaescalasom'],
+        ['title' =>__('guia_mesa_live') , 'url' => 'checklistlive'],
+        ['title' =>__('guia_mesa_som') , 'url' => 'checklistsom'],
+        ['title' =>__('repertorio') , 'url' => 'musicas'],
+        ['title' =>__('consultar_repertorio') , 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
 } elseif ($perfil === 'consulta') {
     $menuOptions = [
-        ['title' => 'Inicio', 'url' => 'paginainicial'],
-        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativo'],
-        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
-        ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
-        ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
-        ['title' => 'R.I e informações gerais', 'url' => 'checklistlouvor'],
-        ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
-        ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
-        ['title' => 'Guia mesa na Live', 'url' => 'checklistlive'],
-        ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
-        ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaff'],
-        ['title' => 'Consulta Repertório', 'url' => 'consultarepertorio'],
+        ['title' => __('header_inicio') , 'url' => 'paginainicial'],
+        ['title' => __('consultar_escala_criativo') , 'url' => 'consultaescalacriativo'],
+        ['title' =>__('consultar_escala_danca') , 'url' => 'consultaescaladanca'],
+        ['title' =>__('consultar_escala_kids') , 'url' => 'consultaescalakids'],
+        ['title' =>__('consultar_escala_louvor') , 'url' => 'consultaescala'],
+        ['title' =>__('ri_louvor') , 'url' => 'checklistlouvor'],
+        ['title' =>__('consultar_escala_midias') , 'url' => 'consultaescalamidias'],
+        ['title' => __('consultar_escala_staff'), 'url' => 'consultaescalastaff'],
+        ['title' => __('consultar_escala_som'), 'url' => 'consultaescalasom'],
+        ['title' =>__('guia_mesa_live') , 'url' => 'checklistlive'],
+        ['title' =>__('guia_mesa_som') , 'url' => 'checklistsom'],
+        ['title' =>__('repertorio') , 'url' => 'musicas'],
+        ['title' =>__('consultar_repertorio') , 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
 } elseif ($perfil === 'ministro') {
     $menuOptions = [
-       ['title' => 'Inicio', 'url' => 'paginainicial'],
-        ['title' => 'Consultar Escala Criativo', 'url' => 'consultaescalacriativo'],
-        ['title' => 'Consultar Escala Dança', 'url' => 'consultaescaladanca'],
-        ['title' => 'Consultar Escala Louvor', 'url' => 'consultaescala'],
-        ['title' => 'R.I e informações gerais', 'url' => 'checklistlouvor'],
-        ['title' => 'Consultar Escala Kids', 'url' => 'consultaescalakids'],
-        ['title' => 'Consultar Escala Midias', 'url' => 'consultaescalamidias'],
-        ['title' => 'Consultar Escala Som', 'url' => 'consultaescalasom'],
-        ['title' => 'Guia mesa na Live', 'url' => 'checklistlive'],
-        ['title' => 'Guia mesa de Som', 'url' => 'checklistsom'],
-        ['title' => 'Consultar Escala Staff', 'url' => 'consultaescalastaff'],
-        ['title' => 'Repertório', 'url' => 'musicas'],
-        ['title' => 'Consulta Repertório', 'url' => 'consultarepertorio'],
+        ['title' => 'Inicio', 'url' => 'paginainicial'],
+        ['title' => __('header_inicio') , 'url' => 'paginainicial'],
+        ['title' => __('consultar_escala_criativo') , 'url' => 'consultaescalacriativo'],
+        ['title' =>__('consultar_escala_danca') , 'url' => 'consultaescaladanca'],
+        ['title' =>__('consultar_escala_kids') , 'url' => 'consultaescalakids'],
+        ['title' =>__('consultar_escala_louvor') , 'url' => 'consultaescala'],
+        ['title' =>__('ri_louvor') , 'url' => 'checklistlouvor'],
+        ['title' =>__('consultar_escala_midias') , 'url' => 'consultaescalamidias'],
+        ['title' => __('consultar_escala_staff'), 'url' => 'consultaescalastaff'],
+        ['title' => __('consultar_escala_som'), 'url' => 'consultaescalasom'],
+        ['title' =>__('guia_mesa_live') , 'url' => 'checklistlive'],
+        ['title' =>__('guia_mesa_som') , 'url' => 'checklistsom'],
+        ['title' =>__('repertorio') , 'url' => 'musicas'],
+        ['title' =>__('consultar_repertorio') , 'url' => 'consultarepertorio'],
         ['title' => 'Sair', 'url' => 'sair', 'class' => 'btn-danger']
     ];
 }
 
 // Agrupar opções por categoria para melhor organização
 $categorizedOptions = [
-    'Inicio' => array_filter($menuOptions, function($item) {
+    __('header_inicio') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['paginainicial']);
     }),
-    'Administração' => array_filter($menuOptions, function($item) {
+    __('administracao') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['formularioMaster', "formulariolider", 'cadastrodevendas', 'consulta_logs', 'consultaacessos']);
     }),
-    'Musicas' => array_filter($menuOptions, function($item) {
+    __('musica') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['musicas', 'consultarepertorio']);
     }),
-    'Membros' => array_filter($menuOptions, function($item) {
+    __('membros') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['cadastroMembrosAdm', 'consulta_membros', 'consulta_niver']);
     }),
-    'Voluntario' => array_filter($menuOptions, function($item) {
+    __('voluntario') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['cadastrovoluntariadoescala', 'consulta_voluntariado']);
     }),
-     'Criativo' => array_filter($menuOptions, function($item) {
+     __('criativo') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escalacriativo', 'consultaescalacriativo', 'consultaescalacriativovol']);
     }),
-    'Dança' => array_filter($menuOptions, function($item) {
+     __('dance') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escaladanca','consultaescaladanca']);
     }),
     'Kids' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escalakids','consultaescalakids']);
     }),
-    'Louvor' => array_filter($menuOptions, function($item) {
+   __('louvor') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escalalouvor','escalalouvornoite','escalalouvorkids', 'escalalouvorhomens', 'escalalouvormulheres', 'escalalouvorJovens','consultaescala', 'checklistlouvor']);
     }),
     'Midias' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], [ 'escalamidias', 'consultaescalamidias']);
     }),
-    'Som' => array_filter($menuOptions, function($item) {
+    __('som') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escalasom', 'consultaescalasom', 'checklistsom', 'checklistlive']);
     }),
     'Staff' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escalastaff', 'consultaescalastaff']);
     }),
-    'Relatórios' => array_filter($menuOptions, function($item) {
+    __(key: 'relatorios') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['relatoriodepartamento', 'listar_relatoriosdep']);
     }),
     'Site' => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['cadastroEvento', 'cadastrolive']);
     }),
-    'Geral' => array_filter($menuOptions, function($item) {
+     __(key: 'outros') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['cadastroForm.php', 'sair']);
     })
 ];
@@ -609,7 +610,14 @@ $categorizedOptions = array_filter($categorizedOptions);
         <nav>
             <img class="logo" src="LÍRIO MATRIZ (PRETO)_menor.png" alt="Logo">
 
-            
+            <div class="nav-item">
+            <a class="nav-link" href="?lang=pt">
+        <img src="https://flagcdn.com/w40/br.png" width="24" alt="Português">
+    </a>
+            <a class="nav-link" href="?lang=en">
+        <img src="https://flagcdn.com/w40/us.png" width="24" alt="English">
+    </a>
+    </div>
             <div class="menu-container">
                 <div class="menu">
                     <?php foreach ($categorizedOptions as $category => $options): ?>

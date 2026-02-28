@@ -4,6 +4,7 @@ include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
 include_once('config.php');
+include_once('config_language.php');
 
 if((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
     unset($_SESSION['usuario']);
@@ -61,7 +62,6 @@ $funcoesJSON = json_encode($funcoes, JSON_UNESCAPED_UNICODE);
 $escalaSalvaJSON = $escalaSalva ? json_encode($escalaSalva, JSON_UNESCAPED_UNICODE) : 'null';
 include('registroslog.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -74,34 +74,26 @@ include('registroslog.php');
 </head>
 <body>
 
-<div class="container">
-   <div class="navegacao">
-   <?php include("navegacao.php")?>
-   </div>
-   <br><br>
- <h1><i class="fas fa-music"></i> Sistema de Escalas</h1>
-   <h1> <p class="description">Gerencie e compartilhe escalas de forma fácil e rápida</p></h1>
-    
-  <div class="content">
+<div class="content">
     <div class="card">
-      <div class="card-title"><i class="fas fa-calendar-plus"></i> Adicionar Datas</div>
+      <div class="card-title"><i class="fas fa-calendar-plus"></i> <?php echo __('add_data') ?></div>
       <div class="controls">
-        <label for="datePicker">Selecione as datas:</label>
+        <label for="datePicker"><?php echo __('selec_data') ?></label>
         <input type="date" id="datePicker" multiple />
 
         <button type="button" id="btnAdd" class="btn btn-primary">
-          <i class="fas fa-plus-circle"></i> Adicionar Coluna
+          <i class="fas fa-plus-circle"></i> <?php echo __('add_coluna') ?>
         </button>
         <button type="button" id="btnAutoFill" class="btn btn-auto">
-          <i class="fas fa-magic"></i> Preenchimento Automático
+          <i class="fas fa-magic"></i> <?php echo __('preen_aut') ?>
         </button>
         <button type="button" id="btnNew" class="btn-new">
-          <i class="fas fa-file-alt"></i> Nova Escala
+          <i class="fas fa-file-alt"></i> <?php echo __('nova_escala') ?>
         </button>
         <span id="status" class="pill"></span>
       </div>
     </div>
-    
+  
     <div id="escalaWrapper">
       <table id="escalaTable" aria-label="Tabela de Escala">
         <thead>
@@ -115,24 +107,24 @@ include('registroslog.php');
     
     <div class="action-buttons">
       <button type="button" id="btnValidate" class="btn btn-warning">
-        <i class="fas fa-check"></i> Validar Escala
+        <i class="fas fa-check"></i> <?php echo __('val_escala') ?>
       </button>
       <button type="button" id="btnSave" class="btn btn-info">
-        <i class="fas fa-save"></i> Salvar Escala
+        <i class="fas fa-save"></i> <?php echo __('salvar_escala') ?>
       </button>
       <button type="button" id="btnExport" class="btn btn-success">
-        <i class="fas fa-download"></i> Exportar como PDF
+        <i class="fas fa-download"></i> <?php echo __('export_pdf') ?>
       </button>
       <button type="button" id="btnPreview" class="btn btn-primary">
-        <i class="fas fa-eye"></i> Visualizar Escala
+        <i class="fas fa-eye"></i> <?php echo __('visualizar_escala') ?>
       </button>
       <button type="button" id="btnShare" class="btn btn-warning">
-        <i class="fab fa-whatsapp"></i> Compartilhar
+        <i class="fab fa-whatsapp"></i> <?php echo __('compartilhar') ?>
       </button>
     </div>
     
     <p class="footnote">
-      <i class="fas fa-lightbulb"></i> Dica: Adicione quantas datas quiser e depois salve ou exporte a escala.
+      <i class="fas fa-lightbulb"></i> <?php echo __('dica') ?>
     </p>
   </div>
 </div>
@@ -143,21 +135,21 @@ include('registroslog.php');
     <div class="close-modal">&times;</div>
     <div class="modal-header">
       <i class="fas fa-save fa-2x"></i>
-      <h2>Salvar Escala</h2>
+      <h2><?php echo __('salvar_escala') ?></h2>
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <label for="escalaName">Nome da Escala:</label>
+        <label for="escalaName"><?php echo __('nome_escala') ?></label>
         <input type="text" id="escalaName" placeholder="Ex: Escala Janeiro 2024" />
       </div>
       <div class="form-group">
-        <label for="escalaDescription">Descrição (opcional):</label>
+        <label for="escalaDescription"><?php echo __('desc_opicional') ?></label>
         <input type="text" id="escalaDescription" placeholder="Ex: Escala para os cultos de janeiro" />
       </div>
     </div>
     <div class="modal-footer">
-      <button type="button" id="btnCancelSave" class="btn btn-warning">Cancelar</button>
-      <button type="button" id="btnConfirmSave" class="btn btn-success">Salvar</button>
+      <button type="button" id="btnCancelSave" class="btn btn-warning"><?php echo __('cancelar') ?></button>
+      <button type="button" id="btnConfirmSave" class="btn btn-success"><?php echo __('salvar') ?></button>
     </div>
   </div>
 </div>
@@ -174,8 +166,8 @@ include('registroslog.php');
       <p>Tem certeza que deseja criar uma nova escala? Todas as datas adicionadas serão removidas.</p>
     </div>
     <div class="modal-footer">
-      <button type="button" id="btnCancelNew" class="btn btn-warning">Cancelar</button>
-      <button type="button" id="btnConfirmNew" class="btn btn-success">Confirmar</button>
+      <button type="button" id="btnCancelNew" class="btn btn-warning"><?php echo __('cancelar') ?></button>
+      <button type="button" id="btnConfirmNew" class="btn btn-success"><?php echo __(key: 'salvar') ?></button>
     </div>
   </div>
 </div>

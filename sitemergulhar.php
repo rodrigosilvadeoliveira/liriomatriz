@@ -23,21 +23,36 @@
 
 </header>
 
-<form action="contato.php" method="post">
+
 
 
 <!--<h1 id="titulonapagina">Conheça o curso Mergulhar</h1>-->
 
-<div class="form-mergulhar">
+
         <!-- Cole o iframe aqui 
         <iframe src="mergulhar.pdf" width="100%" height="600px"></iframe>
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSfxEFCitoAF8MHY7jJVKSQI8MbdwwoF3CKyOGpMb19dh6jzHy4c0h265L6J_bToA/pub?start=true&loop=false&delayms=5000" width="100%" height="600px"></iframe>
 
     </div>-->
     <?php
-$slides = glob("img/slides/*.jpg"); // Pega todas as imagens da pasta slides/
-foreach ($slides as $slide) {
-    echo '<img class="mergulhar" src="'.$slide.'" />';
+
+$idioma = $_SESSION['lang'] ?? 'pt';
+
+// Segurança extra
+$idiomasPermitidos = ['pt', 'en'];
+if (!in_array($idioma, $idiomasPermitidos)) {
+    $idioma = 'pt';
+}
+
+$diretorio = "img/slides/" . $idioma . "/";
+$slides = glob($diretorio . "*.jpg");
+
+if (!empty($slides)) {
+    foreach ($slides as $slide) {
+        echo '<img class="mergulhar" src="'.$slide.'?t='.time().'" />';
+    }
+} else {
+    echo '<p style="text-align:center; padding:2rem;">'.__('sem_imagem').'</p>';
 }
 ?>
 <div class="footer" id="footer">

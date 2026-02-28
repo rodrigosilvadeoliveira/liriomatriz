@@ -1,5 +1,8 @@
- <?php include('sitecabecalho.php'); ?>
-        
+ <?php
+  include('sitecabecalho.php');
+ include_once('config_language.php');
+  ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -129,29 +132,40 @@
     </header>
 
     <main>
-        <h1 id="titulohome">Voluntariado</h1>
+        <h1 id="titulohome"><?= __('header_voluntariado') ?></h1>
 
         <!-- Container do vídeo responsivo -->
         <div class="video-container">
             <video class="video-voluntarios" controls loop muted playsinline autoplay>
                 <source src="voluntariado.mp4" type="video/mp4">
                 <source src="voluntariado.webm" type="video/webm">
-                Seu navegador não suporta a tag de vídeo.
+                <?= __('msgdeerro') ?>
             </video>
         </div>
 
         <!-- Container das imagens em coluna -->
         <div class="imagens-container">
-            <?php
-            $slides = glob("img/voluntariado/*.jpeg");
-            if (count($slides) > 0) {
-                foreach ($slides as $slide) {
-                    echo '<img class="img-voluntariado" src="'.$slide.'?t='.time().'" />';
-                }
-            } else {
-                echo '<p style="text-align: center; padding: 2rem;">Nenhuma imagem disponível no momento.</p>';
-            }
-            ?>
+           <?php
+
+$idioma = $_SESSION['lang'] ?? 'pt';
+
+// Segurança extra
+$idiomasPermitidos = ['pt', 'en'];
+if (!in_array($idioma, $idiomasPermitidos)) {
+    $idioma = 'pt';
+}
+
+$diretorio = "img/voluntariado/" . $idioma . "/";
+$slides = glob($diretorio . "*.jpeg");
+
+if (!empty($slides)) {
+    foreach ($slides as $slide) {
+        echo '<img class="img-voluntariado" src="'.$slide.'?t='.time().'" />';
+    }
+} else {
+    echo '<p style="text-align:center; padding:2rem;">'.__('sem_imagem').'</p>';
+}
+?>
         </div>
     </main>
 
