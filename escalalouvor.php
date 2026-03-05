@@ -1,4 +1,5 @@
 <?php
+
 date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
@@ -73,7 +74,15 @@ include('registroslog.php');
 
 </head>
 <body>
-
+    <div class="container">
+   <div class="navegacao">
+   <?php include("navegacao.php")?>
+   </div>
+   <br><br>
+   
+ <h1><i class="fas fa-user-friends"></i> <?php echo __('sistema_escala') ?> </h1>
+   <h1> <p class="description"><?php echo __('sistema_escala2') ?></p></h1>
+   
 <div class="content">
     <div class="card">
       <div class="card-title"><i class="fas fa-calendar-plus"></i> <?php echo __('add_data') ?></div>
@@ -160,10 +169,10 @@ include('registroslog.php');
     <div class="close-modal">&times;</div>
     <div class="modal-header">
       <i class="fas fa-exclamation-triangle fa-2x" style="color: #ffcc00;"></i>
-      <h2>Nova Escala</h2>
+      <h2><?php echo __('nova_escala') ?></h2>
     </div>
     <div class="modal-body">
-      <p>Tem certeza que deseja criar uma nova escala? Todas as datas adicionadas serão removidas.</p>
+      <p><?php echo __('confir_nova_escala') ?></p>
     </div>
     <div class="modal-footer">
       <button type="button" id="btnCancelNew" class="btn btn-warning"><?php echo __('cancelar') ?></button>
@@ -182,14 +191,14 @@ include('registroslog.php');
 <div id="imagePreview" class="image-preview">
   <div class="image-preview-content">
     <div class="close-preview">&times;</div>
-    <h3>Prévia da Escala</h3>
+    <h3><?php echo __('previa_escala') ?></h3>
     <div id="previewContainer"></div>
     <div class="preview-actions">
       <button id="btnDownloadPreview" class="btn btn-success">
-        <i class="fas fa-download"></i> Baixar
+        <i class="fas fa-download"></i> <?php echo __('baixar') ?>
       </button>
       <button id="btnSharePreview" class="btn btn-warning">
-        <i class="fab fa-whatsapp"></i> Compartilhar
+        <i class="fab fa-whatsapp"></i> <?php echo __('compartilhar') ?>
       </button>
     </div>
   </div>

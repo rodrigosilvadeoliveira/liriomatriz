@@ -80,6 +80,10 @@ Pastora na Lirio Matriz",
 //sistema.php
 "sistema" => "Sistema",
 "area_voluntario" => "Área do Voluntario",
+"usuario" => "Usuário",
+"senha" => "Senha",
+"entrar" => "Entrar",
+
 
 // menu do sistema
 "administracao" => "Administração",
@@ -158,5 +162,32 @@ Pastora na Lirio Matriz",
 "desc_opicional" => "Descrição (opcional)",
 "cancelar" => "Cancelar",
 "salvar" => "Salvar",
+"confir_nova_escala" => "Tem certeza que deseja criar uma nova escala? Todas as datas adicionadas serão removidas.",
+"previa_escala" => "Prévia da Escala",
+"baixar" => "Baixar",
+
+//consultaescala.php
+"quinta_domingo_manha" => "Quinta e Domingo Manhã",
+"domingo_noite" => "Louvor Domingo Noite",
+"louvor_kids" => "Louvor Kids",
+"louvor_gcs" => "Louvor GCs",
+"consultar_escala" => "Consultar Escala",
+"selecione_tipo_escala" => "Selecione o tipo de escala:",
+"escala" => "Escala(s)",
+"editar" => "Editar",
+"excluir" => "Excluir",
+"fechar" => "Fechar",
+
+//perfil.php
+"alterar_senha" => "Alterar Senha",
+"alterar_foto" => "Alterar Foto",
+
+//alterarfoto.php
+"edicao_foto" => "Edição de foto",
+"previa_foto" => "Prévia do Perfil",
+
+//alterarsenha.php
+"nome_completo" => "Nome completo",
+"nova_senha" => "Nova Senha",
 
 ];

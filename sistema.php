@@ -1,3 +1,4 @@
+<?php include_once('config_language.php'); ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -378,8 +379,16 @@
         <div class="logo-container">
             <img id="logo" src="lirioMatriz_preto.png" alt="Logo Sistema Teste Matriz">
         </div>
-        <h1 class="title">Sistema <br><u>Lirio Matriz</u></h1>
-        <p class="subtitle">Área do Voluntario(a)</p>
+        <h1 class="title"><?= __(key: 'sistema') ?> <br> <u>Lirio Matriz</u></h1>
+        <p class="subtitle"><?= __(key: 'area_voluntario') ?></p>
+         
+    <a class="nav-link" href="?lang=pt">
+        <img src="https://flagcdn.com/w40/br.png" width="44" alt="Português">
+    </a>
+    <a class="nav-link" href="?lang=en">
+        <img src="https://flagcdn.com/w40/us.png" width="44" height="32" alt="English">
+    </a>
+
     </div>
     
     <!-- Container do formulário - AGORA CENTRALIZADO -->
@@ -402,17 +411,17 @@
                     <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                     </svg>
-                    <input class="login" type="text" placeholder="Usuário" name="usuario" id="login" required>
+                    <input class="login" type="text" placeholder= "<?= __(key: 'usuario') ?>" name="usuario" id="login" required>
                 </div>
                 
                 <div class="input-group">
                     <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                     </svg>
-                    <input class="login" type="password" placeholder="Senha" name="senha" id="senha" required>
+                    <input class="login" type="password" placeholder=<?= __(key: 'senha') ?> name="senha" id="senha" required>
                 </div>
                 
-                <input class="inputSubmit" type="submit" name="submit" value="Entrar">
+                <input class="inputSubmit" type="submit" name="submit" value=<?= __(key: 'entrar') ?>>
             </div>
         </form>
     </div>

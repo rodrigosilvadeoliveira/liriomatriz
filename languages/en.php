@@ -67,6 +67,9 @@ return [
 //sistema.php
 "sistema" => "System",
 "area_voluntario" => "Volunteer Area",
+"usuario" => "User",
+"senha" => "Password",
+"entrar" => "Enter",
 
 // menu do sistema
 "administracao" => "Administration",
@@ -101,7 +104,7 @@ return [
 "escala_kids" => "Kids Scale",
 "consultar_escala_kids" => "Consult Kids Scale",
 "escala_quinta_domingo_manha" => "Scale of Thursday and Sunday Morning",
-"escala_domingo_noite" => "EScale praise of Sunday Night",
+"escala_domingo_noite" => "Scale praise of Sunday Night",
 "escala_louvor_kids" => "Scale Praise Kids",
 "escala_louvor_gcs" => "Scale Praise GCs",
 "consultar_escala_louvor" => "Consult Scale Praise",
@@ -144,4 +147,32 @@ return [
 "desc_opicional" => "Description (optional)",
 "cancelar" => "Cancel",
 "salvar" => "Save",
+"confir_nova_escala" => "Are you sure you want to create a new scale? All added dates will be removed.",
+"previa_escala" => "Preview of the Scale",
+"baixar" => "Download",
+
+//consultaescala.php
+"quinta_domingo_manha" => "Thursday and Sunday Morning",
+"domingo_noite" => "Praise of Sunday Night",
+"louvor_kids" => "Praise Kids",
+"louvor_gcs" => "Praise GCs",
+"consultar_escala" => "Consult Scale",
+"selecione_tipo_escala" => "Select the scale type:",
+"escala" => "Scale(s)",
+"editar" => "Edit",
+"excluir" => "Delete",
+"fechar" => "Close",
+
+//perfil.php
+"alterar_senha" => "Update Password",
+"alterar_foto" => "Update Photo",
+
+//perfil.php
+"edicao_foto" => "Edition of Photo",
+"previa_foto" => "Preview of Photo",
+
+//alterarsenha.php
+"nome_completo" => "Complete Name",
+"nova_senha" => "New Password",
+
 ];

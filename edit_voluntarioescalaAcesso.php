@@ -11,7 +11,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
     exit();
 }
 
-$id_voluntario = $_GET['id'];
+$cadastroadm_id = $_GET['id'];
 
 // Verifica login
 if ((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
@@ -22,9 +22,9 @@ if ((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
 $logado = $_SESSION['usuario'];
 
 // Consultar dados do voluntário no banco de dados
-$sql = "SELECT * FROM musicos WHERE id = ?";
+$sql = "SELECT * FROM musicos WHERE cadastroadm_id = ?";
 $stmt = $conexao->prepare($sql);
-$stmt->bind_param("i", $id_voluntario);
+$stmt->bind_param("i", $cadastroadm_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -33,7 +33,7 @@ if ($result->num_rows === 0) {
     exit();
 }
 
-$voluntario = $result->fetch_assoc();
+ $voluntario= $result->fetch_assoc();
 
 // Verifica imagem cortada da sessão ou usa a existente do banco
 $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : (isset($voluntario['foto']) ? $voluntario['foto'] : '');
@@ -229,7 +229,7 @@ include('registroslog.php');
         <!-- Formulário -->
         <div class="card card-form">
             <div class="card-header card-header-custom">
-                <h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>Informações do Membro</h5>
+                <h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>Informações posições e departamentos com nome do voluntario(a)</h5>
             </div>
             <div class="card-body">
                 <?php if (!empty($imagem)): ?>
@@ -247,14 +247,13 @@ include('registroslog.php');
                 <form method="POST" action="atualizar_voluntariado_escala.php" enctype="multipart/form-data"
                     class="row g-3">
                     <!-- Campo oculto para ID do voluntário -->
-                    <input type="hidden" name="id" value="<?php echo $id_voluntario; ?>">
+                    <input type="hidden" name="id" value="<?php echo $cadastroadm_id; ?>">
 
-                   <div class="col-md-6">
-    <label for="nome" class="form-label -field">Nome</label>
-    <input type="text" name="nome" id="nome" class="form-control"
-        value="<?php echo htmlspecialchars($voluntario['nome']); ?>" 
-        readonly>
-</div>
+                    <div class="col-md-6">
+                        <label for="nome" class="form-label -field">Nome</label>
+                        <input type="text" name="nome" id="nome" class="form-control"
+                            value="<?php echo htmlspecialchars($voluntario['nome']); ?>" required>
+                    </div>
 
 
                     <h5>
@@ -319,7 +318,6 @@ include('registroslog.php');
                             Voluntários Som <i class="fas fa-chevron-down ms-2"></i>
                         </a>
                     </h5>
-                    
                     <div class="collapse" id="som">
                     <div class="col-md-6">
                         <label for="igreja" class="form-label -field">Igreja</label>

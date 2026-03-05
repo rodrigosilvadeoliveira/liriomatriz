@@ -35,14 +35,43 @@ include_once('config.php');
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<br><br><br>
+<br>
+
 <div class="navegacao">
    <?php include("navegacao.php")?>
    </div>
-<br>
-<div>
-<table class="table" id="tabelaLista">
-  <thead>
+
+<div class="container">
+<div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+ <h1 class="h3 text-gray-800"><i class="fas fa-user-plus me-2"></i>
+ Acessos de Voluntario</h1>
+</div>
+</div>
+<div class="container mb-4">
+    <form method="GET" action="" class="row g-3">
+        <div class="col-md-8">
+            <input type="text" name="search" class="form-control" placeholder="Pesquisar por usuário, ação ou nível de acesso..." 
+                   value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-search"></i> Pesquisar
+            </button>
+        </div>
+        <div class="col-md-2">
+            <a href="?" class="btn btn-secondary w-100">
+                <i class="fas fa-refresh"></i> Limpar
+            </a>
+        </div>
+        <!-- Manter a página atual na pesquisa -->
+        <input type="hidden" name="pagina" value="1">
+    </form>
+</div>
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Voluntário(a)</th>
@@ -95,6 +124,7 @@ include_once('config.php');
     </tr>
   </tbody>
 </table>
+</div>
 </div>
 
 <script>

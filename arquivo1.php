@@ -2,17 +2,48 @@
 include_once('config.php');
 include_once('config_language.php');
 
-// Verificação de login
-if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
-    unset($_SESSION['usuario']);
-    unset($_SESSION['senha']);
+if (empty($_SESSION['usuario']) || empty($_SESSION['senha'])) {
+    session_unset();
+    session_destroy();
     header('Location: login.php');
     exit;
 }
 
 $logado = $_SESSION['usuario'];
-$perfil = $_SESSION['nivel_acesso'];
+$perfil = $_SESSION['nivel_acesso'] ?? 'consulta';
 
+$foto_perfil = "uploads/foto_67feba4ab0f0a.jpg";// imagem padrão
+
+// =============================
+// 2️⃣ Buscar foto com JOIN (mais eficiente)
+// =============================
+$sql = "
+SELECT m.foto
+FROM cadastroadm c
+LEFT JOIN musicos m ON m.cadastroadm_id = c.id
+LIMIT 1
+";
+
+$stmt = $conexao->prepare($sql);
+
+if ($stmt) {
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $dados = $result->fetch_assoc();
+
+    if (!empty($dados['foto'])) {
+
+        // Remove ./ do início se existir
+        $caminho = ltrim($dados['foto'], './');
+
+        if (file_exists($caminho)) {
+            $foto_perfil = $caminho;
+        }
+    }
+
+    $stmt->close();
+}
 $perfil_usuario = $_SESSION['nivel_acesso'] ?? 'consulta'; // valor padrão caso não exista
 $pode_excluir = in_array($perfil_usuario, ['master', 'lider']);
 $pode_editar = in_array($perfil_usuario, ['master', 'lider']);
@@ -40,7 +71,7 @@ if ($perfil === 'master') {
         ['title' => __('consultar_escala_criativo') , 'url' => 'consultaescalacriativo'],
         ['title' =>__('escala_danca') , 'url' => 'escaladanca'],
         ['title' =>__('consultar_escala_danca') , 'url' => 'consultaescaladanca'],
-        ['title' =>__('_escala_kids') , 'url' => 'escalakids'],
+        ['title' =>__('escala_kids') , 'url' => 'escalakids'],
         ['title' =>__('consultar_escala_kids') , 'url' => 'consultaescalakids'],
         ['title' =>__('escala_quinta_domingo_manha') , 'url' => 'escalalouvor'],
 	    ['title' =>__('escala_domingo_noite'), 'url' => 'escalalouvornoite'],
@@ -89,13 +120,12 @@ if ($perfil === 'master') {
     $menuOptions = [
         ['title' => __('header_inicio') , 'url' => 'paginainicial'],
         ['title' => __('cadastro_acesso_lider') , 'url' => 'formulariolider'],
-        ['title' => __('cadastro_voluntario') , 'url' => 'cadastrovoluntariadoescala'],
         ['title' => __('consulta_voluntario') , 'url' => 'consulta_voluntariado'],
         ['title' => __('escala_criativo') , 'url' => 'escalacriativo'],
         ['title' => __('consultar_escala_criativo') , 'url' => 'consultaescalacriativo'],
         ['title' =>__('escala_danca') , 'url' => 'escaladanca'],
         ['title' =>__('consultar_escala_danca') , 'url' => 'consultaescaladanca'],
-        ['title' =>__('_escala_kids') , 'url' => 'escalakids'],
+        ['title' =>__('escala_kids') , 'url' => 'escalakids'],
         ['title' =>__('consultar_escala_kids') , 'url' => 'consultaescalakids'],
         ['title' =>__('escala_quinta_domingo_manha') , 'url' => 'escalalouvor'],
 	    ['title' =>__('escala_domingo_noite'), 'url' => 'escalalouvornoite'],
@@ -173,7 +203,7 @@ $categorizedOptions = [
      __('criativo') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escalacriativo', 'consultaescalacriativo', 'consultaescalacriativovol']);
     }),
-     __('dance') => array_filter($menuOptions, function($item) {
+     __('danca') => array_filter($menuOptions, function($item) {
         return in_array($item['url'], ['escaladanca','consultaescaladanca']);
     }),
     'Kids' => array_filter($menuOptions, function($item) {
@@ -603,6 +633,30 @@ $categorizedOptions = array_filter($categorizedOptions);
         .mobile-menu::-webkit-scrollbar-thumb:hover {
             background: #aaa;
         }
+         .profile-icon-container {
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+}
+
+.profile-link {
+    display: inline-block;
+}
+
+.profile-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.profile-icon:hover {
+    transform: scale(1.05);
+}
     </style>
 </head>
 <body>
@@ -612,10 +666,10 @@ $categorizedOptions = array_filter($categorizedOptions);
 
             <div class="nav-item">
             <a class="nav-link" href="?lang=pt">
-        <img src="https://flagcdn.com/w40/br.png" width="24" alt="Português">
+        <img src="https://flagcdn.com/w40/br.png" width="44" alt="Português">
     </a>
             <a class="nav-link" href="?lang=en">
-        <img src="https://flagcdn.com/w40/us.png" width="24" alt="English">
+        <img src="https://flagcdn.com/w40/us.png" width="44" height="32" alt="English">
     </a>
     </div>
             <div class="menu-container">
@@ -649,7 +703,12 @@ $categorizedOptions = array_filter($categorizedOptions);
     </header>
 
     <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu" id="mobileMenu">
+        <div class="profile-icon-container">
+        <a href="perfil.php" class="profile-link">
+     <img src="<?php echo $foto_perfil; ?>" alt="Perfil" class="profile-icon">
+        </a>
+    </div>
         <div class="search-container">
             <i class="fas fa-search"></i>
             <input type="text" placeholder="Pesquisar opções..." id="menuSearch">

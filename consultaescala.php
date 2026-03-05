@@ -4,8 +4,9 @@ include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
 include_once('config.php');
+include_once('config_language.php');
 
-if((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
+if ((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
     unset($_SESSION['usuario']);
     unset($_SESSION['senha']);
     header('Location: login.php');
@@ -14,10 +15,10 @@ $logado = $_SESSION['usuario'];
 
 // Definir tabelas disponíveis
 $tabelas_escalas = [
-    'escalas_louvor' => 'Quinta e Domingo Manhã',
-    'escalas_louvornoite' => 'Domingo Noite',
-    'escalas_homens' => 'Escala GCs',
-    'escalas_louvorkids' => 'Escala Louvor Kids'
+    'escalas_louvor' =>  __('quinta_domingo_manha') ,
+    'escalas_louvornoite' => __('domingo_noite'),
+    'escalas_homens' => __('louvor_kids'),
+    'escalas_louvorkids' => __('louvor_gcs')
 ];
 
 // Processar parâmetro de tabela selecionada
@@ -30,14 +31,15 @@ if (!array_key_exists($tabela_selecionada, $tabelas_escalas)) {
 $sql = "SELECT id, nome, pdf_path, data_criacao FROM $tabela_selecionada ORDER BY id DESC";
 $res = $conexao->query($sql);
 $escalas = [];
-if($res) {
-    while($row = $res->fetch_assoc()){
+if ($res) {
+    while ($row = $res->fetch_assoc()) {
         $escalas[] = $row;
     }
 }
 
 // Função para obter estatísticas (opcional)
-function obterEstatisticasTabela($conexao, $tabela) {
+function obterEstatisticasTabela($conexao, $tabela)
+{
     $sql = "SELECT COUNT(*) as total FROM $tabela";
     $result = $conexao->query($sql);
     return $result ? $result->fetch_assoc()['total'] : 0;
@@ -48,63 +50,74 @@ include('registroslog.php');
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Consulta Escalas - <?php echo htmlspecialchars($tabelas_escalas[$tabela_selecionada]); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
-        body { background: #f4f6f9; font-family: 'Segoe UI', Arial, sans-serif; }
-        
+        body {
+            background: #f4f6f9;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
         /* Card de navegação entre tabelas */
         .tabela-card {
             background: #fff;
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
         }
+
         .tabela-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
+
         .tabela-card.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
+
         .tabela-card.active .tabela-nome {
             color: white;
         }
+
         .tabela-nome {
             font-weight: 600;
             color: #2c3e50;
             margin-bottom: 5px;
         }
+
         .tabela-count {
             font-size: 12px;
             color: #7f8c8d;
         }
+
         .tabela-card.active .tabela-count {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
         }
-        
+
         /* Card de escala */
         .escala-card {
             background: #fff;
             border-radius: 12px;
             padding: 0;
             margin-bottom: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             border-left: 4px solid #3498db;
             transition: all 0.3s ease;
         }
+
         .escala-card:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transform: translateY(-2px);
         }
-        
+
         .escala-header {
             background: #f8f9fa;
             padding: 15px;
@@ -114,30 +127,30 @@ include('registroslog.php');
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .escala-header:hover {
             background: #f0f7ff;
         }
-        
+
         .escala-titulo {
             font-size: 18px;
             font-weight: 600;
             color: #2c3e50;
             margin: 0;
         }
-        
+
         .escala-data {
             font-size: 24px;
             color: #black;
             margin-top: 5px;
             background-color: azure;
         }
-        
+
         .escala-acoes {
             display: flex;
             gap: 8px;
         }
-        
+
         .btn-download {
             background: #2ecc71;
             color: white;
@@ -150,17 +163,38 @@ include('registroslog.php');
             gap: 5px;
             transition: all 0.2s;
         }
-        
+
         .btn-download:hover {
             background: #27ae60;
             transform: scale(1.05);
         }
-        
+
         .btn-download:disabled {
             background: #95a5a6;
             cursor: not-allowed;
         }
-        
+
+        .btn-editar {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-editar:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+            color: white;
+            text-decoration: none;
+        }
+
         .btn-excluir {
             background: #e74c3c;
             color: white;
@@ -173,17 +207,17 @@ include('registroslog.php');
             gap: 5px;
             transition: all 0.2s;
         }
-        
+
         .btn-excluir:hover {
             background: #c0392b;
             transform: scale(1.05);
         }
-        
+
         .escala-detalhes {
             padding: 20px;
             display: none;
         }
-        
+
         .badge-tabela {
             background: #3498db;
             color: white;
@@ -192,10 +226,18 @@ include('registroslog.php');
             font-size: 11px;
             margin-left: 10px;
         }
-        
-        .modal-img { max-width: 100%; height: auto; }
-        .pdf-preview { width: 100%; height: 500px; border: none; }
-        
+
+        .modal-img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .pdf-preview {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
         .btn-consulta-repertorio {
             background: black;
             border: none;
@@ -210,47 +252,55 @@ include('registroslog.php');
             align-items: center;
             gap: 8px;
         }
-        
+
         .btn-consulta-repertorio:hover {
             background: #44ada9ff;
             text-decoration: none;
         }
+
         /* Adicione ao CSS existente */
-.escala-funcao {
-    display: flex;
-    align-items: center;
-    margin: 8px 0;
-    padding: 10px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    
-}
+        .escala-funcao {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
 
-.escala-funcao img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 15px;
-    border: 3px solid #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+        }
 
-.escala-funcao strong {
-    color: #2c3e50;
-    font-weight: 600;
-}
+        .escala-funcao img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-/* Animação para expandir */
-.escala-detalhes {
-    animation: fadeIn 0.3s ease;
-}
+        .escala-funcao strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-        
+        /* Animação para expandir */
+        .escala-detalhes {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Responsividade */
         @media (max-width: 768px) {
             .escala-header {
@@ -258,111 +308,120 @@ include('registroslog.php');
                 align-items: flex-start;
                 gap: 10px;
             }
-            
+
             .escala-acoes {
                 width: 100%;
                 justify-content: flex-end;
             }
-            
+
             .tabela-card {
                 padding: 10px;
                 margin-bottom: 10px;
             }
         }
+        @media (max-width: 514px){
+            .lisescalas {
+    
+    width: 50%;
+}
+        }
+        
     </style>
 </head>
+
 <body class="container py-4">
 
     <div class="navegacao">
         <?php include("navegacao.php") ?>
     </div>
-    
+
     <br><br>
-    
+
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2><i class="bi bi-music-note-list"></i> Consulta de Escalas</h2>
+        <h2><i class="bi bi-music-note-list"></i> <?php echo __('consultar_escala') ?></h2>
         <a href="consultarepertorio.php" class="btn-consulta-repertorio">
-            <i class="bi bi-music-note-beamed"></i> Consulta Repertório
+            <i class="bi bi-music-note-beamed"></i> <?php echo __('consultar_repertorio') ?>
         </a>
     </div>
-    
+
     <!-- Seletor de Tabelas -->
     <div class="row mb-4">
         <div class="col-12">
-            <h5 class="mb-3">Selecione o tipo de escala:</h5>
+            <h5 class="mb-3"><?php echo __('selecione_tipo_escala') ?></h5>
             <div class="row">
-                <?php foreach($tabelas_escalas as $tabela_id => $tabela_nome): 
+                <?php foreach ($tabelas_escalas as $tabela_id => $tabela_nome):
                     $total = obterEstatisticasTabela($conexao, $tabela_id);
-                ?>
-                <div class="col-md-3 col-sm-6 mb-3">
-    <div class="tabela-card <?php echo $tabela_selecionada == $tabela_id ? 'active' : ''; ?>" 
-         onclick="window.location.href='?tabela=<?php echo $tabela_id; ?>'"
-         style="cursor: pointer;">
-        <!-- Ícone baseado no tipo de escala -->
-        <div class="d-flex align-items-center mb-2">
-            <?php 
-            // Definir ícone baseado no tipo de tabela
-            $icone = '';
-            $cor_icone = '';
-            
-            switch($tabela_id) {
-                case 'escalas_louvor':
-                    // Para louvor tradicional - sol para manhã
-                    $icone = 'bi-sun';
-                    $cor_icone = $tabela_selecionada == $tabela_id ? '#FFD700' : '#FFA500';
-                    break;
-		case 'escalas_louvornoite':
-                    // Para louvor tradicional - sol para manhã
-                    $icone = 'bi-moon-stars';
-                    $cor_icone = $tabela_selecionada == $tabela_id ? '#FFD700' : '#FFA500';
-                    break;
-                case 'escalas_homens':
-                    // Para GCs - pessoas reunidas
-                    $icone = 'bi-people';
-                    $cor_icone = $tabela_selecionada == $tabela_id ? '#3498db' : '#2980b9';
-                    break;
-                case 'escalas_louvorkids':
-                    // Para kids - crianças felizes
-                    $icone = 'bi-emoji-smile';
-                    $cor_icone = $tabela_selecionada == $tabela_id ? '#e74c3c' : '#c0392b';
-                    break;
-                default:
-                    $icone = 'bi-music-note-beamed';
-                    $cor_icone = '#2c3e50';
-            }
-            ?>
-            <i class="bi <?php echo $icone; ?> me-2" style="font-size: 24px; color: <?php echo $cor_icone; ?>;"></i>
-            <div class="tabela-nome"><?php echo htmlspecialchars($tabela_nome); ?></div>
-        </div>
-        <div class="tabela-count"><?php echo $total; ?> escala(s)</div>
-    </div>
-</div>
+                    ?>
+                    <div class="col-md-3 col-sm-6 mb-3 lisescalas">
+                        <div class="tabela-card <?php echo $tabela_selecionada == $tabela_id ? 'active' : ''; ?>"
+                            onclick="window.location.href='?tabela=<?php echo $tabela_id; ?>'" style="cursor: pointer;">
+                            <!-- Ícone baseado no tipo de escala -->
+                            <div class="d-flex align-items-center mb-2">
+                                <?php
+                                // Definir ícone baseado no tipo de tabela
+                                $icone = '';
+                                $cor_icone = '';
+
+                                switch ($tabela_id) {
+                                    case 'escalas_louvor':
+                                        // Para louvor tradicional - sol para manhã
+                                        $icone = 'bi-sun';
+                                        $cor_icone = $tabela_selecionada == $tabela_id ? '#FFD700' : '#FFA500';
+                                        break;
+                                        case 'escalas_louvornoite':
+                                        // Para louvor tradicional - sol para manhã
+                                        $icone = 'bi-moon';
+                                        $cor_icone = $tabela_selecionada == $tabela_id ? '#FFD700' : '#FFA500';
+                                        break;
+                                    case 'escalas_homens':
+                                        // Para GCs - pessoas reunidas
+                                        $icone = 'bi-people';
+                                        $cor_icone = $tabela_selecionada == $tabela_id ? '#3498db' : '#2980b9';
+                                        break;
+                                    case 'escalas_louvorkids':
+                                        // Para kids - crianças felizes
+                                        $icone = 'bi-emoji-smile';
+                                        $cor_icone = $tabela_selecionada == $tabela_id ? '#e74c3c' : '#c0392b';
+                                        break;
+                                    default:
+                                        $icone = 'bi-music-note-beamed';
+                                        $cor_icone = '#2c3e50';
+                                }
+                                ?>
+                                <i class="bi <?php echo $icone; ?> me-2"
+                                    style="font-size: 24px; color: <?php echo $cor_icone; ?>;"></i>
+                                <div class="tabela-nome"><?php echo htmlspecialchars($tabela_nome); ?></div>
+                            </div>
+                            <div class="tabela-count"><?php echo $total; ?> <?php echo __('escala') ?></div>
+                        </div>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </div>
     </div>
-    
+
     <!-- Lista de Escalas -->
     <div class="row">
         <div class="col-12">
-            <h4 class="mb-3"><?php echo htmlspecialchars($tabelas_escalas[$tabela_selecionada]); ?> 
+            <h4 class="mb-3"><?php echo htmlspecialchars($tabelas_escalas[$tabela_selecionada]); ?>
                 <span class="badge bg-primary"><?php echo count($escalas); ?> itens</span>
             </h4>
-            
-            <?php if(empty($escalas)): ?>
+
+            <?php if (empty($escalas)): ?>
                 <div class="alert alert-info">
                     <i class="bi bi-info-circle"></i> Nenhuma escala encontrada para esta categoria.
                 </div>
             <?php else: ?>
-                <?php foreach($escalas as $escala): ?>
+                <?php foreach ($escalas as $escala): ?>
                     <div class="escala-card">
-                        <div class="escala-header" data-id="<?php echo $escala['id']; ?>" data-tabela="<?php echo $tabela_selecionada; ?>">
+                        <div class="escala-header" data-id="<?php echo $escala['id']; ?>"
+                            data-tabela="<?php echo $tabela_selecionada; ?>">
                             <div>
                                 <div class="escala-titulo">
                                     <?php echo htmlspecialchars($escala['nome']); ?>
                                     <span class="badge-tabela"><?php echo $tabelas_escalas[$tabela_selecionada]; ?></span>
                                 </div>
-                               <!--     <?php if(isset($escala['data_criacao'])): ?>
+                                <!--     <?php if (isset($escala['data_criacao'])): ?>
                                     <div class="escala-data">
                                     <i class="bi bi-calendar"></i> 
                                         <?php echo date('d/m/Y H:i', strtotime($escala['data_criacao'])); ?>
@@ -371,9 +430,8 @@ include('registroslog.php');
                             </div>
                             <div class="escala-acoes">
                                 <?php if (!empty($escala['pdf_path'])): ?>
-                                    <button class="btn-download" 
-                                            data-pdf="<?php echo htmlspecialchars($escala['pdf_path']); ?>"
-                                            onclick="visualizarPDF('<?php echo htmlspecialchars($escala['pdf_path']); ?>')">
+                                    <button class="btn-download" data-pdf="<?php echo htmlspecialchars($escala['pdf_path']); ?>"
+                                        onclick="visualizarPDF('<?php echo htmlspecialchars($escala['pdf_path']); ?>')">
                                         <i class="bi bi-download"></i> PDF
                                     </button>
                                 <?php else: ?>
@@ -381,18 +439,24 @@ include('registroslog.php');
                                         <i class="bi bi-file-earmark-x"></i> Sem PDF
                                     </button>
                                 <?php endif; ?>
-                                <?php if($pode_excluir): ?>
-                                <button class="btn-excluir" 
+                                <?php if ($pode_editar): ?>
+                                    <a href="editar_escala.php?id=<?php echo $escala['id']; ?>&tabela=<?php echo $tabela_selecionada; ?>"
+                                        class="btn-editar">
+                                        <i class="bi bi-pencil"></i> <?php echo __('editar') ?>
+                                    </a>
+                                <?php endif; ?>
+                                <?php if ($pode_excluir): ?>
+                                    <button class="btn-excluir"
                                         onclick="excluirEscala(event, <?php echo $escala['id']; ?>, '<?php echo $tabela_selecionada; ?>')">
-                                    <i class="bi bi-trash"></i> Excluir
-                                </button>
+                                        <i class="bi bi-trash"></i> <?php echo __('excluir') ?>
+                                    </button>
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <div class="escala-detalhes" 
-     id="detalhes-<?php echo $tabela_selecionada; ?>-<?php echo $escala['id']; ?>"
-     data-carregado="false">
-</div>
+                        <div class="escala-detalhes"
+                            id="detalhes-<?php echo $tabela_selecionada; ?>-<?php echo $escala['id']; ?>"
+                            data-carregado="false">
+                        </div>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -404,7 +468,7 @@ include('registroslog.php');
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalPdfLabel">Visualizar Escala em PDF</h5>
+                    <h5 class="modal-title" id="modalPdfLabel"><?php echo __('visualizar_escala') ?></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -414,7 +478,7 @@ include('registroslog.php');
                     <a id="downloadPdf" href="#" class="btn btn-success" download>
                         <i class="bi bi-download"></i> Download PDF
                     </a>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo __('fechar') ?></button>
                 </div>
             </div>
         </div>
@@ -423,94 +487,95 @@ include('registroslog.php');
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-$(document).ready(function(){
-    // Abrir/fechar detalhes da escala
-    $(".escala-header").click(function(e){
-        // Não abrir detalhes se clicar nos botões de ação
-        if ($(e.target).closest('.btn-download, .btn-excluir').length) {
-            return;
-        }
-        
-        let id = $(this).data("id");
-        let tabela = $(this).data("tabela");
-        let detalhesDiv = $("#detalhes-" + tabela + "-" + id);
-        let carregado = detalhesDiv.data("carregado");
+        $(document).ready(function () {
+            // Abrir/fechar detalhes da escala
+            $(".escala-header").click(function (e) {
+                // Não abrir detalhes se clicar nos botões de ação
+                if ($(e.target).closest('.btn-download, .btn-excluir').length) {
+                    return;
+                }
 
-        if(detalhesDiv.is(":visible")){
-            detalhesDiv.slideUp();
-        } else {
-            if(carregado === false || carregado === "false"){
-                // Marcar como carregando
-                detalhesDiv.html('<div class="text-center p-3"><i class="bi bi-hourglass-split"></i> Carregando...</div>').slideDown();
-                
-                // Requisição AJAX
-                $.get("carregar_escala.php", {
+                let id = $(this).data("id");
+                let tabela = $(this).data("tabela");
+                let detalhesDiv = $("#detalhes-" + tabela + "-" + id);
+                let carregado = detalhesDiv.data("carregado");
+
+                if (detalhesDiv.is(":visible")) {
+                    detalhesDiv.slideUp();
+                } else {
+                    if (carregado === false || carregado === "false") {
+                        // Marcar como carregando
+                        detalhesDiv.html('<div class="text-center p-3"><i class="bi bi-hourglass-split"></i> Carregando...</div>').slideDown();
+
+                        // Requisição AJAX
+                        $.get("carregar_escala.php", {
+                            id: id,
+                            tabela: tabela
+                        }, function (html) {
+                            detalhesDiv.html(html).data("carregado", true);
+                        }).fail(function () {
+                            detalhesDiv.html('<div class="alert alert-danger">Erro ao carregar detalhes</div>');
+                        });
+                    } else {
+                        detalhesDiv.slideDown();
+                    }
+                }
+            });
+            $(document).on("click", ".toggleEscala", function () {
+                let card = $(this).closest(".p-3");
+
+                let usuario = card.find(".apenas-usuario");
+                let todos = card.find(".todos");
+
+                if (todos.is(":visible")) {
+                    todos.slideUp();
+                    usuario.slideDown();
+                    $(this).text("Ver todos");
+                } else {
+                    usuario.slideUp();
+                    todos.slideDown();
+                    $(this).text("Mostrar apenas minha escala");
+                }
+            });
+
+        });
+        function visualizarPDF(pdfPath) {
+            event.stopPropagation();
+
+            if (!pdfPath) {
+                alert('PDF não disponível para visualização.');
+                return;
+            }
+
+            // Configurar o iframe e link de download no modal
+            $("#pdfPreview").attr('src', pdfPath);
+            $("#downloadPdf").attr('href', pdfPath);
+
+            // Abrir o modal
+            let modal = new bootstrap.Modal(document.getElementById('modalPdf'));
+            modal.show();
+        }
+
+        function excluirEscala(event, id, tabela) {
+            event.stopPropagation();
+
+            if (confirm("Tem certeza que deseja excluir esta escala?\nEsta ação não pode ser desfeita.")) {
+                $.post("excluir_escala.php", {
                     id: id,
                     tabela: tabela
-                }, function(html){
-                    detalhesDiv.html(html).data("carregado", true);
-                }).fail(function(){
-                    detalhesDiv.html('<div class="alert alert-danger">Erro ao carregar detalhes</div>');
+                }, function (resposta) {
+                    if (resposta.trim() === "ok") {
+                        // Recarregar apenas a seção de escalas
+                        location.reload();
+                    } else {
+                        alert("Erro ao excluir escala: " + resposta);
+                    }
+                }).fail(function () {
+                    alert("Erro na comunicação com o servidor.");
                 });
-            } else {
-                detalhesDiv.slideDown();
             }
         }
-    });
-    $(document).on("click", ".toggleEscala", function(){
-    let card = $(this).closest(".p-3");
-
-    let usuario = card.find(".apenas-usuario");
-    let todos = card.find(".todos");
-
-    if(todos.is(":visible")){
-        todos.slideUp();
-        usuario.slideDown();
-        $(this).text("Ver todos");
-    } else {
-        usuario.slideUp();
-        todos.slideDown();
-        $(this).text("Mostrar apenas minha escala");
-    }
-});
-
-});
-    function visualizarPDF(pdfPath) {
-        event.stopPropagation();
-        
-        if (!pdfPath) {
-            alert('PDF não disponível para visualização.');
-            return;
-        }
-        
-        // Configurar o iframe e link de download no modal
-        $("#pdfPreview").attr('src', pdfPath);
-        $("#downloadPdf").attr('href', pdfPath);
-        
-        // Abrir o modal
-        let modal = new bootstrap.Modal(document.getElementById('modalPdf'));
-        modal.show();
-    }
-
-    function excluirEscala(event, id, tabela) {
-        event.stopPropagation();
-        
-        if(confirm("Tem certeza que deseja excluir esta escala?\nEsta ação não pode ser desfeita.")){
-            $.post("excluir_escala.php", {
-                id: id,
-                tabela: tabela
-            }, function(resposta){
-                if(resposta.trim() === "ok"){
-                    // Recarregar apenas a seção de escalas
-                    location.reload();
-                } else {
-                    alert("Erro ao excluir escala: " + resposta);
-                }
-            }).fail(function() {
-                alert("Erro na comunicação com o servidor.");
-            });
-        }
-    }
     </script>
 </body>
+
 </html>

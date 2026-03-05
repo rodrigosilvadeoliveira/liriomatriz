@@ -46,7 +46,7 @@ $resultTotal = $conexao->query($sqlTotal);
 $rowTotal = $resultTotal->fetch_assoc();
 
 // Lista de instrumentos/funções para verificar
-$instrumentos = ['bateria', 'violao', 'teclado', 'baixo', 'ministro', 'vocal1', 'vocal2', 'vocal3', 'talckback', 'igreja', 'live', 'somkids', 'ct', 'c1', 'c2', 'lt', 'lz', 'ph', 'danca', 'real_time', 'real_time_kids', 'recap', 'real_time_treinamento', 'recap_treinamento', 'real_time_adolescentes', 'real_time_homens', 'real_time_mulheres', 'real_time_jovens', 'staff1', 'staff2'];
+$instrumentos = ['bateria', 'violao', 'teclado', 'baixo', 'ministro', 'vocal1', 'vocal2', 'vocal3', 'talckback', 'igreja', 'live', 'somkids', 'igreja_noite', 'ct', 'c1', 'c2', 'lt', 'lz', 'ph',  'danca_manhã', 'danca_noite', 'real_time', 'recap', 'real_time_manhã', 'real_time_noite','staff1', 'staff2', 'prof1_manhã', 'prof2_manhã', 'prof1_noite', 'prof2_noite'];
 $contagemInstrumentos = [];
 
 // Verificar quais colunas existem na tabela e têm valores preenchidos
@@ -334,14 +334,7 @@ include('registroslog.php');
         <?php include("navegacao.php") ?>
     </nav>
 
-    <div class="container-fluid" style="margin-top: 73px;">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-lg-2 col-md-3 d-md-block sidebar collapse p-0">
-                <div class="position-sticky pt-3">
-                    <?php include("navegacao.php") ?>
-                </div>
-            </div>
+  
 
             <!-- Main Content -->
             <main class="col-lg-10 col-md-9 ms-sm-auto px-4 py-4">
@@ -457,7 +450,7 @@ include('registroslog.php');
                 </div>
 
                 <!-- Detalhamento por Instrumento -->
-                <div class="row mb-4">
+                <!-- <div class="row mb-4">
                     <div class="col-12">
                         <div class="card card-dashboard">
                             <div class="card-header bg-white py-3">
@@ -530,7 +523,7 @@ include('registroslog.php');
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Filter Section -->
                 <div class="filter-section mb-4">
