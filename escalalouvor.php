@@ -1,9 +1,13 @@
 <?php
+
 date_default_timezone_set('America/Sao_Paulo');
+
 include('verificarLogin.php');
 verificarLogin();
+
 include('verifica_permissao.php');
 include_once('config.php');
+include_once('config_language.php');
 
 if((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
     unset($_SESSION['usuario']);
@@ -12,54 +16,168 @@ if((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
 }
 
 $logado = $_SESSION['usuario'];
-$resultlist = null;
+$igreja = $_SESSION['igreja_id'];
 
+$resultlist = null;
 $escalaSalva = null;
 
-// Buscar sempre o último registro salvo (pela data ou pelo id maior)
-$sql = "SELECT * FROM escalas_louvor ORDER BY id DESC LIMIT 1";
-$result = $conexao->query($sql);
 
-if ($result && $result->num_rows > 0) {
-    $escalaSalva = $result->fetch_assoc();
+// ===============================
+// CATEGORIAS DE ESCALA
+// ===============================
+$categoriasEscala = [];
+$tiposPermitidos = [];
+
+$sqlCategorias = "
+    SELECT DISTINCT tipo
+    FROM categoria_escala
+    WHERE igreja_id = ?
+    ORDER BY tipo ASC
+";
+
+$stmtCategorias = $conexao->prepare($sqlCategorias);
+$stmtCategorias->bind_param("i", $igreja);
+$stmtCategorias->execute();
+
+$resultCategorias = $stmtCategorias->get_result();
+
+while ($row = $resultCategorias->fetch_assoc()) {
+
+    $tipo = trim($row['tipo']);
+
+    if (!empty($tipo)) {
+
+        $categoriasEscala[] = $tipo;
+        $tiposPermitidos[] = $tipo;
+    }
 }
 
-// Funções fixas (linhas da escala)
-$funcoes = ["Bateria", "Violao", "Teclado", "Baixo", "Ministro", "Vocal1", "Vocal2", "Vocal3", "Talckback"];
+$stmtCategorias->close();
+
+
+// ===============================
+// PEGAR TIPO SELECIONADO
+// ===============================
+$tipoSelecionado = $_GET['tipo'] ?? ($tiposPermitidos[0] ?? 'louvor');
+
+
+// segurança
+if (!in_array($tipoSelecionado, $tiposPermitidos)) {
+    $tipoSelecionado = $tiposPermitidos[0] ?? 'louvor';
+}
+// ===============================
+// FUNÇÕES
+// ===============================
+$funcoes = [];
+
+$sqlFuncoes = "
+    SELECT nome 
+    FROM funcoes 
+    WHERE tipo = ?
+    AND igreja_id = ?
+    ORDER BY id ASC
+";
+
+$stmtFuncoes = $conexao->prepare($sqlFuncoes);
+$stmtFuncoes->bind_param("si", $tipoSelecionado, $igreja);
+$stmtFuncoes->execute();
+
+$resultFuncoes = $stmtFuncoes->get_result();
+
+while ($row = $resultFuncoes->fetch_assoc()) {
+    $funcoes[] = $row['nome'];
+}
+
+$stmtFuncoes->close();
+
+
+// ===============================
+// ÍCONES
+// ===============================
+$iconesFuncoes = [
+    "Bateria" => "fa-drum",
+    "Baixo" => "fa-guitar",
+    "Violão" => "fa-guitar",
+    "Teclado" => "fa-keyboard",
+    "Ministro" => "fa-microphone",
+    "Vocal 1" => "fa-microphone",
+    "Vocal 2" => "fa-microphone",
+    "Vocal 3" => "fa-microphone",
+    "Talckback" => "fa-headset"
+];
+
+$iconesJSON = json_encode($iconesFuncoes);
+
+
+// ===============================
+// FOTOS
+// ===============================
 $nomesPorFuncao = [];
-
-// Mapear fotos por nome
 $fotosPorNome = [];
-$resFotos = $conexao->query("SELECT nome, foto FROM musicos");
+
+$resFotos = $conexao->query("
+    SELECT usuario, foto 
+    FROM voluntarios
+");
+
 if ($resFotos && $resFotos->num_rows > 0) {
-  while ($r = $resFotos->fetch_assoc()) {
-    $fotosPorNome[$r['nome']] = $r['foto'];
-  }
+    while ($r = $resFotos->fetch_assoc()) {
+        $fotosPorNome[$r['usuario']] = $r['foto'];
+    }
 }
+
 $fotosJSON = json_encode($fotosPorNome, JSON_UNESCAPED_UNICODE);
 
-// Buscar nomes da tabela "musicos" para cada função
+
+// ===============================
+// VOLUNTÁRIOS POR FUNÇÃO
+// ===============================
 foreach ($funcoes as $funcao) {
-    $coluna = strtolower($funcao);
-    $sql = "SELECT DISTINCT $coluna AS nome FROM musicos WHERE $coluna IS NOT NULL AND $coluna <> '' ORDER BY $coluna ASC";
-    $resultado = $conexao->query($sql);
-    
+
+    $sql = "
+        SELECT v.id, v.usuario
+        FROM voluntarios v
+        INNER JOIN voluntario_funcoes vf 
+            ON vf.voluntario_id = v.id
+        INNER JOIN funcoes f 
+            ON f.id = vf.funcao_id
+        WHERE f.nome = ?
+        AND v.igreja_id = ?
+        ORDER BY v.usuario ASC
+    ";
+
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("si", $funcao, $igreja);
+    $stmt->execute();
+
+    $resultado = $stmt->get_result();
+
     $nomes = [];
-    if ($resultado && $resultado->num_rows > 0) {
-        while ($row = $resultado->fetch_assoc()) {
-            $nomes[] = $row['nome'];
-        }
+
+    while ($row = $resultado->fetch_assoc()) {
+
+        $nomes[] = [
+            'id' => $row['id'],
+            'nome' => $row['usuario']
+        ];
     }
+
     $nomesPorFuncao[$funcao] = $nomes;
 }
 
-// Transformar em JSON para usar no JS
+
+// ===============================
+// JSON
+// ===============================
 $nomesJSON = json_encode($nomesPorFuncao, JSON_UNESCAPED_UNICODE);
 $funcoesJSON = json_encode($funcoes, JSON_UNESCAPED_UNICODE);
 
-// Se houver escala salva, converter para JSON também
-$escalaSalvaJSON = $escalaSalva ? json_encode($escalaSalva, JSON_UNESCAPED_UNICODE) : 'null';
+$escalaSalvaJSON = $escalaSalva 
+    ? json_encode($escalaSalva, JSON_UNESCAPED_UNICODE) 
+    : 'null';
+
 include('registroslog.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -72,40 +190,57 @@ include('registroslog.php');
 
 </head>
 <body>
-
-<div class="container">
+    <div class="container">
    <div class="navegacao">
    <?php include("navegacao.php")?>
    </div>
    <br><br>
- <h1><i class="fas fa-music"></i> Sistema de Escalas</h1>
-   <h1> <p class="description">Gerencie e compartilhe escalas de forma fácil e rápida</p></h1>
-    
-  <div class="content">
+   
+ <h1><i class="fas fa-user-friends"></i> <?php echo __('sistema_escala') ?> </h1>
+   <h1> <p class="description"><?php echo __('sistema_escala2') ?></p></h1>
+   
+<form method="GET" id="formTipoEscala" class="content">
+<h1> <p class="description">Selecione Departamento</p></h1>
+    <select name="tipo" id="tipo" onchange="document.getElementById('formTipoEscala').submit();">
+
+    <?php foreach ($categoriasEscala as $categoria): ?>
+
+        <option 
+            value="<?= htmlspecialchars($categoria) ?>"
+            <?= $tipoSelecionado == $categoria ? 'selected' : '' ?>
+        >
+            <?= ucfirst(htmlspecialchars($categoria)) ?>
+        </option>
+
+    <?php endforeach; ?>
+
+</select>
+</form>   
+<div class="content">
     <div class="card">
-      <div class="card-title"><i class="fas fa-calendar-plus"></i> Adicionar Datas</div>
+      <div class="card-title"><i class="fas fa-calendar-plus"></i> <?php echo __('add_data') ?></div>
       <div class="controls">
-        <label for="datePicker">Selecione as datas:</label>
+        <label for="datePicker"><?php echo __('selec_data') ?></label>
         <input type="date" id="datePicker" multiple />
 
         <button type="button" id="btnAdd" class="btn btn-primary">
-          <i class="fas fa-plus-circle"></i> Adicionar Coluna
+          <i class="fas fa-plus-circle"></i> <?php echo __('add_coluna') ?>
         </button>
         <button type="button" id="btnAutoFill" class="btn btn-auto">
-          <i class="fas fa-magic"></i> Preenchimento Automático
+          <i class="fas fa-magic"></i> <?php echo __('preen_aut') ?>
         </button>
         <button type="button" id="btnNew" class="btn-new">
-          <i class="fas fa-file-alt"></i> Nova Escala
+          <i class="fas fa-file-alt"></i> <?php echo __('nova_escala') ?>
         </button>
         <span id="status" class="pill"></span>
       </div>
     </div>
-    
+  
     <div id="escalaWrapper">
       <table id="escalaTable" aria-label="Tabela de Escala">
         <thead>
           <tr id="headerRow">
-            <th>Escala Louvor Igreja</th>
+            <th>Escala Voluntários</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
@@ -114,24 +249,24 @@ include('registroslog.php');
     
     <div class="action-buttons">
       <button type="button" id="btnValidate" class="btn btn-warning">
-        <i class="fas fa-check"></i> Validar Escala
+        <i class="fas fa-check"></i> <?php echo __('val_escala') ?>
       </button>
       <button type="button" id="btnSave" class="btn btn-info">
-        <i class="fas fa-save"></i> Salvar Escala
+        <i class="fas fa-save"></i> <?php echo __('salvar_escala') ?>
       </button>
       <button type="button" id="btnExport" class="btn btn-success">
-        <i class="fas fa-download"></i> Exportar como PDF
+        <i class="fas fa-download"></i> <?php echo __('export_pdf') ?>
       </button>
       <button type="button" id="btnPreview" class="btn btn-primary">
-        <i class="fas fa-eye"></i> Visualizar Escala
+        <i class="fas fa-eye"></i> <?php echo __('visualizar_escala') ?>
       </button>
       <button type="button" id="btnShare" class="btn btn-warning">
-        <i class="fab fa-whatsapp"></i> Compartilhar
+        <i class="fab fa-whatsapp"></i> <?php echo __('compartilhar') ?>
       </button>
     </div>
     
     <p class="footnote">
-      <i class="fas fa-lightbulb"></i> Dica: Adicione quantas datas quiser e depois salve ou exporte a escala.
+      <i class="fas fa-lightbulb"></i> <?php echo __('dica') ?>
     </p>
   </div>
 </div>
@@ -142,21 +277,21 @@ include('registroslog.php');
     <div class="close-modal">&times;</div>
     <div class="modal-header">
       <i class="fas fa-save fa-2x"></i>
-      <h2>Salvar Escala</h2>
+      <h2><?php echo __('salvar_escala') ?></h2>
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <label for="escalaName">Nome da Escala:</label>
+        <label for="escalaName"><?php echo __('nome_escala') ?></label>
         <input type="text" id="escalaName" placeholder="Ex: Escala Janeiro 2024" />
       </div>
       <div class="form-group">
-        <label for="escalaDescription">Descrição (opcional):</label>
+        <label for="escalaDescription"><?php echo __('desc_opicional') ?></label>
         <input type="text" id="escalaDescription" placeholder="Ex: Escala para os cultos de janeiro" />
       </div>
     </div>
     <div class="modal-footer">
-      <button type="button" id="btnCancelSave" class="btn btn-warning">Cancelar</button>
-      <button type="button" id="btnConfirmSave" class="btn btn-success">Salvar</button>
+      <button type="button" id="btnCancelSave" class="btn btn-warning"><?php echo __('cancelar') ?></button>
+      <button type="button" id="btnConfirmSave" class="btn btn-success"><?php echo __('salvar') ?></button>
     </div>
   </div>
 </div>
@@ -167,14 +302,14 @@ include('registroslog.php');
     <div class="close-modal">&times;</div>
     <div class="modal-header">
       <i class="fas fa-exclamation-triangle fa-2x" style="color: #ffcc00;"></i>
-      <h2>Nova Escala</h2>
+      <h2><?php echo __('nova_escala') ?></h2>
     </div>
     <div class="modal-body">
-      <p>Tem certeza que deseja criar uma nova escala? Todas as datas adicionadas serão removidas.</p>
+      <p><?php echo __('confir_nova_escala') ?></p>
     </div>
     <div class="modal-footer">
-      <button type="button" id="btnCancelNew" class="btn btn-warning">Cancelar</button>
-      <button type="button" id="btnConfirmNew" class="btn btn-success">Confirmar</button>
+      <button type="button" id="btnCancelNew" class="btn btn-warning"><?php echo __('cancelar') ?></button>
+      <button type="button" id="btnConfirmNew" class="btn btn-success"><?php echo __(key: 'salvar') ?></button>
     </div>
   </div>
 </div>
@@ -189,14 +324,14 @@ include('registroslog.php');
 <div id="imagePreview" class="image-preview">
   <div class="image-preview-content">
     <div class="close-preview">&times;</div>
-    <h3>Prévia da Escala</h3>
+    <h3><?php echo __('previa_escala') ?></h3>
     <div id="previewContainer"></div>
     <div class="preview-actions">
       <button id="btnDownloadPreview" class="btn btn-success">
-        <i class="fas fa-download"></i> Baixar
+        <i class="fas fa-download"></i> <?php echo __('baixar') ?>
       </button>
       <button id="btnSharePreview" class="btn btn-warning">
-        <i class="fab fa-whatsapp"></i> Compartilhar
+        <i class="fab fa-whatsapp"></i> <?php echo __('compartilhar') ?>
       </button>
     </div>
   </div>
@@ -227,6 +362,7 @@ include('registroslog.php');
   const funcoes = <?= $funcoesJSON ?? '[]' ?>;
   const fotosPorNome = <?= $fotosJSON ?? '{}' ?>;
   const AVATAR_PADRAO = 'assets/avatar-default.png';
+  const iconesFuncoes = <?= $iconesJSON ?>;
   
   // Elementos
 const tbody = document.getElementById('tableBody');
@@ -251,7 +387,13 @@ if (funcoes.length > 0) {
     const tr = document.createElement('tr');
     tr.dataset.funcao = funcao;
     const td = document.createElement('td');
-    td.innerHTML = `<strong>${funcao}</strong>`;
+    const icone = iconesFuncoes[funcao] || "fa-user";
+td.innerHTML = `
+<strong>
+<i class="fas ${icone}" style="margin-right:6px;color:#6c63ff"></i>
+${funcao}
+</strong>
+`;
     tr.appendChild(td);
     tbody.appendChild(tr);
   });
@@ -314,12 +456,17 @@ function showToast(msg, type = 'success') {
   setTimeout(() => toastEl.classList.remove('show'), 3000);
 }
 
+// =============================
+// FOTO
+// =============================
 function getFoto(nome) {
   if (!nome) return AVATAR_PADRAO;
   return fotosPorNome[nome] || AVATAR_PADRAO;
 }
 
-// cria <div class="select-avatar"><img><select></div>
+// =============================
+// SELECT + AVATAR
+// =============================
 function makeSelectWithAvatar() {
   const wrap = document.createElement('div');
   wrap.className = 'select-avatar';
@@ -329,24 +476,30 @@ function makeSelectWithAvatar() {
   img.alt = 'foto';
 
   const sel = document.createElement('select');
+
   wrap.appendChild(img);
   wrap.appendChild(sel);
 
-  // atualiza imagem ao mudar seleção
+  // 🔥 CORREÇÃO: usar NOME (textContent), não ID
   sel.addEventListener('change', () => {
-    img.src = getFoto(sel.value);
+    const selectedOption = sel.options[sel.selectedIndex];
+    const nomeSelecionado = selectedOption ? selectedOption.textContent : '';
+    img.src = getFoto(nomeSelecionado);
   });
 
-  // expõe o select (alguns lugares do seu código buscam #escalaTable select)
   wrap._select = sel;
   wrap._img = img;
 
   return wrap;
 }
 
+// =============================
+// CRIAR SELECT POR FUNÇÃO
+// =============================
 function createSelect(funcao, isoDate) {
   const wrap = makeSelectWithAvatar();
   const sel = wrap._select;
+
   sel.name = `escala[${funcao}][${isoDate}]`;
 
   const opt0 = document.createElement('option');
@@ -355,17 +508,61 @@ function createSelect(funcao, isoDate) {
   sel.appendChild(opt0);
 
   const nomes = (nomesPorFuncao[funcao] || []);
+
   nomes.forEach(nome => {
     const opt = document.createElement('option');
-    opt.value = nome;
-    opt.textContent = nome;
+    opt.value = nome.id;         // ✅ ID no value
+    opt.textContent = nome.nome; // ✅ NOME exibido
     sel.appendChild(opt);
   });
 
-  // setar imagem inicial (vazio → avatar padrão)
-  wrap._img.src = getFoto(sel.value);
+  // 🔥 CORREÇÃO: imagem inicial baseada no NOME
+  const selectedOption = sel.options[sel.selectedIndex];
+  const nomeSelecionado = selectedOption ? selectedOption.textContent : '';
+  wrap._img.src = getFoto(nomeSelecionado);
 
-  return wrap; // agora retorna <div> com <img> e <select>
+  return wrap;
+}
+
+// =============================
+// SUBSTITUIR SELECT POR TEXTO (PDF/PRINT)
+// =============================
+function replaceSelectsWithText(clonedTable) {
+  const originalSelects = document.querySelectorAll('#escalaTable select');
+  const clonedSelects = clonedTable.querySelectorAll('select');
+
+  clonedSelects.forEach((select, idx) => {
+    const originalSelect = originalSelects[idx];
+
+    const selectedOption = originalSelect
+      ? originalSelect.options[originalSelect.selectedIndex]
+      : null;
+
+    const displayName = selectedOption
+      ? selectedOption.textContent
+      : '-- Selecione --';
+
+    const foto = getFoto(displayName);
+
+    // 🔥 Montar visual final
+    const display = document.createElement('div');
+    display.className = 'print-cell';
+
+    const img = document.createElement('img');
+    img.className = 'avatar';
+    img.alt = displayName;
+    img.src = foto;
+
+    const span = document.createElement('span');
+    span.textContent = displayName;
+
+    display.appendChild(img);
+    display.appendChild(span);
+
+    const wrapper = select.closest('.select-avatar') || select.parentNode;
+    wrapper.innerHTML = '';
+    wrapper.appendChild(display);
+  });
 }
 
 function addColumn() {
@@ -433,39 +630,33 @@ function autoFillTable() {
 }
 
 // Coletar dados da escala para salvar
+// Coletar dados da escala para salvar - VERSÃO CORRIGIDA
 function getEscalaData() {
-  const data = {
-    nome: document.getElementById('escalaName').value,
-    descricao: document.getElementById('escalaDescription').value,
-    datas: [],
-    escalas: {}
-  };
-  
-  // Coletar datas
-  const dates = headerRow.querySelectorAll('th[data-iso]');
-  dates.forEach(th => {
-    data.datas.push({
-      iso: th.dataset.iso,
-      formatada: th.textContent
-    });
-  });
-  
-  // Coletar escalas por função
-  const rows = tbody.querySelectorAll('tr');
-  rows.forEach(row => {
-    const funcao = row.dataset.funcao;
-    data.escalas[funcao] = {};
-    
-    const selects = row.querySelectorAll('select');
-    selects.forEach((select, index) => {
-      const dateIso = dates[index].dataset.iso;
-      data.escalas[funcao][dateIso] = select.value;
-    });
-  });
-  
-  return data;
-}
+    const data = {
+        nome: document.getElementById('escalaName').value,
+        descricao: document.getElementById('escalaDescription').value,
+        escala: {},  // ← manter como "escala" (singular)
+        cadastroadm_id: <?= $_SESSION['usuario_id'] ?? 0 ?>
+    };
 
+    const dates = headerRow.querySelectorAll('th[data-iso]');
+    const rows = tbody.querySelectorAll('tr');
+
+    dates.forEach((th, colIndex) => {
+        const iso = th.dataset.iso;
+        data.escala[iso] = {};
+
+        rows.forEach(row => {
+            const funcao = row.dataset.funcao;
+            const select = row.querySelectorAll('select')[colIndex];
+            if (select && select.value) {
+                data.escala[iso][funcao] = select.value; // ← guarda o ID
+            }
+        });
+    });
+
+    return data;
+}
 // Função para salvar a escala
 async function saveEscala() {
   const escalaData = getEscalaData();
@@ -525,41 +716,6 @@ function removeColumn(iso) {
   showToast(`Data ${formatISOToBRcomSemana(iso)} removida com sucesso.`);
 }
 
-// Substituir selects por textos na tabela clonada
-function replaceSelectsWithText(clonedTable) {
-  // pega os selects originais (ordem) para ler valor selecionado
-  const originalSelects = document.querySelectorAll('#escalaTable select');
-
-  // pega os selects clonados
-  const clonedSelects = clonedTable.querySelectorAll('select');
-
-  clonedSelects.forEach((select, idx) => {
-    const originalSelect = originalSelects[idx];
-    const selectedValue = originalSelect ? originalSelect.value : '';
-    const displayName = selectedValue || '-- Selecione --';
-    const foto = getFoto(selectedValue);
-
-    // wrapper que será exibido no print
-    const display = document.createElement('div');
-    display.className = 'print-cell';
-
-    const img = document.createElement('img');
-    img.className = 'avatar';
-    img.alt = displayName;
-    img.src = foto;
-
-    const span = document.createElement('span');
-    span.textContent = displayName;
-
-    display.appendChild(img);
-    display.appendChild(span);
-
-    // substituir o wrapper inteiro quando possível
-    const wrapper = select.closest('.select-avatar') || select.parentNode;
-    wrapper.innerHTML = '';        // limpa tudo dentro do wrapper
-    wrapper.appendChild(display);  // coloca imagem + nome
-  });
-}
 
 // Função para pré-carregar imagens
 function preloadImages() {
@@ -976,7 +1132,7 @@ async function shareOnWhatsApp() {
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       await navigator.share({
         files: [file],
-        title: 'Escala Musical',
+        title: 'Escala Louvor',
         text: 'Segue a escala gerada:'
       });
       showToast('Escala compartilhada com sucesso!');
@@ -1077,7 +1233,9 @@ function carregarEscalaSalva(dadosEscala) {
                       if (escala.escalas[funcao] && escala.escalas[funcao][iso]) {
                           const valorSalvo = escala.escalas[funcao][iso];
                           sel.value = valorSalvo;          // seta o valor
-                          wrap._img.src = getFoto(valorSalvo); // atualiza a imagem junto
+                          const option = sel.options[sel.selectedIndex];
+const nomeSelecionado = option ? option.textContent : '';
+wrap._img.src = getFoto(nomeSelecionado);
                       }
 
                       td.appendChild(wrap);
@@ -1098,66 +1256,140 @@ function carregarEscalaSalva(dadosEscala) {
 
 // Função para salvar/atualizar escala no banco de dados
 function salvarEscalaNoBanco(escalaData, blobPdf, callback) {
-    const formData = new FormData();
-    formData.append('acao', 'salvar_escalalouvor');
-    formData.append('dados', JSON.stringify(escalaData));
-    formData.append('fileName', getPdfFileName()); // Adicionar o nome do arquivo
 
-    // adiciona o PDF como arquivo
+    // pegar tipo selecionado
+    const tipoSelecionado = document.getElementById('tipo')?.value || 'louvor';
+
+    // mapa dos arquivos
+    const rotasSalvar = {
+        louvor: 'salvar_escalalouvor.php',
+        som: 'salvar_escalasom.php',
+        criativo: 'salvar_escalacriativo.php',
+        midias: 'salvar_escalamidias.php',
+        staff: 'salvar_escalastaff.php',
+        recepcao: 'salvar_escalarecepcao.php',
+        kids: 'salvar_escalakids.php',
+        danca: 'salvar_escaladanca.php'
+    };
+
+    // definir endpoint
+    const endpoint = rotasSalvar[tipoSelecionado] || 'salvar_escalalouvor.php';
+
+    // criar formData
+    const formData = new FormData();
+
+    formData.append('acao', 'salvar_escala');
+    formData.append('tipo', tipoSelecionado);
+    formData.append('dados', JSON.stringify(escalaData));
+    formData.append('fileName', getPdfFileName());
+
+    // adicionar PDF
     if (blobPdf) {
-        formData.append('pdf', blobPdf, getPdfFileName()); // Usar o mesmo nome para o arquivo
+        formData.append('pdf', blobPdf, getPdfFileName());
     }
 
-    fetch('salvar_escalalouvor.php', {
+    // loading opcional
+    showToast('Salvando escala...');
+
+    fetch(endpoint, {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
+    .then(async response => {
+
+        if (!response.ok) {
+            throw new Error(`Erro HTTP ${response.status}`);
+        }
+
+        return response.json();
+    })
     .then(data => {
+
         if (data.success) {
+
             showToast('Escala salva com sucesso!');
-            if (callback) callback();
+
+            if (callback && typeof callback === 'function') {
+                callback(data);
+            }
+
         } else {
-            showToast('Erro ao salvar escala: ' + data.message, 'error');
+
+            showToast(
+                data.message || 'Erro ao salvar escala.',
+                'error'
+            );
         }
     })
     .catch(error => {
-        console.error('Erro:', error);
-        showToast('Erro ao conectar com o servidor.', 'error');
+
+        console.error('Erro ao salvar escala:', error);
+
+        showToast(
+            'Erro ao conectar com o servidor.',
+            'error'
+        );
     });
 }
-// Função para validar escala
+// Função para validar escala - VERSÃO CORRIGIDA
 function validarEscala() {
-  const escalaData = getEscalaData();
-
-  if (escalaData.datas.length === 0) {
-    showToast('Adicione ao menos uma data para validar.', 'error');
-    return;
-  }
-
-  fetch('validar_escala.php', {
-    method: 'POST',
-    body: new URLSearchParams({
-      dados: JSON.stringify(escalaData)
-    })
-  })
-  .then(r => r.json())
-  .then(res => {
-    if (res.success) {
-      showToast(res.message, 'success');
-      alert(res.message);
-    } else {
-      showToast('Conflitos encontrados!', 'error');
-      // Mostra conflitos detalhados em modal/alert
-      alert(res.message);
+    const escalaData = getEscalaData();
+    
+    // Verificar se há datas
+    const datasExistentes = Object.keys(escalaData.escala || {});
+    
+    if (datasExistentes.length === 0) {
+        showToast('Adicione ao menos uma data para validar.', 'error');
+        return;
     }
-  })
-  .catch(err => {
-    console.error(err);
-    showToast('Erro ao validar escala.', 'error');
-  });
-}
 
+    // Mostrar loading no botão
+    const btn = document.getElementById('btnValidate');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="spinner"></span> Validando...';
+    btn.disabled = true;
+
+    // Preparar dados no formato correto para validação
+    const dadosParaValidar = {
+        nome: escalaData.nome,
+        descricao: escalaData.descricao,
+        escala: escalaData.escala  // Enviar no formato que o backend normaliza
+    };
+
+    console.log('Enviando para validação:', dadosParaValidar);
+
+    fetch('validar_escala.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dadosParaValidar)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(res => {
+        if (res.success) {
+            showToast('Escala validada com sucesso!', 'success');
+            alert(res.message);
+        } else {
+            showToast('Conflitos encontrados!', 'error');
+            alert(res.message);
+        }
+    })
+    .catch(err => {
+        console.error('Erro na validação:', err);
+        showToast('Erro ao validar escala.', 'error');
+        alert('Erro ao conectar com o servidor:\n' + err.message);
+    })
+    .finally(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    });
+}
 // Eventos
 document.getElementById('btnAdd').addEventListener('click', addColumn);
 document.getElementById('btnAutoFill').addEventListener('click', autoFillTable);
@@ -1225,9 +1457,7 @@ previewEl.addEventListener('click', (e) => {
 document.getElementById('datePicker').focus();
 
 // Carregar escala salva ao iniciar a página
-<?php if ($escalaSalva): ?>
-carregarEscalaSalva('<?php echo addslashes($escalaSalva['dados_escala']); ?>');
-<?php endif; ?>
+
 </script>
 
 </body>
