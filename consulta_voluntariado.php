@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
@@ -12,31 +11,47 @@ if ((!isset($_SESSION['usuario']) == true) && ($_SESSION['senha']) == true) {
 }
 
 $logado = $_SESSION['usuario'];
+$igreja = $_SESSION['igreja_id'];
 $resultlist = null;
 
 // Processamento das consultas
 if (!empty($_GET['search'])) {
     $data = $_GET['search'];
     $sql = "SELECT * FROM musicos 
+     WHERE igreja_id = '$igreja'
+            AND (
             WHERE id LIKE '%$data%' 
             OR nome LIKE '%$data%' 
+            )
             ORDER BY nome ASC";
     $resultlist = $conexao->query($sql);
+    
+
+}
+
+if ($resultlist === null) {
+
+    $sql = "SELECT * FROM musicos 
+            WHERE igreja_id = '$igreja'
+            ORDER BY id DESC";
+
+    $resultlist = $conexao->query($sql);
+
 } else if (isset($_GET['filtro'])) {
     $filtro = $_GET['filtro'];
 
     if ($filtro == "nomeAZ") {
-        $sql = "SELECT * FROM musicos ORDER BY nome ASC";
+        $sql = "SELECT * FROM musicos WHERE igreja_id = '$igreja' ORDER BY nome ASC";
     } elseif ($filtro == "nomeZA") {
-        $sql = "SELECT * FROM musicos ORDER BY nome DESC";
+        $sql = "SELECT * FROM musicos WHERE igreja_id = '$igreja' ORDER BY nome DESC";
     } else {
-        $sql = "SELECT * FROM musicos ORDER BY id DESC";
+        $sql = "SELECT * FROM musicos WHERE igreja_id = '$igreja' ORDER BY id DESC";
     }
     $resultlist = $conexao->query($sql);
 }
 
 if ($resultlist === null) {
-    $sql = "SELECT * FROM musicos ORDER BY id DESC";
+    $sql = "SELECT * FROM musicos WHERE igreja_id = '$igreja' ORDER BY id DESC";
     $resultlist = $conexao->query($sql);
 }
 
@@ -46,7 +61,7 @@ $resultTotal = $conexao->query($sqlTotal);
 $rowTotal = $resultTotal->fetch_assoc();
 
 // Lista de instrumentos/funções para verificar
-$instrumentos = ['bateria', 'violao', 'teclado', 'baixo', 'ministro', 'vocal1', 'vocal2', 'vocal3', 'talckback', 'igreja', 'live', 'somkids', 'ct', 'c1', 'c2', 'lt', 'lz', 'ph', 'danca', 'real_time', 'real_time_kids', 'recap', 'real_time_treinamento', 'recap_treinamento', 'real_time_adolescentes', 'real_time_homens', 'real_time_mulheres', 'real_time_jovens', 'staff1', 'staff2'];
+$instrumentos = ['bateria', 'violao', 'teclado', 'baixo', 'ministro', 'vocal1', 'vocal2', 'vocal3', 'talckback', 'igreja', 'live', 'somkids', 'igreja_noite', 'ct', 'c1', 'c2', 'lt', 'lz', 'ph', 'danca_manhã', 'danca_noite', 'real_time', 'real_time_kids', 'recap', 'real_time_treinamento', 'recap_treinamento', 'real_time_manhã', 'real_time_noite', 'real_time_mulheres', 'real_time_jovens', 'staff1_manhã', 'staff2_manhã', 'staff1_noite', 'staff2_noite', 'prof1_manhã', 'prof2_manhã', 'prof1_noite', 'prof2_noite', 'porta_1', 'balcao', 'area_externa_1', 'area_externa_2'];
 $contagemInstrumentos = [];
 
 // Verificar quais colunas existem na tabela e têm valores preenchidos
@@ -84,7 +99,6 @@ foreach ($instrumentos as $instrumento) {
         $musicosPorInstrumento[$instrumento] = $nomes;
     }
 }
-include('registroslog.php');
 ?>
 
 <!DOCTYPE html>
@@ -334,27 +348,20 @@ include('registroslog.php');
         <?php include("navegacao.php") ?>
     </nav>
 
-    <div class="container-fluid" style="margin-top: 73px;">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-lg-2 col-md-3 d-md-block sidebar collapse p-0">
-                <div class="position-sticky pt-3">
-                    <?php include("navegacao.php") ?>
-                </div>
-            </div>
+    
 
             <!-- Main Content -->
             <main class="col-lg-10 col-md-9 ms-sm-auto px-4 py-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-3 mb-4 border-bottom">
                     <h1 class="h3"><i class="fas fa-music me-2"></i>Consulta de Voluntarios para escalas</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
+                    <!-- <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
                             <a href="cadastro_musicos.php" class="btn btn-sm btn-primary">
                                 <i class="fas fa-plus me-1"></i>Novo Músico
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Welcome Message -->
@@ -456,7 +463,7 @@ include('registroslog.php');
                     </div>
                 </div>
 
-                <!-- Detalhamento por Instrumento -->
+                <!-- Detalhamento por Instrumento 
                 <div class="row mb-4">
                     <div class="col-12">
                         <div class="card card-dashboard">
@@ -480,24 +487,33 @@ include('registroslog.php');
                                         'igreja' => 'Igreja',
                                         'live' => 'Live',
                                         'somkids' => 'Som Kids',
+                                        'igreja_noite' => 'Igreja Noite',
                                         'ct' => 'CT',
                                         'c1' => 'C1',
                                         'c2' => 'C2',
                                         'lt' => 'LT',
                                         'lz' => 'LZ',
                                         'ph' => 'PH',
-                                        'danca' => 'Dança',
+                                        'danca_manhã' => 'Dança Manhã',
+                                        'danca_noite' => 'Dança Noite',
                                         'real_time' => 'Real Time',
-                                        'real_time_kids' => 'Real Time Kids',
                                         'recap' => 'Recap',
-                                        'real_time_treinamento' => 'Real Time Treinamento',
-                                        'recap_treinamento' => 'Recap Treinamento',
-                                        'real_time_adolescentes' => 'Real Time Adolescentes',
-                                        'real_time_homens' => 'Real Time Homens',
+                                        'real_time_manhã' => 'Real Time Manhã',
+                                        'real_time_noite' => 'Real Time Noite',
                                         'real_time_mulheres' => 'Real Time Mulheres',
                                         'real_time_jovens' => 'Real Time Jovens',
-                                        'staff1' => 'Staff 1',
-                                        'staff2' => 'Staff 2',
+                                        'staff1_manhã' => 'Staff 1 Manhã',
+                                        'staff2_manhã' => 'Staff 2 Manhã',
+                                        'staff1_noite' => 'Staff 1 Noite',
+                                        'staff2_noite' => 'Staff 2 Noite',
+                                        'prof1_manhã' => 'Prof 1 Manhã',
+                                        'prof2_manhã' => 'Prof 2 Manhã',
+                                        'prof1_noite' => 'Prof 1 Noite',
+                                        'prof2_noite' => 'Prof 2 Noite',
+                                        'porta_1' => 'porta_1', 
+                                        'balcao' => 'balcao', 
+                                        'area_externa_1' => 'area_externa_1', 
+                                        'area_externa_2' => 'area_externa_2'
                                     ];
 
                                     foreach ($instrumentos as $instrumento):
@@ -531,6 +547,7 @@ include('registroslog.php');
                         </div>
                     </div>
                 </div>
+                -->
 
                 <!-- Filter Section -->
                 <div class="filter-section mb-4">
@@ -619,9 +636,7 @@ include('registroslog.php');
                                                     <a class='btn btn-sm btn-primary action-btn' href='edit_voluntarioescala.php?id=$user_data[id]' title='Editar'>
                                                         <i class='fas fa-edit'></i>
                                                     </a>
-                                                    <button class='btn btn-sm btn-info action-btn view-musician' data-id='$user_data[id]' title='Visualizar'>
-                                                        <i class='fas fa-eye'></i>
-                                                    </button>
+                                                    
                                                 </div>
                                             </td>";
                                             echo "</tr>";
