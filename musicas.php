@@ -44,7 +44,6 @@ $resultMusicas = $conexao->query($sql);
 
 include('registroslog.php');
 
-include('registroslog.php');
 ?>
 
 <!DOCTYPE html>
@@ -70,8 +69,12 @@ include('registroslog.php');
   </style>
 </head>
 <body>
+<<<<<<< HEAD
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+=======
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+>>>>>>> 2657b610b256eecd0effa4e3c07a7749882687c8
   <?php include("navegacao.php") ?>
 </nav>
 
@@ -79,12 +82,21 @@ include('registroslog.php');
   <h3 class="mb-4">Cadastro de Músicas</h3>
   <div class="alert alert-info">
     <h5>
+<<<<<<< HEAD
                         <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#musicos"
                             role="button" aria-expanded="false" aria-controls="musicos">Musicas do Tabernaculo <i
                                 class="fas fa-chevron-down ms-2"></i>
                         </a>
                     </h5>
                     <div class="collapse" id="musicos">
+=======
+                        <a class="text-decoration-none d-block py-2" data-bs-toggle="collapse" href="#tabernaculo"
+                            role="button" aria-expanded="false" aria-controls="musicos">Tabernaculo <i
+                                class="fas fa-chevron-down ms-2"></i>
+                        </a>
+                    </h5>
+                    <div class="collapse" id="tabernaculo">
+>>>>>>> 2657b610b256eecd0effa4e3c07a7749882687c8
                         <div class="row">
                             <div class="col-md-6">
                                 <h3 id="textos">    
@@ -95,12 +107,19 @@ include('registroslog.php');
       </div>
      </div>
     </div>
+<<<<<<< HEAD
   <!--<div class="alert alert-info">
      <a href="verificar_repertorios.php" target="_blank" class="btn btn-sm btn-warning">
         🔧 Verificar Sistema
     </a> -->
 </div>
 
+=======
+    <!-- <a href="verificar_repertorios.php" target="_blank" class="btn btn-sm btn-warning">
+        🔧 Verificar Sistema
+    </a> -->
+</div>
+>>>>>>> 2657b610b256eecd0effa4e3c07a7749882687c8
   <!-- Mensagens de feedback -->
 <?php
 if (isset($_GET['success']) && $_GET['success'] == 'repertorio_created') {
@@ -189,6 +208,7 @@ if (isset($_GET['error'])) {
       <form id="formRepertorio" method="POST" action="incluir_repertorio.php">
         <div class="row mb-3">
           <div class="col-md-3">
+<<<<<<< HEAD
             <label class="form-label"><b>Data do Repertório:</b></label>
             <input type="date" name="data_repertorio" class="form-control" required>
           </div>
@@ -210,6 +230,12 @@ if (isset($_GET['error'])) {
                         </select>
                     </div>
 <div class="col-md-2 d-flex align-items-end">
+=======
+            <label class="form-label">Data do Repertório</label>
+            <input type="date" name="data_repertorio" class="form-control" required>
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+>>>>>>> 2657b610b256eecd0effa4e3c07a7749882687c8
             <button type="submit" class="btn btn-success">
               <i class="fas fa-plus"></i> Incluir Repertório
             </button>
@@ -302,6 +328,10 @@ echo "</td>";
 $(document).ready(function() {
   $('#tabelaMusicas').DataTable({
     language: { url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/pt-BR.json' },
+<<<<<<< HEAD
+=======
+    stateSave: true,
+>>>>>>> 2657b610b256eecd0effa4e3c07a7749882687c8
     responsive: true,
     order: [[1, 'desc']],
     lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],

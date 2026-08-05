@@ -6,6 +6,7 @@ verificarLogin();
 include('verifica_permissao.php');
 
 
+
 include('registroslog.php');
 ?>
 

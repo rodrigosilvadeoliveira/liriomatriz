@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -165,5 +166,46 @@ header {
   
   <!-- Ícones Bootstrap (se necessário) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+=======
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Lirio Matriz</title>
+    <link rel="stylesheet" href="style.css?t=<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <script src="bootstrap.min.js"></script>
+    </head>
+
+<body>
+    <div class="cabecalho" id="cabecalhodoSite">
+    <?php include('sitecabecalho.php');?>
+    </div>
+<br >
+<br >
+<h1 id="titulonapagina">Ao Vivo na Liro Matriz</h1>
+<div class="video-container">
+        <!-- Substitua o URL abaixo pelo link do seu vídeo do YouTube -->
+        <iframe id="youtube" src="https://www.youtube.com/embed/K_ADtJ7jnsE?si=z-22cfMGdbSCeTGK" title="YouTube video player" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+
+        </iframe>
+    </div>
+
+<div class="footer" id="footer">
+      <?php include('footerSite.php');?>
+      </div>
+
+>>>>>>> 2657b610b256eecd0effa4e3c07a7749882687c8
 </body>
 </html>

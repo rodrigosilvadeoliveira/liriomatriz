@@ -148,6 +148,7 @@ echo "<h1 id='BemVindo'>Bem vindo <U>$logado</u><p>Consulta Log de Acesso</p></h
                     <th scope="col">Hora</th>
                     <th scope="col">Ação</th>
                     <th scope="col">Funções</th>
+                    <th scope="col">Dispositivo</th>
                 </tr>
             </thead>
             <tbody>
@@ -170,12 +171,16 @@ echo "<h1 id='BemVindo'>Bem vindo <U>$logado</u><p>Consulta Log de Acesso</p></h
                                 <i class='fas fa-trash'></i> Excluir
                             </a>
                         </td>";
+echo "<td>" . htmlspecialchars($user_data['dispositivo']) . "</td>";
                         echo "</tr>";
+                        
                     }
                 } else {
                     echo "<tr><td colspan='6' class='text-center'>Nenhum registro encontrado</td></tr>";
                 }
-                ?>
+                  
+                                  
+            ?>
             </tbody>
         </table>
     </div>
@@ -283,15 +288,20 @@ echo "<h1 id='BemVindo'>Bem vindo <U>$logado</u><p>Consulta Log de Acesso</p></h
     resetarTempo();
 
     // Foca no campo de pesquisa quando a página carrega
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.querySelector('input[name="search"]');
-        if (searchInput) {
+    document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.querySelector('input[name="search"]');
+
+    if (searchInput) {
+        // Verifica se a resolução é maior que 1300px
+        if (window.innerWidth > 1300) {
             // Se não há valor de pesquisa, foca no campo
             if (!searchInput.value) {
                 searchInput.focus();
             }
         }
-    });
+    }
+});
+
 </script>
 
 </body>

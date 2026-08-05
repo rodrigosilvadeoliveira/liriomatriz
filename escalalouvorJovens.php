@@ -61,7 +61,6 @@ $funcoesJSON = json_encode($funcoes, JSON_UNESCAPED_UNICODE);
 $escalaSalvaJSON = $escalaSalva ? json_encode($escalaSalva, JSON_UNESCAPED_UNICODE) : 'null';
 include('registroslog.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

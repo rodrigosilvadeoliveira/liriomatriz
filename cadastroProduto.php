@@ -1,6 +1,6 @@
 <?php include("cabecalhoAdm.php")?>
 <?php
-date_default_timezone_set('America/Sao_Paulo');
+
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
@@ -52,6 +52,7 @@ VALUES ('$produto','$modelo','$tamanho','$categoria','$valordevenda','$estoque',
 header('Location: cadastroProduto.php');
 }
 include('registroslog.php');
+
 ?>
 
 <!DOCTYPE html>

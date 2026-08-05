@@ -8,6 +8,7 @@ $imagem = isset($_SESSION['imagem_cortada']) ? $_SESSION['imagem_cortada'] : '';
 // Verifica login
 
 include('registroslog.php');
+
 ?>
 
 <!DOCTYPE html>

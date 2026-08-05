@@ -242,7 +242,6 @@ if (isset($_POST['submitAdm'])) {
 }
 include('registroslog.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

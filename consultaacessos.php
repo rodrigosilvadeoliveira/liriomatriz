@@ -7,8 +7,9 @@ verificarLogin();
 include('verifica_permissao.php');
 include_once('config.php');
 
-// Verificação de login
-
+// ======================================
+// VERIFICAÇÃO DE SESSÃO
+// ======================================
 if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
 
     unset($_SESSION['usuario']);

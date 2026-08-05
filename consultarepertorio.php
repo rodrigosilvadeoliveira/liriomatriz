@@ -11,10 +11,12 @@ if ((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
     header('Location: login.php');
 }
 $logado = $_SESSION['usuario'];
+$igreja = $_SESSION['igreja_id'];
 
 // Buscar lista de repertórios (agora com o campo periodo)
 $sqlRepertorios = "SELECT id, data_repertorio, periodo, nome_musicas, arquivo_repertorio 
                    FROM repertorio 
+                   WHERE igreja_id = '$igreja'
                    ORDER BY data_repertorio DESC";
 $resultRepertorios = $conexao->query($sqlRepertorios);
 
@@ -26,9 +28,7 @@ function diaSemana($dataIso) {
 }
 
 include('registroslog.php');
-include('registroslog.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -45,6 +45,7 @@ include('registroslog.php');
             list-style-type: none;
             padding-left: 0;
             margin-bottom: 0;
+            width: 300px;
         }
         .musicas-list li {
             position: relative;

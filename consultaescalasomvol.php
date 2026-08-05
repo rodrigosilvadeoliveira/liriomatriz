@@ -28,7 +28,6 @@ function diaSemana($dataIso) {
 }
 include('registroslog.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

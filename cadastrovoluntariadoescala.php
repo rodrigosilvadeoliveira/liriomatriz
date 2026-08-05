@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
@@ -15,6 +14,7 @@ if ((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
     header('Location: login.php');
 }
 $logado = $_SESSION['usuario'];
+
 include('registroslog.php');
 ?>
 

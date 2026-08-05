@@ -12,6 +12,7 @@ if((!isset($_SESSION['usuario']) == true) && ($_SESSION['senha']) == true) {
     header('Location: login.php');
 }
 $logado = $_SESSION['usuario'];
+$igreja = $_SESSION['igreja_id'];
 
 include('registroslog.php');
 
@@ -50,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 2. Preparação dos arquivos e variáveis
     $dataFormatada = date('d_m_Y', strtotime($dataRepertorio));
-    $nomeArquivoFinal = "repertorio_{$dataFormatada}.pdf";
+    $nomeArquivoFinal = "repertorio_{$dataFormatada}_{$periodo}.pdf";
     $caminhoArquivoFinal = 'uploads/repertorios/' . $nomeArquivoFinal;
     $caminhoBanco = 'repertorios/' . $nomeArquivoFinal;
 
@@ -95,10 +96,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pdf->Output('F', $caminhoArquivoFinal);
 
     // 5. Salva no banco — AGORA COM O CAMPO "periodo"
-    $sqlInsert = "INSERT INTO repertorio (data_repertorio, periodo, arquivo_repertorio, nome_musicas, criado_em) 
-                  VALUES (?, ?, ?, ?, NOW())";
+    $sqlInsert = "INSERT INTO repertorio (data_repertorio, periodo, arquivo_repertorio, nome_musicas, igreja_id, criado_em) 
+                  VALUES (?, ?, ?, ?, ?, NOW())";
     $stmt = $conexao->prepare($sqlInsert);
-    $stmt->bind_param("ssss", $dataRepertorio, $periodo, $caminhoBanco, $nomesMusicasStr);
+    $stmt->bind_param("ssssi", $dataRepertorio, $periodo, $caminhoBanco, $nomesMusicasStr, $igreja);
 
     if ($stmt->execute()) {
         header('Location: musicas.php?success=repertorio_created');

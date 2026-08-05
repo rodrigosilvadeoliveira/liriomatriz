@@ -1,6 +1,7 @@
 
 <?php
 include_once('config.php');
+include_once('config_language.php');
 
 $sql = "SELECT * FROM evento WHERE cartaz= 'carrousel' ORDER BY id DESC";
 $result = $conexao->query($sql);
@@ -9,12 +10,9 @@ $sql = "SELECT * FROM evento WHERE cartaz= 'home' ORDER BY id DESC";
 $resultHome = $conexao->query($sql);
 
 //session_start();
-ini_set('display_errors', 1); // Exibir erros no navegador (para fins de desenvolvimento)
-error_reporting(E_ALL); // Relatar todos os tipos de erro (para fins de desenvolvimento)
-date_default_timezone_set('America/Sao_Paulo'); // Definir fuso horário para Brasil/Brasília
-include_once('config.php');
+date_default_timezone_set('America/Sao_Paulo');
    // print_r($_SESSION);
-    include('registroslog.php');
+    
 ?>
 
 <!DOCTYPE html>
@@ -33,13 +31,42 @@ include_once('config.php');
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     <script src="bootstrap.min.js"></script>
     </head>
+    <style>
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+        }
+        
+        /* Vídeo responsivo */
+        .video-voluntarios {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+     
+    </style>
 
 <body>
-    <div class="cabecalho" id="cabecalhodoSite">
+    
     <?php include('sitecabecalho.php');?>
-    </div>
+   
 <br >
 <main>
+
+<div class="video-container">
+            <video class="video-voluntarios" controls loop muted playsinline autoplay>
+                <source src="sabedoria.mp4" type="video/mp4">
+                <!-- <source src="voluntariado.webm" type="video/webm"> -->
+                Seu navegador não suporta a tag de vídeo.
+            </video>
+        </div>
+
 <div id="tabelacarrousel" class="carroussel">
     <div class="carroussel-container">
         <?php
@@ -54,7 +81,7 @@ include_once('config.php');
         ?>
     </div>
 </div>
-<h1 id="titulocategoria">Você encontra na Lirio Matriz</h1>
+        <h1 id="titulocategoria"><?= __('titulo_categoria') ?></h1>
 <div id="tabelaSite">
 <div class="produtos-container">
         <table>
@@ -86,87 +113,53 @@ include_once('config.php');
 </div>
 </div>
 <h1 id="titulohome">Lirio Matriz</h1>
-<h3 id="subtitulohome">BEM-VINDO À LÍRIO, BEM-VINDO A SUA CASA.</h2>
-<h3 id="textos">É muito bom poder compartilhar com você a visão que nos torna Lírio, que faz nossa
-Igreja cumprir um propósito no Reino de Deus. Quero antes de tudo, dizer que todas as denominações
-são importantes, afinal você não escolhe uma Denominação por conta de Deus.
-Deus está em todos lugares, mas você escolhe um lugar para congregar pois além de ser um local
-que respeite a palavra de Deus,este ambiente também faz sentido e combina com você.
-
-Queremos que você de forma prática possa compreender absolutamente tudo que pulsa
-em nosso coração e, didaticamente desenvolvemos três perguntas que
-responderão tudo sobre nós e nosso jeito Lírio de ser:</h3>
+<h3 id="subtitulohome"><?= __('bem_vindo_sub') ?></h3>
+<h3 id="textos"><?= __('texto_prt1') ?></h3>
 
 
-<h1 id="titulohome">O que a Lírio é?</h1>
-<h3 id="titulohome">A LIRIO É <b>S.I.R.</b></h2>
+<h1 id="titulohome"><?= __('titulo_o_que_e') ?></h1>
+<h3 id="titulohome"><?= __('sir') ?></h3>
 
-<h3 id="subtitulohome">SIMPLES</h2>
-<h3 id="textos">Uma Igreja para todos, que prega o evangelho de Jesus Cristo de forma
-acessível e compreensível a todos.</h3>
+<h3 id="subtitulohome"><?= __('simples') ?></h3>
+<h3 id="textos"><?= __('simples_desc') ?></h3>
 
-<h3 id="subtitulohome">INTENSA</h2>
-<h3 id="textos">Uma Igreja que em tudo que realiza aplica alto índices de energia; que prega,
-canta e ora com vida tendo a plena certeza que Deus e move de acordo com a
-nossa intensidade.</h3>
+<h3 id="subtitulohome"><?= __('simples_intensa') ?></h2>
+<h3 id="textos"><?= __('simples_intensa2') ?></h3>
 
-<h3 id="subtitulohome">RELEVANTE</h2>
-<h3 id="textos">Uma Igreja onde seus membros são marcados com a cultura do Reino tendo
-seu estilo de vida pessoal transformado em todos os campos da vida, onde
-seus membros são a forma mais eficaz de propagação do evangelho, que
-inspirados compartilham de forma espontânea e voluntária suas experiencias
-com Deus em seu dia a dia;</h3>
+<h3 id="subtitulohome"><?= __('simples_relevante') ?></h2>
+<h3 id="textos"><?= __('simples_relevante2') ?></h3>
 
                                                                                    
 
 <h1 id="titulohome">Como a Lírio funciona?</h1>
 <h3 id="titulohome"> LÍRIO FUNCIONA EM 4C's.</h2>
 
-<h3 id="subtitulohome">CARÁTER</h2>
-<h3 id="textos">Uma Igreja que vive a Sagrada Escritura de forma plena, sem adaptações, que
-ensina seus membros no compromisso com a verdade, honestidade e
-coerência.</h3>
+<h3 id="subtitulohome"><?= __('simples_carater') ?></h2>
+<h3 id="textos"><?= __('simples_carater2') ?></h3>
 
-<h3 id="subtitulohome">COMPETÊNCIA</h2>
-<h3 id="textos">Uma Igreja que acredita que todos tem um chamado e uma vocação, e trabalha
-para que todos se sintam úteis no servir combinando seus dons naturais e
-espirituais no servir a Igreja e alcançar os perdidos.</h3>
+<h3 id="subtitulohome"><?= __('simples_competencia') ?></h2>
+<h3 id="textos"><?= __('simples_competencia2') ?></h3>
 
-<h3 id="subtitulohome">COMBINAÇÃO</h2>
-<h3 id="textos">Uma Igreja que não negocia sua visão e vocação para se adequar a pessoas,
-pressões por resultado, mas que tem humildade para compartilhar exaustivamente
-nosso jeito Lírio de ser com todos os que desejarem se unir a nós.</h3>
+<h3 id="subtitulohome"><?= __('combinacao') ?></h2>
+<h3 id="textos"><?= __('combinacao2') ?></h3>
 
-<h3 id="subtitulohome">COMPROMETIMENTO</h3>
-<h3 id="textos">Uma Igreja que não tem medo de sacrificar em prol do Reino, e que inspira
-seus membros a servirem além de sua comodidade e horas livres;</h3>
+<h3 id="subtitulohome"><?= __('comprometimento') ?></h3>
+<h3 id="textos"><?= __('comprometimento2') ?></h3>
 
                                                                                    
+<h1 id="titulohome"><?= __('titulo') ?></h1>
+<h3 id="titulohome"><?= __('titulo2') ?></h2>
 
-<h1 id="titulohome">Como a Lírio se mantém?</h1>
-<h3 id="titulohome">A LÍRIO SE MANTÉM EM 3 P's.</h2>
+<h3 id="subtitulohome"><?= __(key: 'paixao') ?></h2>
+<h3 id="textos"><?= __(key: 'paixao2') ?></h3>
 
-<h3 id="subtitulohome">PAIXÃO</h2>
-<h3 id="textos">Uma Igreja que tem consciência que nada é mais encantador e inspirador que
-o evangelho, absolutamente nada é pesado ou cansativo.</h3>
+<h3 id="subtitulohome"><?= __(key: 'preparo') ?></h2>
+<h3 id="textos"><?= __(key: 'preparo2') ?></h3>
 
-<h3 id="subtitulohome">PREPARO</h2>
-<h3 id="textos">Uma Igreja que oferece para todos os membros e voluntários centros de
-formação para que compreendam com clareza nossa doutrina e cultura; que se
-atualiza, que ama a modernização, mas sem abrir mão de sua essência e doutrina.</h3>
-
-<h3 id="subtitulohome">PROPÓSITO</h2>
-<h3 id="textos">Uma Igreja que é que é grande o suficiente para sonhar em escala mundial, e
-pessoal o suficiente para que cada um encontre o seu lugar.
-
-Esta é a sua Igreja, essa é a casa que Deus preparou para que você o sirva e
-seja uma ferramenta relevante para a expansão de Seu Reino.
+<h3 id="subtitulohome"><?= __(key: 'proprosito') ?></h2>
+<h3 id="textos"><?= __(key: 'proprosito2') ?></h3>
 </h3>                                                       
-<h3 id="textos">
-Abraços de carinho e fé.
-Rozilda Paixão
-Pastora na Lirio Matriz
-</h3>                                                                                                                                                                                                                                                                                                                
+<h3 id="textos"><?= __(key: 'saudacao') ?></h3>                                                                                                                                                                                                                                                                                                                
 </main>
 <div class="footer" id="footer">
       <?php include('sitefooter.php');?>

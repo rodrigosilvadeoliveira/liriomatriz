@@ -6,7 +6,6 @@ $sql = "SELECT * FROM evento WHERE cartaz= 'live' ORDER BY id DESC";
 $result = $conexao->query($sql);
 include('registroslog.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
