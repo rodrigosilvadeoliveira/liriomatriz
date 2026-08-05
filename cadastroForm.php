@@ -1,4 +1,5 @@
 <?php
+
 include('verificarLogin.php');
 verificarLogin();
 //session_start();

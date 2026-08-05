@@ -24,15 +24,31 @@ if (isset($_POST['submit']) && !empty($_POST['usuario']) && !empty($_POST['senha
         $_SESSION['senha'] = $senha;
         $_SESSION['nivel_acesso'] = $row['nivel_acesso'];
         $_SESSION['nome'] = $row['nome'];
+        $_SESSION['igreja_id'] = $row['igreja_id'];
 // REGISTRA O LOGIN NO LOG
 $data_login = date('Y-m-d'); // formato: 2025-04-21
 $hora_login = date('H:i:s'); // formato: 14:30:05
+$pagina = basename($_SERVER['PHP_SELF']); // pega o nome do arquivo atual, ex: membros.php
 
-$logSql = "INSERT INTO log_login (usuario, nome, nivel_acesso, data_login, hora_login) VALUES (?, ?, ?, ?, ?)";
+// Busca o nome e o nível de acesso do usuário atual
+$usuario = $_SESSION['usuario'];
+$nivel_acesso = $_SESSION['nivel_acesso'] ?? 'desconhecido';
+$igreja_id = $_SESSION['igreja_id'];
+
+// (opcional) Se quiser pegar também o nome do usuário na tabela de usuários:
+$stmtUser = $conexao->prepare("SELECT nome FROM cadastroadm WHERE usuario = ?");
+$stmtUser->bind_param("s", $usuario);
+$stmtUser->execute();
+$resultUser = $stmtUser->get_result();
+$rowUser = $resultUser->fetch_assoc();
+$nome_usuario = $rowUser['nome'] ?? $usuario; // se não encontrar, usa o login mesmo
+
+// Inserir o registro no log
+$logSql = "INSERT INTO log_login (usuario, nome, nivel_acesso, data_login, hora_login, acao, igreja_id)
+           VALUES (?, ?, ?, ?, ?, ?, ?)";
 $logStmt = $conexao->prepare($logSql);
-$logStmt->bind_param("sssss", $usuario, $row['nome'], $row['nivel_acesso'], $data_login, $hora_login);
+$logStmt->bind_param("sssssss", $usuario, $nome_usuario, $nivel_acesso, $data_login, $hora_login, $pagina, $igreja_id);
 $logStmt->execute();
-
 
         // Redireciona com base no perfil
         switch ($row['nivel_acesso']) {
@@ -42,27 +58,17 @@ $logStmt->execute();
             case 'voluntario':
                 header('Location: vendasVol');
                 break;
-            case 'secretaria':
-                header('Location: paginainicial');
-                break;
-            case 'midia':
-                header('Location: paginainicial');
-                break;
-            case 'master':
-                header('Location: paginainicial');
-                break;
-            case 'live':
-                header('Location: cadastrolive');
-                break;
-            case 'lider':
-                header('Location: paginainicial');
-                break;
-            case 'ministro':
-                header('Location: paginainicial');
-                break;
-            case 'consulta':
-                header('Location: paginainicial');
-                break;
+             case 'secretaria':
+    case 'midia':
+    case 'master':
+    case 'live':
+    case 'lider':
+    case 'ministro':
+    case 'consulta':
+        // Marca para mostrar banner na página inicial
+        $_SESSION['mostrar_banner_login'] = true;
+        header('Location: paginainicial');
+        break;
             default:
                 header('Location: acesso_negado');
                 break;

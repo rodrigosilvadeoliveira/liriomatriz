@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
@@ -58,6 +59,7 @@ $funcoesJSON = json_encode($funcoes, JSON_UNESCAPED_UNICODE);
 
 // Se houver escala salva, converter para JSON também
 $escalaSalvaJSON = $escalaSalva ? json_encode($escalaSalva, JSON_UNESCAPED_UNICODE) : 'null';
+include('registroslog.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
@@ -83,6 +84,7 @@ foreach ($instrumentos as $instrumento) {
         $musicosPorInstrumento[$instrumento] = $nomes;
     }
 }
+include('registroslog.php');
 ?>
 
 <!DOCTYPE html>

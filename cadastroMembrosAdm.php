@@ -1,4 +1,5 @@
 <?php
+
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
@@ -14,6 +15,7 @@ if ((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
     header('Location: login.php');
 }
 $logado = $_SESSION['usuario'];
+include('registroslog.php');
 ?>
 
 <!DOCTYPE html>

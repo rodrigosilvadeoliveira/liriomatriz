@@ -1,5 +1,6 @@
 <?php include("cabecalhoAdm.php")?>
 <?php
+
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
@@ -50,6 +51,8 @@ VALUES ('$produto','$modelo','$tamanho','$categoria','$valordevenda','$estoque',
 
 header('Location: cadastroProduto.php');
 }
+include('registroslog.php');
+
 ?>
 
 <!DOCTYPE html>

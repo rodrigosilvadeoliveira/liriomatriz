@@ -14,7 +14,8 @@ error_reporting(E_ALL); // Relatar todos os tipos de erro (para fins de desenvol
 date_default_timezone_set('America/Sao_Paulo'); // Definir fuso horário para Brasil/Brasília
 include_once('config.php');
    // print_r($_SESSION);
-    ?>
+  include('registroslog.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,13 +66,14 @@ include_once('config.php');
                 echo '<a href="' . $imagemHome['links'] . '">' .'<img class="imagens" src="' . $imagemHome['imagem'] . '">'.'</a>';
                 echo '<div class="produto-info">';
 
-                // echo '<b>' . $imagemHome['produto'] . '</b>';
-                // echo '<p>' . $imagemHome['marca'] . ' - ' . $produtoNoCarrinho['caracteristicas'] . '</p>';
-                // echo '<p>SKU ' . $produtoNoCarrinho['id'] . '</p>';
-                // echo '<p>R$ ' . $produtoNoCarrinho['valordevenda'] . '</p>';
-                // echo '<form action="' . $imagemHome['links'] . '">';
-                //echo '<input type="hidden" name="id" value="' . $produtoNoCarrinho['id'] . '">';
-               // echo '<input type="submit" class="linkredirect" value="Ir para a pagina">';
+                echo '<b>' . $imagemHome['produto'] . '</b>';
+                echo '<p>' . $imagemHome['marca'] . ' - ' . $produtoNoCarrinho['caracteristicas'] . '</p>';
+                echo '<p>SKU ' . $produtoNoCarrinho['id'] . '</p>';
+                echo '<p>R$ ' . $produtoNoCarrinho['valordevenda'] . '</p>';
+                echo '<form action="' . $imagemHome['links'] . '">';
+                echo '<input type="hidden" name="id" value="' . $produtoNoCarrinho['id'] . '">';
+               echo '<input type="submit" class="linkredirect" value="Ir para a pagina">';
+
                 echo '</form>';
                 echo '</div>';
                 echo '</td>';

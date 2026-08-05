@@ -1,9 +1,21 @@
 <?php
 // Inclui os arquivos de configuração e segurança
+date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
-include('verifica_permissao.php');
-include_once('config.php');
+include_once("config.php");
+
+// Verifica sessão
+if((!isset($_SESSION['usuario']) == true) && ($_SESSION['senha']) == true) {
+    unset($_SESSION['usuario']);
+    unset($_SESSION['senha']);
+    header('Location: login.php');
+}
+$logado = $_SESSION['usuario'];
+$igreja = $_SESSION['igreja_id'];
+
+include('registroslog.php');
+
 
 // Inclui a biblioteca FPDI
 require_once('vendor/autoload.php');
@@ -12,12 +24,14 @@ use setasign\Fpdi\Fpdi;
 // Verifica se a requisição foi um POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if (empty($_POST['data_repertorio']) || empty($_POST['musicasSelecionadasFinal'])) {
+    // Verifica campos obrigatórios
+    if (empty($_POST['data_repertorio']) || empty($_POST['musicasSelecionadasFinal']) || empty($_POST['periodo'])) {
         header('Location: musicas.php?error=dados_ausentes');
         exit;
     }
 
     $dataRepertorio = $_POST['data_repertorio'];
+    $periodo = $_POST['periodo']; // <-- NOVO CAMPO
     $pares = explode(',', $_POST['musicasSelecionadasFinal']);
 
     // Quebra cada par id:ordem
@@ -37,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 2. Preparação dos arquivos e variáveis
     $dataFormatada = date('d_m_Y', strtotime($dataRepertorio));
-    $nomeArquivoFinal = "repertorio_{$dataFormatada}.pdf";
+    $nomeArquivoFinal = "repertorio_{$dataFormatada}_{$periodo}.pdf";
     $caminhoArquivoFinal = 'uploads/repertorios/' . $nomeArquivoFinal;
     $caminhoBanco = 'repertorios/' . $nomeArquivoFinal;
 
@@ -81,11 +95,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 4. Salva o PDF no servidor
     $pdf->Output('F', $caminhoArquivoFinal);
 
-    // 5. Salva no banco
-    $sqlInsert = "INSERT INTO repertorio (data_repertorio, arquivo_repertorio, nome_musicas, criado_em) 
-                  VALUES (?, ?, ?, NOW())";
+    // 5. Salva no banco — AGORA COM O CAMPO "periodo"
+    $sqlInsert = "INSERT INTO repertorio (data_repertorio, periodo, arquivo_repertorio, nome_musicas, igreja_id, criado_em) 
+                  VALUES (?, ?, ?, ?, ?, NOW())";
     $stmt = $conexao->prepare($sqlInsert);
-    $stmt->bind_param("sss", $dataRepertorio, $caminhoBanco, $nomesMusicasStr);
+    $stmt->bind_param("ssssi", $dataRepertorio, $periodo, $caminhoBanco, $nomesMusicasStr, $igreja);
 
     if ($stmt->execute()) {
         header('Location: musicas.php?success=repertorio_created');

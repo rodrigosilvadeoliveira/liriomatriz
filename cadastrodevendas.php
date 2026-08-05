@@ -108,6 +108,7 @@ header('Location: cadastrodevendas.php');
 <div class="navegacao">
    <?php include("navegacao.php")?>
    </div>
+   <div class="table-container">
 <fieldset class="boxformulariodoSite">
     <form id="insert_form" class="row g-3" name="cadastrodevendas" action="cadastrodevendas.php" method="POST" enctype="multipart/form-data">
     

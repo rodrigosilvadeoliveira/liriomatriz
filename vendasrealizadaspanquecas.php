@@ -83,7 +83,7 @@ include('config.php');
             echo "</tr>";
             $valorTotal += $user_data['preco_unitario']; // Adicione o valor de venda ao valor total
 
-        }
+        
         echo "<tr>";
         echo "<td colspan='4'><b>Valor Total:</b></td>";
         echo "<td>" . $valorTotal . "</td>";

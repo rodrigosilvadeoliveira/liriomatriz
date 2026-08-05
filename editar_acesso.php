@@ -1,8 +1,14 @@
 <?php
-date_default_timezone_set('America/Sao_Paulo');
 include('verificarLogin.php');
 verificarLogin();
 include('verifica_permissao.php');
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+
+if (!$id) {
+    die("ID inválido.");
+}
+
 include_once('config.php');
 
 // Verifica imagem cortada da sessão
@@ -15,7 +21,23 @@ if ((!isset($_SESSION['usuario']) == true) and ($_SESSION['senha']) == true) {
     header('Location: login.php');
 }
 $logado = $_SESSION['usuario'];
-include('registroslog.php');
+
+
+
+$sql = "SELECT * FROM cadastroadm WHERE id = ?";
+$stmt = $conexao->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+if ($result->num_rows == 0) {
+    die("Cadastro não encontrado.");
+}
+
+$dados = $result->fetch_assoc();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -182,17 +204,13 @@ include('registroslog.php');
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-        <?php include("navegacao.php") ?>
-    </nav>
+ 
 
     <div class="container">
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
-            <h1 class="h3 text-gray-800"><i class="fas fa-user-plus me-2"></i>Cadastro de Voluntario</h1>
-            <div>
-                <?php include("navegacao.php") ?>
-            </div>
+            <h1 class="h3 text-gray-800"><i class="fas fa-user-plus me-2"></i>Alterar Acesso</h1>
+            
         </div>
         
         <!-- Mensagem de Boas-Vindas -->
@@ -206,47 +224,55 @@ include('registroslog.php');
                 <h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>Informações do Volintario(a)</h5>
             </div>
                 
-                <form method="POST" action="enviarcadastroadm.php" enctype="multipart/form-data" class="row g-3">
+                <form method="POST" action="alterarcadastroadm.php" enctype="multipart/form-data" class="row g-3">
+                    <input type="hidden" name="id" value="<?= $dados['id'] ?>">
+                    <input type="hidden" name="igreja_id" value="<?= $dados['igreja_id'] ?>">
                     <div class="col-md-6">
                         <label for="nome" class="form-label -field">*Nome completo</label>
-                        <input type="text" name="nome" id="nome" class="form-control" >
+                        <input type="text" name="nome" id="nome" class="form-control" value="<?= htmlspecialchars($dados['nome'] ?? '') ?>">
                     </div>
                 
                     <div class="col-md-6">
                         <label for="usuario" class="form-label -field">*Login</label>
-                        <input type="text" name="usuario" id="usuario" class="form-control" >
+                        <input type="text" name="usuario" id="usuario" class="form-control" value="<?= htmlspecialchars($dados['usuario'] ?? '') ?>">
                     </div>
 
-                    <div class="col-md-6">
-                        <label for="senha" class="form-label -field">*Senha</label>
-                        <input type="text" name="senha" id="senha" class="form-control" >
-                    </div>
+                   
                     <div class="col-md-6">
                         <label for="email" class="form-label -field">Email</label>
-                        <input type="text" name="email" id="email" class="form-control" >
+                        <input type="text" name="email" id="email" class="form-control" value="<?= htmlspecialchars($dados['email'] ?? '') ?>">
                     </div>
                     <div class="col-md-6">
                         <label for="telefone" class="form-label -field">*Telefone</label>
-                        <input type="text" name="telefone" id="telefone" class="form-control" >
+                        <input type="text" name="telefone" id="telefone" class="form-control" value="<?= htmlspecialchars($dados['telefone'] ?? '') ?>">
                     </div>
                     <div class="col-md-6">
                         <label for="celular" class="form-label -field">Celular</label>
-                        <input type="text" name="celular" id="celular" class="form-control" >
+                        <input type="text" name="celular" id="celular" class="form-control" value="<?= htmlspecialchars($dados['celular'] ?? '') ?>">
                     </div>
   <div class="col-md-3">
     <label for="inputState" class="form-label">*Perfil:</label>
     <select id="nivel_acesso" class="form-select" name="nivel_acesso">
-    <option value="">Selecione</option>
-    <option value="admin">Administrador</option>
-    <option value="consulta">Consulta</option>
-    <option value="lider">Lider</option>
-    <option value="live">Live</option>
-    <option value="master">Master</option>
-    <option value="midia">Midias</option>
-    <option value="secretaria">Secretaria</option>
-    <option value="voluntario">Voluntário</option>
-    
-    </select>
+
+<option value="">Selecione</option>
+
+<option value="admin" <?= $dados['nivel_acesso']=='admin'?'selected':'' ?>>Administrador</option>
+
+<option value="consulta" <?= $dados['nivel_acesso']=='consulta'?'selected':'' ?>>Consulta</option>
+
+<option value="lider" <?= $dados['nivel_acesso']=='lider'?'selected':'' ?>>Lider</option>
+
+<option value="live" <?= $dados['nivel_acesso']=='live'?'selected':'' ?>>Live</option>
+
+<option value="master" <?= $dados['nivel_acesso']=='master'?'selected':'' ?>>Master</option>
+
+<option value="midia" <?= $dados['nivel_acesso']=='midia'?'selected':'' ?>>Midias</option>
+
+<option value="secretaria" <?= $dados['nivel_acesso']=='secretaria'?'selected':'' ?>>Secretaria</option>
+
+<option value="voluntario" <?= $dados['nivel_acesso']=='voluntario'?'selected':'' ?>>Voluntário</option>
+
+</select>
 </div>
                     <div class="col-12 mt-4">
                         <button type="submit" name="submitAdm" id="submitAdm" class="btn btn-primary-custom">
