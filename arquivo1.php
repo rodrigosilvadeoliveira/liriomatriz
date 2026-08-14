@@ -961,11 +961,21 @@ $categorizedOptions = array_filter($categorizedOptions);
          .profile-icon-container {
     display: flex;
     justify-content: center;
-    padding: 15px 0;
+    padding: 0px 0;
 }
 
 .profile-link {
     display: inline-block;
+}
+.profile-icon-menu {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
 .profile-icon {
@@ -987,15 +997,21 @@ $categorizedOptions = array_filter($categorizedOptions);
 <body>
     <header>
         <nav>
-            <img class="logo" src="LÍRIO MATRIZ (PRETO)_menor.png" alt="Logo">
+            <div class="profile-icon-container">
+        <a href="perfil.php" class="profile-link">
+     <img src="<?php echo $foto_perfil; ?>" alt="Perfil" class="profile-icon-menu">
+        </a>
+    </div>
 
             <div class="nav-item">
-            <a class="banderira" href="?lang=pt">
+
+            <img class="logo" src="LÍRIO MATRIZ (PRETO)_menor.png" alt="Logo">
+            <!-- <a class="banderira" href="?lang=pt">
         <img src="https://flagcdn.com/w40/br.png" width="44" alt="Português">
     </a>
             <a class="banderira" href="?lang=en">
         <img src="https://flagcdn.com/w40/us.png" width="44" height="32" alt="English">
-    </a>
+    </a> -->
     </div>
             <div class="menu-container">
                 <div class="menu">

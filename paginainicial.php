@@ -665,11 +665,11 @@ $imagemBanner = isset($_SESSION['banner_imagem']) ? $_SESSION['banner_imagem'] :
         setTimeout(fecharBanner, 15000);
     </script>
         <div class="welcome-message">
-            <div class="profile-icon-container">
+            <!-- <div class="profile-icon-container">
         <a href="perfil.php" class="profile-link">
      <img src="<?php echo $foto_perfil; ?>" alt="Perfil" class="profile-icon">
         </a>
-    </div>
+    </div> -->
             <h1><?php echo __('bem_vindo') ?> <?php echo $logado; ?>!</h1>
             <p><?php echo __('seu_login') ?> <?php echo $perfil; ?></p>
             <p><?php echo __('hoje') ?> <?php echo date('d/m/Y'); ?></p>
