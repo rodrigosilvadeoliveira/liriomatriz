@@ -376,7 +376,7 @@
     <!-- Cabeçalho com logo e título -->
     <div class="header">
         <div class="logo-container">
-            <img id="logo" src="lirioMatriz_preto.png" alt="Logo Sistema Teste Matriz">
+            <img id="logo" src="lirio_preto_transparente.png" alt="Logo Sistema Teste Matriz">
         </div>
         <h1 class="title">Sistema <br><u>Lirio Matriz</u></h1>
         <p class="subtitle">Área do Voluntario(a)</p>
